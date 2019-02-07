@@ -1,8 +1,6 @@
 public class RSSReader{
     
-    void getTitle(){
-        
-    }
+    void getTitle(){}
     void getAuthor(){}
     void getDescription(){}
     void getDuration(){}

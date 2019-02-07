@@ -1,14 +1,17 @@
 public class Book{
     
     String title;
+    String subTitle;
     String authors;
     String publisher;
     String publishYear;
     String pageCount;
     int isbn;
     
-    Book(String title, String authors, String publisher, String publishYear, String pageCount, int isbn){
+    Book(String title, String subTitle, String authors, String publisher, String publishYear, 
+            String pageCount, int isbn){
         this.title = title;
+        this.subTitle = subTitle;
         this.authors = authors;
         this.publisher = publisher;
         this.publishYear = publishYear;
@@ -21,6 +24,13 @@ public class Book{
     }
     void setTitle(String title){
         this.title = title;
+    }
+    
+    String getSubtitle(){
+        return subTitle;
+    }
+    void setSubTitle(String subTitle){
+        this.subTitle = subTitle;
     }
     
     String getAuthors(){

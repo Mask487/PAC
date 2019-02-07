@@ -34,7 +34,7 @@ public class BookLookupTest {
   }
 
   public static void main(String[] args) throws IOException, JSONException {
-    JSONObject json = readJsonFromUrl("https://www.googleapis.com/books/v1/volumes?q=isbn:045146155X");
+    JSONObject json = readJsonFromUrl("https://www.googleapis.com/books/v1/volumes?q=isbn9780553593679");
     String[] items = new String[json.length()];
     JSONArray things = json.getJSONArray("items");
     //System.out.println(things.getJSONObject(0).getJSONObject("volumeInfo").get("title"));

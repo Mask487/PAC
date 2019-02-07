@@ -23,6 +23,13 @@ public class BookSearch{
                 .getJSONObject("volumeInfo").get("title").toString();
         return title;
     }
+    String getSubtitle(int isbn) throws IOException{
+        JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/"
+                + "volumes?q=isbn:" + isbn);
+        String subTitle = json.getJSONArray("items").getJSONObject(0)
+                .getJSONObject("volumeInfo").get("subtitle").toString();
+        return subTitle;
+    }
     String getAuthors(int isbn) throws IOException{
         JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/"
                 + "volumes?q=isbn:" + isbn);
@@ -83,7 +90,7 @@ public class BookSearch{
         //the json file for the book, uses that info to create a book object
         //that is added to the list
         for(int i : isbn){
-            Book book = new Book(getTitle(i), getAuthors(i), getPublisher(i), 
+            Book book = new Book(getTitle(i), getSubtitle(i), getAuthors(i), getPublisher(i), 
                     getPublishYear(i), getPageCount(i), i);
             bookList.add(book);
         }
