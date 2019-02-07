@@ -44,7 +44,7 @@ public class BookLookupTest {
     System.out.println(json.getJSONArray("items").getJSONObject(0)
             .getJSONObject("volumeInfo").get("subtitle"));
     System.out.println(json.getJSONArray("items").getJSONObject(0)
-            .getJSONObject("volumeInfo").get("authors"));
+            .getJSONObject("volumeInfo").get("authors").toString());
     System.out.println(json.getJSONArray("items").getJSONObject(0)
             .getJSONObject("volumeInfo").get("publisher"));
     System.out.println(json.getJSONArray("items").getJSONObject(0)
