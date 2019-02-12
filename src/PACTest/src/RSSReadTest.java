@@ -52,21 +52,9 @@ public class RSSReadTest {
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                 FileChannel fileChannel = fileOutputStream.getChannel();
                 
-                fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);                
+                fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
                 
-                /*for(int i = 0; i < tempList.size(); i++){
-                    System.out.println(tempList.get(0).getUrl());
-                }*/
                 
-                //SyndEnclosureImpl test = entry.getEnclosures();
-                
-                //File file2 = new File(entry.getEnclosures().get(0).toString());
-                //Path p1 = file.toPath();
-                //Path p2 = file.toPath();
-                //file = (File)entry.getEnclosures().get(0);
-                //File f = new File(entry.getEnclosures().get(0), "C:\\TestFolder\\test.mp3"); //file.getAbsolutePath();
-                //Files.copy(p2, p1, REPLACE_EXISTING);
-                //System.out.println(feed);
 
                 ok = true;
             }
