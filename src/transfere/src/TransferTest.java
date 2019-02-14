@@ -7,6 +7,7 @@ public class TransferTest
         Transfer t = new Transfer();
         t.initialize(0);
         System.out.println("Phone Name: " + t.getPhoneName() + "\nPhone Model: " + t.getPhoneModel() + "\nBattery Level: " + t.getPhoneBattery());
+        //t.addEBook(file);
 
     }
 }
