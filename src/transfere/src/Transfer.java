@@ -2,6 +2,8 @@ import be.derycke.pieter.com.COMException;
 import jmtp.*;
 import java.io.File;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 
 class Transfer implements TransferObject
@@ -89,6 +91,20 @@ class Transfer implements TransferObject
 
     }
 
+    public void addPodcast(ArrayList<File> files)
+    {
+        for (int i = 0; i < files.size(); i++) {
+            File file = files.get(i);
+            if (doesFolderExist("podcasts", pD))
+            {
+                pctoP(setTargetFolder("podcasts", pD), file);
+            }else{
+                createFolder("podcasts", pD);
+                pctoP(setTargetFolder("ebooks", pD), file);
+            }
+        }
+    }
+
     public void addEBook(File file)
     {
         if (doesFolderExist("eBooks", pD))
@@ -97,6 +113,20 @@ class Transfer implements TransferObject
         }else{
             createFolder("eBooks", pD);
             pctoP(setTargetFolder("ebooks", pD), file);
+        }
+    }
+
+    public void addEbook(ArrayList<File> files)
+    {
+        for (int i = 0; i < files.size(); i++) {
+            File file = files.get(i);
+            if (doesFolderExist("eBooks", pD))
+            {
+                pctoP(setTargetFolder("ebooks", pD), file);
+            }else{
+                createFolder("eBooks", pD);
+                pctoP(setTargetFolder("ebooks", pD), file);
+            }
         }
     }
 
@@ -158,6 +188,5 @@ class Transfer implements TransferObject
         }
         return target;
     }
-    //backup phone method
-    //transfer files from one phone to another
+
 }
