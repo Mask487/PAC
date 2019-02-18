@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class Transfer implements TransferObject
-{
+class Transfer implements TransferObject {
     private PortableDevice pD = null;
 
-    public void initialize(int i)
-    {
+    public void initialize(int i) {
         PortableDeviceFolderObject pFO = null;
         PortableDeviceManager pDM = new PortableDeviceManager();
         pD = pDM.getDevices()[i];
@@ -26,37 +24,38 @@ class Transfer implements TransferObject
         boolean pod = doesFolderExist("PODCASTS", pD);
         boolean ebooks = doesFolderExist("EBOOKS", pD);
         boolean pacfiles = doesFolderExist("PACFILES", pD);
-        if (!pod)
-        {
+        if (!pod) {
             createFolder("podcasts", pD);
         }
-        if (!ebooks)
-        {
+        if (!ebooks) {
             createFolder("ebooks", pD);
         }
-        if (!pacfiles)
-        {
+        if (!pacfiles) {
             createFolder("pacfiles", pD);
         }
         pD.close();
     }
 
-    public String getPhoneModel()
-    {
+    public String getPhoneModel() {
         String out = "";
         return out = pD.getModel();
     }
 
-    public int getPhoneBattery()
-    {
+    public int getPhoneBattery() {
         int out;
         return out = pD.getPowerLevel();
     }
 
-    public String getPhoneName()
-    {
+    public String getPhoneName() {
         String out;
         return out = pD.getFriendlyName();
+    }
+
+    //when adding files, checks to see if file doesn't already exist
+    private boolean doesFileExist()
+    {
+
+        return false;
     }
 
     public boolean doesFolderExist(String folderName, PortableDevice pD)
