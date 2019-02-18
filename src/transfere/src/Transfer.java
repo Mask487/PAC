@@ -130,7 +130,6 @@ class Transfer implements TransferObject
         }
     }
 
-
     public void ptoPC(PortableDeviceObject pDO, PortableDevice pD, String file)
     {
         PortableDeviceToHostImpl32 copy = new PortableDeviceToHostImpl32();
