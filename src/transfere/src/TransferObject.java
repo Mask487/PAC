@@ -10,7 +10,8 @@ public interface TransferObject
 {
     void initialize(int i);
     void pctoP(PortableDeviceFolderObject targetFolder, File file);
-    void ptoPC(PortableDeviceObject pDO, PortableDevice pD, String file);
+    void ptoPC(PortableDeviceObject pDO, String file);
+    void getFolder(String folder, File file);
     boolean doesFolderExist(String folderName, PortableDevice pD);
     void addPodcast(File file);
     void addPodcast(ArrayList<File> files);
