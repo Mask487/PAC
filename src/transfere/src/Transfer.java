@@ -179,19 +179,17 @@ class Transfer implements TransferObject {
 
     public void backup(){
         PortableDeviceFolderObject target = null;
-        for(PortableDeviceObject obj : pD.getRootObjects()){
-            if (obj instanceof PortableDeviceStorageObject){
-                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj;
-                for (PortableDeviceObject obj2 : store.getChildObjects())
-                {
-                    obj2.
+        for (PortableDeviceObject obj1 : pD.getRootObjects())
+        {
+            if (obj1 instanceof  PortableDeviceStorageObject)
+            {
+                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
+                PortableDeviceObject[] folderFiles = store.getChildObjects();
+                for (int i = 0; i < folderFiles.length; i++) {
+                    
                 }
             }
         }
-    }
-
-    private PortableDeviceFolderObject recurs(PortableDeviceFolderObject target){
-
     }
 
     private void createFolder(String folderName, PortableDevice pD)
@@ -209,12 +207,12 @@ class Transfer implements TransferObject {
 
     private PortableDeviceFolderObject setTargetFolder(String folderName, PortableDevice pD) {
         PortableDeviceFolderObject target = null;
-        for (PortableDeviceObject obj1 : pD.getRootObjects())
+        for (PortableDeviceObject obj1 : pD.getRootObjects())//gets root files of phone
         {
-            if (obj1 instanceof PortableDeviceStorageObject)
+            if (obj1 instanceof PortableDeviceStorageObject)//if obj is phone storage or sd storage
             {
                 PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
-                for (PortableDeviceObject obj2 : store.getChildObjects())
+                for (PortableDeviceObject obj2 : store.getChildObjects())//gets child objects of internal or sd
                 {
                     if (obj2.getOriginalFileName().equalsIgnoreCase(folderName))
                     {
