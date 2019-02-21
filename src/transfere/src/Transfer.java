@@ -172,23 +172,60 @@ class Transfer implements TransferObject {
             try {
                 targetFolder.addAudioObject(file, "", "", bigint);
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
         }
     }
 
-    public void backup(){
+    public void backup(String path){
         PortableDeviceFolderObject target = null;
+        File file = new File("D:\\Desktop\\" + path);
+        if(!file.isDirectory()){
+            file.mkdir();
+        }
         for (PortableDeviceObject obj1 : pD.getRootObjects())
         {
-            if (obj1 instanceof  PortableDeviceStorageObject)
+            System.out.println(obj1.getName() + "\n--------------------");
+            if (obj1 instanceof PortableDeviceStorageObject)
             {
-                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
-                PortableDeviceObject[] folderFiles = store.getChildObjects();
-                for (int i = 0; i < folderFiles.length; i++) {
-                    
+                File tempFile = new File(file.getPath() + "\\" + obj1.getName());
+                if (!tempFile.isDirectory()){
+                    tempFile.mkdir();
+                }
+                PortableDeviceStorageObject storage = (PortableDeviceStorageObject) obj1;
+                for (PortableDeviceObject obj2 : storage.getChildObjects())
+                {
+                    System.out.println("    " + obj2.getName());
+                    if (obj2 instanceof PortableDeviceFolderObject)
+                    {
+                        File tempFile2 = new File(tempFile.getPath() + "\\" + obj2.getName());
+                        if(!tempFile2.isDirectory()){
+                            tempFile2.mkdir();
+                        }
+                        recur((PortableDeviceFolderObject) obj2, "    ", tempFile2);
+                    }
+                    ptoPC(obj2, tempFile.getPath());
                 }
             }
+            System.out.println("");
+        }
+    }
+
+    private void recur(PortableDeviceFolderObject object, String tab, File file)
+    {
+        tab = tab + "    ";
+
+        for (PortableDeviceObject obj : object.getChildObjects())
+        {
+            System.out.println(tab + obj.getName());
+            if (obj instanceof PortableDeviceFolderObject){
+                File tempFile = new File(file.getPath() + "\\" + obj.getName());
+                if(!tempFile.isDirectory()){
+                    tempFile.mkdir();
+                }
+                recur((PortableDeviceFolderObject) obj, tab, tempFile);
+            }
+            ptoPC(obj, file.getPath());
         }
     }
 

@@ -14,7 +14,7 @@ public class TransferTest
         System.out.println("Phone Name: " + t.getPhoneName() + "\nPhone Model: " + t.getPhoneModel() + "\nBattery Level: " + t.getPhoneBattery());
         //t.addEbook(files);
         t.getFolder("podcasts", file1);
-        //t.backup();
+        t.backup("Backup");
 
     }
 }

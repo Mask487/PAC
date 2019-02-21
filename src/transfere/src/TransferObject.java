@@ -13,7 +13,7 @@ public interface TransferObject
     void ptoPC(PortableDeviceObject pDO, String file);
     void getFolder(String folder, File file);
     boolean doesFolderExist(String folderName, PortableDevice pD);
-    void backup();
+    void backup(String name);
     void addPodcast(File file);
     void addPodcast(ArrayList<File> files);
     void addEBook(File file);
