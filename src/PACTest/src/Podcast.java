@@ -1,12 +1,5 @@
 public class Podcast{
     
-    void getTitle(){}
-    void getAuthor(){}
-    void getDescription(){}
-    void getDuration(){}
-    void getURL(){}
-    void getExplicit(){}
-    
     String title;
     String author;
     String description;
@@ -22,4 +15,54 @@ public class Podcast{
         this.url = url;
         this.isExplicit = isExplicit;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Boolean getIsExplicit() {
+        return isExplicit;
+    }
+
+    public void setIsExplicit(Boolean isExplicit) {
+        this.isExplicit = isExplicit;
+    }
+    
+    
 }
