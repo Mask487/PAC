@@ -15,7 +15,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 
-public  class RSSReader {
+public class RSSReader {
 
     static void DownloadPodcast(String url) {
         try {
@@ -28,27 +28,13 @@ public  class RSSReader {
             for (Iterator i = feed.getEntries().iterator(); i.hasNext();) {
                 entry = (SyndEntry) i.next();
                 System.out.println(entry.getTitle());
-                
+
                 /*List<SyndEnclosure> tl = entry.getEnclosures();
                 URL turl = new URL(tl.get(0).getUrl());
                 turl.getFile();*/
-                
                 DownloadPodcast(entry);
-                
+
             }
-            List<SyndEnclosure> tempList = entry.getEnclosures();
-            
-            File file = new File("C:/Users/cothe/Desktop/");
-            
-            URL tempURL = new URL(tempList.get(0).getUrl());
-            
-            ReadableByteChannel readableByteChannel = Channels.newChannel(tempURL.openStream());
-
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            FileChannel fileChannel = fileOutputStream.getChannel();
-
-            fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
-
         } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("ERROR: " + ex.getMessage());
@@ -58,57 +44,61 @@ public  class RSSReader {
     static void DownloadPodcast(SyndEntry e) {
         try {
             List<SyndEnclosure> tempList = e.getEnclosures();
+            URL tempURL = new URL(tempList.get(0).getUrl());
             
             String name = e.getTitle();
-            if(name.contains("!")){
+            if (name.contains("!")) {
                 name = name.replace("!", "");
             }
-            if(name.contains("/")){
+            if (name.contains("/")) {
                 name = name.replace("/", "");
             }
-            if(name.contains("\\")){
+            if (name.contains("\\")) {
                 name = name.replace("\\", "");
             }
-            if(name.contains("?")){
+            if (name.contains("?")) {
                 name = name.replace("?", "");
             }
-            if(name.contains("%")){
+            if (name.contains("%")) {
                 name = name.replace("%", "");
             }
-            if(name.contains("*")){
+            if (name.contains("*")) {
                 name = name.replace("*", "");
             }
-            if(name.contains(":")){
+            if (name.contains(":")) {
                 name = name.replace(":", "");
             }
-            if(name.contains("|")){
+            if (name.contains("|")) {
                 name = name.replace("|", "");
             }
-            if(name.contains("\"")){
+            if (name.contains("\"")) {
                 name = name.replace("\"", "");
             }
-            if(name.contains("<")){
+            if (name.contains("<")) {
                 name = name.replace(">", "");
             }
-            if(name.contains(">")){
+            if (name.contains(">")) {
                 name = name.replace(">", "");
             }
-            if(name.contains(".")){
+            if (name.contains(".")) {
                 name = name.replace(".", "");
             }
-            if(name.contains(" ")){
+            if (name.contains(" ")) {
                 name = name.replace(" ", "_");
             }
             File file = new File("C:/Users/cothe/Desktop/" + name + ".mp3");
             
-            URL tempURL = new URL(tempList.get(0).getUrl());
-            
-            ReadableByteChannel readableByteChannel = Channels.newChannel(tempURL.openStream());
+            if (!file.exists()) {
+                ReadableByteChannel readableByteChannel = Channels.newChannel(tempURL.openStream());
 
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            FileChannel fileChannel = fileOutputStream.getChannel();
+                FileOutputStream fileOutputStream = new FileOutputStream(file);
+                FileChannel fileChannel = fileOutputStream.getChannel();
 
-            fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
+                fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
+            } 
+            else {
+                System.out.println("FILE ALREADY EXISTS. CHECKING REMAINING FILES.");
+            }
 
         } catch (Exception ex) {
             ex.printStackTrace();
