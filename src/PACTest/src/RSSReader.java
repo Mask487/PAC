@@ -27,11 +27,7 @@ public class RSSReader {
 
             for (Iterator i = feed.getEntries().iterator(); i.hasNext();) {
                 entry = (SyndEntry) i.next();
-                System.out.println(entry.getTitle());
 
-                /*List<SyndEnclosure> tl = entry.getEnclosures();
-                URL turl = new URL(tl.get(0).getUrl());
-                turl.getFile();*/
                 DownloadPodcast(entry);
 
             }
@@ -89,6 +85,9 @@ public class RSSReader {
             File file = new File("C:/Users/cothe/Desktop/" + name + ".mp3");
             
             if (!file.exists()) {
+                
+                System.out.println(e.getTitle());
+                
                 ReadableByteChannel readableByteChannel = Channels.newChannel(tempURL.openStream());
 
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
