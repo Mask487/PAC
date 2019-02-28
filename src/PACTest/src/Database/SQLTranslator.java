@@ -355,6 +355,7 @@ public class SQLTranslator implements DBInterface{
         int contentTypeID = SQLCheckForeignKeyRecord(queryContentType, DBEnumeration.CONTENTTYPE);
         if(contentTypeID == -1) {
             addContentType(contentType);
+            contentTypeID = SQLCheckForeignKeyRecord(queryContentType, DBEnumeration.CONTENTTYPE);
         }
         
         int syncStatusID = SQLCheckForeignKeyRecord(querySyncStatus, DBEnumeration.SYNCSTATUS);
