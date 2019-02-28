@@ -15,4 +15,5 @@ public class DBEnumeration {
     public static final String PUBLISHER = "Publisher";
     public static final String SYNCSTATUS  = "SyncStatus";
     public static final String SERIES = "Series";
+    public static final int SENTINEL = -99;
 }

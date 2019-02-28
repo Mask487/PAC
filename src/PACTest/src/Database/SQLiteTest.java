@@ -16,28 +16,33 @@ public class SQLiteTest {
         SQLTranslator test = new SQLTranslator();
         ResultSet res;
         
-        String contentType = "EBook";
-        String syncStatusType = "Pixel";
-        String firstName = "Jacob";
-        String middleName = "Tyler";
-        String lastName = "Oleson";
-        String genreName = "TestAgain";
-        String publisherName = "Test";
-        String seriesName = "Test"; 
-        String contentName = "Test";
-        String contentDescription = "No";
-        //yyyy-mm-dd
-        String uploadDate = "2019-02-27";
-        int pageCount = 1; 
-        //hh:mm:ss
-        String duration = "24:00:00";
-        String isbn = "UNKNOWN";
-        boolean explicit = true; 
-        String location = "/ProjectDirectory/Content/Test/Test";
-        test.addContent(contentType, syncStatusType, firstName, middleName, lastName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location);
-        
-        
-        
+//        String contentType = "EBook";
+//        String syncStatusType = "Pixel";
+//        String firstName = "Jacob";
+//        String middleName = "Tyler";
+//        String lastName = "Oleson";
+//        String genreName = "TestAgain";
+//        String publisherName = "Test";
+//        String seriesName = "Test"; 
+//        String contentName = "Test";
+//        String contentDescription = "No";
+//        //yyyy-mm-dd
+//        String uploadDate = "2019-02-27";
+//        int pageCount = 1; 
+//        //hh:mm:ss
+//        String duration = "24:00:00";
+//        String isbn = "UNKNOWN";
+//        boolean explicit = true; 
+//        String location = "/ProjectDirectory/Content/Test/Test";
+//        test.addContent(contentType, syncStatusType, firstName, middleName, lastName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location);
+//        
+        String unknown = "UNKNOWN";
+        test.addContentType(unknown);
+        test.addCreator("jacob", unknown, unknown);
+        test.addGenre(unknown);
+        test.addPublisher(unknown);
+        test.addSeries(unknown);
+        test.addSyncStatus(unknown);
 //        List<String[]> result = test.getAllContent();
 //
 //        printContents(result);
