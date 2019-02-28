@@ -16,4 +16,5 @@ public class DBEnumeration {
     public static final String SYNCSTATUS  = "SyncStatus";
     public static final String SERIES = "Series";
     public static final int SENTINEL = -99;
+    public static final String UNKNOWN = "UNKNOWN";
 }

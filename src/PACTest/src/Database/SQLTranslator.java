@@ -9,12 +9,11 @@ import java.util.List;
 /**
  * @author Jacob Oleson
  * 
- * @update 2/27/2019
+ * @update 2/28/2019
  * 
  * Translator class that actually speaks to the DB File.
  */
 
-//@TODO Determine how to do the ResultSet to Primitives translation.
 //@TODO Add music, videos, and photos to DB Content Table. 
 public class SQLTranslator implements DBInterface{
     
@@ -130,30 +129,34 @@ public class SQLTranslator implements DBInterface{
     
     /**
      * Gets content determined by their creator.
-     * @param firstName Cannot be null.
-     * @param middleName Can be null.
-     * @param lastName Cannot be null.
+     * @param _firstName Cannot be null.
+     * @param _middleName Can be null.
+     * @param _lastName Cannot be null.
      * @return returns all content associated with one creator.
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public List<String[]> getContentByCreator(String firstName, String middleName, String lastName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Content c JOIN Creator a on c.CreatorID = a.CreatorID WHERE "
-               +  "a.ContentCreatorID = (SELECT CreatorID FROM Creator WHERE FirstName = '" + firstName + "' AND MiddleName = '" + middleName + "' AND LastName = '" + lastName + "')";
+    public List<String[]> getContentByCreator(String _firstName, String _middleName, String _lastName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Content c JOIN "
+                + "Creator a on c.CreatorID = a.CreatorID WHERE "
+                + "a.ContentCreatorID = (SELECT CreatorID FROM Creator WHERE "
+                + "FirstName = '" + _firstName + "' AND MiddleName = '" 
+                + _middleName + "' AND LastName = '" + _lastName + "')";
         return SQLToPrimitives(getRecords(query));
     }
     
     
     /**
      * Gets all content by a given genre.
-     * @param genreName
+     * @param _genreName
      * @return returns all content of the given genre.
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public List<String[]> getContentByGenre(String genreName) throws SQLException, ClassNotFoundException {        
-        String query = "SELECT * FROM Content c JOIN Genre g on c.GenreID = g.GenreID"
-                + " WHERE g.GenreName = '" + genreName + "'";
+    public List<String[]> getContentByGenre(String _genreName) throws SQLException, ClassNotFoundException {        
+        String query = "SELECT * FROM Content c JOIN "
+                + "Genre g on c.GenreID = g.GenreID "
+                + "WHERE g.GenreName = '" + _genreName + "'";
         return SQLToPrimitives(getRecords(query));
     }
     
@@ -179,7 +182,8 @@ public class SQLTranslator implements DBInterface{
      * @throws java.lang.ClassNotFoundException
      */
     public List<String[]> getContentByPublisher(String publisherName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT c.ContentID FROM Content c JOIN Publisher p on c.PublisherID = p.PublisherID "
+        String query = "SELECT c.ContentID FROM Content c JOIN "
+                + "Publisher p on c.PublisherID = p.PublisherID "
                 + "WHERE p.PublisherName = '" + publisherName + "'";
         return SQLToPrimitives(getRecords(query));
     }
@@ -193,7 +197,8 @@ public class SQLTranslator implements DBInterface{
      * @throws java.lang.ClassNotFoundException 
      */
     public List<String[]> getContentBySeries(String seriesName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Content c JOIN Series s on c.SeriesID = s.SeriesID WHERE "
+        String query = "SELECT * FROM Content c "
+                + "JOIN Series s on c.SeriesID = s.SeriesID WHERE "
                 + "s.SeriesName = '" + seriesName + "'";
         return SQLToPrimitives(getRecords(query));
     }
@@ -222,7 +227,8 @@ public class SQLTranslator implements DBInterface{
      * @throws ClassNotFoundException 
      */
     public List<String[]> getContentType(String contentType) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM ContentType WHERE ContentType = '" + contentType + "'";
+        String query = "SELECT * FROM ContentType "
+                + "WHERE ContentType = '" + contentType + "'";
         return SQLToPrimitives(getRecords(query));
     }
        
@@ -252,7 +258,8 @@ public class SQLTranslator implements DBInterface{
      * @throws java.lang.ClassNotFoundException 
      */
     public List<String[]> getGenre(String genreName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Genre g WHERE g.GenreName = '" + genreName + "'";
+        String query = "SELECT * FROM Genre g "
+                + "WHERE g.GenreName = '" + genreName + "'";
         return SQLToPrimitives(getRecords(query));
     }
 
@@ -265,11 +272,11 @@ public class SQLTranslator implements DBInterface{
      * @throws java.lang.ClassNotFoundException 
      */
     public List<String[]> getPublisher(String publisherName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Publisher p WHERE p.PublisherName = '" + publisherName + "'";
+        String query = "SELECT * FROM Publisher p "
+                + "WHERE p.PublisherName = '" + publisherName + "'";
         return SQLToPrimitives(getRecords(query));
     }
 
-    
     
     /**
      * Gets a specific series from the DB. 
@@ -279,11 +286,11 @@ public class SQLTranslator implements DBInterface{
      * @throws ClassNotFoundException 
      */
     public List<String[]> getSeries(String seriesName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Series s WHERE s.SeriesName = '" + seriesName + "'";
+        String query = "SELECT * FROM Series s "
+                + "WHERE s.SeriesName = '" + seriesName + "'";
         return SQLToPrimitives(getRecords(query));
     }
 
-   
     
     /**
      * Gets a specific sync status from the DB.
@@ -293,13 +300,18 @@ public class SQLTranslator implements DBInterface{
      * @throws ClassNotFoundException 
      */
     public List<String[]> getSyncStatus(String syncStatusDescription) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM SyncStatus sy WHERE sy.SyncStatusDescription = '" + syncStatusDescription + "'";
+        String query = "SELECT * FROM SyncStatus sy "
+                + "WHERE sy.SyncStatusDescription = '" 
+                + syncStatusDescription + "'";
         return SQLToPrimitives(getRecords(query));
     }
     
     
     /**
      * Adds a new piece of content to DB. Desperately needs to be refactored down.
+     * You must give all parameters but if you do not have information to give, just put null.
+     * Giving null will allow for info to be stored as null and set the foreign keys
+     * to an UNKNOWN value that should be pre-populated in the DB 
      * @param contentType
      * @param syncStatusType
      * @param firstName
@@ -331,7 +343,40 @@ public class SQLTranslator implements DBInterface{
             getConnection();
         }
 
-        
+        if(contentType == null) {
+            contentType = DBEnumeration.UNKNOWN;
+        }
+        if(syncStatusType == null){
+            syncStatusType = DBEnumeration.UNKNOWN;
+        }
+        if(firstName == null) {
+            firstName = DBEnumeration.UNKNOWN;
+        }
+        if(middleName == null) {
+            middleName = DBEnumeration.UNKNOWN;
+        }
+        if(lastName == null) {
+            lastName = DBEnumeration.UNKNOWN;
+        }
+        if(genreName == null) {
+            genreName = DBEnumeration.UNKNOWN;
+        }
+        if(publisherName == null) {
+            publisherName = DBEnumeration.UNKNOWN;
+        }
+        if(seriesName == null) {
+            seriesName = DBEnumeration.UNKNOWN;
+        }
+        if(contentName == null) {
+            contentName = DBEnumeration.UNKNOWN;
+        }
+        if(contentDescription == null) {
+            contentDescription = DBEnumeration.UNKNOWN;
+        }
+        //Upload Date, Page Count, Duration, ISBN and Exlicit can remain UNKNOWN
+        if(location == null) {
+            setContentLocation(contentName);
+        }
         //Check if attributes of content exist by querying relevant tables
         String queryContentType = "SELECT ContentTypeID FROM " + DBEnumeration.CONTENTTYPE
                 + " WHERE ContentType = '" + contentType + "'";
@@ -786,35 +831,36 @@ public class SQLTranslator implements DBInterface{
         
         if(res.next()) {
         //Gets the id dependent on what field is requested. 
-        switch(table) {
-            case DBEnumeration.CONTENT : 
-                id = res.getInt("ContentID");
-                break;
-                
-            case DBEnumeration.CONTENTTYPE :
-                id = res.getInt("ContentTypeID");
-                break;
-                
-            case DBEnumeration.CREATOR : 
-                id = res.getInt("CreatorID");
-                break;
-                    
-            case DBEnumeration.GENRE :
-                id = res.getInt("GenreID");
-                break;   
-                
-            case DBEnumeration.PUBLISHER :
-                id = res.getInt("PublisherID");   
-                break;    
-                
-            case DBEnumeration.SERIES :
-                id = res.getInt("SeriesID");
-                break;    
-            case DBEnumeration.SYNCSTATUS :
-                id = res.getInt("SyncStatusID");
-                break;
+            switch(table) {
+                case DBEnumeration.CONTENT : 
+                    id = res.getInt("ContentID");
+                    break;
+
+                case DBEnumeration.CONTENTTYPE :
+                    id = res.getInt("ContentTypeID");
+                    break;
+
+                case DBEnumeration.CREATOR : 
+                    id = res.getInt("CreatorID");
+                    break;
+
+                case DBEnumeration.GENRE :
+                    id = res.getInt("GenreID");
+                    break;   
+
+                case DBEnumeration.PUBLISHER :
+                    id = res.getInt("PublisherID");   
+                    break;    
+
+                case DBEnumeration.SERIES :
+                    id = res.getInt("SeriesID");
+                    break;    
+                case DBEnumeration.SYNCSTATUS :
+                    id = res.getInt("SyncStatusID");
+                    break;
+            }
         }
-        }
+        
         return id;
     }
     
@@ -859,4 +905,24 @@ public class SQLTranslator implements DBInterface{
         }
         return table;
     }   
+
+    private void setContentLocation (String contentName) {
+        
+        //Set a filepath for the information we're trying to store.
+    }
+    
+    
+    /**
+     * Close connection stream to DB File. 
+     */
+    public void closeConnection() {
+        if(conn != null) {
+            try{
+                conn.close();
+            }
+            catch(SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 }
