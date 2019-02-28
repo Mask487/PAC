@@ -79,6 +79,11 @@ public class BookSearch{
           String jsonText = readJSON(rd);
           JSONObject json = new JSONObject(jsonText);
           return json;
+          
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("ERROR: " + ex.getMessage());
+            return null;
         }
     }
     //accepts a list of isbn numbers, returns a list of books with their info
@@ -90,8 +95,8 @@ public class BookSearch{
         //the json file for the book, uses that info to create a book object
         //that is added to the list
         for(int i : isbn){
-            Book book = new Book(getTitle(i), getSubtitle(i), getAuthors(i), getPublisher(i), 
-                    getPublishYear(i), getPageCount(i), i);
+            Book book = new Book(getTitle(i), getSubtitle(i), getAuthors(i), 
+                    getPublisher(i), getPublishYear(i), getPageCount(i), i);
             bookList.add(book);
         }
         

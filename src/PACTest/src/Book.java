@@ -8,8 +8,8 @@ public class Book{
     String pageCount;
     int isbn;
     
-    Book(String title, String subTitle, String authors, String publisher, String publishYear, 
-            String pageCount, int isbn){
+    Book(String title, String subTitle, String authors, String publisher, 
+            String publishYear, String pageCount, int isbn){
         this.title = title;
         this.subTitle = subTitle;
         this.authors = authors;
