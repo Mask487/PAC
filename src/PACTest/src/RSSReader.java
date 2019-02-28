@@ -91,7 +91,6 @@ public class RSSReader {
                 ReadableByteChannel readableByteChannel = Channels.newChannel(tempURL.openStream());
 
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
-                FileChannel fileChannel = fileOutputStream.getChannel();
 
                 fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
             } 
