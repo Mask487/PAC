@@ -21,291 +21,14 @@ public class SQLTranslator implements DBInterface{
     private static Connection conn;
     
     /**
-         * The jdbc:sqlite: part is permanent. The part after that specifies
-         * the filepath. There needs to be a way to specify the filepath 
-         * in relation to where this file is in the project directory.
-         * For now just specify where it is on your own machine.
-         */
-    //private final String url = "jdbc:sqlite:C:/sqlite/PACDB.db";
-    private final String url = "jdbc:sqlite:C:/PAC/Database/PACDB.db";
-    
-    /**
-     * All records requested from DB 
-     * are put in a list of String arrays. Could be optimized better
-     * but this prevents from other parts of the application being returned
-     * SQL table objects. 
-     * This at least turns everything back into a primitive data type that you
-     * can work with.
+     * The jdbc:sqlite: part is permanent. The part after that specifies
+     * the filepath. There needs to be a way to specify the filepath 
+     * in relation to where this file is in the project directory.
+     * For now just specify where it is on your own machine.
      */
     
-    
-    /**
-     * Gets All Content in the DB and displays all information associated with them.
-     * Most likely need a Reflection Class to help with outputting.
-     * @return 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
-     */
-    public List<String[]> getAllContent() throws SQLException, ClassNotFoundException {        
-        String query = "SELECT * FROM " + DBEnumeration.CONTENT;
-        return SQLToPrimitives(getRecords(query));
-    }
-    
-    
-    /**
-     * Returns the Content Types the DB currently knows.
-     * @return 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
-     */
-    public List<String[]> getAllContentTypes() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM ContentType";
-        return SQLToPrimitives(getRecords(query));
-    }
-    
-        
-    /**
-     * This method displays all current creators held in db. 
-     * 
-     * @return res returns the set of all creators and the information associated
-     * with them that was requested.
-     * 
-     * @throws SQLException
-     * @throws ClassNotFoundException 
-     */
-    public List<String[]> getAllCreators() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM " + DBEnumeration.CREATOR;
-        return SQLToPrimitives(getRecords(query));
-    }
-        
-    
-    /**
-     * Gets all the genres that the DB knows about. 
-     * @return gets all genres that the DB holds.
-     * @throws SQLException
-     * @throws ClassNotFoundException 
-     */
-    public List<String[]> getAllGenres() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM " + DBEnumeration.GENRE;
-        return SQLToPrimitives(getRecords(query));
-    }
-        
-    
-    /**
-     * 
-     * @return 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
-     */
-    public List<String[]> getAllPublishers() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Publisher";
-        return SQLToPrimitives(getRecords(query));
-    }
-        
+    private final String dbLocationPath = "jdbc:sqlite:C:/PAC/Database/PACDB.db";
    
-    /**
-     * Gets all series that the DB currently holds.
-     * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
-     */
-    public List<String[]> getAllSeries() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Series";
-        return SQLToPrimitives(getRecords(query));
-    }
-        
-    
-    /**
-     * Gets all sync statuses from the DB. Don't know why this would be used but just in case. 
-     * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
-     */
-    public List<String[]> getAllSyncStatus() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM SyncStatus";
-        return SQLToPrimitives(getRecords(query));
-    }
-    
-    
-    /**
-     * Gets content determined by their creator.
-     * @param _firstName Cannot be null.
-     * @param _middleName Can be null.
-     * @param _lastName Cannot be null.
-     * @return returns all content associated with one creator.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
-     */
-    public List<String[]> getContentByCreator(String _firstName, String _middleName, String _lastName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Content c JOIN "
-                + "Creator a on c.CreatorID = a.CreatorID WHERE "
-                + "a.ContentCreatorID = (SELECT CreatorID FROM Creator WHERE "
-                + "FirstName = '" + _firstName + "' AND MiddleName = '" 
-                + _middleName + "' AND LastName = '" + _lastName + "')";
-        return SQLToPrimitives(getRecords(query));
-    }
-    
-    
-    /**
-     * Gets all content by a given genre.
-     * @param _genreName
-     * @return returns all content of the given genre.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
-     */
-    public List<String[]> getContentByGenre(String _genreName) throws SQLException, ClassNotFoundException {        
-        String query = "SELECT * FROM Content c JOIN "
-                + "Genre g on c.GenreID = g.GenreID "
-                + "WHERE g.GenreName = '" + _genreName + "'";
-        return SQLToPrimitives(getRecords(query));
-    }
-    
-    
-    /**
-     * Gets a specific content determined by its name.
-     * @param contentName
-     * @return returns an individual piece of content.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
-     */
-    public List<String[]> getContentByName(String contentName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT c.ContentID FROM Content c WHERE c.ContentName = '" + contentName + "'"; 
-        return SQLToPrimitives(getRecords(query));
-    }
-    
-    
-    /**
-     * Gets content associated with a publisher.
-     * @param publisherName
-     * @return returns all content by a given publisher.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
-     */
-    public List<String[]> getContentByPublisher(String publisherName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT c.ContentID FROM Content c JOIN "
-                + "Publisher p on c.PublisherID = p.PublisherID "
-                + "WHERE p.PublisherName = '" + publisherName + "'";
-        return SQLToPrimitives(getRecords(query));
-    }
-    
-    
-    /**
-     * Gets all content in DB that is a part of a specific series. 
-     * @param seriesName
-     * @return returns all content associated with a given series. 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
-     */
-    public List<String[]> getContentBySeries(String seriesName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Content c "
-                + "JOIN Series s on c.SeriesID = s.SeriesID WHERE "
-                + "s.SeriesName = '" + seriesName + "'";
-        return SQLToPrimitives(getRecords(query));
-    }
-    
-    
-    /**
-     * Gets content determined by their type.
-     * @param contentType 
-     * @return returns all content by a given type.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
-     */
-    public List<String[]> getContentByType(String contentType) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Content c JOIN ContentType ct on "
-                + "c.ContentTypeID = ct.contentTypeID WHERE "
-                + "ct.ContentType = '" + contentType + "'";
-        return SQLToPrimitives(getRecords(query));
-    }
-    
-    
-    /**
-     * Gets a specific content type from the db. 
-     * @param contentType
-     * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
-     */
-    public List<String[]> getContentType(String contentType) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM ContentType "
-                + "WHERE ContentType = '" + contentType + "'";
-        return SQLToPrimitives(getRecords(query));
-    }
-       
-    
-    /**
-     * Gets a specific creator determined by their name.
-     * @param firstName
-     * @param middleName
-     * @param lastName
-     * @return returns a specific creator. 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
-     */
-    public List<String[]> getCreator(String firstName, String middleName, String lastName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Creator a WHERE a.FirstName = '" 
-                + firstName + "' AND a.MiddleName = '" + middleName 
-                + "' AND a.LastName = '" + lastName + "'";
-        return SQLToPrimitives(getRecords(query));
-    }    
-    
-    
-    /**
-     * Gets a specific genre from the DB.
-     * @param genreName
-     * @return returns a specific genre. 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
-     */
-    public List<String[]> getGenre(String genreName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Genre g "
-                + "WHERE g.GenreName = '" + genreName + "'";
-        return SQLToPrimitives(getRecords(query));
-    }
-
-    
-    /**
-     * Gets a specific publisher by name
-     * @param publisherName
-     * @return 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
-     */
-    public List<String[]> getPublisher(String publisherName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Publisher p "
-                + "WHERE p.PublisherName = '" + publisherName + "'";
-        return SQLToPrimitives(getRecords(query));
-    }
-
-    
-    /**
-     * Gets a specific series from the DB. 
-     * @param seriesName
-     * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
-     */
-    public List<String[]> getSeries(String seriesName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Series s "
-                + "WHERE s.SeriesName = '" + seriesName + "'";
-        return SQLToPrimitives(getRecords(query));
-    }
-
-    
-    /**
-     * Gets a specific sync status from the DB.
-     * @param syncStatusDescription
-     * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
-     */
-    public List<String[]> getSyncStatus(String syncStatusDescription) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM SyncStatus sy "
-                + "WHERE sy.SyncStatusDescription = '" 
-                + syncStatusDescription + "'";
-        return SQLToPrimitives(getRecords(query));
-    }
-    
     
     /**
      * Adds a new piece of content to DB. Desperately needs to be refactored down.
@@ -768,6 +491,436 @@ public class SQLTranslator implements DBInterface{
     }
     
     
+    
+    
+    /********
+     * IMPORTANT: All tables aside from content are set to cascade delete.
+     * That means if one of them is deleted, all content that had that given key
+     * will be deleted too!! Need to discuss if that is best. Might be good for some 
+     * instances and not others(Good for series, bad for genres).
+     ********/
+    
+    /**
+     * Deletes a specific piece of content from the content table.
+     * DB handles cascade deletes so if a piece of content is the only 
+     * @return 
+     */
+    public boolean deleteContent() {
+        return false;
+    }
+    
+    
+    /**
+     * Deletes a specific content type from the ContentType table.
+     * Does it need to delete all content of that type as well? I'm not sure. 
+     * @return 
+     */
+    public boolean deleteContentType() {
+        return false;
+    }
+    
+    
+    /**
+     * Deletes a specific creator from the creator table. Does it need to 
+     * delete all content associated with that creator? I'm inclined to yes. 
+     * @return 
+     */
+    public boolean deleteCreator() {
+        return false;
+    }
+    
+    
+    /**
+     * Deletes a genre from the genre table. Does it need to delete all content
+     * of a given genre too? I'm inclined to no.
+     * @return 
+     */
+    public boolean deleteGenre() {
+        return false;
+    }
+    
+    
+    /**
+     * Deletes a publisher from the publisher table. Does it need to 
+     * delete all content associated with a given publisher too?
+     * I'm inclined to no.
+     * @return 
+     */
+    public boolean deletePublisher() {
+        return false;
+    }
+    
+    
+    /**
+     * Delete a series from the series table. Needs to delete all content associated
+     * with that series from the content table too. I'm inclined to yes.
+     * I think an extra 
+     * parameter obtained from user needs to specify this. 
+     * @return 
+     */
+    public boolean deleteSeries() {
+        return false;
+    }
+    
+    
+    /**
+     * delete a specific type of sync status. Maybe status for a record is no longer supported
+     * or its been de-synched?
+     * @return 
+     */
+    public boolean deleteSyncStatus() {
+        return false;
+    }
+     
+    
+    
+    
+    /**
+     * All records requested from DB 
+     * are put in a list of String arrays. Could be optimized better
+     * but this prevents from other parts of the application being returned
+     * SQL table objects. 
+     * This at least turns everything back into a primitive data type that you
+     * can work with.
+     */
+    
+    
+    /**
+     * Gets All Content in the DB and displays all information associated with them.
+     * Most likely need a Reflection Class to help with outputting.
+     * @return 
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException 
+     */
+    public List<String[]> getAllContent() throws SQLException, ClassNotFoundException {        
+        String query = "SELECT * FROM " + DBEnumeration.CONTENT;
+        return SQLToPrimitives(getRecords(query));
+    }
+    
+    
+    /**
+     * Returns the Content Types the DB currently knows.
+     * @return 
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException 
+     */
+    public List<String[]> getAllContentTypes() throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM ContentType";
+        return SQLToPrimitives(getRecords(query));
+    }
+    
+        
+    /**
+     * This method displays all current creators held in db. 
+     * 
+     * @return res returns the set of all creators and the information associated
+     * with them that was requested.
+     * 
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<String[]> getAllCreators() throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM " + DBEnumeration.CREATOR;
+        return SQLToPrimitives(getRecords(query));
+    }
+        
+    
+    /**
+     * Gets all the genres that the DB knows about. 
+     * @return gets all genres that the DB holds.
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<String[]> getAllGenres() throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM " + DBEnumeration.GENRE;
+        return SQLToPrimitives(getRecords(query));
+    }
+        
+    
+    /**
+     * 
+     * @return 
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException 
+     */
+    public List<String[]> getAllPublishers() throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Publisher";
+        return SQLToPrimitives(getRecords(query));
+    }
+        
+   
+    /**
+     * Gets all series that the DB currently holds.
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<String[]> getAllSeries() throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Series";
+        return SQLToPrimitives(getRecords(query));
+    }
+        
+    
+    /**
+     * Gets all sync statuses from the DB. Don't know why this would be used but just in case. 
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<String[]> getAllSyncStatus() throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM SyncStatus";
+        return SQLToPrimitives(getRecords(query));
+    }
+    
+    
+    /**
+     * Gets content determined by their creator.
+     * @param _firstName Cannot be null.
+     * @param _middleName Can be null.
+     * @param _lastName Cannot be null.
+     * @return returns all content associated with one creator.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
+    public List<String[]> getContentByCreator(String _firstName, String _middleName, String _lastName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Content c JOIN "
+                + "Creator a on c.CreatorID = a.CreatorID WHERE "
+                + "a.ContentCreatorID = (SELECT CreatorID FROM Creator WHERE "
+                + "FirstName = '" + _firstName + "' AND MiddleName = '" 
+                + _middleName + "' AND LastName = '" + _lastName + "')";
+        return SQLToPrimitives(getRecords(query));
+    }
+    
+    
+    /**
+     * Gets all content by a given genre.
+     * @param _genreName
+     * @return returns all content of the given genre.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
+    public List<String[]> getContentByGenre(String _genreName) throws SQLException, ClassNotFoundException {        
+        String query = "SELECT * FROM Content c JOIN "
+                + "Genre g on c.GenreID = g.GenreID "
+                + "WHERE g.GenreName = '" + _genreName + "'";
+        return SQLToPrimitives(getRecords(query));
+    }
+    
+    
+    /**
+     * Gets a specific content determined by its name.
+     * @param contentName
+     * @return returns an individual piece of content.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
+    public List<String[]> getContentByName(String contentName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT c.ContentID FROM Content c WHERE c.ContentName = '" + contentName + "'"; 
+        return SQLToPrimitives(getRecords(query));
+    }
+    
+    
+    /**
+     * Gets content associated with a publisher.
+     * @param publisherName
+     * @return returns all content by a given publisher.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
+    public List<String[]> getContentByPublisher(String publisherName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT c.ContentID FROM Content c JOIN "
+                + "Publisher p on c.PublisherID = p.PublisherID "
+                + "WHERE p.PublisherName = '" + publisherName + "'";
+        return SQLToPrimitives(getRecords(query));
+    }
+    
+    
+    /**
+     * Gets all content in DB that is a part of a specific series. 
+     * @param seriesName
+     * @return returns all content associated with a given series. 
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException 
+     */
+    public List<String[]> getContentBySeries(String seriesName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Content c "
+                + "JOIN Series s on c.SeriesID = s.SeriesID WHERE "
+                + "s.SeriesName = '" + seriesName + "'";
+        return SQLToPrimitives(getRecords(query));
+    }
+    
+    
+    /**
+     * Gets content determined by their type.
+     * @param contentType 
+     * @return returns all content by a given type.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
+    public List<String[]> getContentByType(String contentType) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Content c JOIN ContentType ct on "
+                + "c.ContentTypeID = ct.contentTypeID WHERE "
+                + "ct.ContentType = '" + contentType + "'";
+        return SQLToPrimitives(getRecords(query));
+    }
+    
+    
+    /**
+     * Gets a specific content type from the db. 
+     * @param contentType
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<String[]> getContentType(String contentType) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM ContentType "
+                + "WHERE ContentType = '" + contentType + "'";
+        return SQLToPrimitives(getRecords(query));
+    }
+       
+    
+    /**
+     * Gets a specific creator determined by their name.
+     * @param firstName
+     * @param middleName
+     * @param lastName
+     * @return returns a specific creator. 
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException 
+     */
+    public List<String[]> getCreator(String firstName, String middleName, String lastName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Creator a WHERE a.FirstName = '" 
+                + firstName + "' AND a.MiddleName = '" + middleName 
+                + "' AND a.LastName = '" + lastName + "'";
+        return SQLToPrimitives(getRecords(query));
+    }    
+    
+    
+    /**
+     * Gets a specific genre from the DB.
+     * @param genreName
+     * @return returns a specific genre. 
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException 
+     */
+    public List<String[]> getGenre(String genreName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Genre g "
+                + "WHERE g.GenreName = '" + genreName + "'";
+        return SQLToPrimitives(getRecords(query));
+    }
+
+    
+    /**
+     * Gets a specific publisher by name
+     * @param publisherName
+     * @return 
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException 
+     */
+    public List<String[]> getPublisher(String publisherName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Publisher p "
+                + "WHERE p.PublisherName = '" + publisherName + "'";
+        return SQLToPrimitives(getRecords(query));
+    }
+
+    
+    /**
+     * Gets a specific series from the DB. 
+     * @param seriesName
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<String[]> getSeries(String seriesName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Series s "
+                + "WHERE s.SeriesName = '" + seriesName + "'";
+        return SQLToPrimitives(getRecords(query));
+    }
+
+    
+    /**
+     * Gets a specific sync status from the DB.
+     * @param syncStatusDescription
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<String[]> getSyncStatus(String syncStatusDescription) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM SyncStatus sy "
+                + "WHERE sy.SyncStatusDescription = '" 
+                + syncStatusDescription + "'";
+        return SQLToPrimitives(getRecords(query));
+    }
+    
+    
+    
+    
+    /**
+     * Updates a specific piece of content. Could be used when something might
+     * become a favorite. Still need to work on that functionality. 
+     * @return 
+     */
+    public boolean updateContent() {
+        return false;
+    }
+    
+    
+    /**
+     * Updates a specific content type.
+     * @return 
+     */
+    public boolean updateContentType() {
+        return false;
+    }
+    
+    
+    /**
+     * Updates info about a creator.
+     * @return 
+     */
+    public boolean updateCreator() {
+        return false;
+    }
+    
+    
+    /**
+     * Updates info about a genre.
+     * @return 
+     */
+    public boolean updateGenre() {
+        return false;
+    }
+    
+    
+    /**
+     * Updates info about a publisher. 
+     * @return 
+     */
+    public boolean updatePublisher() {
+        return false;
+    }
+    
+    
+    /**
+     * Updates info about a series. 
+     * @return 
+     */
+    public boolean updateSeries() {
+        return false;
+    }
+    
+    
+    /**
+     * Updates info about a specific sync status.
+     * @return 
+     */
+    public boolean updateSyncStatus() {
+        return false;
+    }
+    
+    
+    
+    
     /**
      * 
      * This method establishes the connection to the db. Still need to add
@@ -785,13 +938,28 @@ public class SQLTranslator implements DBInterface{
         Class.forName("org.sqlite.JDBC");
         
         try {
-            conn = DriverManager.getConnection(url);
+            conn = DriverManager.getConnection(dbLocationPath);
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-
+    
+    
+    /**
+     * Close connection stream to DB File. 
+     */
+    public void closeConnection() {
+        if(conn != null) {
+            try{
+                conn.close();
+            }
+            catch(SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    
     
     /**
      * private method that each getter can use to retrieve records
@@ -906,23 +1074,14 @@ public class SQLTranslator implements DBInterface{
         return table;
     }   
 
+    
+    /**
+     * Sets a file path for a new piece of content. Needs to create a new 
+     * directory if needed(possibly for a series, music/photo album, etc.)
+     * @param contentName 
+     */
     private void setContentLocation (String contentName) {
         
         //Set a filepath for the information we're trying to store.
-    }
-    
-    
-    /**
-     * Close connection stream to DB File. 
-     */
-    public void closeConnection() {
-        if(conn != null) {
-            try{
-                conn.close();
-            }
-            catch(SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
     }
 }
