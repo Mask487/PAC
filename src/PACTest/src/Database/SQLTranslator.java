@@ -28,7 +28,7 @@ public class SQLTranslator implements DBInterface{
          * For now just specify where it is on your own machine.
          */
     //private final String url = "jdbc:sqlite:C:/sqlite/PACDB.db";
-    private final String url = "jdbc:sqlite:C:/PAC/PAC/Database/PACDB.db";
+    private final String url = "jdbc:sqlite:C:/PAC/Database/PACDB.db";
     
     /**
      * All records requested from DB 
@@ -360,26 +360,31 @@ public class SQLTranslator implements DBInterface{
         int syncStatusID = SQLCheckForeignKeyRecord(querySyncStatus, DBEnumeration.SYNCSTATUS);
         if(syncStatusID == -1) {
             addSyncStatus(syncStatusType);
+            syncStatusID = SQLCheckForeignKeyRecord(querySyncStatus, DBEnumeration.SYNCSTATUS);
         }
         
         int creatorID = SQLCheckForeignKeyRecord(queryCreator, DBEnumeration.CREATOR);
         if(creatorID == -1) {
             addCreator(firstName, middleName, lastName);
+            creatorID = SQLCheckForeignKeyRecord(queryCreator, DBEnumeration.CREATOR);
         }
         
         int genreID = SQLCheckForeignKeyRecord(queryGenre, DBEnumeration.GENRE);
         if(genreID == -1) {
             addGenre(genreName);
+            genreID = SQLCheckForeignKeyRecord(queryGenre, DBEnumeration.GENRE);
         }
         
         int publisherID = SQLCheckForeignKeyRecord(queryPublisher, DBEnumeration.PUBLISHER);
         if(publisherID == -1) {
             addPublisher(publisherName);
+            publisherID = SQLCheckForeignKeyRecord(queryPublisher, DBEnumeration.PUBLISHER);
         }
         
         int seriesID = SQLCheckForeignKeyRecord(querySeries, DBEnumeration.SERIES);
         if(seriesID == -1) {
             addSeries(seriesName);
+            seriesID = SQLCheckForeignKeyRecord(querySeries, DBEnumeration.SERIES);
         }
         
         //Check if a piece of content already exists as a given type. If it does, don't add it.
@@ -669,6 +674,7 @@ public class SQLTranslator implements DBInterface{
         Statement stmt = conn.createStatement();
         ResultSet res = stmt.executeQuery(query);
         
+        if(res.next()) {
         //Gets the id dependent on what field is requested. 
         switch(table) {
             case DBEnumeration.CONTENT : 
@@ -698,7 +704,7 @@ public class SQLTranslator implements DBInterface{
                 id = res.getInt("SyncStatusID");
                 break;
         }
-       
+        }
         return id;
     }
     

@@ -17,15 +17,15 @@ public class SQLiteTest {
         ResultSet res;
         
         String contentType = "EBook";
-        String syncStatusType = "IPhone";
+        String syncStatusType = "Pixel";
         String firstName = "Jacob";
         String middleName = "Tyler";
         String lastName = "Oleson";
         String genreName = "TestAgain";
-        String publisherName = "Barn Pharm";
-        String seriesName = "Into the Procurence"; 
-        String contentName = "Into the Procurence of the Barn Pharamacy";
-        String contentDescription = "Yes";
+        String publisherName = "Test";
+        String seriesName = "Test"; 
+        String contentName = "Test";
+        String contentDescription = "No";
         //yyyy-mm-dd
         String uploadDate = "2019-02-27";
         int pageCount = 1; 
@@ -33,7 +33,7 @@ public class SQLiteTest {
         String duration = "24:00:00";
         String isbn = "UNKNOWN";
         boolean explicit = true; 
-        String location = "/ProjectDirectory/Content/EBook/IntoTheProcurenceOfTheBarnPharmacy";
+        String location = "/ProjectDirectory/Content/Test/Test";
         test.addContent(contentType, syncStatusType, firstName, middleName, lastName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location);
         
         
