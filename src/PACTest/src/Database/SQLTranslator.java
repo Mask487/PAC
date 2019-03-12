@@ -26,7 +26,6 @@ public class SQLTranslator implements DBInterface{
      * in relation to where this file is in the project directory.
      * For now just specify where it is on your own machine.
      */
-    
     private final String dbLocationPath = "jdbc:sqlite:C:/PAC/Database/PACDB.db";
    
     

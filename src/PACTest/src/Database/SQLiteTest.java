@@ -1,8 +1,6 @@
 package Database;
 
 import java.sql.*;
-import java.util.List;
-
 /**
  *
  * @author Jacob Oleson
@@ -76,20 +74,5 @@ public class SQLiteTest {
 //            ex.printStackTrace();
 //        }
         
-    }
-    
-    public void addCreator(String firstName, String middleName, String lastName) {
-    
-    }
-    
-    public static void printContents(List<String[]> result) {
-                
-        for(int i = 0; i < result.size(); i++) {
-            String[] strings = result.get(i);
-            for(int j = 0; j < strings.length; j++) {
-                System.out.println(strings[j] + " ");
-            }
-            System.out.println();
-        }
     }
 }
