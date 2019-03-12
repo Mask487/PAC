@@ -86,6 +86,7 @@ public class BookSearch{
             return null;
         }
     }
+    //USE THIS METHOD TO LOOKUP BOOKS
     //accepts a list of isbn numbers, returns a list of books with their info
     List<Book> BookLookUp(List<Integer> isbn) throws IOException, JSONException{
         

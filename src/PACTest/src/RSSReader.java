@@ -16,7 +16,8 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
 public class RSSReader {
-
+    
+    //USE THIS METHOD TO SEARCH FOR AND DOWNLOAD PODCAST
     static void DownloadPodcast(String url) {
         try {
             URL feedUrl = new URL(url);
@@ -24,7 +25,8 @@ public class RSSReader {
             SyndFeedInput input = new SyndFeedInput();
             SyndFeed feed = input.build(new XmlReader(feedUrl));
             SyndEntry entry = null;
-
+            
+            //loops through feed for podcasts
             for (Iterator i = feed.getEntries().iterator(); i.hasNext();) {
                 entry = (SyndEntry) i.next();
 
@@ -42,6 +44,7 @@ public class RSSReader {
             List<SyndEnclosure> tempList = e.getEnclosures();
             URL tempURL = new URL(tempList.get(0).getUrl());
             
+            //removes invalid character from title
             String name = e.getTitle();
             if (name.contains("!")) {
                 name = name.replace("!", "");
@@ -82,8 +85,13 @@ public class RSSReader {
             if (name.contains(" ")) {
                 name = name.replace(" ", "_");
             }
+            
+            //will be changed in the future to permanent location
+            //uses above formatted title to create file path
             File file = new File("C:/Users/cothe/Desktop/" + name + ".mp3");
             
+            
+            //checks if file already exists
             if (!file.exists()) {
                 
                 System.out.println(e.getTitle());
