@@ -4,7 +4,7 @@ package Util;
  *
  * @author Jacob Oleson
  * 
- * @update 2/27/2019
+ * @update 3/14/2019
  */
 public class DBEnumeration {
     
