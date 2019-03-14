@@ -1,20 +1,38 @@
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
 import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.net.DatagramSocket;
 
 
 class Transfer implements TransferObject {
     private PortableDevice pD = null;
+    private String ip;
+
 
     public void initialize(int i) {
+
         PortableDeviceFolderObject pFO = null;
         PortableDeviceManager pDM = new PortableDeviceManager();
         pD = pDM.getDevices()[i];
         File file = new File("\\PACFILES");
         boolean condition = false;
+
+        //gets ip for wifi transfer
+        try(final DatagramSocket socket = new DatagramSocket()){
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            ip = socket.getLocalAddress().getHostAddress();
+        } catch (SocketException e) {
+            e.printStackTrace();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
 
 
         //open phone
@@ -35,12 +53,21 @@ class Transfer implements TransferObject {
         }
         pD.close();
     }
+    public String getIp() throws IOException {
+        Runtime runtime = Runtime.getRuntime();
+        runtime.exec(new String[]{"cmd.exe /c cd \"C:\\adb\" & start cmd.exe"});
+
+        return ip;
+    }
+
 
     //returns phone model
     public String getPhoneModel() {
         String out = "";
         return out = pD.getModel();
     }
+
+
 
     //returns battery percentage
     public int getPhoneBattery() {
