@@ -3,6 +3,7 @@ import jmtp.PortableDeviceFolderObject;
 import jmtp.PortableDeviceObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public interface TransferObject
     String getPhoneModel();
     int getPhoneBattery();
     String getPhoneName();
+    String getIp() throws IOException;
 
 
 
