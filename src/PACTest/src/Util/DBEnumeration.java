@@ -22,4 +22,5 @@ public class DBEnumeration {
     
     //Default value for records not given
     public static final String UNKNOWN = "UNKNOWN";
+    public static final String UNLISTED = "UNLISTED";
 }
