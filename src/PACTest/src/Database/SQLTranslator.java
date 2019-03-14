@@ -98,7 +98,7 @@ public class SQLTranslator implements DBInterface{
         }
         //Upload Date, Page Count, Duration, ISBN and Exlicit can remain UNKNOWN
         if(location == null) {
-            setContentLocation(contentName);
+            setContentLocation(contentName, seriesName, contentType);
         }
         //Check if attributes of content exist by querying relevant tables
         String queryContentType = "SELECT ContentTypeID FROM " + DBEnumeration.CONTENTTYPE
@@ -1118,10 +1118,16 @@ public class SQLTranslator implements DBInterface{
     /**
      * Sets a file path for a new piece of content. Needs to create a new 
      * directory if needed(possibly for a series, music/photo album, etc.)
+     * Content should be divided into directories of that content's type. Then
+     * further divided by series. If no series, go into folder called unlisted.
+     * Then in their series folder they'll exist as accessible files. 
+     * Alternatively, we could just divide by series, no need to divide by type.
      * @param contentName 
+     * @param series
+     * @param contentType
      */
-    private void setContentLocation (String contentName) {
+    private void setContentLocation (String contentName, String seriesName, String contentType) {
         
-        //Set a filepath for the information we're trying to store.
+        
     }
 }
