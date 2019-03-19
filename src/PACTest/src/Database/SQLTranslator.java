@@ -3,6 +3,7 @@ package Database;
 import java.sql.*;
 import Interfaces.DBInterface;
 import Util.DBEnumeration;
+import Util.DBPrint;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,8 @@ import java.util.List;
  * Translator class that actually speaks to the DB File.
  */
 
-//@TODO Add music, videos, and photos to DB Content Table. 
+//@TODO How does actual content file fit into folder that DB creates for it
+//@TODO Create directories for new content being added in.
 public class SQLTranslator implements DBInterface{
     
     //Establishes connection to db file.
@@ -50,6 +52,7 @@ public class SQLTranslator implements DBInterface{
      * @param isbn
      * @param explicit
      * @param location
+     * @param url
      * @return
      * @throws SQLException
      * @throws ClassNotFoundException 
@@ -205,8 +208,7 @@ public class SQLTranslator implements DBInterface{
         prep.setBoolean(13, explicit);
         prep.setString(14, location);
         prep.setString(15, url);
-        
-        
+         
         //Check if content already exists. If it doesn't, add it. 
         
         if(SQLInsert(prep)) {
@@ -361,6 +363,110 @@ public class SQLTranslator implements DBInterface{
             return false;
         }
     }
+    
+    
+    /**
+     * 
+     * @param newPlaylistName
+     * @return 
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException 
+     */
+    public boolean addPlaylist(String newPlaylistName) throws SQLException, ClassNotFoundException {
+        if(conn == null) {
+            getConnection();
+        }
+        
+        //Check if record already exists
+        int count = 0;
+        String checkQuery = "SELECT COUNT(*) AS total FROM " 
+                + DBEnumeration.PLAYLIST + " pl WHERE pl.PlaylistName = '" 
+                + newPlaylistName + "'";
+        ResultSet res = getRecords(checkQuery);
+        if(res.next()) {
+            count = res.getInt("total");
+        }
+        
+        if(count != 0) {
+            System.out.println("Playlist already exists, cannot add");
+            return false;
+        }
+        
+        //Insert record into DB.
+        String insertQuery = "INSERT INTO " + DBEnumeration.PLAYLIST 
+                + "(PlaylistName)"
+                + " VALUES(?);";
+        PreparedStatement prep = conn.prepareStatement(insertQuery);
+        prep.setString(1, newPlaylistName);
+        
+        if(SQLInsert(prep)) {
+            System.out.println("New playlist added successfully");
+            return true;
+        }
+        else {
+            System.out.println("Error with adding new playlist");
+            return false;
+        }
+    }
+    
+    
+    /**
+     * 
+     * @param contentName
+     * @param contentType
+     * @param playlistName
+     * @return 
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException 
+     */
+    public boolean addToPlaylist(String contentName, String contentType, String playlistName) throws SQLException, ClassNotFoundException {
+        
+        if(conn == null) {
+            getConnection();
+        }
+        
+        //Check if content already exists
+        int count = 0;
+        String checkQuery = "SELECT COUNT(*) AS total FROM " 
+                + DBEnumeration.PCLOOKUP + " pc WHERE pc.PlaylistID ="
+                + " (SELECT PlaylistID FROM " + DBEnumeration.PLAYLIST 
+                + " WHERE PlaylistName = '" + playlistName + "') AND"
+                + " ContentID = (SELECT ContentID FROM " + DBEnumeration.CONTENT
+                + " WHERE ContentName = '" + contentName + "' AND ContentTypeID ="
+                + " (SELECT ContentTypeID FROM ContentType WHERE ContentType = '" 
+                + contentType + "'))";
+        
+        ResultSet res = getRecords(checkQuery);
+        if(res.next()) {
+            count = res.getInt("total");
+        }
+        
+        if(count != 0) {
+            System.out.println("Content already exists in playlist, cannot add");
+            return false;
+        }
+        
+        //Insert content into playlist
+        String query = "INSERT INTO " + DBEnumeration.PCLOOKUP
+                + " (PlaylistID, ContentID)"
+                + " VALUES ((SELECT PlaylistID FROM " + DBEnumeration.PLAYLIST
+                + " WHERE PlaylistName = '" + playlistName + "'),"
+                + " (SELECT ContentID FROM " + DBEnumeration.CONTENT 
+                + " WHERE ContentName = '" + contentName + "' AND"
+                + " ContentTypeID = (SELECT ContentTypeID FROM " + DBEnumeration.CONTENTTYPE
+                + " WHERE ContentType = '" + contentType + "')))";
+        
+        PreparedStatement prep = conn.prepareStatement(query);
+        
+        if(SQLInsert(prep)) {
+            System.out.println("Content added to playlist successfully");
+            return true;
+        }
+        else {
+            System.out.println("Error with adding content to playlist");
+            return false;
+        }        
+    } 
     
     
     /**
@@ -844,16 +950,23 @@ public class SQLTranslator implements DBInterface{
      * Method that returns a count of the number of entries of a certain genre
      * Hopefully useful for the recommendation class
      * @param genreName
-     * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
+     * @return 
      */
-    public List<String[]> getGenreCount(String genreName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT COUNT(*) TotalCount FROM " + DBEnumeration.CONTENT
-                + " c JOIN " + DBEnumeration.GENRE 
-                + " g on c.GenreID = g.genreID WHERE g.GenreName = '"
-                + genreName + "'";
-        return SQLToPrimitives(getRecords(query));
+    public int getGenreCount(String genreName) {
+        
+        try {
+            String query = "SELECT COUNT(*) TotalCount FROM " + DBEnumeration.CONTENT
+                    + " c JOIN " + DBEnumeration.GENRE 
+                    + " g on c.GenreID = g.genreID WHERE g.GenreName = '"
+                    + genreName + "'";
+            return getCount(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            e.getMessage();
+        }
+        
+        return 0;
     }
     
     
@@ -861,29 +974,69 @@ public class SQLTranslator implements DBInterface{
      * Gets a specific publisher by name
      * @param publisherName
      * @return 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
      */
     @Override
-    public List<String[]> getPublisher(String publisherName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Publisher p "
-                + "WHERE p.PublisherName = '" + publisherName + "'";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getPublisher(String publisherName) {
+        
+        try {
+            String query = "SELECT * FROM Publisher p "
+                    + "WHERE p.PublisherName = '" + publisherName + "'";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            e.getMessage();
+        }
+        
+        return null;
     }
 
     
     /**
+     * Gets the number of content published by a given publisher.
+     * @param publisherName
+     * @return 
+     */
+    public int getPublisherCount(String publisherName) {
+        
+        try {
+            String query = "SELECT COUNT(*)" + DBEnumeration.COUNT 
+                    + " FROM " + DBEnumeration.CONTENT
+                    + " c JOIN " + DBEnumeration.PUBLISHER
+                    + " p on c.PublisherID = p.PublisherID WHERE p.PublisherName = '"
+                    + publisherName + "'";
+            return getCount(getRecords(query));
+        } 
+        
+        catch(SQLException | ClassNotFoundException e) {
+            e.getMessage();  
+        }
+        
+        return 0;
+    }
+    
+    
+    /**
      * Gets a specific series from the DB. 
      * @param seriesName
-     * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
+     * @return 
      */
     @Override
-    public List<String[]> getSeries(String seriesName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Series s "
-                + "WHERE s.SeriesName = '" + seriesName + "'";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getSeries(String seriesName) {
+        
+        try {
+            String query = "SELECT * FROM Series s "
+                    + "WHERE s.SeriesName = '" + seriesName + "'";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            e.getMessage();  
+        }
+        
+        
+        //Default to null if nothing returned.
+        return null;  
     }
 
     
@@ -1144,8 +1297,20 @@ public class SQLTranslator implements DBInterface{
      * @param series
      * @param contentType
      */
-    private void setContentLocation (String contentName, String seriesName, String contentType) {
+    private void setContentLocation (String contentName, String seriesName, String contentType) {   
+    }
+    
+    
+    private int getCount(ResultSet res) {
         
+        try {
+            return res.getInt(DBEnumeration.COUNT);
+        }
         
+        catch(SQLException e) {
+            e.getMessage();
+        }
+        
+        return 0;
     }
 }

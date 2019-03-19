@@ -13,6 +13,8 @@ public class DBEnumeration {
     public static final String CONTENTTYPE = "ContentType";
     public static final String GENRE = "Genre";
     public static final String CREATOR = "Creator";
+    public static final String PCLOOKUP = "PlaylistContentLookup";
+    public static final String PLAYLIST = "Playlists";
     public static final String PUBLISHER = "Publisher";
     public static final String SYNCSTATUS  = "SyncStatus";
     public static final String SERIES = "Series";
@@ -23,4 +25,6 @@ public class DBEnumeration {
     //Default value for records not given
     public static final String UNKNOWN = "UNKNOWN";
     public static final String UNLISTED = "UNLISTED";
+    
+    public static final String COUNT = "TotalCount";
 }
