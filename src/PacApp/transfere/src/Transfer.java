@@ -1,7 +1,7 @@
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
-import java.io.File;
-import java.io.IOException;
+
+import java.io.*;
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -14,6 +14,7 @@ import java.net.DatagramSocket;
 class Transfer implements TransferObject {
     private PortableDevice pD = null;
     private String ip;
+    private String mainPath = "\"D:\\Desktop\\PAC\\";
 
 
     public void initialize(int i) {
@@ -54,10 +55,39 @@ class Transfer implements TransferObject {
         pD.close();
     }
     public String getIp() throws IOException {
-        Runtime runtime = Runtime.getRuntime();
-        runtime.exec(new String[]{"cmd.exe /c cd \"C:\\adb\" & start cmd.exe"});
+        String addr = mainPath + "addrs.txt\"";
+        String longIp = "";
+        String ip = "";
+        ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "cd \"C:\\Users\\quinc\\AppData\\Local\\Android\\Sdk\\platform-tools\" " +
+                "&& adb devices " +
+                "&& adb shell ip route > " + addr + " ");
+        builder.redirectErrorStream(true);
+        Process p = builder.start();
+        BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        String line;
+        while(true){
+            line = r.readLine();
+            if(line == null){ break; }
+            //System.out.println(line);
+        }
+
+        BufferedReader r2 = new BufferedReader(new FileReader("D:\\Desktop\\PAC\\addrs.txt"));
+        try{
+            StringBuilder sb = new StringBuilder();
+            line = r2.readLine();
+            ip = line.split("/")[0];
+            longIp = sb.toString();
+        }finally {
+            r2.close();
+        }
+        System.out.println("IP: " + ip);
 
         return ip;
+    }
+
+    public void wifiSetup(String ip) throws IOException {
+        ip = getIp();
+        
     }
 
 
@@ -80,6 +110,7 @@ class Transfer implements TransferObject {
         String out;
         return out = pD.getFriendlyName();
     }
+
 
     //when adding files, checks to see if file doesn't already exist
     private boolean doesFileExist(PortableDeviceFolderObject targetFolder, File file)
