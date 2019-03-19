@@ -45,8 +45,14 @@ public class SQLiteTest {
         test.addPublisher(unknown);
         test.addSeries(unknown);
         test.addSyncStatus(unknown);
-        test.getGenreCount("Philosophical Fiction");
-        DBPrint.printContents(test.getGenreCount("Philosophical Fon"));
+        System.out.println(test.getGenreCount("Philosophical Fiction"));
+        test.getGenreCount("Philosophical Fon");
+        System.out.println(test.getPublisherCount("Test"));
+        test.addPlaylist("newPlaylist");
+        
+        test.addToPlaylist("Test", "Test", "newPlaylist");
+        System.out.println("Number of contnet that belong to series UNKNOWN = " + test.getSeriesCount("UNKNOWN"));
+        DBPrint.printContents(test.getAllContent());
 //        List<String[]> result = test.getAllContent();
 //
 //        printContents(result);
