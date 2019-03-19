@@ -34,7 +34,7 @@ public class Recommend {
             SQLTranslator db = new Database.SQLTranslator();
             searchTerms = db.getAllSeries();
         }
-        else if(st.equals("series")){
+        else if(st.equals("publisher")){
             SQLTranslator db = new Database.SQLTranslator();
             searchTerms = db.getAllPublishers();
         }
