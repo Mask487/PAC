@@ -60,7 +60,7 @@ public class SQLTranslator implements DBInterface{
             String genreName, String publisherName, String seriesName, 
             String contentName, String contentDescription, String uploadDate,
             int pageCount, String duration, String isbn, boolean explicit, 
-            String location) throws SQLException, ClassNotFoundException {
+            String location, String url) throws SQLException, ClassNotFoundException {
         
         if(conn == null) {
             getConnection();
@@ -187,8 +187,8 @@ public class SQLTranslator implements DBInterface{
         String query = "INSERT INTO " + DBEnumeration.CONTENT 
                 + "(ContentTypeID, SyncStatusID, CreatorID, GenreID, PublisherID"
                 + ", SeriesID, ContentName, ContentDescription, UploadDate, "
-                + "PageCount, Duration, ISBN, Explicit, Location)" 
-                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "PageCount, Duration, ISBN, Explicit, Location, DownloadURL)" 
+                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement prep = conn.prepareStatement(query);
         prep.setInt(1, contentTypeID);
         prep.setInt(2, syncStatusID);
@@ -204,6 +204,7 @@ public class SQLTranslator implements DBInterface{
         prep.setString(12, isbn);
         prep.setBoolean(13, explicit);
         prep.setString(14, location);
+        prep.setString(15, url);
         
         
         //Check if content already exists. If it doesn't, add it. 
@@ -838,6 +839,23 @@ public class SQLTranslator implements DBInterface{
         return SQLToPrimitives(getRecords(query));
     }
 
+    
+    /**
+     * Method that returns a count of the number of entries of a certain genre
+     * Hopefully useful for the recommendation class
+     * @param genreName
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<String[]> getGenreCount(String genreName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT COUNT(*) TotalCount FROM " + DBEnumeration.CONTENT
+                + " c JOIN " + DBEnumeration.GENRE 
+                + " g on c.GenreID = g.genreID WHERE g.GenreName = '"
+                + genreName + "'";
+        return SQLToPrimitives(getRecords(query));
+    }
+    
     
     /**
      * Gets a specific publisher by name

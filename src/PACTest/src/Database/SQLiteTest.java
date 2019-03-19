@@ -1,5 +1,8 @@
 package Database;
 
+import Util.DBPrint;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 /**
  *
@@ -14,26 +17,27 @@ public class SQLiteTest {
         SQLTranslator test = new SQLTranslator();
         ResultSet res;
         
-//        String contentType = "EBook";
-//        String syncStatusType = "Pixel";
-//        String firstName = "Jacob";
-//        String middleName = "Tyler";
-//        String lastName = "Oleson";
-//        String genreName = "TestAgain";
-//        String publisherName = "Test";
-//        String seriesName = "Test"; 
-//        String contentName = "Test";
-//        String contentDescription = "No";
-//        //yyyy-mm-dd
-//        String uploadDate = "2019-02-27";
-//        int pageCount = 1; 
-//        //hh:mm:ss
-//        String duration = "24:00:00";
-//        String isbn = "UNKNOWN";
-//        boolean explicit = true; 
-//        String location = "/ProjectDirectory/Content/Test/Test";
-//        test.addContent(contentType, syncStatusType, firstName, middleName, lastName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location);
-//        
+        String contentType = "Podcast";
+        String syncStatusType = "Iphone";
+        String firstName = "Matthew";
+        String middleName = "James";
+        String lastName = "Malzahn";
+        String genreName = "Fantasy";
+        String publisherName = "Test";
+        String seriesName = "Test"; 
+        String contentName = "Test";
+        String contentDescription = "Test of URL";
+        //yyyy-mm-dd
+        String uploadDate = "2019-02-30";
+        int pageCount = 0; 
+        //hh:mm:ss
+        String duration = "1:50:32";
+        String isbn = "UNKNOWN";
+        boolean explicit = true; 
+        String location = "/ProjectDirectory/Content/Test/Test";
+        String url = "test";
+        test.addContent(contentType, syncStatusType, firstName, middleName, lastName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url);
+        
         String unknown = "UNKNOWN";
         test.addContentType(unknown);
         test.addCreator("jacob", unknown, unknown);
@@ -41,6 +45,8 @@ public class SQLiteTest {
         test.addPublisher(unknown);
         test.addSeries(unknown);
         test.addSyncStatus(unknown);
+        test.getGenreCount("Philosophical Fiction");
+        DBPrint.printContents(test.getGenreCount("Philosophical Fon"));
 //        List<String[]> result = test.getAllContent();
 //
 //        printContents(result);
@@ -74,5 +80,10 @@ public class SQLiteTest {
 //            ex.printStackTrace();
 //        }
         
+
+
+    Path currentRelativePath = Paths.get("");
+    String s = currentRelativePath.toAbsolutePath().toString();
+        System.out.println("Current relative path is: " + s);
     }
 }

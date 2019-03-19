@@ -30,7 +30,7 @@ public interface DBInterface {
             String genreName, String publisherName, String seriesName, 
             String contentName, String contentDescription, String uploadDate,
             int pageCount, String duration, String isbn, boolean explicit, 
-            String location) throws SQLException, ClassNotFoundException;
+            String location, String url) throws SQLException, ClassNotFoundException;
     
     
     public boolean addContentType(String contentTypeName) throws SQLException, ClassNotFoundException;
