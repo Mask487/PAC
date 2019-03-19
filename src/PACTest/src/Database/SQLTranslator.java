@@ -709,26 +709,42 @@ public class SQLTranslator implements DBInterface{
      * Gets All Content in the DB and displays all information associated with them.
      * Most likely need a Reflection Class to help with outputting.
      * @return 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
      */
     @Override
-    public List<String[]> getAllContent() throws SQLException, ClassNotFoundException {        
-        String query = "SELECT * FROM " + DBEnumeration.CONTENT;
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getAllContent() {        
+        
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT;
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
     
     
     /**
      * Returns the Content Types the DB currently knows.
      * @return 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
      */
     @Override
-    public List<String[]> getAllContentTypes() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM " + DBEnumeration.CONTENTTYPE;
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getAllContentTypes() {
+        
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.CONTENTTYPE;
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
     
         
@@ -737,66 +753,104 @@ public class SQLTranslator implements DBInterface{
      * 
      * @return res returns the set of all creators and the information associated
      * with them that was requested.
-     * 
-     * @throws SQLException
-     * @throws ClassNotFoundException 
      */
     @Override
-    public List<String[]> getAllCreators() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM " + DBEnumeration.CREATOR;
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getAllCreators() {
+        
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.CREATOR;
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
         
     
     /**
      * Gets all the genres that the DB knows about. 
      * @return gets all genres that the DB holds.
-     * @throws SQLException
-     * @throws ClassNotFoundException 
      */
     @Override
-    public List<String[]> getAllGenres() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM " + DBEnumeration.GENRE;
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getAllGenres() {
+        
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.GENRE;
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
         
     
     /**
      * 
      * @return 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
      */
     @Override
-    public List<String[]> getAllPublishers() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Publisher";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getAllPublishers() {
+        
+        try {
+            String query = "SELECT * FROM Publisher";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
         
    
     /**
      * Gets all series that the DB currently holds.
      * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
      */
     @Override
-    public List<String[]> getAllSeries() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Series";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getAllSeries() {
+        
+        try {
+            String query = "SELECT * FROM Series";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
         
     
     /**
      * Gets all sync statuses from the DB. Don't know why this would be used but just in case. 
      * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
      */
     @Override
-    public List<String[]> getAllSyncStatus() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM SyncStatus";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getAllSyncStatus() {
+       
+        try {
+            String query = "SELECT * FROM SyncStatus";
+            return SQLToPrimitives(getRecords(query));
+        }
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
     
     
@@ -806,17 +860,25 @@ public class SQLTranslator implements DBInterface{
      * @param _middleName Can be null.
      * @param _lastName Cannot be null.
      * @return returns all content associated with one creator.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public List<String[]> getContentByCreator(String _firstName, String _middleName, String _lastName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Content c JOIN "
-                + "Creator a on c.CreatorID = a.CreatorID WHERE "
-                + "a.ContentCreatorID = (SELECT CreatorID FROM Creator WHERE "
-                + "FirstName = '" + _firstName + "' AND MiddleName = '" 
-                + _middleName + "' AND LastName = '" + _lastName + "')";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getContentByCreator(String _firstName, String _middleName, String _lastName) {
+        
+        try {
+            String query = "SELECT * FROM Content c JOIN "
+                    + "Creator a on c.CreatorID = a.CreatorID WHERE "
+                    + "a.ContentCreatorID = (SELECT CreatorID FROM Creator WHERE "
+                    + "FirstName = '" + _firstName + "' AND MiddleName = '" 
+                    + _middleName + "' AND LastName = '" + _lastName + "')";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
     
     
@@ -824,15 +886,23 @@ public class SQLTranslator implements DBInterface{
      * Gets all content by a given genre.
      * @param _genreName
      * @return returns all content of the given genre.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public List<String[]> getContentByGenre(String _genreName) throws SQLException, ClassNotFoundException {        
-        String query = "SELECT * FROM Content c JOIN "
-                + "Genre g on c.GenreID = g.GenreID "
-                + "WHERE g.GenreName = '" + _genreName + "'";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getContentByGenre(String _genreName) {        
+        
+        try {
+            String query = "SELECT * FROM Content c JOIN "
+                    + "Genre g on c.GenreID = g.GenreID "
+                    + "WHERE g.GenreName = '" + _genreName + "'";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
     
     
@@ -840,13 +910,21 @@ public class SQLTranslator implements DBInterface{
      * Gets a specific content determined by its name.
      * @param contentName
      * @return returns an individual piece of content.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public List<String[]> getContentByName(String contentName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT c.ContentID FROM Content c WHERE c.ContentName = '" + contentName + "'"; 
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getContentByName(String contentName) {
+        
+        try{
+            String query = "SELECT c.ContentID FROM Content c WHERE c.ContentName = '" + contentName + "'"; 
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
     
     
@@ -854,15 +932,23 @@ public class SQLTranslator implements DBInterface{
      * Gets content associated with a publisher.
      * @param publisherName
      * @return returns all content by a given publisher.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public List<String[]> getContentByPublisher(String publisherName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT c.ContentID FROM Content c JOIN "
-                + "Publisher p on c.PublisherID = p.PublisherID "
-                + "WHERE p.PublisherName = '" + publisherName + "'";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getContentByPublisher(String publisherName) {
+        
+        try {
+            String query = "SELECT c.ContentID FROM Content c JOIN "
+                    + "Publisher p on c.PublisherID = p.PublisherID "
+                    + "WHERE p.PublisherName = '" + publisherName + "'";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
     
     
@@ -870,15 +956,23 @@ public class SQLTranslator implements DBInterface{
      * Gets all content in DB that is a part of a specific series. 
      * @param seriesName
      * @return returns all content associated with a given series. 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
      */
     @Override
-    public List<String[]> getContentBySeries(String seriesName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Content c "
-                + "JOIN Series s on c.SeriesID = s.SeriesID WHERE "
-                + "s.SeriesName = '" + seriesName + "'";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getContentBySeries(String seriesName) {
+        
+        try {
+            String query = "SELECT * FROM Content c "
+                    + "JOIN Series s on c.SeriesID = s.SeriesID WHERE "
+                    + "s.SeriesName = '" + seriesName + "'";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
     
     
@@ -886,15 +980,22 @@ public class SQLTranslator implements DBInterface{
      * Gets content determined by their type.
      * @param contentType 
      * @return returns all content by a given type.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public List<String[]> getContentByType(String contentType) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Content c JOIN ContentType ct on "
-                + "c.ContentTypeID = ct.contentTypeID WHERE "
-                + "ct.ContentType = '" + contentType + "'";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getContentByType(String contentType) {
+        
+        try {
+            String query = "SELECT * FROM Content c JOIN ContentType ct on "
+                    + "c.ContentTypeID = ct.contentTypeID WHERE "
+                    + "ct.ContentType = '" + contentType + "'";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
     }
     
     
@@ -902,14 +1003,22 @@ public class SQLTranslator implements DBInterface{
      * Gets a specific content type from the db. 
      * @param contentType
      * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
      */
     @Override
-    public List<String[]> getContentType(String contentType) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM ContentType "
-                + "WHERE ContentType = '" + contentType + "'";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getContentType(String contentType) {
+        
+        try {
+            String query = "SELECT * FROM ContentType "
+                    + "WHERE ContentType = '" + contentType + "'";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
        
     
@@ -919,30 +1028,46 @@ public class SQLTranslator implements DBInterface{
      * @param middleName
      * @param lastName
      * @return returns a specific creator. 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
      */
     @Override
-    public List<String[]> getCreator(String firstName, String middleName, String lastName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Creator a WHERE a.FirstName = '" 
-                + firstName + "' AND a.MiddleName = '" + middleName 
-                + "' AND a.LastName = '" + lastName + "'";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getCreator(String firstName, String middleName, String lastName) {
+        
+        try {
+            String query = "SELECT * FROM Creator a WHERE a.FirstName = '" 
+                    + firstName + "' AND a.MiddleName = '" + middleName 
+                    + "' AND a.LastName = '" + lastName + "'";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }    
     
     
     /**
      * Gets a specific genre from the DB.
      * @param genreName
-     * @return returns a specific genre. 
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
+     * @return returns a specific genre.  
      */
     @Override
-    public List<String[]> getGenre(String genreName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM Genre g "
-                + "WHERE g.GenreName = '" + genreName + "'";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getGenre(String genreName) {
+        
+        try {
+            String query = "SELECT * FROM Genre g "
+                    + "WHERE g.GenreName = '" + genreName + "'";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return null;
     }
 
     
@@ -963,7 +1088,7 @@ public class SQLTranslator implements DBInterface{
         }
         
         catch(SQLException | ClassNotFoundException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         
         return 0;
@@ -985,7 +1110,7 @@ public class SQLTranslator implements DBInterface{
         }
         
         catch(SQLException | ClassNotFoundException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         
         return null;
@@ -1009,7 +1134,7 @@ public class SQLTranslator implements DBInterface{
         } 
         
         catch(SQLException | ClassNotFoundException e) {
-            e.getMessage();  
+            System.out.println(e.getMessage());  
         }
         
         return 0;
@@ -1031,12 +1156,36 @@ public class SQLTranslator implements DBInterface{
         }
         
         catch(SQLException | ClassNotFoundException e) {
-            e.getMessage();  
+            System.out.println(e.getMessage()); 
         }
         
         
         //Default to null if nothing returned.
         return null;  
+    }
+    
+    
+    /**
+     * Returns the number of content that belong to a specific series.
+     * @param seriesName
+     * @return 
+     */
+    public int getSeriesCount(String seriesName) {
+        
+        try {
+            String query = "SELECT COUNT(*)" + DBEnumeration.COUNT 
+                    + " FROM " + DBEnumeration.CONTENT
+                    + " c JOIN " + DBEnumeration.SERIES
+                    + " s on c.SeriesID = s.SeriesID WHERE s.SeriesName = '"
+                    + seriesName + "'";
+            return getCount(getRecords(query));
+        } 
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());  
+        }
+        
+        return 0;
     }
 
     
@@ -1044,15 +1193,23 @@ public class SQLTranslator implements DBInterface{
      * Gets a specific sync status from the DB.
      * @param syncStatusDescription
      * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
      */
     @Override
-    public List<String[]> getSyncStatus(String syncStatusDescription) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM SyncStatus sy "
-                + "WHERE sy.SyncStatusDescription = '" 
-                + syncStatusDescription + "'";
-        return SQLToPrimitives(getRecords(query));
+    public List<String[]> getSyncStatus(String syncStatusDescription){
+        
+        try {
+            String query = "SELECT * FROM SyncStatus sy "
+                    + "WHERE sy.SyncStatusDescription = '" 
+                    + syncStatusDescription + "'";
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default value
+        return null;
     }
     
     
@@ -1135,22 +1292,20 @@ public class SQLTranslator implements DBInterface{
      * 
      * This method establishes the connection to the db. Still need to add
      * one that closes said connection.
-     * @throws SQLException
-     * @throws ClassNotFoundException 
      */
     @Override
-    public void getConnection() throws SQLException, ClassNotFoundException {
+    public void getConnection() {
         
         /**
          * This part is necessary. Specifies the library that allows Java to 
          * work with SQLite
          */
-        Class.forName("org.sqlite.JDBC");
         
         try {
+            Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection(dbLocationPath);
         }
-        catch (SQLException e) {
+        catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -1180,9 +1335,11 @@ public class SQLTranslator implements DBInterface{
      * @throws ClassNotFoundException 
      */
     private ResultSet getRecords(String query) throws SQLException, ClassNotFoundException {
+        
         if(conn == null) {
             getConnection();
         }
+        
         
         Statement stmt = conn.createStatement();
         ResultSet res = stmt.executeQuery(query);
@@ -1270,19 +1427,27 @@ public class SQLTranslator implements DBInterface{
      * @param res
      * @return 
      */
-    private static List<String[]> SQLToPrimitives(ResultSet res) throws SQLException {
+    private static List<String[]> SQLToPrimitives(ResultSet res) {
         
-        int nCol = res.getMetaData().getColumnCount();
-        List<String[]> table = new ArrayList<>();
-        while(res.next()) {
-            String[] row = new String[nCol];
-            for(int iCol = 1; iCol <= nCol; iCol++) {
-                Object obj = res.getObject(iCol);
-                row[iCol-1] = (obj == null) ? null:obj.toString();
+        try {
+            int nCol = res.getMetaData().getColumnCount();
+            List<String[]> table = new ArrayList<>();
+            while(res.next()) {
+                String[] row = new String[nCol];
+                for(int iCol = 1; iCol <= nCol; iCol++) {
+                    Object obj = res.getObject(iCol);
+                    row[iCol-1] = (obj == null) ? null:obj.toString();
+                }
+                table.add(row);
             }
-            table.add(row);
+            return table;
         }
-        return table;
+        
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
     }   
 
     

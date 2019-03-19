@@ -50,7 +50,9 @@ public class SQLiteTest {
         System.out.println(test.getPublisherCount("Test"));
         test.addPlaylist("newPlaylist");
         
-        test.addToPlaylist("Test", "aegsk ", "newPlaylist");
+        test.addToPlaylist("Test", "Test", "newPlaylist");
+        System.out.println("Number of contnet that belong to series UNKNOWN = " + test.getSeriesCount("UNKNOWN"));
+        DBPrint.printContents(test.getAllContent());
 //        List<String[]> result = test.getAllContent();
 //
 //        printContents(result);
