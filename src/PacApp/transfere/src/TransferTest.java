@@ -16,8 +16,6 @@ public class TransferTest
         //t.addEbook(files);
         //t.getFolder("podcasts", file1);
         //t.backup("Backup");
-        t.setAdbPath("C:\\Users\\quinc\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe");
-        t.checkConnection();
         System.out.println(t.getIp());
 
     }

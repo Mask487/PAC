@@ -1,7 +1,7 @@
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
-
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -14,8 +14,6 @@ import java.net.DatagramSocket;
 class Transfer implements TransferObject {
     private PortableDevice pD = null;
     private String ip;
-    private String adb;
-
 
 
     public void initialize(int i) {
@@ -55,56 +53,13 @@ class Transfer implements TransferObject {
         }
         pD.close();
     }
-    public String getIp() {
+    public String getIp() throws IOException {
+        Runtime runtime = Runtime.getRuntime();
+        runtime.exec(new String[]{"cmd.exe /c cd \"C:\\adb\" & start cmd.exe"});
+
         return ip;
     }
 
-    public void setAdbPath(String path) throws IOException {
-        File dir = new File(path);
-        boolean exists = dir.exists();
-        if(exists){
-            adb = path;
-        }else{
-            adb = null;
-        }
-    }
-
-    public String getAdbPath(){
-        return adb;
-    }
-
-    public boolean checkConnection() throws IOException {
-        if(adb != null){
-            Runtime runtime = Runtime.getRuntime();
-            runtime.exec(new String[]{"cmd.exe /c cd " + adb + " & start cmd.exe && adb shell ip -f inet addr show wlan0 > phoneprofile.pfl"});
-            String pip = getPhoneIp();
-        }
-        return false;
-    }
-
-    private String getPhoneIp() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("phoneprofile.pfl"));
-        try{
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while(line != null){
-                sb.append(line);
-                sb.append("\n");
-                line = br.readLine();
-            }
-            return sb.toString();
-        }finally{
-            br.close();
-        }
-    }
-
-    public void wirelessSetup() throws IOException{
-        if(checkConnection()){
-            Runtime runtime = Runtime.getRuntime();
-            runtime.exec(new String[]{"cmd.exe /c cd " + adb + " & start cmd.exe && adb devices && adb kill-server"});
-        }
-    }
 
     //returns phone model
     public String getPhoneModel() {
