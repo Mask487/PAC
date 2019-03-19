@@ -10,12 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.net.DatagramSocket;
 
-
-class Transfer implements TransferObject {
+class Transfer extends Thread implements TransferObject{
     private PortableDevice pD = null;
     private String ip;
     private String mainPath = "\"D:\\Desktop\\PAC\\";
-
 
     public void initialize(int i) {
 
@@ -54,6 +52,9 @@ class Transfer implements TransferObject {
         }
         pD.close();
     }
+
+
+    //change path files to something more universal
     public String getIp() throws IOException {
         String addr = mainPath + "addrs.txt\"";
         String longIp = "";
@@ -80,14 +81,15 @@ class Transfer implements TransferObject {
         }finally {
             r2.close();
         }
-        System.out.println("IP: " + ip);
+        //System.out.println("IP: " + ip);
 
         return ip;
     }
 
     public void wifiSetup(String ip) throws IOException {
         ip = getIp();
-        
+
+
     }
 
 
@@ -236,37 +238,49 @@ class Transfer implements TransferObject {
     }
 
     public void backup(String path){
-        PortableDeviceFolderObject target = null;
-        File file = new File("D:\\Desktop\\" + path);
-        if(!file.isDirectory()){
-            file.mkdir();
-        }
-        for (PortableDeviceObject obj1 : pD.getRootObjects())
-        {
-            System.out.println(obj1.getName() + "\n--------------------");
-            if (obj1 instanceof PortableDeviceStorageObject)
-            {
-                File tempFile = new File(file.getPath() + "\\" + obj1.getName());
-                if (!tempFile.isDirectory()){
-                    tempFile.mkdir();
+
+        class BackupThread implements Runnable{
+            //String path;
+            BackupThread(String string) {
+                //path = string;
+            }
+            public void run() {
+                PortableDeviceFolderObject target = null;
+                File file = new File("D:\\Desktop\\" + path);
+                if(!file.isDirectory()){
+                    file.mkdir();
                 }
-                PortableDeviceStorageObject storage = (PortableDeviceStorageObject) obj1;
-                for (PortableDeviceObject obj2 : storage.getChildObjects())
+                for (PortableDeviceObject obj1 : pD.getRootObjects())
                 {
-                    System.out.println("    " + obj2.getName());
-                    if (obj2 instanceof PortableDeviceFolderObject)
+                    System.out.println(obj1.getName() + "\n--------------------");
+                    if (obj1 instanceof PortableDeviceStorageObject)
                     {
-                        File tempFile2 = new File(tempFile.getPath() + "\\" + obj2.getName());
-                        if(!tempFile2.isDirectory()){
-                            tempFile2.mkdir();
+                        File tempFile = new File(file.getPath() + "\\" + obj1.getName());
+                        if (!tempFile.isDirectory()){
+                            tempFile.mkdir();
                         }
-                        recur((PortableDeviceFolderObject) obj2, "    ", tempFile2);
+                        PortableDeviceStorageObject storage = (PortableDeviceStorageObject) obj1;
+                        for (PortableDeviceObject obj2 : storage.getChildObjects())
+                        {
+                            System.out.println("    " + obj2.getName());
+                            if (obj2 instanceof PortableDeviceFolderObject)
+                            {
+                                File tempFile2 = new File(tempFile.getPath() + "\\" + obj2.getName());
+                                if(!tempFile2.isDirectory()){
+                                    tempFile2.mkdir();
+                                }
+                                recur((PortableDeviceFolderObject) obj2, "    ", tempFile2);
+                            }
+                            ptoPC(obj2, tempFile.getPath());
+                        }
                     }
-                    ptoPC(obj2, tempFile.getPath());
+                    System.out.println("");
                 }
             }
-            System.out.println("");
         }
+        Thread t = new Thread(new BackupThread(path));
+
+
     }
 
     private void recur(PortableDeviceFolderObject object, String tab, File file)
@@ -318,7 +332,4 @@ class Transfer implements TransferObject {
         }
         return target;
     }
-
-
-
 }
