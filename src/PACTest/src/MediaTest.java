@@ -1,4 +1,4 @@
-import javafx.scene.media.Media;
+/*import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class MediaTest{
@@ -36,3 +36,68 @@ public class MediaTest{
 //for podcast and other audio/video files then autoplay would be a must.
 
 //not sure how to set metadata for when user pauses media and comes back later to start at the same spot
+
+
+public void setDrag(JTextArea t){
+        JTextArea myPanel = t;
+        if(fileList.isEmpty()){
+            myPanel.setDragEnabled(true);
+        }
+        else if(!fileList.isEmpty()){
+            myPanel.setDragEnabled(false);
+            fileList.clear();
+        }
+    }
+    public void DragAndDrop(JTextArea t) {
+        fileList = new ArrayList<>();
+        final JTextArea myPanel = t;
+        myPanel.setDropTarget(new DropTarget() {
+            @Override
+            public synchronized void drop(DropTargetDropEvent evt) {
+                String path;
+                try {
+                    evt.acceptDrop(DnDConstants.ACTION_COPY);
+                    List<File> droppedFiles = (List<File>) evt
+                            .getTransferable().getTransferData(
+                                    DataFlavor.javaFileListFlavor);
+                    System.out.println(droppedFiles);
+                    for (File file : droppedFiles) {
+                        if (file.isDirectory()) {
+                            getFiles(file.getAbsolutePath());
+                        } else if (!file.isDirectory() && file.isFile() && file.getName().endsWith(".txt")) {
+                            path = file.getAbsolutePath();
+                            fileList.add(path);
+                        } else {
+                            System.out.println("ERROR, Unsupported File Type"
+                                    + " Detected");
+                        }
+                    }
+                    /*for (String s : fileList) {
+                        try {
+                            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+                                    new FileInputStream(s)));
+                            String line = null;
+                            String text = "";
+                            while ((line = bufferedReader.readLine()) != null) {
+                                text += line + System.lineSeparator();
+                            }
+                            //myPanel.setText(text);
+                            bufferedReader.close();
+                            System.out.println("isFile " + text);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        //return fileList;
+        setDrag(myPanel);
+    } 
+}
+
+
+*/
