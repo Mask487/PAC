@@ -16,42 +16,42 @@ import org.json.JSONObject;
 public class BookSearch{
     
     //start getters for the book information
-    String getTitle(int isbn) throws IOException{
+    String getTitle(String isbn) throws IOException{
         JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/"
                 + "volumes?q=isbn:" + isbn);
         String title = json.getJSONArray("items").getJSONObject(0)
                 .getJSONObject("volumeInfo").get("title").toString();
         return title;
     }
-    String getSubtitle(int isbn) throws IOException{
+    String getSubtitle(String isbn) throws IOException{
         JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/"
                 + "volumes?q=isbn:" + isbn);
         String subTitle = json.getJSONArray("items").getJSONObject(0)
                 .getJSONObject("volumeInfo").get("subtitle").toString();
         return subTitle;
     }
-    String getAuthors(int isbn) throws IOException{
+    String getAuthors(String isbn) throws IOException{
         JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/"
                 + "volumes?q=isbn:" + isbn);
         String authors = json.getJSONArray("items").getJSONObject(0)
                 .getJSONObject("volumeInfo").get("authors").toString();
         return authors;
     }
-    String getPublisher(int isbn) throws IOException{
+    String getPublisher(String isbn) throws IOException{
         JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/"
                 + "volumes?q=isbn:" + isbn);
         String publisher = json.getJSONArray("items").getJSONObject(0)
                 .getJSONObject("volumeInfo").get("publisher").toString();
         return publisher;
     }
-    String getPublishYear(int isbn) throws IOException{
+    String getPublishYear(String isbn) throws IOException{
         JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/"
                 + "volumes?q=isbn:" + isbn);
         String publishYear = json.getJSONArray("items").getJSONObject(0)
                 .getJSONObject("volumeInfo").get("publishedDate").toString();
         return publishYear;
     }
-    String getPageCount(int isbn) throws IOException{
+    String getPageCount(String isbn) throws IOException{
         JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/"
                 + "volumes?q=isbn:" + isbn);
         String pageCount = json.getJSONArray("items").getJSONObject(0)
@@ -88,14 +88,14 @@ public class BookSearch{
     }
     //USE THIS METHOD TO LOOKUP BOOKS
     //accepts a list of isbn numbers, returns a list of books with their info
-    List<Book> BookLookUp(List<Integer> isbn) throws IOException, JSONException{
+    List<Book> BookLookUp(List<String> isbn) throws IOException, JSONException{
         
         List<Book> bookList = new ArrayList<>();
         
         //takes each isbn and uses the getters above to get their info from
         //the json file for the book, uses that info to create a book object
         //that is added to the list
-        for(int i : isbn){
+        for(String i : isbn){
             Book book = new Book(getTitle(i), getSubtitle(i), getAuthors(i), 
                     getPublisher(i), getPublishYear(i), getPageCount(i), i);
             bookList.add(book);
