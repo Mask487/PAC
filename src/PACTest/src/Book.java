@@ -6,10 +6,10 @@ public class Book{
     String publisher;
     String publishYear;
     String pageCount;
-    int isbn;
+    String isbn;
     
     Book(String title, String subTitle, String authors, String publisher, 
-            String publishYear, String pageCount, int isbn){
+            String publishYear, String pageCount, String isbn){
         this.title = title;
         this.subTitle = subTitle;
         this.authors = authors;
@@ -61,10 +61,10 @@ public class Book{
         this.pageCount = pageCount;
     }
     
-    int getISBN(){
+    String getISBN(){
         return isbn;
     }
-    void setISBN(int isbn){
+    void setISBN(String isbn){
         this.isbn = isbn;
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Jacob Oleson
  * 
- * @update 3/13/2019
+ * @update 3/14/2019
  * 
  * Translator class that actually speaks to the DB File.
  */
@@ -54,12 +54,13 @@ public class SQLTranslator implements DBInterface{
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
+    @Override
     public boolean addContent(String contentType, String syncStatusType, 
             String firstName, String middleName, String lastName, 
             String genreName, String publisherName, String seriesName, 
             String contentName, String contentDescription, String uploadDate,
             int pageCount, String duration, String isbn, boolean explicit, 
-            String location) throws SQLException, ClassNotFoundException {
+            String location, String url) throws SQLException, ClassNotFoundException {
         
         if(conn == null) {
             getConnection();
@@ -97,7 +98,7 @@ public class SQLTranslator implements DBInterface{
         }
         //Upload Date, Page Count, Duration, ISBN and Exlicit can remain UNKNOWN
         if(location == null) {
-            setContentLocation(contentName);
+            setContentLocation(contentName, seriesName, contentType);
         }
         //Check if attributes of content exist by querying relevant tables
         String queryContentType = "SELECT ContentTypeID FROM " + DBEnumeration.CONTENTTYPE
@@ -186,8 +187,8 @@ public class SQLTranslator implements DBInterface{
         String query = "INSERT INTO " + DBEnumeration.CONTENT 
                 + "(ContentTypeID, SyncStatusID, CreatorID, GenreID, PublisherID"
                 + ", SeriesID, ContentName, ContentDescription, UploadDate, "
-                + "PageCount, Duration, ISBN, Explicit, Location)" 
-                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "PageCount, Duration, ISBN, Explicit, Location, DownloadURL)" 
+                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement prep = conn.prepareStatement(query);
         prep.setInt(1, contentTypeID);
         prep.setInt(2, syncStatusID);
@@ -203,6 +204,7 @@ public class SQLTranslator implements DBInterface{
         prep.setString(12, isbn);
         prep.setBoolean(13, explicit);
         prep.setString(14, location);
+        prep.setString(15, url);
         
         
         //Check if content already exists. If it doesn't, add it. 
@@ -225,6 +227,7 @@ public class SQLTranslator implements DBInterface{
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
+    @Override
     public boolean addContentType(String contentTypeName) throws SQLException, ClassNotFoundException {
         if(conn == null) {
             getConnection();
@@ -274,6 +277,7 @@ public class SQLTranslator implements DBInterface{
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
+    @Override
     public boolean addCreator(String firstName, String middleName, String lastName) throws SQLException, ClassNotFoundException {
         if(conn == null) {
             getConnection();
@@ -321,6 +325,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException 
      * @throws java.lang.ClassNotFoundException 
      */
+    @Override
     public boolean addGenre(String genreName) throws SQLException, ClassNotFoundException {
         if(conn == null) {
             getConnection();
@@ -365,6 +370,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException 
      * @throws java.lang.ClassNotFoundException 
      */
+    @Override
     public boolean addPublisher(String publisherName) throws SQLException, ClassNotFoundException {
         if(conn == null) {
             getConnection();
@@ -409,6 +415,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException 
      * @throws java.lang.ClassNotFoundException 
      */
+    @Override
     public boolean addSeries(String seriesName) throws SQLException, ClassNotFoundException {
         if(conn == null) {
             getConnection();
@@ -453,6 +460,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException 
      * @throws java.lang.ClassNotFoundException 
      */
+    @Override
     public boolean addSyncStatus(String syncName) throws SQLException, ClassNotFoundException {
         if(conn == null) {
             getConnection();
@@ -504,6 +512,7 @@ public class SQLTranslator implements DBInterface{
      * DB handles cascade deletes so if a piece of content is the only 
      * @return 
      */
+    @Override
     public boolean deleteContent() {
         return false;
     }
@@ -514,6 +523,7 @@ public class SQLTranslator implements DBInterface{
      * Does it need to delete all content of that type as well? I'm not sure. 
      * @return 
      */
+    @Override
     public boolean deleteContentType() {
         return false;
     }
@@ -524,6 +534,7 @@ public class SQLTranslator implements DBInterface{
      * delete all content associated with that creator? I'm inclined to yes. 
      * @return 
      */
+    @Override
     public boolean deleteCreator() {
         return false;
     }
@@ -534,6 +545,7 @@ public class SQLTranslator implements DBInterface{
      * of a given genre too? I'm inclined to no.
      * @return 
      */
+    @Override
     public boolean deleteGenre() {
         return false;
     }
@@ -545,6 +557,7 @@ public class SQLTranslator implements DBInterface{
      * I'm inclined to no.
      * @return 
      */
+    @Override
     public boolean deletePublisher() {
         return false;
     }
@@ -557,6 +570,7 @@ public class SQLTranslator implements DBInterface{
      * parameter obtained from user needs to specify this. 
      * @return 
      */
+    @Override
     public boolean deleteSeries() {
         return false;
     }
@@ -567,6 +581,7 @@ public class SQLTranslator implements DBInterface{
      * or its been de-synched?
      * @return 
      */
+    @Override
     public boolean deleteSyncStatus() {
         return false;
     }
@@ -591,6 +606,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException 
      * @throws java.lang.ClassNotFoundException 
      */
+    @Override
     public List<String[]> getAllContent() throws SQLException, ClassNotFoundException {        
         String query = "SELECT * FROM " + DBEnumeration.CONTENT;
         return SQLToPrimitives(getRecords(query));
@@ -603,8 +619,9 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException 
      * @throws java.lang.ClassNotFoundException 
      */
+    @Override
     public List<String[]> getAllContentTypes() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM ContentType";
+        String query = "SELECT * FROM " + DBEnumeration.CONTENTTYPE;
         return SQLToPrimitives(getRecords(query));
     }
     
@@ -618,6 +635,7 @@ public class SQLTranslator implements DBInterface{
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
+    @Override
     public List<String[]> getAllCreators() throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM " + DBEnumeration.CREATOR;
         return SQLToPrimitives(getRecords(query));
@@ -630,6 +648,7 @@ public class SQLTranslator implements DBInterface{
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
+    @Override
     public List<String[]> getAllGenres() throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM " + DBEnumeration.GENRE;
         return SQLToPrimitives(getRecords(query));
@@ -642,6 +661,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException 
      * @throws java.lang.ClassNotFoundException 
      */
+    @Override
     public List<String[]> getAllPublishers() throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM Publisher";
         return SQLToPrimitives(getRecords(query));
@@ -654,6 +674,7 @@ public class SQLTranslator implements DBInterface{
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
+    @Override
     public List<String[]> getAllSeries() throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM Series";
         return SQLToPrimitives(getRecords(query));
@@ -666,6 +687,7 @@ public class SQLTranslator implements DBInterface{
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
+    @Override
     public List<String[]> getAllSyncStatus() throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM SyncStatus";
         return SQLToPrimitives(getRecords(query));
@@ -681,6 +703,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
+    @Override
     public List<String[]> getContentByCreator(String _firstName, String _middleName, String _lastName) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM Content c JOIN "
                 + "Creator a on c.CreatorID = a.CreatorID WHERE "
@@ -698,6 +721,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
+    @Override
     public List<String[]> getContentByGenre(String _genreName) throws SQLException, ClassNotFoundException {        
         String query = "SELECT * FROM Content c JOIN "
                 + "Genre g on c.GenreID = g.GenreID "
@@ -713,6 +737,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
+    @Override
     public List<String[]> getContentByName(String contentName) throws SQLException, ClassNotFoundException {
         String query = "SELECT c.ContentID FROM Content c WHERE c.ContentName = '" + contentName + "'"; 
         return SQLToPrimitives(getRecords(query));
@@ -726,6 +751,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
+    @Override
     public List<String[]> getContentByPublisher(String publisherName) throws SQLException, ClassNotFoundException {
         String query = "SELECT c.ContentID FROM Content c JOIN "
                 + "Publisher p on c.PublisherID = p.PublisherID "
@@ -741,6 +767,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException 
      * @throws java.lang.ClassNotFoundException 
      */
+    @Override
     public List<String[]> getContentBySeries(String seriesName) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM Content c "
                 + "JOIN Series s on c.SeriesID = s.SeriesID WHERE "
@@ -756,6 +783,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
+    @Override
     public List<String[]> getContentByType(String contentType) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM Content c JOIN ContentType ct on "
                 + "c.ContentTypeID = ct.contentTypeID WHERE "
@@ -771,6 +799,7 @@ public class SQLTranslator implements DBInterface{
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
+    @Override
     public List<String[]> getContentType(String contentType) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM ContentType "
                 + "WHERE ContentType = '" + contentType + "'";
@@ -787,6 +816,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException 
      * @throws java.lang.ClassNotFoundException 
      */
+    @Override
     public List<String[]> getCreator(String firstName, String middleName, String lastName) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM Creator a WHERE a.FirstName = '" 
                 + firstName + "' AND a.MiddleName = '" + middleName 
@@ -802,6 +832,7 @@ public class SQLTranslator implements DBInterface{
      * @throws java.sql.SQLException 
      * @throws java.lang.ClassNotFoundException 
      */
+    @Override
     public List<String[]> getGenre(String genreName) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM Genre g "
                 + "WHERE g.GenreName = '" + genreName + "'";
@@ -810,12 +841,30 @@ public class SQLTranslator implements DBInterface{
 
     
     /**
+     * Method that returns a count of the number of entries of a certain genre
+     * Hopefully useful for the recommendation class
+     * @param genreName
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<String[]> getGenreCount(String genreName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT COUNT(*) TotalCount FROM " + DBEnumeration.CONTENT
+                + " c JOIN " + DBEnumeration.GENRE 
+                + " g on c.GenreID = g.genreID WHERE g.GenreName = '"
+                + genreName + "'";
+        return SQLToPrimitives(getRecords(query));
+    }
+    
+    
+    /**
      * Gets a specific publisher by name
      * @param publisherName
      * @return 
      * @throws java.sql.SQLException 
      * @throws java.lang.ClassNotFoundException 
      */
+    @Override
     public List<String[]> getPublisher(String publisherName) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM Publisher p "
                 + "WHERE p.PublisherName = '" + publisherName + "'";
@@ -830,6 +879,7 @@ public class SQLTranslator implements DBInterface{
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
+    @Override
     public List<String[]> getSeries(String seriesName) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM Series s "
                 + "WHERE s.SeriesName = '" + seriesName + "'";
@@ -844,6 +894,7 @@ public class SQLTranslator implements DBInterface{
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
+    @Override
     public List<String[]> getSyncStatus(String syncStatusDescription) throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM SyncStatus sy "
                 + "WHERE sy.SyncStatusDescription = '" 
@@ -859,6 +910,7 @@ public class SQLTranslator implements DBInterface{
      * become a favorite. Still need to work on that functionality. 
      * @return 
      */
+    @Override
     public boolean updateContent() {
         return false;
     }
@@ -868,6 +920,7 @@ public class SQLTranslator implements DBInterface{
      * Updates a specific content type.
      * @return 
      */
+    @Override
     public boolean updateContentType() {
         return false;
     }
@@ -877,6 +930,7 @@ public class SQLTranslator implements DBInterface{
      * Updates info about a creator.
      * @return 
      */
+    @Override
     public boolean updateCreator() {
         return false;
     }
@@ -886,6 +940,7 @@ public class SQLTranslator implements DBInterface{
      * Updates info about a genre.
      * @return 
      */
+    @Override
     public boolean updateGenre() {
         return false;
     }
@@ -895,6 +950,7 @@ public class SQLTranslator implements DBInterface{
      * Updates info about a publisher. 
      * @return 
      */
+    @Override
     public boolean updatePublisher() {
         return false;
     }
@@ -904,6 +960,7 @@ public class SQLTranslator implements DBInterface{
      * Updates info about a series. 
      * @return 
      */
+    @Override
     public boolean updateSeries() {
         return false;
     }
@@ -913,6 +970,7 @@ public class SQLTranslator implements DBInterface{
      * Updates info about a specific sync status.
      * @return 
      */
+    @Override
     public boolean updateSyncStatus() {
         return false;
     }
@@ -948,6 +1006,7 @@ public class SQLTranslator implements DBInterface{
     /**
      * Close connection stream to DB File. 
      */
+    @Override
     public void closeConnection() {
         if(conn != null) {
             try{
@@ -1077,10 +1136,16 @@ public class SQLTranslator implements DBInterface{
     /**
      * Sets a file path for a new piece of content. Needs to create a new 
      * directory if needed(possibly for a series, music/photo album, etc.)
+     * Content should be divided into directories of that content's type. Then
+     * further divided by series. If no series, go into folder called unlisted.
+     * Then in their series folder they'll exist as accessible files. 
+     * Alternatively, we could just divide by series, no need to divide by type.
      * @param contentName 
+     * @param series
+     * @param contentType
      */
-    private void setContentLocation (String contentName) {
+    private void setContentLocation (String contentName, String seriesName, String contentType) {
         
-        //Set a filepath for the information we're trying to store.
+        
     }
 }

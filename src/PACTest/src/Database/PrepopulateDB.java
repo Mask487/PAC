@@ -10,6 +10,5 @@ package Database;
  * @author jacob
  */
 public class PrepopulateDB {
-    public final String unknown = "UNKNOWN";
     
 }
