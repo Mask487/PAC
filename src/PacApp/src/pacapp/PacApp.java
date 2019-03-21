@@ -259,16 +259,15 @@ public class PacApp extends Application {
         Button copy = new Button("Duplicate Phone");       //Creates button 
         copy.backgroundProperty().set(buBack);         //adds transparent background
 
-        copy.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void enter(MouseEvent enter) {
-
-                System.out.println("copy entered");
-
-            }
-        });
-              //public void changeText(){
-             // }
+//        copy.setOnMouseEntered(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void enter(MouseEvent enter) {
+//
+//                System.out.println("copy entered");
+//
+//            }
+//        });
+              
         
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
