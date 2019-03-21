@@ -242,9 +242,11 @@ class Transfer extends Thread implements TransferObject{
         class BackupThread implements Runnable{
             //String path;
             BackupThread(String string) {
+
                 //path = string;
             }
             public void run() {
+                System.out.println("Thread starting");
                 PortableDeviceFolderObject target = null;
                 File file = new File("D:\\Desktop\\" + path);
                 if(!file.isDirectory()){
@@ -278,8 +280,9 @@ class Transfer extends Thread implements TransferObject{
                 }
             }
         }
-        Thread t = new Thread(new BackupThread(path));
 
+        Thread t = new Thread(new BackupThread(path));
+        t.start();
 
     }
 
