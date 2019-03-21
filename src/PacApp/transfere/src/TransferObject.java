@@ -13,17 +13,25 @@ public interface TransferObject
     void pctoP(PortableDeviceFolderObject targetFolder, File file);
     void ptoPC(PortableDeviceObject pDO, String file);
     void getFolder(String folder, File file);
-    boolean doesFolderExist(String folderName, PortableDevice pD);
     void backup(String name);
+    void addFiles(File file, char choice);
+    void addFiles(ArrayList<File> files, char choice);
     void addPodcast(File file);
     void addPodcast(ArrayList<File> files);
     void addEBook(File file);
     void addEbook(ArrayList<File> files);
-    String getPhoneModel();
+    void addMusic(File file);
+    void addMusic(ArrayList<File> files);
+    void addVideos(File file);
+    void addVideos(ArrayList<File> files);
     int getPhoneBattery();
+    void getPhoneIp() throws IOException;
+    boolean setMainPath(String path);
+    boolean setAdbPath(String path);
+    boolean doesFolderExist(String folderName, PortableDevice pD);
+    String getPhoneModel();
     String getPhoneName();
-    String getIp() throws IOException;
-
+    String getIp();
 
 
 

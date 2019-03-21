@@ -14,6 +14,25 @@ class Transfer extends Thread implements TransferObject{
     private PortableDevice pD = null;
     private String ip;
     private String mainPath = "\"D:\\Desktop\\PAC\\";
+    private String adbPath = "";
+
+    public boolean setAdbPath(String path){
+        File file = new File(path);
+        if (file.exists() && file.isDirectory()){
+            this.adbPath = path;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setMainPath(String path){
+        File file = new File(path);
+        if (file.exists() && file.isDirectory()){
+            this.mainPath = path;
+            return true;
+        }
+        return false;
+    }
 
     public void initialize(int i) {
 
@@ -55,10 +74,12 @@ class Transfer extends Thread implements TransferObject{
 
 
     //change path files to something more universal
-    public String getIp() throws IOException {
+    public void getPhoneIp() throws IOException {
         String addr = mainPath + "addrs.txt\"";
         String longIp = "";
         String ip = "";
+
+        //adbPath
         ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "cd \"C:\\Users\\quinc\\AppData\\Local\\Android\\Sdk\\platform-tools\" " +
                 "&& adb devices " +
                 "&& adb shell ip route > " + addr + " ");
@@ -83,11 +104,18 @@ class Transfer extends Thread implements TransferObject{
         }
         //System.out.println("IP: " + ip);
 
-        return ip;
+        this.ip = ip;
     }
 
-    public void wifiSetup(String ip) throws IOException {
-        ip = getIp();
+
+    public String getIp(){
+        if (this.ip != null){
+            return this.ip;
+        }
+        return "No ip Specified";
+    }
+
+    public void wifiSetup() throws IOException {
 
 
     }
@@ -112,7 +140,6 @@ class Transfer extends Thread implements TransferObject{
         String out;
         return out = pD.getFriendlyName();
     }
-
 
     //when adding files, checks to see if file doesn't already exist
     private boolean doesFileExist(PortableDeviceFolderObject targetFolder, File file)
@@ -148,7 +175,41 @@ class Transfer extends Thread implements TransferObject{
         return false;
     }
 
-    //add
+    public void addFiles(File file, char choice){
+        switch(choice){
+            case 'p':
+                addPodcast(file);
+                break;
+            case 'e':
+                addEBook(file);
+                break;
+            case 'm':
+                addMusic(file);
+                break;
+            case 'v':
+                addVideos(file);
+                break;
+        }
+    }
+
+    public void addFiles(ArrayList<File> files, char choice){
+        switch(choice){
+            case 'p':
+                addPodcast(files);
+                break;
+            case 'e':
+                addEbook(files);
+                break;
+            case 'm':
+                addMusic(files);
+                break;
+            case 'v':
+                addVideos(files);
+                break;
+        }
+    }
+
+    //add single Podcast
     public void addPodcast(File file)
     {
         if (doesFolderExist("podcasts", pD))
@@ -161,6 +222,7 @@ class Transfer extends Thread implements TransferObject{
 
     }
 
+    //add multiple podcasts
     public void addPodcast(ArrayList<File> files)
     {
         for (int i = 0; i < files.size(); i++) {
@@ -196,6 +258,56 @@ class Transfer extends Thread implements TransferObject{
             }else{
                 createFolder("eBooks", pD);
                 pctoP(setTargetFolder("ebooks", pD), file);
+            }
+        }
+    }
+
+    public void addMusic(File file)
+    {
+        if (doesFolderExist("music", pD))
+        {
+            pctoP(setTargetFolder("music", pD), file);
+        }else{
+            createFolder("music", pD);
+            pctoP(setTargetFolder("music", pD), file);
+        }
+    }
+
+    public void addMusic(ArrayList<File> files)
+    {
+        for (int i = 0; i < files.size(); i++) {
+            File file = files.get(i);
+            if (doesFolderExist("music", pD))
+            {
+                pctoP(setTargetFolder("music", pD), file);
+            }else{
+                createFolder("music", pD);
+                pctoP(setTargetFolder("music", pD), file);
+            }
+        }
+    }
+
+    public void addVideos(File file)
+    {
+        if (doesFolderExist("videos", pD))
+        {
+            pctoP(setTargetFolder("videos", pD), file);
+        }else{
+            createFolder("videos", pD);
+            pctoP(setTargetFolder("videos", pD), file);
+        }
+    }
+
+    public void addVideos(ArrayList<File> files)
+    {
+        for (int i = 0; i < files.size(); i++) {
+            File file = files.get(i);
+            if (doesFolderExist("videos", pD))
+            {
+                pctoP(setTargetFolder("videos", pD), file);
+            }else{
+                createFolder("videos", pD);
+                pctoP(setTargetFolder("videos", pD), file);
             }
         }
     }
