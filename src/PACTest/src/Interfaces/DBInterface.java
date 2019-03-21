@@ -33,22 +33,28 @@ public interface DBInterface {
             String location, String url) throws SQLException, ClassNotFoundException;
     
     
-    public boolean addContentType(String contentTypeName) throws SQLException, ClassNotFoundException;
+    public boolean addContentType(String contentTypeName);
     
     
-    public boolean addCreator(String firstName, String middleName, String lastName) throws SQLException, ClassNotFoundException;
+    public boolean addCreator(String firstName, String middleName, String lastName);
 
     
-    public boolean addGenre(String genreName) throws SQLException, ClassNotFoundException;
+    public boolean addGenre(String genreName);
     
     
-    public boolean addPublisher(String publisherName) throws SQLException, ClassNotFoundException;
+    public boolean addPlaylist(String playlistName);
+    
+    
+    public boolean addToPlaylist(String contentName, String contentType, String playlistName);
+    
+    
+    public boolean addPublisher(String publisherName);
  
     
-    public boolean addSeries(String seriesName) throws SQLException, ClassNotFoundException;
+    public boolean addSeries(String seriesName);
     
     
-    public boolean addSyncStatus(String syncName) throws SQLException, ClassNotFoundException;
+    public boolean addSyncStatus(String syncName);
     
     
     public boolean deleteContent();
@@ -63,6 +69,12 @@ public interface DBInterface {
     public boolean deleteGenre();
     
     
+    public boolean deletePlaylist();
+    
+    
+    public boolean deleteFromPlaylist();
+    
+    
     public boolean deletePublisher();
     
     
@@ -72,62 +84,74 @@ public interface DBInterface {
     public boolean deleteSyncStatus();
     
     
-    public List<String[]> getAllContent() throws SQLException, ClassNotFoundException;
+    public List<String[]> getAllContent();
 
 
-    public List<String[]> getAllContentTypes() throws SQLException, ClassNotFoundException;
+    public List<String[]> getAllContentTypes();
     
     
     
-    public List<String[]> getAllCreators() throws SQLException, ClassNotFoundException;
+    public List<String[]> getAllCreators();
     
    
-    public List<String[]> getAllGenres() throws SQLException, ClassNotFoundException;
+    public List<String[]> getAllGenres();
     
     
-    public List<String[]> getAllPublishers() throws SQLException, ClassNotFoundException;
+    public List<String[]> getAllPublishers();
     
     
-    public List<String[]> getAllSeries() throws SQLException, ClassNotFoundException;
+    public List<String[]> getAllSeries();
     
     
-    public List<String[]> getAllSyncStatus() throws SQLException, ClassNotFoundException;
+    public List<String[]> getAllSyncStatus();
     
  
-    public List<String[]> getContentByCreator(String _firstName, String _middleName, String _lastName) throws SQLException, ClassNotFoundException;
+    public List<String[]> getContentByCreator(String _firstName, String _middleName, String _lastName);
     
     
-    public List<String[]> getContentByGenre(String _genreName) throws SQLException, ClassNotFoundException;
+    public List<String[]> getContentByGenre(String _genreName);
 
 
-    public List<String[]> getContentByName(String contentName) throws SQLException, ClassNotFoundException;
+    public List<String[]> getContentByName(String contentName);
 
 
-    public List<String[]> getContentByPublisher(String publisherName) throws SQLException, ClassNotFoundException;
+    public List<String[]> getContentByPublisher(String publisherName);
 
 
-    public List<String[]> getContentBySeries(String seriesName) throws SQLException, ClassNotFoundException;
+    public List<String[]> getContentBySeries(String seriesName);
 
 
-    public List<String[]> getContentByType(String contentType) throws SQLException, ClassNotFoundException;
+    public List<String[]> getContentByType(String contentType);
 
     
-    public List<String[]> getContentType(String contentType) throws SQLException, ClassNotFoundException;
+    public List<String[]> getContentType(String contentType);
     
     
-    public List<String[]> getCreator(String firstName, String middleName, String lastName) throws SQLException, ClassNotFoundException;
+    public List<String[]> getCreator(String firstName, String middleName, String lastName);
     
     
-    public List<String[]> getGenre(String genreName) throws SQLException, ClassNotFoundException;
+    public int getCreatorCount(String firstName, String middleName, String lastName);
     
     
-    public List<String[]> getPublisher(String publisherName) throws SQLException, ClassNotFoundException;
+    public List<String[]> getGenre(String genreName);
     
     
-    public List<String[]> getSeries(String seriesName) throws SQLException, ClassNotFoundException;
+    public int getGenreCount(String genreName);
     
     
-    public List<String[]> getSyncStatus(String syncStatusDescription) throws SQLException, ClassNotFoundException;
+    public List<String[]> getPublisher(String publisherName);
+    
+    
+    public int getPublisherCount(String publisherName);
+    
+    
+    public List<String[]> getSeries(String seriesName);
+    
+    
+    public int getSeriesCount(String seriesName);
+    
+    
+    public List<String[]> getSyncStatus(String syncStatusDescription);
     
     
     public boolean updateContent();
@@ -140,6 +164,9 @@ public interface DBInterface {
     
     
     public boolean updateGenre();
+    
+    
+    public boolean updatePlaylist();
     
     
     public boolean updatePublisher();
