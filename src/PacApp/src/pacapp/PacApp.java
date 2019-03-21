@@ -259,6 +259,17 @@ public class PacApp extends Application {
         Button copy = new Button("Duplicate Phone");       //Creates button 
         copy.backgroundProperty().set(buBack);         //adds transparent background
 
+        copy.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void enter(MouseEvent enter) {
+
+                System.out.println("copy entered");
+
+            }
+        });
+              //public void changeText(){
+             // }
+        
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -275,16 +286,16 @@ public class PacApp extends Application {
         midButt.setPadding(new Insets(5, 5, 5, 5));
         midButt.setSpacing(50);
 
-           midRow.backgroundProperty().set(testBack);
+           //midRow.backgroundProperty().set(testBack);
         
          midRow.getChildren().addAll(Android, midButt);
         midButt.getChildren().addAll(sync, backup, copy);
        
-        tAnchor.getChildren().addAll(midRow,midButt); /////not anchoring or sstacking
-        tAnchor.setRightAnchor(midRow, 0.5);
-       tAnchor.setLeftAnchor(midRow, 0.5);
-        tAnchor.setBottomAnchor(midRow, 0.5);
-        tAnchor.setTopAnchor(midRow, 0.5);
+        tAnchor.getChildren().addAll(midRow); /////not anchoring or sstacking
+        tAnchor.setRightAnchor(midRow, 80.0);
+       tAnchor.setLeftAnchor(midRow, 80.0);
+        tAnchor.setBottomAnchor(midRow, 50.0);
+        tAnchor.setTopAnchor(midRow, 50.0);
 
         // test buttons
         Button buttonSave = new Button("right");
