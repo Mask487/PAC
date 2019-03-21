@@ -40,7 +40,7 @@ public class PacApp extends Application {
 
         primary.fillProperty().set(Paint.valueOf("505050"));
         stage.setScene(primary);
-        root2.setMinSize(250, 350);
+        root2.setMinSize(720, 480);
         //root2.setMaxSize(1600,900);
 
         Insets bFillIn = new Insets(0);
