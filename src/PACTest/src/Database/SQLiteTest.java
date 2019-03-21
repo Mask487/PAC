@@ -38,54 +38,8 @@ public class SQLiteTest {
         String url = "test";
         test.addContent(contentType, syncStatusType, firstName, middleName, lastName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url);
         
-        String unknown = "UNKNOWN";
-        test.addContentType(unknown);
-        test.addCreator("jacob", unknown, unknown);
-        test.addGenre(unknown);
-        test.addPublisher(unknown);
-        test.addSeries(unknown);
-        test.addSyncStatus(unknown);
-        System.out.println(test.getGenreCount("Philosophical Fiction"));
-        test.getGenreCount("Philosophical Fon");
-        System.out.println(test.getPublisherCount("Test"));
-        test.addPlaylist("newPlaylist");
         
-        test.addToPlaylist("Test", "Test", "newPlaylist");
-        System.out.println("Number of contnet that belong to series UNKNOWN = " + test.getSeriesCount("UNKNOWN"));
-        DBPrint.printContents(test.getAllContent());
-//        List<String[]> result = test.getAllContent();
-//
-//        printContents(result);
-//        
-//        List<String[]> result2 = test.getAllCreators();
-//        
-//        printContents(result2);
-        
-        
-        
-        
-        
-        
-//        String firstName = "Jacob";
-//        String middleName = "Tyler";
-//        String lastName = "Oleson";
-        //test.addContentTest(firstName, middleName, lastName);
-        //test.addCreator(firstName, middleName, lastName);
-//      
-//        try {
-//            res = test.displayCreators();
-//            while(res.next()) {
-//                System.out.println(res.getString("FirstName") +  " " + 
-//                    res.getString("LastName"));
-//            }
-//        } 
-//        catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        catch(SQLException ex){
-//            ex.printStackTrace();
-//        }
-        
+        test.addToPlaylist("Test", "Podcsaegeasgast", "newPlaylist");
 
 
     Path currentRelativePath = Paths.get("");
