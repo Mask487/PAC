@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TransferObject
 {
-    void initialize(int i);
+    void initializePhone(int i);
     void pctoP(PortableDeviceFolderObject targetFolder, File file);
     void ptoPC(PortableDeviceObject pDO, String file);
     void getFolder(String folder, File file);

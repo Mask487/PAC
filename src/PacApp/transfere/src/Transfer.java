@@ -16,26 +16,21 @@ class Transfer extends Thread implements TransferObject{
     private String mainPath = "\"D:\\Desktop\\PAC\\";
     private String adbPath = "";
 
-    public boolean setAdbPath(String path){
-        File file = new File(path);
-        if (file.exists() && file.isDirectory()){
-            this.adbPath = path;
-            return true;
+    public void initializeDesk() throws FileNotFoundException {
+        File file = new File("./PAC_Config.txt");
+        if(!file.isFile()){
+            PrintWriter w = new PrintWriter("./PAC_Config.txt");
+            w.println("adb_directory = \"\"");
+            w.println("music_directory = \"\"");
+            w.println("podcasts_directory = \"\"");
+            w.println("ebooks_directory = \"\"");
+            w.println("videos_directory = \"\"");
+            w.println("phone_ip = \"\"");
+            w.close();
         }
-        return false;
     }
 
-    public boolean setMainPath(String path){
-        File file = new File(path);
-        if (file.exists() && file.isDirectory()){
-            this.mainPath = path;
-            return true;
-        }
-        return false;
-    }
-
-    public void initialize(int i) {
-
+    public void initializePhone(int i) {
         PortableDeviceFolderObject pFO = null;
         PortableDeviceManager pDM = new PortableDeviceManager();
         pD = pDM.getDevices()[i];
@@ -71,6 +66,26 @@ class Transfer extends Thread implements TransferObject{
         }
         pD.close();
     }
+
+    public boolean setAdbPath(String path){
+        File file = new File(path);
+        if (file.isFile()){
+            this.adbPath = path;
+            
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setMainPath(String path){
+        File file = new File(path);
+        if (file.exists() && file.isDirectory()){
+            this.mainPath = path;
+            return true;
+        }
+        return false;
+    }
+
 
 
     //change path files to something more universal
@@ -139,40 +154,6 @@ class Transfer extends Thread implements TransferObject{
     public String getPhoneName() {
         String out;
         return out = pD.getFriendlyName();
-    }
-
-    //when adding files, checks to see if file doesn't already exist
-    private boolean doesFileExist(PortableDeviceFolderObject targetFolder, File file)
-    {
-        PortableDeviceObject[] items = targetFolder.getChildObjects();
-        for (int i = 0; i < items.length; i++) {
-            if (items[i].getOriginalFileName().equalsIgnoreCase(file.getName())){
-                //System.out.println(items[i].getOriginalFileName());
-                return false;
-            }
-        }
-        return true;
-    }
-
-    //checks if folder exists on device
-    public boolean doesFolderExist(String folderName, PortableDevice pD)
-    {
-        //boolean condition = false;
-        for (PortableDeviceObject obj1 : pD.getRootObjects())
-        {
-            if (obj1 instanceof PortableDeviceStorageObject)
-            {
-                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
-                for (PortableDeviceObject obj2 : store.getChildObjects())
-                {
-                    if (obj2.getOriginalFileName().equalsIgnoreCase(folderName))
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     public void addFiles(File file, char choice){
@@ -414,6 +395,40 @@ class Transfer extends Thread implements TransferObject{
             }
             ptoPC(obj, file.getPath());
         }
+    }
+
+    //when adding files, checks to see if file doesn't already exist
+    private boolean doesFileExist(PortableDeviceFolderObject targetFolder, File file)
+    {
+        PortableDeviceObject[] items = targetFolder.getChildObjects();
+        for (int i = 0; i < items.length; i++) {
+            if (items[i].getOriginalFileName().equalsIgnoreCase(file.getName())){
+                //System.out.println(items[i].getOriginalFileName());
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //checks if folder exists on device
+    public boolean doesFolderExist(String folderName, PortableDevice pD)
+    {
+        //boolean condition = false;
+        for (PortableDeviceObject obj1 : pD.getRootObjects())
+        {
+            if (obj1 instanceof PortableDeviceStorageObject)
+            {
+                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
+                for (PortableDeviceObject obj2 : store.getChildObjects())
+                {
+                    if (obj2.getOriginalFileName().equalsIgnoreCase(folderName))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private void createFolder(String folderName, PortableDevice pD)

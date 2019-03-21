@@ -11,7 +11,7 @@ public class TransferTest
         File file1 = new File("D:\\Desktop\\stuff1");
         ArrayList<File> files = new ArrayList<File>(Arrays.asList(file.listFiles()));
         Transfer t = new Transfer();
-        t.initialize(0);
+        t.initializePhone(0);
         System.out.println("Phone Name: " + t.getPhoneName() + "\nPhone Model: " + t.getPhoneModel() + "\nBattery Level: " + t.getPhoneBattery());
         //t.addEbook(files);
         //t.getFolder("podcasts", file1);
