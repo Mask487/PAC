@@ -26,5 +26,9 @@ public class DBEnumeration {
     public static final String UNKNOWN = "UNKNOWN";
     public static final String UNLISTED = "UNLISTED";
     
-    public static final String COUNT = "TotalCount";
+    //Count variable given in SQL Statement
+    public static final String COUNT = "total";
+    
+    //Project Directory
+    public static final String PROJECTDIRECTORY = "C:/PAC/ContentFiles/";
 }
