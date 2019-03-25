@@ -10,7 +10,9 @@ import java.util.List;
 
 /**
  *
- * @author jacob
+ * @author Jacob Oleson
+ * 
+ * @update 3/24/2019
  */
 public interface DBInterface {
     
@@ -26,7 +28,7 @@ public interface DBInterface {
     
     
     public boolean addContent(String contentType, String syncStatusType, 
-            String firstName, String middleName, String lastName, 
+            String creatorName, 
             String genreName, String publisherName, String seriesName, 
             String contentName, String contentDescription, String uploadDate,
             int pageCount, String duration, String isbn, boolean explicit, 
@@ -36,7 +38,7 @@ public interface DBInterface {
     public boolean addContentType(String contentTypeName);
     
     
-    public boolean addCreator(String firstName, String middleName, String lastName);
+    public boolean addCreator(String creatorName);
 
     
     public boolean addGenre(String genreName);
@@ -57,7 +59,7 @@ public interface DBInterface {
     public boolean addSyncStatus(String syncName);
     
     
-    public boolean deleteContent();
+    public boolean deleteContent(String contentName, String contentType, String firstName, String middleName, String lastName);
     
     
     public boolean deleteContentType();
@@ -106,7 +108,7 @@ public interface DBInterface {
     public List<String[]> getAllSyncStatus();
     
  
-    public List<String[]> getContentByCreator(String _firstName, String _middleName, String _lastName);
+    public List<String[]> getContentByCreator(String creatorName);
     
     
     public List<String[]> getContentByGenre(String _genreName);
@@ -127,10 +129,10 @@ public interface DBInterface {
     public List<String[]> getContentType(String contentType);
     
     
-    public List<String[]> getCreator(String firstName, String middleName, String lastName);
+    public List<String[]> getCreator(String creatorName);
     
     
-    public int getCreatorCount(String firstName, String middleName, String lastName);
+    public int getCreatorCount(String creatorName);
     
     
     public List<String[]> getGenre(String genreName);
