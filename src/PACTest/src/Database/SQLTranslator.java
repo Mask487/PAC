@@ -2,14 +2,16 @@ package Database;
 
 import java.sql.*;
 import Interfaces.DBInterface;
+import Util.DBDirectories;
 import Util.DBEnumeration;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Jacob Oleson
  * 
- * @update 3/14/2019
+ * @update 3/24/2019
  * 
  * Translator class that actually speaks to the DB File.
  */
@@ -58,8 +60,7 @@ public class SQLTranslator implements DBInterface{
      */
     @Override
     public boolean addContent(String contentType, String syncStatusType, 
-            String firstName, String middleName, String lastName, 
-            String genreName, String publisherName, String seriesName, 
+            String creatorName, String genreName, String publisherName, String seriesName, 
             String contentName, String contentDescription, String uploadDate,
             int pageCount, String duration, String isbn, boolean explicit, 
             String location, String url) throws SQLException, ClassNotFoundException {
@@ -75,14 +76,8 @@ public class SQLTranslator implements DBInterface{
             if(syncStatusType == null){
                 syncStatusType = DBEnumeration.UNKNOWN;
             }
-            if(firstName == null) {
-                firstName = DBEnumeration.UNKNOWN;
-            }
-            if(middleName == null) {
-                middleName = DBEnumeration.UNKNOWN;
-            }
-            if(lastName == null) {
-                lastName = DBEnumeration.UNKNOWN;
+            if(creatorName == null) {
+                creatorName = DBEnumeration.UNKNOWN;
             }
             if(genreName == null) {
                 genreName = DBEnumeration.UNKNOWN;
@@ -100,17 +95,14 @@ public class SQLTranslator implements DBInterface{
                 contentDescription = DBEnumeration.UNKNOWN;
             }
             //Upload Date, Page Count, Duration, ISBN and Exlicit can remain UNKNOWN
-            if(location == null) {
-                setContentLocation(contentName, seriesName, contentType);
-            }
+           
             //Check if attributes of content exist by querying relevant tables
             String queryContentType = "SELECT ContentTypeID FROM " + DBEnumeration.CONTENTTYPE
                     + " WHERE ContentType = '" + contentType + "'";
             String querySyncStatus = "SELECT SyncStatusID FROM " + DBEnumeration.SYNCSTATUS
                     + " WHERE SyncStatusDescription = '" + syncStatusType + "'";
             String queryCreator = "SELECT CreatorID FROM " + DBEnumeration.CREATOR
-                    + " WHERE FirstName = '" + firstName + "' AND MiddleName = '" 
-                    + middleName + "' AND LastName = '" + lastName + "'";
+                    + " WHERE CreatorName = '" + creatorName + "'";
             String queryGenre = "SELECT GenreID FROM " + DBEnumeration.GENRE 
                     + " WHERE GenreName = '" + genreName + "'";
             String queryPublisher = "SELECT PublisherID FROM " + DBEnumeration.PUBLISHER
@@ -140,7 +132,7 @@ public class SQLTranslator implements DBInterface{
 
             int creatorID = SQLCheckForeignKeyRecord(queryCreator, DBEnumeration.CREATOR);
             if(creatorID == DBEnumeration.SENTINEL) {
-                addCreator(firstName, middleName, lastName);
+                addCreator(creatorName);
                 creatorID = SQLCheckForeignKeyRecord(queryCreator, DBEnumeration.CREATOR);
             }
 
@@ -162,31 +154,71 @@ public class SQLTranslator implements DBInterface{
                 seriesID = SQLCheckForeignKeyRecord(querySeries, DBEnumeration.SERIES);
             }
 
-            //Check if a piece of content already exists as a given type. If it does, don't add it.
+            //Check if a piece of content already exists as a given type by a given author. If it does, don't add it.
             String queryCount = "SELECT COUNT(*) AS total FROM " + DBEnumeration.CONTENT
-                    + " c JOIN ContentType ct on c.ContentTypeID = ct.contentTypeID"
-                    + " WHERE c.ContentName = '" + contentName + "' AND ct.contentTypeID = "
-                    + "(" + queryContentType + ")";
+                    + " c JOIN " + DBEnumeration.CONTENTTYPE
+                    + " ct on c.ContentTypeID = ct.contentTypeID"
+                    + " JOIN " + DBEnumeration.CREATOR 
+                    + " cr on c.CreatorID = cr.CreatorID WHERE c.ContentName = '" 
+                    + contentName + "' AND ct.contentTypeID = "
+                    + "(" + queryContentType 
+                    + ") AND cr.CreatorID = (" + queryCreator + ")";
 
-            int count = 0;
-            Statement stmt2 = conn.createStatement();
-            ResultSet rs2 = stmt2.executeQuery(queryCount);
-            while(rs2.next()) {
-                count = rs2.getInt("total");
-            }
-
-            /**
-             * Count here denotes the amount of content with a specific name as a given type.
-             * If harry potter already exists as an ebook, I don't want to add it as
-             * an ebook again. That's what this prevents. If I have it as an ebook
-             * and I want to add it as an audiobook count will return 0 and we can
-             * continue with adding the audio book.
-             */ 
-            if(count != 0) {
-                System.out.println("Content already exists");
+//            int count = 0;
+//            Statement stmt2 = conn.createStatement();
+//            ResultSet rs2 = stmt2.executeQuery(queryCount);
+//            while(rs2.next()) {
+//                count = rs2.getInt("total");
+//            }
+            
+            //Checks contents existence, if it exists, don't add
+            if(!checkExistence(queryCount)) {
+                System.out.println("Cannot add duplicate content");
                 return false;
             }
+            
+            //Content does not seem to already exist, continue with adding
+            
+            /*
+             * Set location path
+             * Right now follows pattern of
+             * ParentDirecoty/ContentType/GenreName/SeriesName/ContentFile.mp3
+             */
 
+            //Genre name given
+            if(!genreName.equals(DBEnumeration.UNKNOWN)) {
+                //Series name given                
+                if(!seriesName.equals(DBEnumeration.UNKNOWN)) {
+                    location = DBEnumeration.PROJECTDIRECTORY 
+                            + contentType + "/" + genreName
+                            + "/" + seriesName + "/";
+                    }
+
+                //No series name given
+                else {
+                    location = DBEnumeration.PROJECTDIRECTORY 
+                            + contentType + "/" + genreName + "/" + DBEnumeration.UNKNOWN
+                            + "/";
+
+                }
+            }
+
+            //No genre name given
+            else {
+                //Series name given
+                if(!seriesName.equals(DBEnumeration.UNKNOWN)) {
+                    location = DBEnumeration.PROJECTDIRECTORY 
+                            + contentType + "/" + DBEnumeration.UNKNOWN
+                            + "/" + seriesName + "/";
+                }
+
+                //No series name given
+                else {
+                    location = DBEnumeration.PROJECTDIRECTORY 
+                            + contentType + "/" + DBEnumeration.UNKNOWN
+                            + "/" + DBEnumeration.UNKNOWN + "/";
+                }
+            }
             String query = "INSERT INTO " + DBEnumeration.CONTENT 
                     + "(ContentTypeID, SyncStatusID, CreatorID, GenreID, PublisherID"
                     + ", SeriesID, ContentName, ContentDescription, UploadDate, "
@@ -211,14 +243,15 @@ public class SQLTranslator implements DBInterface{
 
             //Check if content already exists. If it doesn't, add it. 
 
-            if(SQLInsert(prep)) {
+            if(SQLInsert(prep)) {        
+                DBDirectories.createDirectories(location);
                 System.out.println("Content added successfully");
-                return true;
+                return true;    
             }
             else {
                 System.out.println("Error in adding content");
                 return false;
-            }
+            }    
         }
         
         catch(SQLException | ClassNotFoundException e) {
@@ -244,22 +277,18 @@ public class SQLTranslator implements DBInterface{
             }
 
             //Check if record already exists
-            int count = 0;
             String checkQuery = "SELECT COUNT(*) AS total FROM " 
                     + DBEnumeration.CONTENTTYPE + " ct WHERE ct.ContentType = '" 
                     + contentTypeName + "'";
-            ResultSet res = getRecords(checkQuery);
-            if(res.next()) {
-                count = res.getInt("total");
-            }
-
-            if(count != 0) {
-                System.out.println("ContentType already exists, cannot add");
+            
+            if(!checkExistence(checkQuery)) {
+                System.out.println("Cannot add duplicate ContentType");
                 return false;
             }
 
             //Insert record into DB
-            String insertQuery = "INSERT INTO " + DBEnumeration.CONTENTTYPE + "(ContentType)"
+            String insertQuery = "INSERT INTO " + DBEnumeration.CONTENTTYPE 
+                    + "(ContentType)"
                     + " VALUES(?);";
 
             PreparedStatement prep = conn.prepareStatement(insertQuery);
@@ -275,7 +304,7 @@ public class SQLTranslator implements DBInterface{
             }
         }
         
-        catch(SQLException | ClassNotFoundException e) {
+        catch(SQLException e) {
             System.out.println(e.getMessage());
         }
         
@@ -293,7 +322,7 @@ public class SQLTranslator implements DBInterface{
      * @return 
      */
     @Override
-    public boolean addCreator(String firstName, String middleName, String lastName) {
+    public boolean addCreator(String creatorName) {
         
         try {
             if(conn == null) {
@@ -302,10 +331,9 @@ public class SQLTranslator implements DBInterface{
 
             //Check if record already exists
             int count = 0;
-            String checkQuery = "SELECT COUNT(*) AS total FROM " 
-                    + DBEnumeration.CREATOR + " cr WHERE cr.FirstName = '" 
-                    + firstName + "' AND cr.MiddleName = '" + middleName 
-                    + "' AND cr.LastName = '" + lastName + "'";
+            String checkQuery = "SELECT COUNT(*) AS " + DBEnumeration.COUNT 
+                    + " FROM " + DBEnumeration.CREATOR 
+                    + " WHERE CreatorName = '" + creatorName + "'";
             ResultSet res = getRecords(checkQuery);
             if(res.next()) {
                 count = res.getInt("total");
@@ -317,12 +345,11 @@ public class SQLTranslator implements DBInterface{
             }
 
             //Insert record into DB.
-            String insertQuery = "INSERT INTO " + DBEnumeration.CREATOR + "(FirstName, MiddleName, LastName)"
-                    + " VALUES(?,?,?);";
+            String insertQuery = "INSERT INTO " + DBEnumeration.CREATOR 
+                    + "(CreatorName)"
+                    + " VALUES(?);";
             PreparedStatement prep = conn.prepareStatement(insertQuery);
-            prep.setString(1, firstName);
-            prep.setString(2, middleName);
-            prep.setString(3, lastName);
+            prep.setString(1, creatorName);
 
             if(SQLInsert(prep)) {
                 System.out.println("Creator added successfully");
@@ -357,17 +384,12 @@ public class SQLTranslator implements DBInterface{
             }
 
             //Check if record already exists
-            int count = 0;
-            String checkQuery = "SELECT COUNT(*) AS total FROM " 
-                    + DBEnumeration.GENRE + " g WHERE g.GenreName = '" 
+            String checkQuery = "SELECT COUNT(*) AS " + DBEnumeration.COUNT 
+                    + " FROM " + DBEnumeration.GENRE + " WHERE GenreName = '" 
                     + genreName + "'";
-            ResultSet res = getRecords(checkQuery);
-            if(res.next()) {
-                count = res.getInt("total");
-            }
-
-            if(count != 0) {
-                System.out.println("Genre already exists, cannot add");
+            
+            if(!checkExistence(checkQuery)) {
+                System.out.println("Cannot add duplicate Genre");
                 return false;
             }
 
@@ -387,7 +409,7 @@ public class SQLTranslator implements DBInterface{
             }
         }
         
-        catch(SQLException | ClassNotFoundException e) {
+        catch(SQLException e) {
             System.out.println(e.getMessage());
         }
         
@@ -410,17 +432,12 @@ public class SQLTranslator implements DBInterface{
             }
 
             //Check if record already exists
-            int count = 0;
-            String checkQuery = "SELECT COUNT(*) AS total FROM " 
-                    + DBEnumeration.PLAYLIST + " pl WHERE pl.PlaylistName = '" 
-                    + playlistName + "'";
-            ResultSet res = getRecords(checkQuery);
-            if(res.next()) {
-                count = res.getInt("total");
-            }
-
-            if(count != 0) {
-                System.out.println("Playlist already exists, cannot add");
+            String checkQuery = "SELECT COUNT(*) AS " + DBEnumeration.COUNT 
+                    + " FROM " + DBEnumeration.PLAYLIST 
+                    + " WHERE PlaylistName = '" + playlistName + "'";
+            
+            if(!checkExistence(checkQuery)) {
+                System.out.println("Cannot add duplicate Playlist");
                 return false;
             }
 
@@ -441,7 +458,7 @@ public class SQLTranslator implements DBInterface{
             }
         }
         
-        catch(SQLException | ClassNotFoundException e) {
+        catch(SQLException e) {
             System.out.println(e.getMessage());
         }
         
@@ -486,8 +503,9 @@ public class SQLTranslator implements DBInterface{
             
             //Check if content already exists in playlist
             int count = 0;
-            String checkQuery = "SELECT COUNT(*) AS total FROM " 
-                    + DBEnumeration.PCLOOKUP + " pc WHERE pc.PlaylistID ="
+            String checkQuery = "SELECT COUNT(*) AS " + DBEnumeration.COUNT 
+                    + " FROM " + DBEnumeration.PCLOOKUP 
+                    + " pc WHERE pc.PlaylistID ="
                     + " (SELECT PlaylistID FROM " + DBEnumeration.PLAYLIST 
                     + " WHERE PlaylistName = '" + playlistName + "') AND"
                     + " ContentID = (SELECT ContentID FROM " + DBEnumeration.CONTENT
@@ -508,11 +526,13 @@ public class SQLTranslator implements DBInterface{
             //Insert content into playlist
             String query = "INSERT INTO " + DBEnumeration.PCLOOKUP
                     + " (PlaylistID, ContentID)"
-                    + " VALUES ((SELECT PlaylistID FROM " + DBEnumeration.PLAYLIST
+                    + " VALUES ((SELECT PlaylistID FROM " 
+                    + DBEnumeration.PLAYLIST
                     + " WHERE PlaylistName = '" + playlistName + "'),"
                     + " (SELECT ContentID FROM " + DBEnumeration.CONTENT 
                     + " WHERE ContentName = '" + contentName + "' AND"
-                    + " ContentTypeID = (SELECT ContentTypeID FROM " + DBEnumeration.CONTENTTYPE
+                    + " ContentTypeID = (SELECT ContentTypeID FROM " 
+                    + DBEnumeration.CONTENTTYPE
                     + " WHERE ContentType = '" + contentType + "')))";
 
             PreparedStatement prep = conn.prepareStatement(query);
@@ -550,22 +570,18 @@ public class SQLTranslator implements DBInterface{
             }
 
             //Check if record already exists
-            int count = 0;
-            String checkQuery = "SELECT COUNT(*) AS total FROM " 
-                    + DBEnumeration.PUBLISHER + " p WHERE p.PublisherName = '" 
-                    + publisherName + "'";
-            ResultSet res = getRecords(checkQuery);
-            if(res.next()) {
-                count = res.getInt("total");
-            }
-
-            if(count != 0) {
-                System.out.println("Publisher already exists, cannot add");
+            String checkQuery = "SELECT COUNT(*) AS " + DBEnumeration.COUNT 
+                    + " FROM " + DBEnumeration.PUBLISHER 
+                    + " WHERE PublisherName = '" + publisherName + "'";
+            
+            if(!checkExistence(checkQuery)) {
+                System.out.println("Cannot add duplicate Publisher");
                 return false;
             }
 
             //Insert record into DB.
-            String insertQuery = "INSERT INTO " + DBEnumeration.PUBLISHER + "(PublisherName)"
+            String insertQuery = "INSERT INTO " + DBEnumeration.PUBLISHER 
+                    + "(PublisherName)"
                     + " VALUES(?);";
             PreparedStatement prep = conn.prepareStatement(insertQuery);
             prep.setString(1, publisherName);
@@ -580,7 +596,7 @@ public class SQLTranslator implements DBInterface{
             }
         }
         
-        catch(SQLException | ClassNotFoundException e) {
+        catch(SQLException e) {
             System.out.println(e.getMessage());
         }
         
@@ -603,22 +619,18 @@ public class SQLTranslator implements DBInterface{
             }        
 
             //Check if record already exists
-            int count = 0;
-            String checkQuery = "SELECT COUNT(*) AS total FROM " 
-                    + DBEnumeration.SERIES + " s WHERE s.SeriesName = '" 
+            String checkQuery = "SELECT COUNT(*) AS " + DBEnumeration.COUNT 
+                    + " FROM " + DBEnumeration.SERIES + " WHERE SeriesName = '" 
                     + seriesName + "'";
-            ResultSet res = getRecords(checkQuery);
-            if(res.next()) {
-                count = res.getInt("total");
-            }
-
-            if(count != 0) {
-                System.out.println("Series already exists, cannot add");
+            
+            if(!checkExistence(checkQuery)) {
+                System.out.println("Cannot add duplicate Series");
                 return false;
             }
 
             //Insert record into DB.
-            String insertQuery = "INSERT INTO " + DBEnumeration.SERIES + "(SeriesName)"
+            String insertQuery = "INSERT INTO " + DBEnumeration.SERIES 
+                    + "(SeriesName)"
                     + " VALUES(?);";
             PreparedStatement prep = conn.prepareStatement(insertQuery);
             prep.setString(1, seriesName);
@@ -633,7 +645,7 @@ public class SQLTranslator implements DBInterface{
             }
         }
         
-        catch(SQLException | ClassNotFoundException e) {
+        catch(SQLException e) {
             System.out.println(e.getMessage());
         }
         
@@ -657,22 +669,19 @@ public class SQLTranslator implements DBInterface{
             }
 
             //Check if record already exists
-            int count = 0;
-            String checkQuery = "SELECT COUNT(*) AS total FROM " 
-                    + DBEnumeration.SYNCSTATUS + " sy WHERE sy.SyncStatusDescription = '" 
+            String checkQuery = "SELECT COUNT(*) AS " + DBEnumeration.COUNT 
+                    + " FROM " + DBEnumeration.SYNCSTATUS 
+                    + " WHERE SyncStatusDescription = '" 
                     + syncName + "'";
-            ResultSet res = getRecords(checkQuery);
-            if(res.next()) {
-                count = res.getInt("total");
-            }
-
-            if(count != 0) {
-                System.out.println("Sync Status already exists, cannot add");
+            
+            if(!checkExistence(checkQuery)) {
+                System.out.println("Cannot add duplicate Sync Status");
                 return false;
             }
 
             //Insert record into DB.
-            String insertQuery = "INSERT INTO " + DBEnumeration.SYNCSTATUS + "(SyncStatusDescription)"
+            String insertQuery = "INSERT INTO " + DBEnumeration.SYNCSTATUS 
+                    + "(SyncStatusDescription)"
                     + " VALUES(?);";
             PreparedStatement prep = conn.prepareStatement(insertQuery);
             prep.setString(1, syncName);
@@ -686,7 +695,7 @@ public class SQLTranslator implements DBInterface{
                 return false;
             }
         }
-        catch(SQLException | ClassNotFoundException e) {
+        catch(SQLException e) {
             System.out.println(e.getMessage());
         }
         
@@ -706,13 +715,39 @@ public class SQLTranslator implements DBInterface{
     /**
      * Deletes a specific piece of content from the content table.
      * DB handles cascade deletes so if a piece of content is the only 
+     * 
+     * Just figured out as of 3/24/2019
+     * Need to delete from playlists first, then delete content.
+     * @param contentName
+     * @param contentType
+     * @param firstName
+     * @param middleName
+     * @param lastName
      * @return 
      */
     @Override
-    public boolean deleteContent() {
-        return false;
+    public boolean deleteContent(String contentName, String contentType, String firstName, String middleName, String lastName) {
+        
+        String query = "DELETE FROM " + DBEnumeration.CONTENT 
+                + " WHERE ContentName = '" + contentName + "' AND"
+                + " ContentTypeID = (SELECT ContentTypeID FROM " 
+                + DBEnumeration.CONTENTTYPE
+                + " WHERE ContentType = '" + contentType + "') AND"
+                + " CreatorID = (SELECT CreatorID FROM " + DBEnumeration.CREATOR
+                + " WHERE FirstName = '" + firstName + "' AND MiddleName = '"
+                + middleName + "' AND LastName = '" + lastName + "')";
+        
+        if(deleteFromDB(query)) {
+            System.out.println("Content deleted successfully");
+            return true;
+        }
+
+        else {
+            System.out.println("Error with deleteing content");
+            return false;
+        }
     }
-    
+ 
     
     /**
      * Deletes a specific content type from the ContentType table.
@@ -966,20 +1001,16 @@ public class SQLTranslator implements DBInterface{
     
     /**
      * Gets content determined by their creator.
-     * @param _firstName Cannot be null.
-     * @param _middleName Can be null.
-     * @param _lastName Cannot be null.
+     * @param creatorName
      * @return returns all content associated with one creator.
      */
     @Override
-    public List<String[]> getContentByCreator(String _firstName, String _middleName, String _lastName) {
+    public List<String[]> getContentByCreator(String creatorName) {
         
         try {
-            String query = "SELECT * FROM Content c JOIN "
-                    + "Creator a on c.CreatorID = a.CreatorID WHERE "
-                    + "a.ContentCreatorID = (SELECT CreatorID FROM Creator WHERE "
-                    + "FirstName = '" + _firstName + "' AND MiddleName = '" 
-                    + _middleName + "' AND LastName = '" + _lastName + "')";
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT  
+                    + " WHERE CreatorID = (SELECT CreatorID FROM " + DBEnumeration.CREATOR
+                    + " WHERE CreatorName = '" + creatorName + "')"; 
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -994,16 +1025,16 @@ public class SQLTranslator implements DBInterface{
     
     /**
      * Gets all content by a given genre.
-     * @param _genreName
+     * @param genreName
      * @return returns all content of the given genre.
      */
     @Override
-    public List<String[]> getContentByGenre(String _genreName) {        
+    public List<String[]> getContentByGenre(String genreName) {        
         
         try {
-            String query = "SELECT * FROM Content c JOIN "
-                    + "Genre g on c.GenreID = g.GenreID "
-                    + "WHERE g.GenreName = '" + _genreName + "'";
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT 
+                    + " c WHERE c.GenreID = (SELECT GenreID FROM " + DBEnumeration.GENRE
+                    + " WHERE GenreName = '" + genreName + "')";
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -1025,7 +1056,8 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentByName(String contentName) {
         
         try{
-            String query = "SELECT c.ContentID FROM Content c WHERE c.ContentName = '" + contentName + "'"; 
+            String query = "SELECT * FROM Content c WHERE c.ContentName = '" 
+                    + contentName + "'"; 
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -1034,6 +1066,25 @@ public class SQLTranslator implements DBInterface{
         }
         
         //Default Value
+        return null;
+    }
+    
+    
+    public List<String[]> getContentByNameAndCreator(String contentName, String creatorName) {
+        
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+                    + " WHERE CreatorID = (SELECT CreatorID FROM "
+                    + DBEnumeration.CREATOR + " WHERE CreatorName = '" 
+                    + creatorName + "') AND ContentName = '" + contentName + "'";     
+            return SQLToPrimitives(getRecords(query));
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //DefaultValue
         return null;
     }
     
@@ -1047,9 +1098,9 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentByPublisher(String publisherName) {
         
         try {
-            String query = "SELECT c.ContentID FROM Content c JOIN "
-                    + "Publisher p on c.PublisherID = p.PublisherID "
-                    + "WHERE p.PublisherName = '" + publisherName + "'";
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+                    + " c WHERE c.PublisherID = (SELECT PublisherID FROM " + DBEnumeration.PUBLISHER
+                    + " WHERE PublisherName = '" + publisherName + "')";
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -1071,9 +1122,10 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentBySeries(String seriesName) {
         
         try {
-            String query = "SELECT * FROM Content c "
-                    + "JOIN Series s on c.SeriesID = s.SeriesID WHERE "
-                    + "s.SeriesName = '" + seriesName + "'";
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT 
+                    + " c WHERE SeriesID = (SELECT SeriesID FROM " + DBEnumeration.SERIES
+                    + " WHERE SeriesName = '" + seriesName + "')";
+                    
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -1095,9 +1147,10 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentByType(String contentType) {
         
         try {
-            String query = "SELECT * FROM Content c JOIN ContentType ct on "
-                    + "c.ContentTypeID = ct.contentTypeID WHERE "
-                    + "ct.ContentType = '" + contentType + "'";
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+                    + " c WHERE c.ContentTypeID = (SELECT ContentTypeID FROM "
+                    + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '" 
+                    + contentType + "')";
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -1134,18 +1187,15 @@ public class SQLTranslator implements DBInterface{
     
     /**
      * Gets a specific creator determined by their name.
-     * @param firstName
-     * @param middleName
-     * @param lastName
+     * @param creatorName
      * @return returns a specific creator. 
      */
     @Override
-    public List<String[]> getCreator(String firstName, String middleName, String lastName) {
+    public List<String[]> getCreator(String creatorName) {
         
         try {
-            String query = "SELECT * FROM Creator a WHERE a.FirstName = '" 
-                    + firstName + "' AND a.MiddleName = '" + middleName 
-                    + "' AND a.LastName = '" + lastName + "'";
+            String query = "SELECT * FROM Creator a WHERE a.CreatorName = '" 
+                    + creatorName + "'";
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -1160,20 +1210,18 @@ public class SQLTranslator implements DBInterface{
 
     /**
      * Gets the count of the number of content created by a specific author
-     * @param firstName
-     * @param middleName
-     * @param lastName
+     * @param creatorName
      * @return 
      */
     @Override
-    public int getCreatorCount(String firstName, String middleName, String lastName) {
+    public int getCreatorCount(String creatorName) {
         
         try {
-            String query = "SELECT COUNT(*) TotalCount FROM " + DBEnumeration.CONTENT
+            String query = "SELECT COUNT(*) AS " + DBEnumeration.COUNT 
+                    + " FROM " + DBEnumeration.CONTENT
                     + " c JOIN " + DBEnumeration.CREATOR 
-                    + " cr on c.CreatorID = cr.CreatorID WHERE cr.FirstName = '"
-                    + firstName + "' AND cr.MiddleName = '" + middleName
-                    + "' AND cr.LastName = '" + lastName + "'";
+                    + " cr on c.CreatorID = cr.CreatorID WHERE cr.CreatorName = '"
+                    + creatorName + "'";
             return getCount(getRecords(query));
         }
         
@@ -1219,9 +1267,10 @@ public class SQLTranslator implements DBInterface{
     public int getGenreCount(String genreName) {
         
         try {
-            String query = "SELECT COUNT(*) TotalCount FROM " + DBEnumeration.CONTENT
+            String query = "SELECT COUNT(*) AS " + DBEnumeration.COUNT 
+                    + " FROM " + DBEnumeration.CONTENT
                     + " c JOIN " + DBEnumeration.GENRE 
-                    + " g on c.GenreID = g.genreID WHERE g.GenreName = '"
+                    + " g on c.GenreID = g.GenreID WHERE g.GenreName = '"
                     + genreName + "'";
             return getCount(getRecords(query));
         }
@@ -1265,7 +1314,7 @@ public class SQLTranslator implements DBInterface{
     public int getPublisherCount(String publisherName) {
         
         try {
-            String query = "SELECT COUNT(*)" + DBEnumeration.COUNT 
+            String query = "SELECT COUNT(*) AS " + DBEnumeration.COUNT 
                     + " FROM " + DBEnumeration.CONTENT
                     + " c JOIN " + DBEnumeration.PUBLISHER
                     + " p on c.PublisherID = p.PublisherID WHERE p.PublisherName = '"
@@ -1310,6 +1359,7 @@ public class SQLTranslator implements DBInterface{
      * @param seriesName
      * @return 
      */
+    @Override
     public int getSeriesCount(String seriesName) {
         
         try {
@@ -1477,6 +1527,61 @@ public class SQLTranslator implements DBInterface{
     }
     
     
+    private boolean deleteFromDB(String query) {
+        if(conn == null) {
+            getConnection();
+        }
+        
+        try {
+            PreparedStatement prep = conn.prepareStatement(query);
+            prep.executeUpdate();
+            return true;
+        }
+       
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return false;
+    }
+    
+    
+    /*
+     * Checks if a record exists in DB. Returns true if no record exists.
+     * @param query
+     * @return 
+     */
+    private boolean checkExistence(String query) {
+        int count = 0;
+        
+        try {
+            ResultSet res = getRecords(query);
+            if(res.next()) {
+                count = res.getInt("total");
+            }
+            
+            //Content does exist if count not equal to zero
+            if(count != 0) {
+                System.out.println("Entry already exists, cannot add");
+                return false;
+            }
+            
+            //Content does not exist, continue with adding
+            else {
+                return true;
+            }
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //Default Value
+        return false;
+    }
+    
+    
     /**
      * Helper method for all the getCount methods that queries the db. 
      * @param res
@@ -1632,7 +1737,9 @@ public class SQLTranslator implements DBInterface{
      * @param series
      * @param contentType
      */
-    private void setContentLocation (String contentName, String seriesName, String contentType) {  
+    private String setContentLocation (String contentName, String seriesName, String contentType) {  
         
+        //Default Value
+        return DBEnumeration.UNLISTED;
     }
 }

@@ -1,8 +1,6 @@
 package Database;
 
 import Util.DBPrint;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.*;
 /**
  *
@@ -14,36 +12,40 @@ import java.sql.*;
  */
 public class SQLiteTest {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        
+        
         SQLTranslator test = new SQLTranslator();
         ResultSet res;
         
         String contentType = "Podcast";
-        String syncStatusType = "Iphone";
-        String firstName = "Matthew";
-        String middleName = "James";
-        String lastName = "Malzahn";
+        String syncStatusType = "Andorid";
+        String creatorName = "J.R.R Tolkein";
         String genreName = "Fantasy";
-        String publisherName = "Test";
-        String seriesName = "Test"; 
-        String contentName = "Test";
-        String contentDescription = "Test of URL";
+        String publisherName = null;
+        String seriesName ="The Lord of the Rings"; 
+        String contentName = "The Fellowship of the Ring";
+        String contentDescription = "Testing";
         //yyyy-mm-dd
-        String uploadDate = "2019-02-30";
-        int pageCount = 0; 
+        String uploadDate = "2019-03-24";
+        int pageCount = 183; 
         //hh:mm:ss
-        String duration = "1:50:32";
-        String isbn = "UNKNOWN";
+        String duration = null;
+        String isbn = null;
         boolean explicit = true; 
-        String location = "/ProjectDirectory/Content/Test/Test";
-        String url = "test";
-        test.addContent(contentType, syncStatusType, firstName, middleName, lastName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url);
-        
-        
-        test.addToPlaylist("Test", "Podcsaegeasgast", "newPlaylist");
-
-
-    Path currentRelativePath = Paths.get("");
-    String s = currentRelativePath.toAbsolutePath().toString();
-        System.out.println("Current relative path is: " + s);
+        String location = null;
+        String url = "https://test.test";
+        //test.addContent(contentType, syncStatusType, creatorName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url);
+        //DBPrint.printContents(test.getAllContent());
+        DBPrint.printContents(test.getContentByType(contentType));
+        //System.out.println(test.getCreatorCount("J", "Tyler", "Oleson"));
+//        test.addToPlaylist("Test", "Podcsaegeasgast", "newPlaylist");
+//
+//        //DBDirectories.createDirectoy("Series");
+//        
+//    Path currentRelativePath = Paths.get("");
+//    String s = currentRelativePath.toAbsolutePath().toString();
+//    String r = DBEnumeration.PROJECTDIRECTORY + "ContentFiles";
+//    DBDirectories.createDirectoy(r);
+        //System.out.println("Current relative path is: " + s);
     }
 }
