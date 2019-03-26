@@ -39,9 +39,7 @@ public class SQLTranslator implements DBInterface{
      * to an UNKNOWN value that should be pre-populated in the DB 
      * @param contentType
      * @param syncStatusType
-     * @param firstName
-     * @param middleName
-     * @param lastName
+     * @param creatorName
      * @param genreName
      * @param publisherName
      * @param seriesName
@@ -859,7 +857,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getAllContent() {        
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.CONTENT;
+            String query = "SELECT ContentName FROM " + DBEnumeration.CONTENT;
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -880,7 +878,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getAllContentTypes() {
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.CONTENTTYPE;
+            String query = "SELECT ContentType FROM " + DBEnumeration.CONTENTTYPE;
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -903,7 +901,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getAllCreators() {
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.CREATOR;
+            String query = "SELECT CreatorName FROM " + DBEnumeration.CREATOR;
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -924,7 +922,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getAllGenres() {
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.GENRE;
+            String query = "SELECT GenreName FROM " + DBEnumeration.GENRE;
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -945,7 +943,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getAllPublishers() {
         
         try {
-            String query = "SELECT * FROM Publisher";
+            String query = "SELECT PublisherName FROM Publisher";
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -987,7 +985,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getAllSyncStatus() {
        
         try {
-            String query = "SELECT * FROM SyncStatus";
+            String query = "SELECT SyncStatusName FROM SyncStatus";
             return SQLToPrimitives(getRecords(query));
         }
         catch(SQLException | ClassNotFoundException e) {

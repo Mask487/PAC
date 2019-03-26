@@ -37,6 +37,13 @@ public class SQLiteTest {
         //test.addContent(contentType, syncStatusType, creatorName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url);
         //DBPrint.printContents(test.getAllContent());
         DBPrint.printContents(test.getContentByType(contentType));
+        
+        String test3 = "C:/Test/test1.mp3";
+        MetaDataReader mdr = new MetaDataReader();
+        mdr.MetaDataReader(test3);
+        System.out.println(mdr.getTitle());
+        System.out.println(mdr.getCreator());
+        
         //System.out.println(test.getCreatorCount("J", "Tyler", "Oleson"));
 //        test.addToPlaylist("Test", "Podcsaegeasgast", "newPlaylist");
 //
