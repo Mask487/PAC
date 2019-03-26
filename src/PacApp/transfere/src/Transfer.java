@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.DatagramSocket;
@@ -13,14 +14,14 @@ import java.net.DatagramSocket;
 class Transfer extends Thread implements TransferObject{
     private PortableDevice pD = null;
     private String ip;
-    private String mainPath = "\"D:\\Desktop\\PAC\\";
-    private String adbPath = "";
-    private String configPath = "";
+    //private String mainPath = "D:\\Desktop\\PAC\\";
+    private String adbPath = null;
+    private String mainPath = System.getProperty("user.dir");
 
     public void initializeDesk() throws FileNotFoundException {
-        File file = new File(configPath);
-        if(!file.isFile()){
-            System.out.println("doesnt exist");
+        File file = new File(mainPath + "\\PAC_config.cfg");
+        if(file.isFile() == false){
+            System.out.println("Config path doesnt exist");
             PrintWriter w = new PrintWriter("PAC_Config.cfg");
             w.println("adb_directory = \"\"");
             w.println("music_directory = \"\"");
@@ -32,7 +33,7 @@ class Transfer extends Thread implements TransferObject{
             file = new File("PAC_Config.cfg");
         }
         System.out.println(file.getAbsolutePath());
-        configPath = file.getAbsolutePath();
+
     }
 
     public void initializePhone(int i) {
@@ -72,16 +73,6 @@ class Transfer extends Thread implements TransferObject{
         pD.close();
     }
 
-    public boolean setAdbPath(String path){
-        File file = new File(path);
-        if (file.isFile()){
-            this.adbPath = path;
-
-            return true;
-        }
-        return false;
-    }
-
     public boolean setMainPath(String path){
         File file = new File(path);
         if (file.exists() && file.isDirectory()){
@@ -91,16 +82,59 @@ class Transfer extends Thread implements TransferObject{
         return false;
     }
 
+    public boolean setAdbPath(String path) throws IOException {
+        String x = "adb_directory = \"";
+        int i = x.length();
+        File newPath = new File(path);
+        File config = new File(this.mainPath + "\\PAC_Config.cfg");
+        if(!newPath.isDirectory()){
+            return false;
+        }else{
+            File newAdb = new File(path + "\\adb.exe");
+            if(!newAdb.isFile()){
+                return false;
+            }else{
+                BufferedReader br = new BufferedReader(new FileReader(config));
+                String line;
+                StringBuffer sb = new StringBuffer();
+                while((line = br.readLine()) != null){
+                    sb.append(line);
+                    sb.append("\n");
+                }
+                String inString = sb.toString();
+                System.out.println(inString);
+                System.out.println(newPath.getAbsolutePath());
+                inString = inString.replaceAll("adb_directory =.*\"", "adb_directory = \"\"");
+                br.close();
+                System.out.println(i);
+                inString = new StringBuilder(inString).insert(i, path).toString();
+                System.out.println("\nNEWPATHS\n" + inString);
+                FileOutputStream fos = new FileOutputStream(config);
+                fos.write(inString.getBytes());
+                fos.close();
+            }
+        }
+        this.adbPath = path;
+        return true;
+    }
 
+    public String getAdbPath(){
+        if(this.adbPath == null){
+            return "No path entered!";
+        }
+        return this.adbPath;
+
+    }
 
     //change path files to something more universal
     public void getPhoneIp() throws IOException {
-        String addr = mainPath + "addrs.txt\"";
+        String addr = mainPath + "\\addrs.txt";
         String longIp = "";
         String ip = "";
 
         //adbPath
-        ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "cd \"C:\\Users\\quinc\\AppData\\Local\\Android\\Sdk\\platform-tools\" " +
+        //System.out.println("cd \"" + this.adbPath + "\" ");
+        ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "cd \"" + this.adbPath + "\" " +
                 "&& adb devices " +
                 "&& adb shell ip route > " + addr + " ");
         builder.redirectErrorStream(true);
@@ -112,11 +146,19 @@ class Transfer extends Thread implements TransferObject{
             if(line == null){ break; }
             //System.out.println(line);
         }
+        File file = new File(addr);
+        if(!file.isFile()){
+            //System.out.println(file.getAbsolutePath());
+            file.createNewFile();
+            //System.out.println(file.getAbsolutePath());
+            FileOutputStream fos = new FileOutputStream(file, false);
+        }
 
-        BufferedReader r2 = new BufferedReader(new FileReader("D:\\Desktop\\PAC\\addrs.txt"));
+        BufferedReader r2 = new BufferedReader(new FileReader(file));
         try{
             StringBuilder sb = new StringBuilder();
             line = r2.readLine();
+            //System.out.println(line);
             ip = line.split("/")[0];
             longIp = sb.toString();
         }finally {

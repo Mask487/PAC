@@ -3,6 +3,7 @@ import jmtp.PortableDeviceFolderObject;
 import jmtp.PortableDeviceObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +28,12 @@ public interface TransferObject
     int getPhoneBattery();
     void getPhoneIp() throws IOException;
     boolean setMainPath(String path);
-    boolean setAdbPath(String path);
+    boolean setAdbPath(String path) throws IOException;
     boolean doesFolderExist(String folderName, PortableDevice pD);
     String getPhoneModel();
     String getPhoneName();
     String getIp();
+    String getAdbPath();
 
 
 
