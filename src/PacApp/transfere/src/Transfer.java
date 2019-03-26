@@ -15,11 +15,13 @@ class Transfer extends Thread implements TransferObject{
     private String ip;
     private String mainPath = "\"D:\\Desktop\\PAC\\";
     private String adbPath = "";
+    private String configPath = "";
 
     public void initializeDesk() throws FileNotFoundException {
-        File file = new File("./PAC_Config.txt");
+        File file = new File(configPath);
         if(!file.isFile()){
-            PrintWriter w = new PrintWriter("./PAC_Config.txt");
+            System.out.println("doesnt exist");
+            PrintWriter w = new PrintWriter("PAC_Config.cfg");
             w.println("adb_directory = \"\"");
             w.println("music_directory = \"\"");
             w.println("podcasts_directory = \"\"");
@@ -27,7 +29,10 @@ class Transfer extends Thread implements TransferObject{
             w.println("videos_directory = \"\"");
             w.println("phone_ip = \"\"");
             w.close();
+            file = new File("PAC_Config.cfg");
         }
+        System.out.println(file.getAbsolutePath());
+        configPath = file.getAbsolutePath();
     }
 
     public void initializePhone(int i) {
@@ -71,7 +76,7 @@ class Transfer extends Thread implements TransferObject{
         File file = new File(path);
         if (file.isFile()){
             this.adbPath = path;
-            
+
             return true;
         }
         return false;
