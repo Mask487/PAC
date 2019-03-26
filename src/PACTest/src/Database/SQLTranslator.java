@@ -1030,7 +1030,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentByGenre(String genreName) {        
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.CONTENT 
+            String query = "SELECT ContentName FROM " + DBEnumeration.CONTENT 
                     + " c WHERE c.GenreID = (SELECT GenreID FROM " + DBEnumeration.GENRE
                     + " WHERE GenreName = '" + genreName + "')";
             return SQLToPrimitives(getRecords(query));
@@ -1054,7 +1054,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentByName(String contentName) {
         
         try{
-            String query = "SELECT * FROM Content c WHERE c.ContentName = '" 
+            String query = "SELECT ContentName FROM Content c WHERE c.ContentName = '" 
                     + contentName + "'"; 
             return SQLToPrimitives(getRecords(query));
         }
@@ -1071,7 +1071,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentByNameAndCreator(String contentName, String creatorName) {
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+            String query = "SELECT ContentName FROM " + DBEnumeration.CONTENT
                     + " WHERE CreatorID = (SELECT CreatorID FROM "
                     + DBEnumeration.CREATOR + " WHERE CreatorName = '" 
                     + creatorName + "') AND ContentName = '" + contentName + "'";     
@@ -1096,7 +1096,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentByPublisher(String publisherName) {
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+            String query = "SELECT ContentName FROM " + DBEnumeration.CONTENT
                     + " c WHERE c.PublisherID = (SELECT PublisherID FROM " + DBEnumeration.PUBLISHER
                     + " WHERE PublisherName = '" + publisherName + "')";
             return SQLToPrimitives(getRecords(query));
@@ -1120,7 +1120,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentBySeries(String seriesName) {
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.CONTENT 
+            String query = "SELECT ContentName FROM " + DBEnumeration.CONTENT 
                     + " c WHERE SeriesID = (SELECT SeriesID FROM " + DBEnumeration.SERIES
                     + " WHERE SeriesName = '" + seriesName + "')";
                     
@@ -1145,7 +1145,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentByType(String contentType) {
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+            String query = "SELECT ContentName FROM " + DBEnumeration.CONTENT
                     + " c WHERE c.ContentTypeID = (SELECT ContentTypeID FROM "
                     + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '" 
                     + contentType + "')";
@@ -1169,7 +1169,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentType(String contentType) {
         
         try {
-            String query = "SELECT * FROM ContentType "
+            String query = "SELECT ContentType FROM ContentType "
                     + "WHERE ContentType = '" + contentType + "'";
             return SQLToPrimitives(getRecords(query));
         }
@@ -1192,7 +1192,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getCreator(String creatorName) {
         
         try {
-            String query = "SELECT * FROM Creator a WHERE a.CreatorName = '" 
+            String query = "SELECT CreatorName FROM Creator a WHERE a.CreatorName = '" 
                     + creatorName + "'";
             return SQLToPrimitives(getRecords(query));
         }
@@ -1241,7 +1241,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getGenre(String genreName) {
         
         try {
-            String query = "SELECT * FROM Genre g "
+            String query = "SELECT GenreName FROM Genre g "
                     + "WHERE g.GenreName = '" + genreName + "'";
             return SQLToPrimitives(getRecords(query));
         }
@@ -1290,7 +1290,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getPublisher(String publisherName) {
         
         try {
-            String query = "SELECT * FROM Publisher p "
+            String query = "SELECT PublisherName FROM Publisher p "
                     + "WHERE p.PublisherName = '" + publisherName + "'";
             return SQLToPrimitives(getRecords(query));
         }
@@ -1337,7 +1337,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getSeries(String seriesName) {
         
         try {
-            String query = "SELECT * FROM Series s "
+            String query = "SELECT SeriesName FROM Series s "
                     + "WHERE s.SeriesName = '" + seriesName + "'";
             return SQLToPrimitives(getRecords(query));
         }
@@ -1386,7 +1386,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getSyncStatus(String syncStatusDescription){
         
         try {
-            String query = "SELECT * FROM SyncStatus sy "
+            String query = "SELECT SyncStatusName FROM SyncStatus sy "
                     + "WHERE sy.SyncStatusDescription = '" 
                     + syncStatusDescription + "'";
             return SQLToPrimitives(getRecords(query));
