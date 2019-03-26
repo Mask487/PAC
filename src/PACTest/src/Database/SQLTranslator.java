@@ -964,7 +964,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getAllSeries() {
         
         try {
-            String query = "SELECT * FROM Series";
+            String query = "SELECT SeriesName FROM Series";
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -1006,7 +1006,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getContentByCreator(String creatorName) {
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.CONTENT  
+            String query = "SELECT ContentName FROM " + DBEnumeration.CONTENT  
                     + " WHERE CreatorID = (SELECT CreatorID FROM " + DBEnumeration.CREATOR
                     + " WHERE CreatorName = '" + creatorName + "')"; 
             return SQLToPrimitives(getRecords(query));
