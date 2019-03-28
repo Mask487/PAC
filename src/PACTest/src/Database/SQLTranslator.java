@@ -37,6 +37,10 @@ public class SQLTranslator implements DBInterface{
      * You must give all parameters but if you do not have information to give, just put null.
      * Giving null will allow for info to be stored as null and set the foreign keys
      * to an UNKNOWN value that should be pre-populated in the DB 
+     * 
+     * Eventually I want to have it so that you just have to pass a file, 
+     * and the name of the content type and you'll be good to go.
+     * Still need to work on the metadata extraction for that though.
      * @param contentType
      * @param syncStatusType
      * @param creatorName
@@ -313,10 +317,7 @@ public class SQLTranslator implements DBInterface{
      
     /**
      * This method adds a new creator to the creator table. 
-     * 
-     * @param firstName 
-     * @param middleName
-     * @param lastName
+     * @param creatorName
      * @return 
      */
     @Override
@@ -964,7 +965,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getAllSeries() {
         
         try {
-            String query = "SELECT SeriesName FROM Series";
+            String query = "SELECT SeriesName FROM " + DBEnumeration.SERIES;
             return SQLToPrimitives(getRecords(query));
         }
         
@@ -985,7 +986,7 @@ public class SQLTranslator implements DBInterface{
     public List<String[]> getAllSyncStatus() {
        
         try {
-            String query = "SELECT SyncStatusName FROM SyncStatus";
+            String query = "SELECT SyncStatusName FROM " + DBEnumeration.SYNCSTATUS;
             return SQLToPrimitives(getRecords(query));
         }
         catch(SQLException | ClassNotFoundException e) {
@@ -1400,6 +1401,18 @@ public class SQLTranslator implements DBInterface{
         return null;
     }
     
+    
+    /**
+     * Set the sync status of a particular piece of content. 
+     * @param contentName
+     * @param contentType
+     * @param creatorName
+     * @return 
+     */
+    public boolean setSyncStatus(String contentName, String contentType, String creatorName) {
+        
+        return false;    
+    }
     
     
     
