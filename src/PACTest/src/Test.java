@@ -8,8 +8,8 @@ import java.nio.channels.ReadableByteChannel;
 
 public class Test{
     public static void main(String[] args) throws IOException {
-        //Stats stats = new Stats();
-        //stats.BookStats();
+        Stats stats = new Stats();
+        stats.BookStats();
         
         /*File file = new File("C:/Users/cothe/Desktop/test.jpeg");
         String url = "https://books.google.com/books/content?id=MsJluAAACAAJ&printsec="
@@ -26,6 +26,6 @@ public class Test{
                         0, Long.MAX_VALUE);*/
         
         
-        RSSReader.DownloadPodcast("http://www.hellointernet.fm/podcast?format=rss");
+        //RSSReader.DownloadPodcast("http://www.hellointernet.fm/podcast?format=rss");
     }
 }
