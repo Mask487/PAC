@@ -1,2 +1,0 @@
-152.13.48.0/23 dev wlan0  proto kernel  scope link  src 152.13.48.188 
-203.0.113.0/24 dev tun0  proto kernel  scope link  src 203.0.113.1 

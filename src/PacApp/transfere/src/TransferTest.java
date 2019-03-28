@@ -12,14 +12,16 @@ public class TransferTest
         ArrayList<File> files = new ArrayList<File>(Arrays.asList(file.listFiles()));
         Transfer t = new Transfer();
         t.initializeDesk();
-        t.initializePhone(0);
+        //t.initializePhone(0);
         //System.out.println("Phone Name: " + t.getPhoneName() + "\nPhone Model: " + t.getPhoneModel() + "\nBattery Level: " + t.getPhoneBattery());
         //t.addEbook(files);
         //t.getFolder("podcasts", file1);
         //t.backup("Backup");
-        t.setAdbPath("C:\\Users\\quinc\\AppData\\Local\\Android\\Sdk\\platform-tools");
-        System.out.println("IP: "+ t.getIp());
-        t.getPhoneIp();
+        //t.setAdbPath("C:\\Users\\quinc\\AppData\\Local\\Android\\Sdk\\platform-tools");
+        t.getAdbPath();
+        t.setBackupPath("D:\\Desktop\\BACKUP");
+        //System.out.println("IP: "+ t.getIp());
+        //t.getPhoneIp();
 
 
     }
