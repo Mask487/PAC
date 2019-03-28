@@ -1,6 +1,0 @@
-adb_directory = ""
-music_directory = ""
-podcasts_directory = ""
-ebooks_directory = ""
-videos_directory = ""
-phone_ip = ""
