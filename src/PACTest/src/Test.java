@@ -5,11 +5,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Test{
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
         Stats stats = new Stats();
-        stats.BookStats();
+        Recommend rec = new Recommend();
+        List<Book> bookList = new ArrayList<>();
+        
+        bookList = rec.RecommendBook("series");
+        
+        System.out.println(bookList);
+        //stats.BookStats();
         
         /*File file = new File("C:/Users/cothe/Desktop/test.jpeg");
         String url = "https://books.google.com/books/content?id=MsJluAAACAAJ&printsec="

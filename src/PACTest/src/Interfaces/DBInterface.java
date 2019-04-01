@@ -27,12 +27,11 @@ public interface DBInterface {
     public void closeConnection();
     
     
-    public boolean addContent(String contentType, String syncStatusType, 
-            String creatorName, 
+    public boolean addContent(String contentType,String creatorName, 
             String genreName, String publisherName, String seriesName, 
             String contentName, String contentDescription, String uploadDate,
             int pageCount, String duration, String isbn, boolean explicit, 
-            String location, String url) throws SQLException, ClassNotFoundException;
+            String location, String url, boolean wantToSync) throws SQLException, ClassNotFoundException;
     
     
     public boolean addContentType(String contentTypeName);
@@ -47,7 +46,7 @@ public interface DBInterface {
     public boolean addPlaylist(String playlistName);
     
     
-    public boolean addToPlaylist(String contentName, String contentType, String playlistName);
+    public boolean addToPlaylist(String contentName, String contentType, String creatorName, String playlistName);
     
     
     public boolean addPublisher(String publisherName);
@@ -59,31 +58,28 @@ public interface DBInterface {
     public boolean addSyncStatus(String syncName);
     
     
-    public boolean deleteContent(String contentName, String contentType, String firstName, String middleName, String lastName);
+    public boolean deleteContent(String contentName, String contentType, String creatorName);
     
     
-    public boolean deleteContentType();
+    public boolean deleteContentType(String contentType);
     
     
-    public boolean deleteCreator();
+    public boolean deleteCreator(String creatorName);
     
     
-    public boolean deleteGenre();
+    public boolean deleteGenre(String genreName);
     
     
-    public boolean deletePlaylist();
+    public boolean deletePlaylist(String playlistName);
     
     
-    public boolean deleteFromPlaylist();
+    public boolean deleteFromPlaylist(String contentName, String contentType, String creatorName, String playlistName);
     
     
-    public boolean deletePublisher();
+    public boolean deletePublisher(String publisherName);
     
     
-    public boolean deleteSeries();
-    
-    
-    public boolean deleteSyncStatus();
+    public boolean deleteSeries(String seriesName);
     
     
     public List<String[]> getAllContent();
@@ -103,9 +99,6 @@ public interface DBInterface {
     
     
     public List<String[]> getAllSeries();
-    
-    
-    public List<String[]> getAllSyncStatus();
     
  
     public List<String[]> getContentByCreator(String creatorName);
@@ -151,9 +144,6 @@ public interface DBInterface {
     
     
     public int getSeriesCount(String seriesName);
-    
-    
-    public List<String[]> getSyncStatus(String syncStatusDescription);
     
     
     public boolean updateContent();
