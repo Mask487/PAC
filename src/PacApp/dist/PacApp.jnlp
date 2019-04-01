@@ -8,7 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
     <jar href="PacApp.jar" size="94145" download="eager" />
+=======
+    <jar href="PacApp.jar" size="143644" download="eager" />
+>>>>>>> cdb5d6dfb744352b27ae72dd60e6dd7cf7843035
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="PacApp" >
     <param name="requiredFXVersion" value="8.0+"/>

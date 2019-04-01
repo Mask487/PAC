@@ -7,15 +7,17 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.nio.Buffer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.net.DatagramSocket;
 
 class Transfer extends Thread implements TransferObject{
     private PortableDevice pD = null;
     private String ip;
-    //private String mainPath = "D:\\Desktop\\PAC\\";
     private String adbPath = null;
+    private String backupPath = null;
     private String mainPath = System.getProperty("user.dir");
 
     public void initializeDesk() throws FileNotFoundException {
@@ -24,15 +26,12 @@ class Transfer extends Thread implements TransferObject{
             System.out.println("Config path doesnt exist");
             PrintWriter w = new PrintWriter("PAC_Config.cfg");
             w.println("adb_directory = \"\"");
-            w.println("music_directory = \"\"");
-            w.println("podcasts_directory = \"\"");
-            w.println("ebooks_directory = \"\"");
-            w.println("videos_directory = \"\"");
+            w.println("backup_directory = \"\"");
             w.println("phone_ip = \"\"");
             w.close();
             file = new File("PAC_Config.cfg");
         }
-        System.out.println(file.getAbsolutePath());
+        //System.out.println(file.getAbsolutePath());
 
     }
 
@@ -82,6 +81,20 @@ class Transfer extends Thread implements TransferObject{
         return false;
     }
 
+    private String fileToString(File file) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String line;
+        String ret;
+        StringBuffer sb = new StringBuffer();
+        while((line = br.readLine()) != null){
+            sb.append(line);
+            sb.append("\n");
+        }
+        ret = sb.toString();
+        br.close();
+        return ret;
+    }
+
     public boolean setAdbPath(String path) throws IOException {
         String x = "adb_directory = \"";
         int i = x.length();
@@ -94,20 +107,11 @@ class Transfer extends Thread implements TransferObject{
             if(!newAdb.isFile()){
                 return false;
             }else{
-                BufferedReader br = new BufferedReader(new FileReader(config));
-                String line;
-                StringBuffer sb = new StringBuffer();
-                while((line = br.readLine()) != null){
-                    sb.append(line);
-                    sb.append("\n");
-                }
-                String inString = sb.toString();
+                String inString = fileToString(config);
                 System.out.println(inString);
                 System.out.println(newPath.getAbsolutePath());
-                inString = inString.replaceAll("adb_directory =.*\"", "adb_directory = \"\"");
-                br.close();
-                System.out.println(i);
-                inString = new StringBuilder(inString).insert(i, path).toString();
+                String newline = "adb_directory = \"" + path.replace("\\", "\\\\") + "\"";
+                inString = inString.replaceAll("adb_directory = \".*\"", newline);
                 System.out.println("\nNEWPATHS\n" + inString);
                 FileOutputStream fos = new FileOutputStream(config);
                 fos.write(inString.getBytes());
@@ -118,12 +122,38 @@ class Transfer extends Thread implements TransferObject{
         return true;
     }
 
-    public String getAdbPath(){
-        if(this.adbPath == null){
-            return "No path entered!";
+    public String getAdbPath() throws IOException {
+        if(this.adbPath != null){
+            //System.out.println("Path exists: " + this.adbPath);
+            return this.adbPath;
+        }else{
+            File file = new File(this.mainPath + "\\PAC_Config.cfg");
+            String conString = fileToString(file);
+            String[] a = conString.split("adb_directory = \"");
+            String[] b = a[1].split("\"");
+            String path = b[0];
+            //System.out.println("get adb path test: " + path);
+            this.adbPath = path;
         }
         return this.adbPath;
+    }
 
+    public boolean setBackupPath(String path) throws IOException {
+        String x = "backup_directory = \"";
+        int i = x.length();
+        File newPath = new File(path);
+        File config = new File(this.mainPath + "\\PAC_Config.cfg");
+        if(!newPath.isDirectory()){
+            return false;
+        }else{
+            String inString = fileToString(config);
+            String newline = "backup_directory = \"" + path.replace("\\", "\\\\") + "\"";
+            inString = inString.replaceAll("backup_directory = \".*\"", newline);
+            FileOutputStream fos = new FileOutputStream(config);
+            fos.write(inString.getBytes());
+            fos.close();
+        }
+        return true;
     }
 
     //change path files to something more universal
@@ -377,7 +407,12 @@ class Transfer extends Thread implements TransferObject{
         }
     }
 
-    public void backup(String path){
+    public void backup(){
+        //add backup folder check here
+        String path = this.backupPath;
+        //make sure phone model is here
+        String pModel = getPhoneModel();
+        String time = new SimpleDateFormat("yyyy-MM-dd_HHmm").format(Calendar.getInstance().getTime());
 
         class BackupThread implements Runnable{
             //String path;
@@ -388,7 +423,7 @@ class Transfer extends Thread implements TransferObject{
             public void run() {
                 System.out.println("Thread starting");
                 PortableDeviceFolderObject target = null;
-                File file = new File("D:\\Desktop\\" + path);
+                File file = new File(path + "\\" + pModel + "\\" + time);
                 if(!file.isDirectory()){
                     file.mkdir();
                 }

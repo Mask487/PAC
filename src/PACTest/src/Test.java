@@ -5,10 +5,19 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Test{
-    public static void main(String[] args) throws IOException {
-        //Stats stats = new Stats();
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+        Stats stats = new Stats();
+        Recommend rec = new Recommend();
+        List<Book> bookList = new ArrayList<>();
+        
+        bookList = rec.RecommendBook("series");
+        
+        System.out.println(bookList);
         //stats.BookStats();
         
         /*File file = new File("C:/Users/cothe/Desktop/test.jpeg");
@@ -26,6 +35,6 @@ public class Test{
                         0, Long.MAX_VALUE);*/
         
         
-        RSSReader.DownloadPodcast("http://www.hellointernet.fm/podcast?format=rss");
+        //RSSReader.DownloadPodcast("http://www.hellointernet.fm/podcast?format=rss");
     }
 }
