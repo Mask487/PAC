@@ -7,7 +7,7 @@ import Util.DBEnumeration;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.io.FilenameUtils;
+//import org.apache.commons.io.FilenameUtils;
 
 /**
  * @author Jacob Oleson
@@ -182,10 +182,10 @@ public class SQLTranslator implements DBInterface{
             location = setContentLocation(contentName, contentType, genreName, seriesName);
             
             //Get the content extension (mp3, epub, etc.)
-            String ext = getExtension(filePath);
+            //String ext = getExtension(filePath);
                         
             //Set the absoulte filepath to the content. This will be put in DB.
-            String fileName = location + contentName + "." + ext;
+            //String fileName = location + contentName + "." + ext;
             
             //Query to insert content into db.
             String query = "INSERT INTO " + DBEnumeration.CONTENT 
@@ -206,7 +206,7 @@ public class SQLTranslator implements DBInterface{
             prep.setString(10, duration);
             prep.setString(11, isbn);
             prep.setBoolean(12, explicit);
-            prep.setString(13, fileName);
+            //prep.setString(13, fileName);
             prep.setString(14, url);
             prep.setBoolean(15, wantToSync);
 
@@ -222,10 +222,10 @@ public class SQLTranslator implements DBInterface{
                 DBDirectories.createDirectories(location);
                 
                 //New filepath for application.
-                if(file.renameTo(new File(fileName))) {
+                /*if(file.renameTo(new File(fileName))) {
                     //file.delete();
                     System.out.println("File moved successfully");
-                }
+                }*/
                 
                 System.out.println("Content added successfully");
                 return true;    
@@ -1900,12 +1900,12 @@ public class SQLTranslator implements DBInterface{
     }
     
     
-    public void test1(String filePath) {
+    /*public void test1(String filePath) {
         File file = new File(filePath);
         System.out.println(file.getAbsolutePath());
-        String ex = FilenameUtils.getExtension(filePath);
+        //String ex = FilenameUtils.getExtension(filePath);
         System.out.println(ex);
-    }
+    }*/
     
     
     /**
@@ -1913,9 +1913,9 @@ public class SQLTranslator implements DBInterface{
      * @param filePath
      * @return 
      */
-    private String getExtension(String filePath) {
-        String ext = FilenameUtils.getExtension(filePath);
+    /*private String getExtension(String filePath) {
+        //String ext = FilenameUtils.getExtension(filePath);
         System.out.println(ext);
         return ext;
-    }
+    }*/
 }
