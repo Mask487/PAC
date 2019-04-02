@@ -1,12 +1,12 @@
 package Database;
-
+import org.apache.commons.io.FilenameUtils;
 import Util.DBPrint;
 import java.sql.*;
 /**
  *
  * @author Jacob Oleson
  * 
- * @update 2/28/19
+ * @update 4/01/19
  * 
  * Simple test that calls the DB interface to add info to the DB file.
  */
@@ -17,26 +17,29 @@ public class SQLiteTest {
         SQLTranslator test = new SQLTranslator();
         ResultSet res;
         String foo = "ThisIsTest";
-        String contentType = "AudioBook";
-        String creatorName = "Ayn Rand";
-        String genreName = "Philosophical Fiction";
-        String publisherName = "Merills";
-        String seriesName = null; 
-        String contentName = "The Fountainhead";
-        String contentDescription = null;
+        String contentType = "Music";
+        String creatorName = "MacCunn";
+        String genreName = "Classical";
+        String publisherName = null;
+        String seriesName = "Land of the Mountain and the FlooD"; 
+        String contentName = "test2";
+        String contentDescription = foo;
         //yyyy-mm-dd
-        String uploadDate = "2019-04-01";
+        String uploadDate = "2019-04-02";
         int pageCount = 0; 
         //hh:mm:ss
-        String duration = "20:33:12";
+        String duration = "01:33:12";
         String isbn = null;
-        boolean explicit = true; 
-        String location = null;
-        String url = "https://test.test";
-        boolean wantToSync = true;
+        boolean explicit = false; 
+        String location = "C:/Test/test2.mp3";
+        String url = null;
+        boolean wantToSync = false;
         
+        
+        //test.test1("C:/Test/test1.mp3");
         //test.addPlaylist("Test play");
-        test.addContent(contentType, creatorName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url, wantToSync);
+        test.addContent(contentType, creatorName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url, wantToSync, location);
+        //test.setSyncStatus(contentName, contentType, creatorName);
         //test.addToPlaylist(contentName, contentType, creatorName, "Test play");
         //test.deleteContent(contentName, contentType, creatorName);
         //test.deleteContent(contentName, contentType, creatorName);

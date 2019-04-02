@@ -72,7 +72,9 @@ public class MetaDataReader {
     }
     
     public static void main(String[] args) throws IOException, TikaException, SAXException {
-        MetaDataReader();
+        
+        mdr.getCreatorName();
+        mdr.getContentName();
     }
     
     protected String getFileType() {
@@ -91,8 +93,10 @@ public class MetaDataReader {
          * Check for those types and if we still get nothing, then
          * return null and db can handle that. 
          */
-        
+        try {
         foo = MetaDataReader.metadata.get("creator");
+        
+        
         
         if(foo == null) {
             foo = MetaDataReader.metadata.get("dc:creator");
@@ -110,7 +114,14 @@ public class MetaDataReader {
             foo = MetaDataReader.metadata.get("Author");
         }
         
-        return foo;
+         return foo;
+        }
+        catch(NullPointerException e) {
+            e.getMessage();
+            return null;
+        }
+        
+       
     }
     
     
@@ -196,7 +207,15 @@ public class MetaDataReader {
      * Get the upload date on file. 
      */
     protected String getUploadDate() {
-        return null;
+        String foo;
+        
+        foo = MetaDataReader.metadata.get("Creation-Date");
+        
+        if(foo == null) {
+            foo = MetaDataReader.metadata.get("meta:creation-date");
+        }
+        
+        return foo;
     }
     
    
@@ -212,6 +231,10 @@ public class MetaDataReader {
      * Get the duration of the mp3 file. Could be song, or podcast. 
      */
     protected String getDuration() {
+        
+        String foo;
+        
+        foo = MetaDataReader.metadata.get("xmpDM:duration");
         return null;
     }
     
