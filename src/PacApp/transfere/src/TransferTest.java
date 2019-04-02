@@ -18,10 +18,11 @@ public class TransferTest
         //t.getFolder("podcasts", file1);
         //t.backup("Backup");
         //t.setAdbPath("C:\\Users\\quinc\\AppData\\Local\\Android\\Sdk\\platform-tools");
-        t.getAdbPath();
-        t.setBackupPath("D:\\Desktop\\BACKUP");
+        //t.getAdbPath();
+        //t.setBackupPath("D:\\Desktop\\BACKUP");
         //System.out.println("IP: "+ t.getIp());
         //t.getPhoneIp();
+        t.syncQueuery();
 
 
     }

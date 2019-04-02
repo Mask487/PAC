@@ -34,6 +34,7 @@ public interface TransferObject
     String getPhoneName();
     String getIp();
     String getAdbPath() throws IOException;
+    ArrayList<String> syncQueuery();
 
 
 

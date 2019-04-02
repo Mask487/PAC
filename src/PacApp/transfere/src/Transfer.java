@@ -1,6 +1,5 @@
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
-
 import java.io.*;
 import java.math.BigInteger;
 import java.net.InetAddress;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.net.DatagramSocket;
+import java.sql.*;
 
 class Transfer extends Thread implements TransferObject{
     private PortableDevice pD = null;
@@ -19,6 +19,7 @@ class Transfer extends Thread implements TransferObject{
     private String adbPath = null;
     private String backupPath = null;
     private String mainPath = System.getProperty("user.dir");
+
 
     public void initializeDesk() throws FileNotFoundException {
         File file = new File(mainPath + "\\PAC_config.cfg");
@@ -31,8 +32,61 @@ class Transfer extends Thread implements TransferObject{
             w.close();
             file = new File("PAC_Config.cfg");
         }
+
         //System.out.println(file.getAbsolutePath());
 
+    }
+
+    public ArrayList<String> syncQueuery(){
+        /*
+        Content Type
+        1 - Audiobook
+        2 - EBook
+        3 -
+        4 -
+        5 -
+        6 -
+        7 - Podcast
+        */
+        Connection c = null;
+        Statement stmt = null;
+        ArrayList<String> locations = null;
+        String location;
+        String contentName;
+        String type;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:Database\\PACDB.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened Database");
+            stmt = c.createStatement();
+            //SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID, and c.SyncStatusID = FALSE;
+            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID;");
+            while(rs.next()){
+                String test;
+                test = rs.getString("Location");
+                if(rs.getString("Location") == null){
+                    System.out.println("location is null");
+                }else if(rs.getString("Location") != null){
+                    locations.add(test);
+                }
+
+            }
+            for(int i = 0; i < locations.size(); i++){
+                System.out.println(locations.get(i));
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+
+        return locations;
     }
 
     public void initializePhone(int i) {
@@ -248,6 +302,10 @@ class Transfer extends Thread implements TransferObject{
                 addVideos(file);
                 break;
         }
+    }
+
+    public void sync(){
+
     }
 
     public void addFiles(ArrayList<File> files, char choice){
