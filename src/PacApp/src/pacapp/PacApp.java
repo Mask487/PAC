@@ -55,6 +55,7 @@ public class PacApp extends Application {
         AnchorPane centerAnchorPane = new AnchorPane();
         AnchorPane backAnchor = new AnchorPane();
         AnchorPane tAnchor = new AnchorPane();
+        StackPane mainStack = new StackPane();
 
         //create background anchor
         root2.setRightAnchor(bp, 0.0);
@@ -264,9 +265,9 @@ public class PacApp extends Application {
         Android.setCache(true);
         
 
-        HBox midRow = new HBox();
-        midRow.setPadding(new Insets(5, 5, 5, 5));
-        midRow.setSpacing(50);
+        HBox phoneMidRow = new HBox();
+        phoneMidRow.setPadding(new Insets(5, 5, 5, 5));
+        phoneMidRow.setSpacing(50);
 
         Button sync = new Button("Sync Phone");       //Creates button 
         sync.backgroundProperty().set(buBack);         //adds transparent background
@@ -325,14 +326,15 @@ public class PacApp extends Application {
 
            //midRow.backgroundProperty().set(testBack);
         
-         midRow.getChildren().addAll(Android, midButt);
-        midButt.getChildren().addAll(sync, backup, copy);
+         phoneMidRow.getChildren().addAll(Android, midButt);//phone scene
+        midButt.getChildren().addAll(sync, backup, copy);//phone buttons
        
-        tAnchor.getChildren().addAll(midRow); /////not anchoring or sstacking
-        tAnchor.setRightAnchor(midRow, 80.0);
-       tAnchor.setLeftAnchor(midRow, 80.0);
-        tAnchor.setBottomAnchor(midRow, 50.0);
-        tAnchor.setTopAnchor(midRow, 50.0);
+        mainStack.getChildren().addAll(phoneMidRow);
+        tAnchor.getChildren().addAll(mainStack); /////not anchoring or sstacking
+        tAnchor.setRightAnchor(mainStack, 80.0);
+       tAnchor.setLeftAnchor(mainStack, 80.0);
+        tAnchor.setBottomAnchor(mainStack, 50.0);
+        tAnchor.setTopAnchor(mainStack, 50.0);
 
         // test buttons
         Button buttonSave = new Button("right");
