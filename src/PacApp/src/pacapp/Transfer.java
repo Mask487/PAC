@@ -15,6 +15,7 @@ import java.sql.*;
 
 class Transfer extends Thread implements TransferObject{
     private PortableDevice pD = null;
+    private PortableDeviceManager pDM;
     private String ip;
     private String adbPath = null;
     private String backupPath = null;
@@ -91,7 +92,7 @@ class Transfer extends Thread implements TransferObject{
 
     public void initializePhone(int i) {
         PortableDeviceFolderObject pFO = null;
-        PortableDeviceManager pDM = new PortableDeviceManager();
+        pDM = new PortableDeviceManager();
         pD = pDM.getDevices()[i];
         File file = new File("\\PACFILES");
         boolean condition = false;
@@ -124,6 +125,17 @@ class Transfer extends Thread implements TransferObject{
             createFolder("pacfiles", pD);
         }
         pD.close();
+    }
+
+    public boolean isPhoneConnected(){
+        try{
+            if(pDM.getDevices().length > 0){
+                return true;
+            }
+        }catch(NullPointerException e){
+            return false;
+        }
+        return false;
     }
 
     public boolean setMainPath(String path){

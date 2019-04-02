@@ -30,11 +30,13 @@ public interface TransferObject
     boolean setMainPath(String path);
     boolean setAdbPath(String path) throws IOException;
     boolean doesFolderExist(String folderName, PortableDevice pD);
+    boolean isPhoneConnected();
     String getPhoneModel();
     String getPhoneName();
     String getIp();
     String getAdbPath() throws IOException;
     ArrayList<String> syncQueuery();
+
 
 
 
