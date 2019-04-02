@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -82,7 +83,7 @@ public interface DBInterface {
     public boolean deleteSeries(String seriesName);
     
     
-    public List<String[]> getAllContent();
+    public ResultSet getAllContent();
 
 
     public List<String[]> getAllContentTypes();
@@ -117,9 +118,6 @@ public interface DBInterface {
 
 
     public List<String[]> getContentByType(String contentType);
-
-    
-    public List<String[]> getContentType(String contentType);
     
     
     public List<String[]> getCreator(String creatorName);

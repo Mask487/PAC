@@ -2,6 +2,8 @@ package Database;
 import org.apache.commons.io.FilenameUtils;
 import Util.DBPrint;
 import java.sql.*;
+import java.util.Iterator;
+import java.util.Set;
 /**
  *
  * @author Jacob Oleson
@@ -35,10 +37,21 @@ public class SQLiteTest {
         String url = null;
         boolean wantToSync = false;
         
+        ContentDAO dao = new ContentDAO();
+//        Content content = dao.getContent(contentName, contentType, creatorName);
+//        System.out.println(content.getContentName());
+        Set all = dao.getAllContent();
+//        
+        Iterator iter = all.iterator();
+        while(iter.hasNext()) {
+            System.out.println(iter.next().toString());
+        }
         
+        //Content newContent = new Content(contentName, contentType, creatorName, );
+        //dao.getContent(contentName, contentType, creatorName);
         //test.test1("C:/Test/test1.mp3");
         //test.addPlaylist("Test play");
-        test.addContent(contentType, creatorName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url, wantToSync, location);
+        //test.addContent(contentType, creatorName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url, wantToSync, location);
         //test.setSyncStatus(contentName, contentType, creatorName);
         //test.addToPlaylist(contentName, contentType, creatorName, "Test play");
         //test.deleteContent(contentName, contentType, creatorName);
