@@ -32,8 +32,8 @@ public class SQLTranslator {
      * in relation to where this file is in the project directory.
      * For now just specify where it is on your own machine.
      */
-    private final String dbLocationPath = "jdbc:sqlite:C:/PAC/Database/PACDB.db";
-   
+    //private final String dbLocationPath = "jdbc:sqlite:C:\\PAC\\Database\\PACDB.db";
+    private final String dbLocationPath = getPathToDB();
     
     /**
      * Adds a new piece of content to DB. Desperately needs to be refactored down.
@@ -551,7 +551,12 @@ public class SQLTranslator {
         
         //Default Value
         return false;
-    } 
+    }
+    
+    
+    public boolean addToPlaylist(Content content, Playlist playlist) {
+        return addToPlaylist(content.getContentName(), content.getContentTypeName(), content.getCreatorName(), playlist.getPlaylistName());
+    }
     
     
     /**
@@ -2184,6 +2189,19 @@ public class SQLTranslator {
         String ext = FilenameUtils.getExtension(filePath);
         System.out.println(ext);
         return ext;
+    }
+    
+    
+    private String getPathToDB() {
+        
+        final String constant = "jdbc:sqlite:";
+        String workingDirectory = System.getProperty("user.dir");
+        File file = new File(workingDirectory);
+        String parentDirectory = file.getParent();
+        File file2 = new File(parentDirectory);
+        String databaseDirectory = file2.getParent() + "\\Database\\PACDB.db";
+        
+        return constant + databaseDirectory;
     }
     
     

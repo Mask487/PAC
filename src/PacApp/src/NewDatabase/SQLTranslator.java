@@ -1,4 +1,4 @@
-package Database;
+package NewDatabase;
 
 import java.sql.*;
 import Util.DBDirectories;

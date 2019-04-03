@@ -1,4 +1,4 @@
-package Database;
+package NewDatabase;
 import org.apache.commons.io.FilenameUtils;
 import Util.DBPrint;
 import java.sql.*;

@@ -40,17 +40,17 @@ public class SQLiteTest {
         ContentDAO dao = new ContentDAO();
         //Content content = dao.getContent(contentName, contentType, creatorName);
         //System.out.println(content.getContentName());
-        //Set all = dao.getAllContent();
+        Set all = dao.getAllContent();
 
-        //Iterator iter = all.iterator();
-        //while(iter.hasNext()) {
-        //    System.out.println(iter.next().toString());
-        //}
+        Iterator iter = all.iterator();
+        while(iter.hasNext()) {
+            System.out.println(iter.next().toString());
+        }
         
-        Content content3 = dao.getContentByID(4);
-        System.out.println(content3.toString());
-        
-        dao.deleteContent(content3);
+//        Content content3 = dao.getContentByID(4);
+//        System.out.println(content3.toString());
+//        
+//        dao.deleteContent(content3);
 
         //test.addContentTest(location, "Podcast");
         //MetaDataReader.genericReader("C:/Test/test3.pdf");
