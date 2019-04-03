@@ -20,8 +20,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -56,6 +59,19 @@ public class PacApp extends Application {
         AnchorPane backAnchor = new AnchorPane();
         AnchorPane tAnchor = new AnchorPane();
         StackPane mainStack = new StackPane();
+        VBox musicCont = new VBox();
+        ScrollPane musicPane = new ScrollPane(musicCont);
+        VBox bookCont = new VBox();
+        ScrollPane bookPane = new ScrollPane(bookCont);
+        VBox audioBookCont = new VBox();
+        ScrollPane audioBookPane = new ScrollPane(audioBookCont);
+        VBox podcastCont = new VBox();
+        ScrollPane podcastPane = new ScrollPane(podcastCont);
+        VBox videoCont = new VBox();
+        ScrollPane videoPane = new ScrollPane(videoCont);
+        TilePane appCont = new TilePane();
+        ScrollPane appPane = new ScrollPane(appCont);
+        VBox settingsList = new VBox();
 
         //create background anchor
         root2.setRightAnchor(bp, 0.0);
@@ -128,7 +144,7 @@ public class PacApp extends Application {
         Button apps = new Button("", appsIcon);       //Creates button with image
         apps.backgroundProperty().set(buBack);         //adds transparent background
         apps.setPadding(inset);
-        
+
         Image phoneIcon = new Image("Phone.png");   //Load Phone Icon for imageview
         ImageView phone = new ImageView();
         phone.setImage(phoneIcon);                  //adds icon to imageview           
@@ -150,8 +166,7 @@ public class PacApp extends Application {
         vbutt.backgroundProperty().set(vfill);
         vbutt.setPadding(new Insets(5, 5, 5, 5));
         vbutt.setSpacing(5);
-        
-        
+
         VBox bvbutt = new VBox();
         bvbutt.backgroundProperty().set(vfill);
         bvbutt.setPadding(new Insets(5, 5, 5, 5));
@@ -184,7 +199,8 @@ public class PacApp extends Application {
         music.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+                mainStack.getChildren().add(musicPane);
                 System.out.println("Music Pressed");
 
             }
@@ -193,7 +209,8 @@ public class PacApp extends Application {
         book.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                mainStack.getChildren().clear();
+                mainStack.getChildren().add(bookPane);
                 System.out.println("Book Pressed");
 
             }
@@ -202,7 +219,8 @@ public class PacApp extends Application {
         aBook.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                mainStack.getChildren().clear();
+                mainStack.getChildren().add(audioBookPane);
                 System.out.println("Audio Books Pressed");
 
             }
@@ -211,7 +229,8 @@ public class PacApp extends Application {
         podcast.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                mainStack.getChildren().clear();
+                mainStack.getChildren().add(podcastPane);
                 System.out.println("podcast Pressed");
 
             }
@@ -220,7 +239,8 @@ public class PacApp extends Application {
         video.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                mainStack.getChildren().clear();
+                mainStack.getChildren().add(videoPane);
                 System.out.println("video Pressed");
 
             }
@@ -229,7 +249,8 @@ public class PacApp extends Application {
         apps.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                mainStack.getChildren().clear();
+                mainStack.getChildren().add(appPane);
                 System.out.println("apps Pressed");
 
             }
@@ -238,23 +259,81 @@ public class PacApp extends Application {
         settingsB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                mainStack.getChildren().clear();
+                mainStack.getChildren().add(settingsList);
                 System.out.println("settings Pressed");
 
             }
         });
 
-        phoneB.setOnAction(new EventHandler<ActionEvent>() {
+        vbutt.getChildren().addAll(music, book, aBook, podcast, video, apps, phoneB);
+        bvbutt.getChildren().addAll(settingsB);
+
+        // Create music pane
+        musicPane.setFitToWidth(true);
+        musicPane.setFitToHeight(true);
+        musicPane.setPannable(false);
+
+        // Create book pane
+        bookPane.setFitToWidth(true);
+        bookPane.setFitToHeight(true);
+        bookPane.setPannable(false);
+        Label noBook = new Label("You have no Books \n import Books to get started.");
+        noBook.backgroundProperty().set(buBack);
+        bookCont.getChildren().addAll(noBook);
+
+        // Create audio book pane
+        audioBookPane.setFitToWidth(true);
+        audioBookPane.setFitToHeight(true);
+        audioBookPane.setPannable(false);
+        Label noAudioBook = new Label("You have no audio books \n import audio Books to get started.");
+        noAudioBook.backgroundProperty().set(buBack);
+        audioBookCont.getChildren().addAll(noAudioBook);
+
+        // Create app pane
+        appPane.setFitToWidth(true);
+        appPane.setFitToHeight(true);
+        appPane.setPannable(false);
+        Label noApp = new Label("You have no apps \n import apps to get started.");
+        noApp.backgroundProperty().set(buBack);
+        appCont.getChildren().addAll(noApp);
+
+        // Create  pane
+        podcastPane.setFitToWidth(true);
+        podcastPane.setFitToHeight(true);
+        podcastPane.setPannable(false);
+        Label nopodcast = new Label("You have no podcasts \n import podcasts to get started.");
+        nopodcast.backgroundProperty().set(buBack); 
+        podcastCont.getChildren().addAll(nopodcast);
+
+        // Create video pane
+        videoPane.setFitToWidth(true);
+        videoPane.setFitToHeight(true);
+        videoPane.setPannable(false);
+        Label noVideo = new Label("You have no videos \n import videos to get started.");
+        noVideo.backgroundProperty().set(buBack); 
+        videoCont.getChildren().addAll(noVideo);
+
+        // create settings VBox
+        Button lightMode = new Button("Change to light mode.");       //Creates button 
+        lightMode.backgroundProperty().set(buBack);         //adds transparent background
+        lightMode.setTextFill(Paint.valueOf("D146FF"));
+        lightMode.setPadding(inset);
+
+        lightMode.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
-                System.out.println("Phone Pressed");
+                Alert lMode = new Alert(Alert.AlertType.WARNING);
+                lMode.setTitle("Suspicious activity detected");
+                lMode.setHeaderText("Light Mode Avoided.");
+                //lMode.setContentText('h');
+                lMode.showAndWait();
+                System.out.println("lightMode Pressed");
 
             }
         });
+        settingsList.getChildren().add(lightMode);
 
-        vbutt.getChildren().addAll(music, book, aBook, podcast, video, apps,phoneB);
-        bvbutt.getChildren().addAll(settingsB);
         // Create Phone Transfer Section
         Image androidImage = new Image("Android.png");   //Load video Icon for imageview
         ImageView Android = new ImageView();
@@ -263,16 +342,16 @@ public class PacApp extends Application {
         Android.setPreserveRatio(true);
         Android.setSmooth(true);
         Android.setCache(true);
-        
 
         HBox phoneMidRow = new HBox();
         phoneMidRow.setPadding(new Insets(5, 5, 5, 5));
         phoneMidRow.setSpacing(50);
 
         Button sync = new Button("Sync Phone");       //Creates button 
+        sync.setTextFill(Paint.valueOf("D146FF"));
         sync.backgroundProperty().set(buBack);         //adds transparent background
         sync.setPadding(inset);
-        
+
         sync.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -283,6 +362,7 @@ public class PacApp extends Application {
         });
 
         Button backup = new Button("Backup Phone");       //Creates button 
+        backup.setTextFill(Paint.valueOf("D146FF"));
         backup.backgroundProperty().set(buBack);         //adds transparent background
         backup.setPadding(inset);
 
@@ -294,8 +374,9 @@ public class PacApp extends Application {
 
             }
         });
-        
+
         Button copy = new Button("Duplicate Phone");       //Creates button 
+        copy.setTextFill(Paint.valueOf("D146FF"));
         copy.backgroundProperty().set(buBack);         //adds transparent background
 
 //        copy.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -306,8 +387,6 @@ public class PacApp extends Application {
 //
 //            }
 //        });
-              
-        
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -316,31 +395,43 @@ public class PacApp extends Application {
 
             }
         });
-        
-        Button android = new Button("Duplicate Phone",Android);       
-        copy.backgroundProperty().set(buBack); 
-        
+
+        Button android = new Button("Duplicate Phone", Android);
+        copy.backgroundProperty().set(buBack);
+
         VBox midButt = new VBox();
         midButt.setPadding(new Insets(5, 5, 5, 5));
         midButt.setSpacing(50);
+        midButt.getChildren().addAll(sync, backup, copy);
 
-           //midRow.backgroundProperty().set(testBack);
-        
-         phoneMidRow.getChildren().addAll(Android, midButt);//phone scene
-        midButt.getChildren().addAll(sync, backup, copy);//phone buttons
-       
-        mainStack.getChildren().addAll(phoneMidRow);
-        tAnchor.getChildren().addAll(mainStack); /////not anchoring or sstacking
-        tAnchor.setRightAnchor(mainStack, 80.0);
-       tAnchor.setLeftAnchor(mainStack, 80.0);
-        tAnchor.setBottomAnchor(mainStack, 50.0);
-        tAnchor.setTopAnchor(mainStack, 50.0);
+        phoneB.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+                mainStack.getChildren().add(phoneMidRow);
+                System.out.println("Phone Pressed");
+
+            }
+        });
+
+        mainStack.getChildren().setAll(phoneMidRow, musicPane);
+        tAnchor.getChildren().addAll(mainStack);
+        tAnchor.setRightAnchor(mainStack, 25.0);// area around
+        tAnchor.setLeftAnchor(mainStack, 25.0);// area around
+        tAnchor.setBottomAnchor(mainStack, 25.0);// area around
+        tAnchor.setTopAnchor(mainStack, 25.0);// area around
 
         // test buttons
         Button buttonSave = new Button("right");
         Button buttonCancel = new Button("left");
         Button buttonTop = new Button("Top");
 
+        //MusicPane
+        Label noMusic = new Label("You have no Music \n import music to get started.");
+        noMusic.backgroundProperty().set(buBack);
+        musicCont.getChildren().addAll(noMusic);
+
+        phoneMidRow.getChildren().addAll(Android, midButt);
         // Button buttonbottom = new Button("bottom");
         centerAnchorPane.getChildren().addAll(tAnchor);
         centerAnchorPane.setRightAnchor(tAnchor, 5.0);
@@ -353,7 +444,7 @@ public class PacApp extends Application {
         bottomAnchorPane.setLeftAnchor(bottomButt, 5.0);
         bottomAnchorPane.setTopAnchor(bottomButt, .0);
         bottomAnchorPane.setBottomAnchor(bottomButt, .0);
-        leftButtonPane.getChildren().addAll(vbutt,bvbutt);
+        leftButtonPane.getChildren().addAll(vbutt, bvbutt);
         topAnchorPane.getChildren().addAll(hSearch);
         leftButtonPane.setTopAnchor(vbutt, 0.0);
         leftButtonPane.setBottomAnchor(bvbutt, 0.0);
@@ -373,5 +464,25 @@ public class PacApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
+    public static void musButt() {
+        
+    }
+    public static void podButt() {
+        
+    }
+    public static void ebkButt() {
+        
+    }
+    public static void abkButt() {
+        
+    }
+    public static void vidButt() {
+        
+    }
+    public static void infButt() {
+        
+    }
+    
 
 }
