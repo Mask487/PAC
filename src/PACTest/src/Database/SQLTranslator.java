@@ -1258,6 +1258,21 @@ public class SQLTranslator {
             return getKey(query);
 
     }
+    
+    
+    public String getContentTypeName(int contentTypeID) {
+        try {
+            String query = "SELECT ContentType FROM  " + DBEnumeration.CONTENTTYPE
+                + " WHERE ContentTypeID = " + contentTypeID;
+            return getRecords(query).getString(1);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+  }
    
        
     /**
@@ -1284,11 +1299,11 @@ public class SQLTranslator {
     }
     
     
-    public ResultSet getCreatorName(int creatorID) {
+    public String getCreatorName(int creatorID) {
         try {
             String query = "SELECT CreatorName FROM " + DBEnumeration.CREATOR
                     + " WHERE CreatorID = " + creatorID;
-            return getRecords(query);
+            return getRecords(query).getString(1);
         }
         
         catch(SQLException | ClassNotFoundException e) {
@@ -1429,7 +1444,7 @@ public class SQLTranslator {
     }
     
     
-    public String getSeriesName(String seriesID) {
+    public String getSeriesName(int seriesID) {
         try {
             String query = "SELECT SeriesName FROM " + DBEnumeration.SERIES
                     + " WHERE SeriesID = " + seriesID;

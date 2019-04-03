@@ -11,15 +11,10 @@ package Database;
  */
 public class Content {
     private int contentID;
-    private int contentTypeID; 
     private String contentTypeName;
-    private int creatorID;
     private String creatorName;
-    private int genreID;
     private String genreName;
-    private int seriesID;
     private String seriesName;
-    private int publisherID;
     private String publisherName;
     private String contentName;
     private String contentDescription;
@@ -44,17 +39,14 @@ public class Content {
     public Content() {
     }
 
-    public Content(int contentID, int contentTypeID, String contentTypeName, int creatorID, String creatorName, int genreID, String genreName, int seriesID, String seriesName, int publisherID, String publisherName, String contentName, String contentDescription, String uploadDate, int pageCount, String duration, String isbn, boolean explicit, String location, String url, boolean wantToSync, String originalFilePath) {
+    public Content(int contentID, String contentTypeName, 
+            String creatorName, String genreName, 
+            String seriesName, String publisherName, String contentName, String contentDescription, String uploadDate, int pageCount, String duration, String isbn, boolean explicit, String location, String url, boolean wantToSync, String originalFilePath) {
         this.contentID = contentID;
-        this.contentTypeID = contentTypeID;
         this.contentTypeName = contentTypeName;
-        this.creatorID = creatorID;
         this.creatorName = creatorName;
-        this.genreID = genreID;
         this.genreName = genreName;
-        this.seriesID = seriesID;
         this.seriesName = seriesName;
-        this.publisherID = publisherID;
         this.publisherName = publisherName;
         this.contentName = contentName;
         this.contentDescription = contentDescription;
@@ -98,13 +90,6 @@ public class Content {
         this.contentID = contentID;
     }
 
-    public int getContentTypeID() {
-        return contentTypeID;
-    }
-
-    public void setContentTypeID(int contentTypeID) {
-        this.contentTypeID = contentTypeID;
-    }
 
     public String getContentTypeName() {
         return contentTypeName;
@@ -114,13 +99,6 @@ public class Content {
         this.contentTypeName = contentTypeName;
     }
 
-    public int getCreatorID() {
-        return creatorID;
-    }
-
-    public void setCreatorID(int creatorID) {
-        this.creatorID = creatorID;
-    }
 
     public String getCreatorName() {
         return creatorName;
@@ -130,13 +108,6 @@ public class Content {
         this.creatorName = creatorName;
     }
 
-    public int getGenreID() {
-        return genreID;
-    }
-
-    public void setGenreID(int genreID) {
-        this.genreID = genreID;
-    }
 
     public String getGenreName() {
         return genreName;
@@ -146,13 +117,6 @@ public class Content {
         this.genreName = genreName;
     }
 
-    public int getSeriesID() {
-        return seriesID;
-    }
-
-    public void setSeriesID(int seriesID) {
-        this.seriesID = seriesID;
-    }
 
     public String getSeriesName() {
         return seriesName;
@@ -166,13 +130,6 @@ public class Content {
         return contentName;
     }
 
-    public int getPublisherID() {
-        return publisherID;
-    }
-
-    public void setPublisherID(int publisherID) {
-        this.publisherID = publisherID;
-    }
 
     public String getPublisherName() {
         return publisherName;
@@ -260,7 +217,7 @@ public class Content {
 
     @Override
     public String toString() {
-        return "Content{" + "contentID=" + contentID + ", contentTypeID=" + contentTypeID + ", contentTypeName=" + contentTypeName + ", creatorID=" + creatorID + ", creatorName=" + creatorName + ", genreID=" + genreID + ", genreName=" + genreName + ", seriesID=" + seriesID + ", seriesName=" + seriesName + ", publisherID=" + publisherID + ", publisherName=" + publisherName + ", contentName=" + contentName + ", contentDescription=" + contentDescription + ", uploadDate=" + uploadDate + ", pageCount=" + pageCount + ", duration=" + duration + ", isbn=" + isbn + ", explicit=" + explicit + ", location=" + location + ", url=" + url + ", wantToSync=" + wantToSync + ", originalFilePath=" + originalFilePath + '}';
+        return "Content{" + "contentID=" + contentID +  ", contentTypeName=" + contentTypeName + ", creatorName=" + creatorName + ", genreName=" + genreName + ", seriesName=" + seriesName + ", publisherName=" + publisherName + ", contentName=" + contentName + ", contentDescription=" + contentDescription + ", uploadDate=" + uploadDate + ", pageCount=" + pageCount + ", duration=" + duration + ", isbn=" + isbn + ", explicit=" + explicit + ", location=" + location + ", url=" + url + ", wantToSync=" + wantToSync + ", originalFilePath=" + originalFilePath + '}';
     }
 
    

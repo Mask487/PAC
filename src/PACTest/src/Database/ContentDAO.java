@@ -268,8 +268,6 @@ public class ContentDAO {
     }
     
     
-    
-    
     public boolean insertContent(Content content) {
         
         boolean success = sql.addContent(content.getContentTypeName(), content.getCreatorName(), content.getGenreName(), content.getPublisherName(), content.getSeriesName(), content.getContentName(), content.getContentDescription(), content.getUploadDate(), content.getPageCount(), content.getDuration(), content.getIsbn(), content.isExplicit(), content.getLocation(), content.getUrl(), content.getWantToSync(), content.getOriginalFilePath());
@@ -303,19 +301,24 @@ public class ContentDAO {
     private Content extractDataFromResultSet(ResultSet res) {
         Content content = new Content();
         try {
+            ResultSet res2;
             content.setContentID(res.getInt("ContentID"));
             content.setContentName(res.getString("ContentName"));
+            /**Since result set returns the foreign key ids
+             * we need to call the translator class to convert
+             * those ids into the actual names for the content object
+             */
+            content.setCreatorName(sql.getCreatorName(res.getInt("CreatorID")));
             content.setContentDescription(res.getString("ContentDescription"));
-            content.setContentTypeID(res.getInt("ContentTypeID"));
-            content.setCreatorID(res.getInt("CreatorID"));
-            content.setGenreID(res.getInt("GenreID"));
-            content.setPublisherID(res.getInt("PublisherID"));
+            content.setContentTypeName(sql.getContentTypeName(res.getInt("ContentTypeID")));
+            content.setGenreName(sql.getGenreName(res.getInt("GenreID")));
+            content.setSeriesName(sql.getSeriesName(res.getInt("SeriesID")));
+            content.setPublisherName(sql.getPublisherName(res.getInt("PublisherID")));
             content.setDuration(res.getString("Duration"));
             content.setExplicit(res.getBoolean("Explicit"));
             content.setIsbn(res.getString("isbn"));
             content.setLocation(res.getString("location"));
             content.setPageCount(res.getInt("PageCount"));
-            content.setSeriesID(res.getInt("SeriesID"));
             content.setUploadDate(res.getString("Uploaddate"));
             content.setUrl(res.getString("DownloadURL"));
             content.setWantToSync(res.getBoolean("WantToSync"));
