@@ -16,7 +16,6 @@ public class DBEnumeration {
     public static final String PCLOOKUP = "PlaylistContentLookup";
     public static final String PLAYLIST = "Playlists";
     public static final String PUBLISHER = "Publisher";
-    public static final String SYNCSTATUS  = "SyncStatus";
     public static final String SERIES = "Series";
     
     //Sentinel Value

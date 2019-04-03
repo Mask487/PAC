@@ -1,25 +1,18 @@
 package Database;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.tika.Tika;
-import org.apache.tika.detect.TypeDetector;
-
+import java.io.InputStream;
+import org.apache.tika.parser.epub.EpubParser;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
-import org.apache.tika.mime.MimeTypes;
-import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.Parser;
-import org.apache.tika.sax.BodyContentHandler;
+import org.apache.tika.parser.mp3.Mp3Parser;
+import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
-
-
+import org.xml.sax.helpers.DefaultHandler;
 /*
  * @author Jacob Oleson
  *
@@ -29,130 +22,123 @@ import org.xml.sax.SAXException;
  * a really useful API to get all the relevant data from a file that 
  * the DB needs to store it. Cannot get contettype, that has to be supplied by 
  * the user/application. Much work needed here.
+
+Here's what the DB NEEDS for any file
+
+     * @param creatorName 
+     * @param genreName
+     * @param publisherName
+     * @param seriesName
+     * @param contentName
+     * @param contentDescription
+     * @param uploadDate
+     * @param pageCount
+     * @param duration
+     * @param isbn
+     * @param explicit
+     * @param url
  */
 public class MetaDataReader {
-    private final Tika defaultTika = new Tika();
-    private final Tika mimeTika = new Tika(new MimeTypes());
-    private final Tika typeTika = new Tika(new TypeDetector());
-    private static final MetaDataReader mdr = new MetaDataReader();
     
-    private String location = "C:/Test/test1.mp3";
-    private File file;
-    private Parser parser;
-    private BodyContentHandler handler;
-    private Metadata metadata;
-    private FileInputStream inputStream;
-    private ParseContext context;
-    String[] metadataNames;
+    private static String location = "C:/Test/FreePodcast.mp3";
     
-    
-    protected void MetaDataReader(String _location) {
-        this.location = _location;
-        this.file = new File(location);
-        this.parser = new AutoDetectParser();
-        this.handler = new BodyContentHandler();
-
-        try {
-            this.metadata = new Metadata();
-            this.inputStream = new FileInputStream(file);
-            this.context = new ParseContext();
-            this.parser.parse(inputStream, handler, metadata, context);
-            this.metadataNames = metadata.names();
-
-            for(String name : metadataNames) {
-                System.out.println(name + ": " + metadata.get(name));
-            }
-        }
-
-        catch(IOException | SAXException e) {
-            System.out.println(e.getMessage());
-        } 
-        catch (TikaException ex) {
-            Logger.getLogger(MetaDataReader.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println(handler.toString());        
-    }
-    
-    protected String getTitle(){
-        return this.metadata.get(MetaDataEnum.TITLE);
-    }
-    
-    protected String getCreator(){
-        return this.metadata.get(MetaDataEnum.CREATOR);
-    }
-    
-    protected String getGenre() {
-        return this.metadata.get(MetaDataEnum.GENRE);
-    }
-    
-    protected String getReleaseData() {
-        return this.metadata.get(MetaDataEnum.RELEASEDATE);
-    }
-    
-    protected String getSeries() {
-        return this.metadata.get(MetaDataEnum.SERIES);
-    }
-    
-    
-    
-    
-   
-    public static void main(String[] args) {
-        test("C:/Test/test4.epub");
-    }
-    public static void test(String location) {
+    /**
+     * You have to tell this methods if the mp3 file you're passing
+     * is an audiobook, podcast, or music file. Metadata reader cannot tell 
+     * the difference.
+     * @param contentType 
+     */
+    public static void mp3Reader(String contentType) {
         
         try {
-            File file = new File(location);
-            Parser parser = new AutoDetectParser();
-            BodyContentHandler handler = new BodyContentHandler();
+            InputStream input = new FileInputStream(new File(location));
+            ContentHandler handler = new DefaultHandler();
             Metadata metadata = new Metadata();
-            FileInputStream inputStream = new FileInputStream(file);
-            ParseContext context = new ParseContext();
+            Parser parser = new Mp3Parser();
+            ParseContext parseCtx = new ParseContext();
+            parser.parse(input, handler, metadata, parseCtx);
+            input.close();
 
-            parser.parse(inputStream, handler, metadata, context);
-            System.out.println(handler.toString());
-
+            // List all metadata
             String[] metadataNames = metadata.names();
 
-            for(String name : metadataNames) {
-                System.out.println(name + ": " + metadata.get(name));
+            for(String name : metadataNames){
+            System.out.println(name + ": " + metadata.get(name));
             }
-            
-            String contentName = metadata.get("title");
-            String genreName = metadata.get("xmpDM:genre");
-            String creatorName = metadata.get("creator");
-            String seriesName = metadata.get("xmpDM:album");
-            String uploadDate = metadata.get("xmpDM:releaseDate");
-            System.out.println(contentName);
-        }
-        
+
+            // Retrieve the necessary info from metadata
+            // Names - title, xmpDM:artist etc. - mentioned below may differ based
+            // on the standard used for processing and storing standardized and/or
+            // proprietary information relating to the contents of a file.
+
+            System.out.println("Title: " + metadata.get("title"));
+            System.out.println("Artists: " + metadata.get("xmpDM:artist"));
+            System.out.println("Genre: " + metadata.get("xmpDM:genre"));
+
+            Content content = new Content();
+            content.setContentName(metadata.get("title"));
+            content.setSeriesName(metadata.get("album"));
+            content.setCreatorName(metadata.get("xmpDM:artist"));
+            content.setGenreName("xmpDM:genre");
+            content.setContentTypeName(contentType);
+        } 
         catch (FileNotFoundException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
+        } 
+        catch (IOException | SAXException | TikaException e) {
+            System.out.println(e.getMessage());
         }
         
-        catch (IOException | SAXException | TikaException ex) {
-            ex.getMessage();
+    } 
+    
+    public static void ePubReader() {
+         try {
+            String location2 = "C:/Test/epubtest2.epub";
+            InputStream input = new FileInputStream(new File(location2));
+            ContentHandler handler = new DefaultHandler();
+            Metadata metadata = new Metadata();
+            Parser parser = new EpubParser() {};
+            ParseContext parseCtx = new ParseContext();
+            parser.parse(input, handler, metadata, parseCtx);
+            input.close();
+
+            // List all metadata
+            String[] metadataNames = metadata.names();
+
+            for(String name : metadataNames){
+            System.out.println(name + ": " + metadata.get(name));
+            }
+
+            // Retrieve the necessary info from metadata
+            // Names - title, xmpDM:artist etc. - mentioned below may differ based
+            // on the standard used for processing and storing standardized and/or
+            // proprietary information relating to the contents of a file.
+
+            System.out.println("Title: " + metadata.get("title"));
+            System.out.println("Author: " + metadata.get("Author"));
+            System.out.println("Genre: " + metadata.get("Genre"));
+
+            Content content = new Content();
+            content.setContentName(metadata.get("title"));
+            content.setSeriesName(metadata.get("Series"));
+            content.setCreatorName(metadata.get("Author"));
+            content.setGenreName("Genre");
+            content.setContentTypeName("EBook");
+            content.setUploadDate(metadata.get("Creation-Date"));
+            content.setPublisherName(metadata.get("Publisher"));
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } 
+        catch (IOException | SAXException | TikaException e) {
+            System.out.println(e.getMessage());
         }
     }
     
-    
-    private static String getFileExtension(String filename) {
-        return FilenameUtils.getExtension(filename);
-    }
-    
-    
-    private String identifyFileTypesUsingDefaultTika(final String fileName) {
-    
-        return defaultTika.detect(fileName);   
-    }
-    
-    private String identifyFileTypesUsingMimeTypesTika(final String fileName) {
-        
-        return mimeTika.detect(fileName);
-    }
-    
-    private String identifyFileTypesUsingTypeDetectorTika(final String fileName) {
-        return typeTika.detect(fileName);
+    public static void main(String[] args) {
+        //mp3Reader("Podcast");
+        ePubReader();
     }
 }
+    
+    
