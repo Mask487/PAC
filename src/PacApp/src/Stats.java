@@ -1,9 +1,10 @@
+import Database.ContentDAO;
 import Database.SQLTranslator;
 import java.util.ArrayList;
 import java.util.List;
 public class Stats{
     SQLTranslator db = new Database.SQLTranslator();
-    
+    ContentDAO dao = new Database.ContentDAO();
     String BookStats(String statType){
         List<String[]> genres = new ArrayList<>();
         List<String[]> authors = new ArrayList<>();
@@ -22,10 +23,10 @@ public class Stats{
         String mostReadSeries = null;
         int mostReadSeriesAmt = 0;
         
-        genres = db.getAllGenres();
-        authors = db.getAllCreators();
-        publishers = db.getAllPublishers();
-        series = db.getAllSeries();
+        genres = dao.getAllGenres();
+        authors = dao.getAllCreators();
+        publishers = dao.getAllPublishers();
+        series = dao.getAllSeries();
         
         for(String[] s : genres){
             for(String x : s){
