@@ -304,6 +304,7 @@ public class PacApp extends Application {
         appPane.setFitToHeight(true);
         appPane.setPannable(false);
         Label noApp = new Label("You have no apps \n import apps to get started.");
+        noApp.setTextFill(Paint.valueOf("101010"));
         noApp.backgroundProperty().set(buBack);
         appCont.getChildren().addAll(noApp);
 
