@@ -33,20 +33,27 @@ public class SQLiteTest {
         String duration = "01:33:12";
         String isbn = null;
         boolean explicit = false; 
-        String location = "C:/Test/test2.mp3";
+        String location = "C:/Test/ultimatetest.mp3";
         String url = null;
         boolean wantToSync = false;
         
         ContentDAO dao = new ContentDAO();
-//        Content content = dao.getContent(contentName, contentType, creatorName);
-//        System.out.println(content.getContentName());
-        Set all = dao.getAllContent();
-//        
-        Iterator iter = all.iterator();
-        while(iter.hasNext()) {
-            System.out.println(iter.next().toString());
-        }
+        //Content content = dao.getContent(contentName, contentType, creatorName);
+        //System.out.println(content.getContentName());
+        //Set all = dao.getAllContent();
+
+        //Iterator iter = all.iterator();
+        //while(iter.hasNext()) {
+        //    System.out.println(iter.next().toString());
+        //}
         
+        Content content3 = dao.getContentByID(4);
+        System.out.println(content3.toString());
+        
+        dao.deleteContent(content3);
+
+        //test.addContentTest(location, "Podcast");
+        //MetaDataReader.genericReader("C:/Test/test3.pdf");
         //Content newContent = new Content(contentName, contentType, creatorName, );
         //dao.getContent(contentName, contentType, creatorName);
         //test.test1("C:/Test/test1.mp3");

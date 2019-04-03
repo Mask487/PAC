@@ -17,23 +17,47 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author jacob
+ * @author Jacob Oleson
+ * 
+ * @update 4/03/2019
+ * 
+ * A data access object that communicates with the Translator Interface to the sqlite db
+ * to insert, delete, and read from the db. This file only interacts
+ * with the content table and its dimension tables.
+ * 
+ * Playlists will have their own data access object.
  */
 public class ContentDAO {
     SQLTranslator sql = new SQLTranslator();
-    
+     
+    /**
+     * Gets content denoted by its name, type, and string.
+     * @param contentName
+     * @param contentType
+     * @param creatorName
+     * @return 
+     */
     public Content getContent(String contentName, String contentType, String creatorName) {
         ResultSet res = sql.getContentTest(contentName, contentType, creatorName);
         return extractDataFromResultSet(res);
     }
    
     
+    /**
+     * Gets content denoted by its id.
+     * @param contentId
+     * @return 
+     */
     public Content getContentByID(int contentId) {
         ResultSet res = sql.getContentByID(contentId);
         return extractDataFromResultSet(res);
     }
     
     
+    /**
+     * Returns all held content in db. 
+     * @return 
+     */
     public Set getAllContent() {
         ResultSet res = sql.getAllContent();
         Set contents = new HashSet();
@@ -134,6 +158,11 @@ public class ContentDAO {
     }
     
     
+    /**
+     * Returns all content in db denoted by a genre name
+     * @param genreName
+     * @return 
+     */
     public Set getAllContentByGenre(String genreName) {
         ResultSet res = sql.getContentByGenre(genreName);
         
@@ -149,6 +178,60 @@ public class ContentDAO {
         } 
         catch (SQLException ex) {
             Logger.getLogger(ContentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    
+    /**
+     * Gets all content produced by a publisher, denoted by that publishers id.
+     * @param publisherID
+     * @return 
+     */
+    public Set getAllContentByPublisher(int publisherID) {
+        ResultSet res = sql.getContentByPublisher(publisherID);
+        
+        Set contents = new HashSet();
+        
+        try {
+            while(res.next()) {
+                Content content = extractDataFromResultSet(res);
+                contents.add(content);
+            }
+            
+            return contents;
+        }
+        
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
+    /**
+     * Gets all content produced by a publisher, given that publisher's name
+     * @param publisherName
+     * @return 
+     */
+    public Set getAllContentByPublisher(String publisherName) {
+        ResultSet res = sql.getContentByPublisher(publisherName);
+        
+        Set contents = new HashSet();
+        
+        try {
+            while(res.next()) {
+                Content content = extractDataFromResultSet(res);
+                contents.add(content);
+            }
+            
+            return contents;
+        }
+        
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
         }
         
         return null;
@@ -181,6 +264,11 @@ public class ContentDAO {
     }
     
     
+    /**
+     * Gets all content in db denoted by a series name
+     * @param seriesName
+     * @return 
+     */
     public Set getAllContentBySeries(String seriesName) {
         ResultSet res = sql.getContentBySeries(seriesName);
         
@@ -202,6 +290,11 @@ public class ContentDAO {
     }
     
 
+    /**
+     * Gets all content of a certain type, denoted by that types id
+     * @param contentTypeID
+     * @return 
+     */
     public Set getAllContentByType(int contentTypeID) {
         ResultSet res = sql.getContentByType(contentTypeID);
         
@@ -251,23 +344,47 @@ public class ContentDAO {
     }
     
     
+    /**
+     * Gets all creator names held in db.
+     * @return 
+     */
     public List<String[]> getAllCreators() {
         return SQLTranslator.SQLToPrimitives(sql.getAllCreators());
     }
     
+    
+    /**
+     * Gets all genre names held in db.
+     * @return 
+     */
     public List<String[]> getAllGenres() {
         return SQLTranslator.SQLToPrimitives(sql.getAllGenres());
     }
     
-    public List<String[]> getAllSeries() {
-        return SQLTranslator.SQLToPrimitives(sql.getAllSeries());
-    }
     
+    /**
+     * Gets all publisher names held in db
+     * @return 
+     */    
     public List<String[]> getAllPublishers() {
         return SQLTranslator.SQLToPrimitives(sql.getAllPublishers());
     }
     
     
+    /**
+     * Gets all series names held in DB. 
+     * @return 
+     */
+    public List<String[]> getAllSeries() {
+        return SQLTranslator.SQLToPrimitives(sql.getAllSeries());
+    }
+
+    
+    /**
+     * Inserts a piece of content given the content object.
+     * @param content
+     * @return 
+     */
     public boolean insertContent(Content content) {
         
         boolean success = sql.addContent(content.getContentTypeName(), content.getCreatorName(), content.getGenreName(), content.getPublisherName(), content.getSeriesName(), content.getContentName(), content.getContentDescription(), content.getUploadDate(), content.getPageCount(), content.getDuration(), content.getIsbn(), content.isExplicit(), content.getLocation(), content.getUrl(), content.getWantToSync(), content.getOriginalFilePath());
@@ -276,28 +393,106 @@ public class ContentDAO {
     }
     
     
+    /**
+     * Inserts a piece of content given the current filepath to that content, 
+     * and a description of its type (Podcast, AudioBook, Etc.)
+     * @param filePath
+     * @param contentType
+     * @return 
+     */
+    public boolean insertContent(String filePath, String contentType) {
+        boolean success = sql.addContent(filePath, contentType);
+        return success;
+    }
+    
+    
+    /**
+     * Deletes records of content held in db.
+     * @param content
+     * @return 
+     */
+    public boolean deleteContent(Content content) {
+        boolean success = sql.deleteContent(content);
+        
+        return success;
+    }
+    
+    
+    /**
+     * Returns a creator's id from db given their name
+     * @param creatorName
+     * @return 
+     */
     public int getCreatorID(String creatorName) {
         return sql.getCreatorID(creatorName);
     }
     
     
-    public int getSeriesID(String seriesName) {
-        return sql.getSeriesID(seriesName);
-    }
-    
-    public int getGenreID(String genreName) {
-        return sql.getGenreID(genreName);
-    }
-    
-    public int getPublisherID(String publisherName) {
-        return sql.getPublisherID(publisherName);
-    }
-    
+    /**
+     * returns a content type id from db given its name
+     * @param contentType
+     * @return 
+     */
     public int getContentTypeID(String contentType) {
         return sql.getContentTypeID(contentType);
     }
     
     
+    /**
+     * Returns a genre's id from db given its name
+     * @param genreName
+     * @return 
+     */
+    public int getGenreID(String genreName) {
+        return sql.getGenreID(genreName);
+    }
+    
+    
+    /**
+     * Returns a publisher's id from db given their name
+     * @param publisherName
+     * @return 
+     */
+    public int getPublisherID(String publisherName) {
+        return sql.getPublisherID(publisherName);
+    }
+    
+    
+    /**
+     * Returns a series id from db given its name
+     * @param seriesName
+     * @return 
+     */
+    public int getSeriesID(String seriesName) {
+        return sql.getSeriesID(seriesName);
+    }
+    
+    
+    /**
+     * Set the sync status for a piece of content to true
+     * @param content
+     * @return 
+     */
+    public boolean setSyncStatus(Content content) {
+        return sql.setSyncStatus(content.getContentID());
+    }
+    
+    
+    /**
+     * Set the sync status for a piece of content to false
+     * @param content
+     * @return 
+     */
+    public boolean unsetSyncStatus(Content content) {
+        return sql.unsetSyncStatus(content.getContentID());
+    }
+    
+    
+    /**
+     * Gets all data from the result set and creates the new content object.
+     * @param res
+     * @return 
+     */
     private Content extractDataFromResultSet(ResultSet res) {
         Content content = new Content();
         try {

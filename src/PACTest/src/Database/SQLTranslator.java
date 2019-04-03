@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FilenameUtils;
+import java.io.IOException;
+import java.nio.file.*;
 /**
  * @author Jacob Oleson
  * 
@@ -23,7 +25,7 @@ public class SQLTranslator {
     
     //Establishes connection to db file.
     private static Connection conn;
-    
+    MetaDataReader mdr = new MetaDataReader();
     /**
      * The jdbc:sqlite: part is permanent. The part after that specifies
      * the filepath. There needs to be a way to specify the filepath 
@@ -98,9 +100,23 @@ public class SQLTranslator {
             if(contentName == null) {
                 contentName = DBEnumeration.UNKNOWN;
             }
+            contentName  = cleanString(contentName);
             if(contentDescription == null) {
                 contentDescription = DBEnumeration.UNKNOWN;
             }
+            if(uploadDate == null) {
+                uploadDate = "2019-04-03";
+            }
+            if(duration == null) {
+                duration = "00:00:00";
+            }
+            if(isbn == null) {
+                isbn = "null";
+            }
+            if(url == null) {
+                url = DBEnumeration.UNKNOWN;
+            }
+            
             //Upload Date, Page Count, Duration, ISBN and Exlicit can remain UNKNOWN
            
             //Check if attributes of content exist by querying relevant tables
@@ -181,10 +197,10 @@ public class SQLTranslator {
             location = setContentLocation(contentName, contentType, genreName, seriesName);
             
             //Get the content extension (mp3, epub, etc.)
-            //String ext = getExtension(filePath);
+            String ext = getExtension(filePath);
                         
-            //Set the absoulte filepath to the content. This will be put in DB.
-            //String fileName = location + contentName + "." + ext;
+            // the absoulte filepath to the content. This will be put in DB.
+            String fileName = location + contentName + "." + ext;
             
             //Query to insert content into db.
             String query = "INSERT INTO " + DBEnumeration.CONTENT 
@@ -205,7 +221,7 @@ public class SQLTranslator {
             prep.setString(10, duration);
             prep.setString(11, isbn);
             prep.setBoolean(12, explicit);
-            //prep.setString(13, fileName);
+            prep.setString(13, fileName);
             prep.setString(14, url);
             prep.setBoolean(15, wantToSync);
 
@@ -221,10 +237,10 @@ public class SQLTranslator {
                 DBDirectories.createDirectories(location);
                 
                 //New filepath for application.
-                /*if(file.renameTo(new File(fileName))) {
+                if(file.renameTo(new File(fileName))) {
                     //file.delete();
                     System.out.println("File moved successfully");
-                }*/
+                }
                 
                 System.out.println("Content added successfully");
                 return true;    
@@ -641,7 +657,7 @@ public class SQLTranslator {
      * @param creatorName
      * @return 
      */
-    public boolean deleteContent(String contentName, String contentType, String creatorName) {
+    public boolean deleteContent(String contentName, String contentType, String creatorName, String filePath) {
         
         //Need to remove content from all playlists first
         deleteFromAllPlaylists(contentName, contentType, creatorName);
@@ -669,6 +685,26 @@ public class SQLTranslator {
 
             removeParentKey(DBEnumeration.CONTENTTYPE, "ContentTypeID");
             
+            
+            //Remove file from directory and if directory is empty, delete directory
+            try {
+                Files.deleteIfExists(Paths.get(filePath));
+            }
+            
+            catch(NoSuchFileException e) {
+                System.out.println(e.getMessage());
+            }
+            
+            catch(DirectoryNotEmptyException e) {
+                System.out.println(e.getMessage());
+            }
+            
+            catch(IOException e) {
+                System.out.println(e.getMessage());
+            }
+            
+            System.out.println("File deleted.");
+            
             return true;
         }
 
@@ -676,6 +712,11 @@ public class SQLTranslator {
             System.out.println("Error with deleteing content");
             return false;
         }     
+    }
+    
+    
+    public boolean deleteContent(Content content) {
+        return deleteContent(content.getContentName(), content.getContentTypeName(), content.getCreatorName(), content.getLocation());      
     }
  
     
@@ -750,6 +791,29 @@ public class SQLTranslator {
     }
     
     
+    public boolean deletePlaylist(int playlistID) {
+        String check = "DELETE FROM " + DBEnumeration.PCLOOKUP
+                +  " WHERE PlaylistID = " + playlistID;
+        if(!deleteFromDB(check)) {
+            System.out.println("Error with deleting playlist");
+            return false;
+        }
+        
+        else {
+            String query = "DELETE FROM " + DBEnumeration.PLAYLIST
+                    + " WHERE PlaylistID = " + playlistID;
+            if(deleteFromDB(query)) {
+                    System.out.println("Playlist deleted successfully");
+                    return true;
+            }
+            
+            else {
+                System.out.println("Error with deleting playlist");
+                return false;
+            }
+        }
+    }
+    
     /**
      * Deletes content from a specific play list
      * @param contentName
@@ -778,6 +842,40 @@ public class SQLTranslator {
             System.out.println("Error with deleting content from playlist: " + playlistName);
             return false;
         }
+    }
+    
+    
+    public boolean deleteFromPlaylist(int contentID, int playlistID) {
+        String query  = "DELETE FROM " + DBEnumeration.PCLOOKUP + " WHERE"
+                + " ContentID = " + contentID 
+                + " AND PlaylistID = " + playlistID;
+        
+        if(deleteFromDB(query)) {
+            System.out.println("Content deleted from playlist successfully");
+            return true;
+        }
+        
+        else {
+            System.out.println("Error with deleting content from playlist");
+            return false;
+        }
+    }
+    
+    
+    public boolean deleteFromAllPlaylists(int contentID) {
+        String query  = "DELETE FROM " + DBEnumeration.PCLOOKUP + " WHERE"
+                + " ContentID = " + contentID;
+        
+        if(deleteFromDB(query)) {
+            System.out.println("Content deleted from all playlists successfully");
+            return true;
+        }
+        
+        else {
+            System.out.println("Error with deleting content from all playlists");
+            return false;
+        }
+        
     }
     
     
@@ -1021,7 +1119,7 @@ public class SQLTranslator {
      */
     public ResultSet getContentByID(int id) {
         try {
-            String query = "SELECT ContentName FROM " + DBEnumeration.CONTENT
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
                     + " WHERE ContentID = " + id;
             return getRecords(query);
         }
@@ -1391,6 +1489,27 @@ public class SQLTranslator {
     
     
     /**
+     * Returns a playlist from the Playlist-ContentLookup table that actually
+     * carries the records of what content is in what playlist
+     * @param playlistID
+     * @return 
+     */
+    public ResultSet getPlaylist(int playlistID) {
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.PCLOOKUP
+                    + " WHERE PlaylistID = " + playlistID;
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
+    /**
      * Gets a specific publisher by name
      * @param publisherID
      * @return 
@@ -1411,6 +1530,11 @@ public class SQLTranslator {
     }
     
     
+    /**
+     * Returns the publisher id given a specific name
+     * @param publisherName
+     * @return 
+     */
     public int getPublisherID(String publisherName) {
         String query = "SELECT PublisherName FROM " + DBEnumeration.PUBLISHER
                 + " WHERE PublisherName = '" + publisherName + "'";
@@ -1501,7 +1625,7 @@ public class SQLTranslator {
         
         try {
             String query = "UPDATE " + DBEnumeration.CONTENT
-                    + " SET WantToSync = TRUE WHERE "
+                    + " SET WantToSync = TRUE WHERE"
                     + " ContentName = '" + contentName + "' AND"
                     + " ContentTypeID = (SELECT ContentTypeID FROM " + DBEnumeration.CONTENTTYPE
                     + " WHERE ContentType = '" + contentType + "') AND"
@@ -1516,6 +1640,30 @@ public class SQLTranslator {
         catch (SQLException e) {
             System.out.println(e.getMessage());
             
+        }
+        
+        return false;
+    }
+    
+    
+    /**
+     * Sets a sync status for a piece of content to true(i.e they want to sync it)
+     * @param contentId
+     * @return 
+     */
+    public boolean setSyncStatus(int contentId) {
+        try {
+            String query  = "UPDATE " + DBEnumeration.CONTENT
+                    + " SET WantToSync = TRUE WHERE"
+                    + " ContentID = " + contentId;
+            PreparedStatement prep = conn.prepareCall(query);
+            if(SQLExecute(prep)) {
+                System.out.println("Set content to sync");
+                return true;
+            }
+        }
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
         }
         
         return false;
@@ -1552,6 +1700,58 @@ public class SQLTranslator {
         return false;
     }
     
+    
+    /**
+     * Sets a sync status for a piece of content to false(i.e they don't want to sync it)
+     * @param contentId
+     * @return 
+     */
+    public boolean unsetSyncStatus(int contentId) {
+        try {
+            String query  = "UPDATE " + DBEnumeration.CONTENT
+                    + " SET WantToSync = FALSE WHERE"
+                    + " ContentID = " + contentId;
+            PreparedStatement prep = conn.prepareCall(query);
+            if(SQLExecute(prep)) {
+                System.out.println("Set content to not sync");
+                return true;
+            }
+        }
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return false;
+    }
+    
+    
+    /**
+     * An attempt to translate the return values of SQL code into primitives the application can use.
+     * @param res
+     * @return 
+     */
+    public static List<String[]> SQLToPrimitives(ResultSet res) {
+        
+        try {
+            int nCol = res.getMetaData().getColumnCount();
+            List<String[]> table = new ArrayList<>();
+            while(res.next()) {
+                String[] row = new String[nCol];
+                for(int iCol = 1; iCol <= nCol; iCol++) {
+                    Object obj = res.getObject(iCol);
+                    row[iCol-1] = (obj == null) ? null:obj.toString();
+                }
+                table.add(row);
+            }
+            return table;
+        }
+        
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
     
     
     /**
@@ -1691,6 +1891,62 @@ public class SQLTranslator {
     }
     
     
+    /**
+     * Cleans the content name of special characters
+     * @param name
+     * @return 
+     */
+    private static String cleanString(String name) {
+        
+            if (name.contains("!")) {
+                name = name.replace("!", "");
+            }
+            if (name.contains("/")) {
+                name = name.replace("/", "");
+            }
+            if (name.contains("\\")) {
+                name = name.replace("\\", "");
+            }
+            if (name.contains("?")) {
+                name = name.replace("?", "");
+            }
+            if (name.contains("%")) {
+                name = name.replace("%", "");
+            }
+            if (name.contains("*")) {
+                name = name.replace("*", "");
+            }
+            if (name.contains(":")) {
+                name = name.replace(":", "");
+            }
+            if (name.contains("|")) {
+                name = name.replace("|", "");
+            }
+            if (name.contains("\"")) {
+                name = name.replace("\"", "");
+            }
+            if (name.contains("<")) {
+                name = name.replace(">", "");
+            }
+            if (name.contains(">")) {
+                name = name.replace(">", "");
+            }
+            if (name.contains(".")) {
+                name = name.replace(".", "");
+            }
+            if (name.contains(" ")) {
+                name = name.replace(" ", "_");
+            }
+            
+            return name;
+    }
+    
+    
+    /**
+     * Executes the delete query
+     * @param query
+     * @return 
+     */
     private boolean deleteFromDB(String query) {
        if(conn == null) {
            getConnection();
@@ -1748,6 +2004,11 @@ public class SQLTranslator {
     }
     
     
+    /**
+     * Returns the key of a given record. 
+     * @param query
+     * @return 
+     */
     private int getKey(String query) {
 
         try {
@@ -1857,33 +2118,7 @@ public class SQLTranslator {
     }
     
     
-    /**
-     * An attempt to translate the return values of SQL code into primitives the application can use.
-     * @param res
-     * @return 
-     */
-    public static List<String[]> SQLToPrimitives(ResultSet res) {
-        
-        try {
-            int nCol = res.getMetaData().getColumnCount();
-            List<String[]> table = new ArrayList<>();
-            while(res.next()) {
-                String[] row = new String[nCol];
-                for(int iCol = 1; iCol <= nCol; iCol++) {
-                    Object obj = res.getObject(iCol);
-                    row[iCol-1] = (obj == null) ? null:obj.toString();
-                }
-                table.add(row);
-            }
-            return table;
-        }
-        
-        catch(SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        
-        return null;
-    }   
+       
 
     
     /**
@@ -1968,5 +2203,24 @@ public class SQLTranslator {
             Logger.getLogger(SQLTranslator.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    
+    public boolean addContent(String filePath, String contentType) {
+        String ext = getExtension(filePath);
+        Content content = null;
+        switch(ext){
+            case "mp3": 
+                content = MetaDataReader.mp3Reader(contentType, filePath);
+                break;
+            case "epub":
+                content = MetaDataReader.ePubReader(filePath);
+        }
+
+        return addContent(contentType, content.getCreatorName(), content.getGenreName(),
+                content.getPublisherName(), content.getSeriesName(), content.getContentName(),
+                content.getContentDescription(), content.getUploadDate(), content.getPageCount(),
+                content.getDuration(), content.getIsbn(), content.isExplicit(), null,
+                content.getUrl(), content.getWantToSync(), filePath);
     }
 }

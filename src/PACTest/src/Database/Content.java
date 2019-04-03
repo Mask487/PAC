@@ -195,6 +195,11 @@ public class Content {
         return location;
     }
 
+    
+    /**
+     * Location path of where the content is going to be stored by our application
+     * @param location 
+     */
     public void setLocation(String location) {
         this.location = location;
     }
