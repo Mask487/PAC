@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PacApp.jar" size="70929226" download="eager" />
+    <jar href="PacApp.jar" size="70929330" download="eager" />
     <jar href="lib/jdom-1.0.jar" size="153253" download="eager" />
     <jar href="lib/jmtp.jar" size="56352" download="eager" />
     <jar href="lib/json-20180813.jar" size="64597" download="eager" />

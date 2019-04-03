@@ -270,19 +270,26 @@ public class PacApp extends Application {
         bvbutt.getChildren().addAll(settingsB);
 
         // Create music pane
+        musicCont.backgroundProperty().set(cenBack);  
+        musicPane.backgroundProperty().set(cenBack); 
         musicPane.setFitToWidth(true);
         musicPane.setFitToHeight(true);
         musicPane.setPannable(false);
 
         // Create book pane
+        bookCont.backgroundProperty().set(cenBack);  
+        bookPane.backgroundProperty().set(cenBack);  
         bookPane.setFitToWidth(true);
         bookPane.setFitToHeight(true);
         bookPane.setPannable(false);
         Label noBook = new Label("You have no Books \n import Books to get started.");
-        noBook.backgroundProperty().set(buBack);
+        
+        noBook.backgroundProperty().set(cenBack);
         bookCont.getChildren().addAll(noBook);
 
         // Create audio book pane
+        audioBookCont.backgroundProperty().set(cenBack);  
+        audioBookPane.backgroundProperty().set(cenBack); 
         audioBookPane.setFitToWidth(true);
         audioBookPane.setFitToHeight(true);
         audioBookPane.setPannable(false);
@@ -291,6 +298,8 @@ public class PacApp extends Application {
         audioBookCont.getChildren().addAll(noAudioBook);
 
         // Create app pane
+        appCont.backgroundProperty().set(cenBack);  
+        appPane.backgroundProperty().set(cenBack); 
         appPane.setFitToWidth(true);
         appPane.setFitToHeight(true);
         appPane.setPannable(false);
@@ -298,7 +307,9 @@ public class PacApp extends Application {
         noApp.backgroundProperty().set(buBack);
         appCont.getChildren().addAll(noApp);
 
-        // Create  pane
+        // Create podcast pane
+        podcastCont.backgroundProperty().set(cenBack);  
+        podcastPane.backgroundProperty().set(cenBack); 
         podcastPane.setFitToWidth(true);
         podcastPane.setFitToHeight(true);
         podcastPane.setPannable(false);
@@ -307,6 +318,8 @@ public class PacApp extends Application {
         podcastCont.getChildren().addAll(nopodcast);
 
         // Create video pane
+        videoCont.backgroundProperty().set(cenBack);  
+        videoPane.backgroundProperty().set(cenBack); 
         videoPane.setFitToWidth(true);
         videoPane.setFitToHeight(true);
         videoPane.setPannable(false);
