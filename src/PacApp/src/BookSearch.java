@@ -26,8 +26,13 @@ public class BookSearch{
     String getSubtitle(String isbn) throws IOException{
         JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/"
                 + "volumes?q=isbn:" + isbn);
-        String subTitle = json.getJSONArray("items").getJSONObject(0)
+        String subTitle;
+        try{
+            subTitle = json.getJSONArray("items").getJSONObject(0)
                 .getJSONObject("volumeInfo").get("subtitle").toString();
+        }catch(Exception e){
+            subTitle = "";
+        }
         return subTitle;
     }
     String getAuthors(String isbn) throws IOException{
