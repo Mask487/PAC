@@ -174,14 +174,22 @@ public class Recommend {
         if (st.equals("genre")) {
             String t = stats.BookStats("genre");
             if(t.contains(" ")){
-                t = t.replace(" ", "%20");
+                t = t.replace(" ", "+");
             }
             JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=subject:" + t);
             JSONArray jArray = json.getJSONArray("items");
 
             for (int i = 0; i > jArray.length(); i++) {
+                
                 String title = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
-                String subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
+                
+                String subTitle = "";
+                try{
+                    subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
+                }catch(Exception e){
+                    subTitle = "";
+                }
+                
                 String authors = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
                 String publisher = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
                 String publishYear = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
@@ -196,14 +204,21 @@ public class Recommend {
         } else if (st.equals("author") || st.equals("creator")) {
             String t = stats.BookStats("author");
             if(t.contains(" ")){
-                t = t.replace(" ", "%20");
+                t = t.replace(" ", "+");
             }
-            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=subject:" + t);
+            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=inauthor:" + t);
             JSONArray jArray = json.getJSONArray("items");
 
             for (int i = 0; i > jArray.length(); i++) {
                 String title = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
-                String subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
+                
+                String subTitle = "";
+                try{
+                    subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
+                }catch(Exception e){
+                    subTitle = "";
+                }
+                
                 String authors = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
                 String publisher = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
                 String publishYear = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
@@ -218,15 +233,22 @@ public class Recommend {
         } else if (st.equals("series")) {
             String t = stats.BookStats("series");
             if(t.contains(" ")){
-                t = t.replace(" ", "%20");
+                t = t.replace(" ", "+");
             }
             System.out.println(t);
-            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=subject:" + t);
-            //JSONArray jArray = json.getJSONArray("items");
+            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=intitle:" + t);
+            JSONArray jArray = json.getJSONArray("items");
 
             for (int i = 0; i > json.getJSONArray("items").length(); i++) {
                 String title = json.getJSONArray("items").getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
-                String subTitle = json.getJSONArray("items").getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
+                
+                String subTitle = "";
+                try{
+                    subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
+                }catch(Exception e){
+                    subTitle = "";
+                }
+                
                 String authors = json.getJSONArray("items").getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
                 String publisher = json.getJSONArray("items").getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
                 String publishYear = json.getJSONArray("items").getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
@@ -241,14 +263,21 @@ public class Recommend {
         } else if (st.equals("publisher")) {
             String t = stats.BookStats("publisher");
             if(t.contains(" ")){
-                t = t.replace(" ", "%20");
+                t = t.replace(" ", "+");
             }
-            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=subject:" + t);
+            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=inpublisher:" + t);
             JSONArray jArray = json.getJSONArray("items");
 
             for (int i = 0; i > jArray.length(); i++) {
                 String title = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
-                String subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
+                
+                String subTitle = "";
+                try{
+                    subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
+                }catch(Exception e){
+                    subTitle = "";
+                }
+                
                 String authors = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
                 String publisher = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
                 String publishYear = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
