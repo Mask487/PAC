@@ -272,9 +272,9 @@ public class Recommend {
                 String title = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
                 
                 String subTitle = "";
-                try{
+                try {
                     subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
-                }catch(Exception e){
+                } catch (Exception e) {
                     subTitle = "";
                 }
                 
