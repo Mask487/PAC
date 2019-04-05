@@ -4,9 +4,9 @@ package Database;
 /**
  *
  * @author Jacob Oleson
- * 
+ *
  * @update 4/02/2019
- * 
+ *
  * Sample content model
  */
 public class Content {
@@ -22,7 +22,7 @@ public class Content {
     private int pageCount;
     private String duration;
     private String isbn;
-    private boolean explicit; 
+    private boolean explicit;
     private String location;
     private String url;
     private boolean wantToSync;
@@ -39,8 +39,8 @@ public class Content {
     public Content() {
     }
 
-    public Content(int contentID, String contentTypeName, 
-            String creatorName, String genreName, 
+    public Content(int contentID, String contentTypeName,
+            String creatorName, String genreName,
             String seriesName, String publisherName, String contentName, String contentDescription, String uploadDate, int pageCount, String duration, String isbn, boolean explicit, String location, String url, boolean wantToSync, String originalFilePath) {
         this.contentID = contentID;
         this.contentTypeName = contentTypeName;
@@ -80,8 +80,8 @@ public class Content {
         this.originalFilePath = originalFilePath;
     }
 
-    
-    
+
+
     public int getContentID() {
         return contentID;
     }
@@ -195,10 +195,10 @@ public class Content {
         return location;
     }
 
-    
+
     /**
      * Location path of where the content is going to be stored by our application
-     * @param location 
+     * @param location
      */
     public void setLocation(String location) {
         this.location = location;
@@ -225,5 +225,5 @@ public class Content {
         return "Content{" + "contentID=" + contentID +  ", contentTypeName=" + contentTypeName + ", creatorName=" + creatorName + ", genreName=" + genreName + ", seriesName=" + seriesName + ", publisherName=" + publisherName + ", contentName=" + contentName + ", contentDescription=" + contentDescription + ", uploadDate=" + uploadDate + ", pageCount=" + pageCount + ", duration=" + duration + ", isbn=" + isbn + ", explicit=" + explicit + ", location=" + location + ", url=" + url + ", wantToSync=" + wantToSync + ", originalFilePath=" + originalFilePath + '}';
     }
 
-   
-}    
+
+}

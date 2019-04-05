@@ -12,7 +12,7 @@ import java.util.Set;
  * @author jacob
  */
 public class Playlist {
-    
+
     private int playlistID;
     private String playlistName;
     private Set contents;
@@ -32,14 +32,14 @@ public class Playlist {
     public void setPlaylistName(String playlistName) {
         this.playlistName = playlistName;
     }
-    
+
     public void addContent(Content content) {
         this.contents.add(content);
     }
-    
+
     public Set geContents() {
         return contents;
     }
-    
-    
+
+
 }
