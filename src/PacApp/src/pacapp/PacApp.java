@@ -492,7 +492,11 @@ public class PacApp extends Application {
     public static void ebkButt(Object objs,Button[] L,int i) {
         
        // String name = objs.getContentName();
+<<<<<<< HEAD
         //L[i] = new Button(name);
+=======
+       //L[i] = new Button(name);
+>>>>>>> 85c620ea521c1cf7292877f90ba92da987486574
         
         
     }
