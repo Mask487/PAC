@@ -19,14 +19,12 @@ import org.xml.sax.helpers.DefaultHandler;
  *
  * @update 3/24/2019
  *
- * At the moment this is a pathetic attempt to familiarize myself with 
- * a really useful API to get all the relevant data from a file that 
- * the DB needs to store it. Cannot get contettype, that has to be supplied by 
+ * At the moment this is a pathetic attempt to familiarize myself with
+ * a really useful API to get all the relevant data from a file that
+ * the DB needs to store it. Cannot get contettype, that has to be supplied by
  * the user/application. Much work needed here.
-
 Here's what the DB NEEDS for any file
-
-     * @param creatorName 
+     * @param creatorName
      * @param genreName
      * @param publisherName
      * @param seriesName
@@ -40,19 +38,19 @@ Here's what the DB NEEDS for any file
      * @param url
  */
 public class MetaDataReader {
-    
+
     private static String location = "C:/Test/FreePodcast.mp3";
-    
+
     /**
      * You have to tell this methods if the mp3 file you're passing
-     * is an audiobook, podcast, or music file. Metadata reader cannot tell 
+     * is an audiobook, podcast, or music file. Metadata reader cannot tell
      * the difference.
-     * @param contentType 
-     * @param _location 
-     * @return  
+     * @param contentType
+     * @param _location
+     * @return
      */
     public static Content mp3Reader(String contentType, String _location) {
-        
+
         try {
             InputStream input = new FileInputStream(new File(_location));
             ContentHandler handler = new DefaultHandler();
@@ -85,23 +83,23 @@ public class MetaDataReader {
             content.setGenreName(metadata.get("xmpDM:genre"));
             content.setContentTypeName(contentType);
             return content;
-        } 
+        }
         catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-        } 
+        }
         catch (IOException | SAXException | TikaException e) {
             System.out.println(e.getMessage());
         }
-        
+
         return null;
-    } 
-    
-    
-    
+    }
+
+
+
     /**
      * Reads in an ebook of the epub file extension.
-     * @param _location 
-     * @return  
+     * @param _location
+     * @return
      */
     public static Content ePubReader(String _location) {
          try {
@@ -137,24 +135,24 @@ public class MetaDataReader {
             content.setContentTypeName("EBook");
             content.setUploadDate(metadata.get("Creation-Date"));
             content.setPublisherName(metadata.get("Publisher"));
-            
+
             return content;
-        } 
+        }
         catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-        } 
+        }
         catch (IOException | SAXException | TikaException e) {
             System.out.println(e.getMessage());
         }
-         
+
          return null;
     }
-    
-    
+
+
     /**
      * This is the default parser if the file type is neither mp3 or epub.
      * @param _location
-     * @return 
+     * @return
      */
     public static Content genericReader(String _location) {
         try {
@@ -190,23 +188,21 @@ public class MetaDataReader {
             content.setContentTypeName("EBook");
             content.setUploadDate(metadata.get("Creation-Date"));
             content.setPublisherName(metadata.get("Publisher"));
-            
+
             return content;
-        } 
+        }
         catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-        } 
+        }
         catch (IOException | SAXException | TikaException e) {
             System.out.println(e.getMessage());
         }
-         
+
          return null;
     }
-    
+
 //    public static void main(String[] args) {
 //        //mp3Reader("Podcast");
 //        ePubReader();
 //    }
 }
-    
-    

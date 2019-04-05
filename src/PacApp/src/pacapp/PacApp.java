@@ -28,7 +28,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import Database.ContentDAO;
+import NewDatabase.ContentDAO;
+import NewDatabase.Content;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -225,8 +226,9 @@ public class PacApp extends Application {
                 Button[] listings = new Button[setSize];
                 int i = 0;
                 while (iter.hasNext()) {
-
-                    ebkButt(iter.next(), listings, i);
+                    Content content = new Content();
+                    content = (Content) iter.next();
+                    ebkButt(content, listings, i,bookCont);
                     i++;
                 }
 
@@ -300,7 +302,8 @@ public class PacApp extends Application {
         bookPane.setFitToHeight(true);
         bookPane.setPannable(false);
         Label noBook = new Label("You have no Books \n import Books to get started.");
-        noBook.backgroundProperty().set(buBack);
+
+        noBook.backgroundProperty().set(cenBack);
         bookCont.getChildren().addAll(noBook);
 
         // Create audio book pane
@@ -320,6 +323,7 @@ public class PacApp extends Application {
         appPane.setFitToHeight(true);
         appPane.setPannable(false);
         Label noApp = new Label("You have no apps \n import apps to get started.");
+        noApp.setTextFill(Paint.valueOf("101010"));
         noApp.backgroundProperty().set(buBack);
         appCont.getChildren().addAll(noApp);
 
@@ -456,7 +460,7 @@ public class PacApp extends Application {
         Button buttonTop = new Button("Top");
 
         //MusicPane
-        Label noMusic = new Label("You have no Music \n import music to get started.");
+        Label noMusic = new Label("You have no Music \n import music to get started!");
         noMusic.backgroundProperty().set(buBack);
         musicCont.getChildren().addAll(noMusic);
 
@@ -502,13 +506,11 @@ public class PacApp extends Application {
 
     }
 
-    public static void ebkButt(Object objs, Button[] L, int i) {
+    public static void ebkButt(Content objs, Button[] L, int i, VBox cont) {
 
-        // String name = objs.getContentName();
-        //L[i] = new Button(name);
-
-
-
+         String name = objs.getContentName();
+        L[i] = new Button(name);
+        cont.getChildren().add(L[i]);
     }
 
     public static void abkButt() {

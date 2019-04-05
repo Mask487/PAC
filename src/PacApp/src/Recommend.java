@@ -180,7 +180,7 @@ public class Recommend {
         return sb.toString();
     }
 
-    //get the json from the url and read it into the string builder above and 
+    //get the json from the url and read it into the string builder above and
     //then convert into a json object
     public static JSONObject readJSONFromUrl(String url) throws IOException,
             JSONException {
