@@ -25,6 +25,6 @@ public class TransferTest
         //t.setBackupPath("D:\\Desktop\\BACKUP");
         System.out.println("IP: "+ t.getIp());
         //t.getPhoneIp();
-        //t.syncQueuery();
+        t.syncQueuery();
     }
 }

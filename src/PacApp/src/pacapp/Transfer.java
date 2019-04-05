@@ -1,5 +1,6 @@
 package pacapp;
 
+import NewDatabase.ContentDAO;
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
 
@@ -57,6 +58,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         6 -
         7 - Podcast
         */
+
         Connection c = null;
         Statement stmt = null;
         ArrayList<String> locations = null;
@@ -94,6 +96,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+
+
 
 
         return locations;
