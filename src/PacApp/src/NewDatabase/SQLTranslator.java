@@ -1330,6 +1330,26 @@ public class SQLTranslator {
     
     
     /**
+     * Gets content whose WantToSync status is set to true
+     * @return 
+     */
+    public ResultSet getContentBySyncStatus() {
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+                    + " WHERE WantToSync = TRUE";
+            
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
+    /**
      * Gets all content of a given content type by id
      * @param contentTypeID
      * @return 
@@ -1338,6 +1358,193 @@ public class SQLTranslator {
         try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT
                     + " WHERE ContentTypeID = " + contentTypeID;
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
+    /**
+     * Searches the content table given a search term
+     * @param contentType
+     * @param searchTerm
+     * @return 
+     */
+    public ResultSet searchContentByType(String contentType, String searchTerm) {
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+                    + " WHERE ContentName LIKE '%" + searchTerm + "%'"
+                    + " OR ContentDescription LIKE '%" + searchTerm + "%'"
+                    + " AND ContentTypeID = (SELECT ContentTypeID FROM " 
+                    + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '" 
+                    + contentType + "')";
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
+    public ResultSet searchContent(String searchTerm) {
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+                    + " WHERE ContentName LIKE '%" + searchTerm + "%'"
+                    + " OR ContentDescription LIKE '%" + searchTerm + "%'";
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
+    /**
+     * Searches all tables for a word that the searchterm is a substring of
+     * Does not care for content type.
+     * @param searchTerm
+     * @return 
+     */
+    public ResultSet searchAllTablesByKeyTerm(String searchTerm) {
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+                    + " c JOIN " + DBEnumeration.CREATOR + " cr "
+                    + " on c.CreatorID = cr.CreatorID JOIN "
+                    + DBEnumeration.GENRE + " g on c.GenreID = g.GenreID"
+                    + " JOIN " + DBEnumeration.PUBLISHER + " p on p.PublisherID = c.PublisherID"
+                    + " JOIN " + DBEnumeration.SERIES + " s on s.SeriesID = c.SeriesID"
+                    + " WHERE c.ContentName LIKE '%" + searchTerm + "%' OR"
+                    + " c.ContentDescription LIKE '%" + searchTerm + "%'"
+                    + " OR cr.CreatorName LIKE '%" + searchTerm + "%' OR "
+                    + " g.GenreName LIKE '%" + searchTerm + "%' OR"
+                    + " p.PublisherName LIKE '%" + searchTerm + "%' OR"
+                    + " s.SeriesName LIKE '%" + searchTerm + "%')";
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
+    /**
+     * Searches all tables and looks for any word that matches the searchterm
+     * and is of a given type.
+     * @param searchTerm
+     * @param contentType
+     * @return 
+     */
+    public ResultSet searchAllTablesByKeyTermAndContentType(String searchTerm, String contentType) {
+    try {
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+                    + " c JOIN " + DBEnumeration.CREATOR + " cr "
+                    + " on c.CreatorID = cr.CreatorID JOIN "
+                    + DBEnumeration.GENRE + " g on c.GenreID = g.GenreID"
+                    + " JOIN " + DBEnumeration.PUBLISHER + " p on p.PublisherID = c.PublisherID"
+                    + " JOIN " + DBEnumeration.SERIES + " s on s.SeriesID = c.SeriesID"
+                    + " WHERE c.ContentName LIKE '%" + searchTerm + "%' OR"
+                    + " c.ContentDescription LIKE '%" + searchTerm + "%'"
+                    + " OR cr.CreatorName LIKE '%" + searchTerm + "%' OR "
+                    + " g.GenreName LIKE '%" + searchTerm + "%' OR"
+                    + " p.PublisherName LIKE '%" + searchTerm + "%' OR"
+                    + " s.SeriesName LIKE '%" + searchTerm + "%'"
+                    + " AND ContentTypeID = (SELECT ContentTypeID FROM "
+                    + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '"
+                    + contentType + "')";
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+
+    /**
+     * Searches the creator table given a search term
+     * @param searchTerm
+     * @return 
+     */
+    public ResultSet searchCreator(String searchTerm) {
+        try {
+            String query  = "SELECT * FROM " + DBEnumeration.CREATOR
+                    + " WHERE CreatorName LIKE '%" + searchTerm + "%'";
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
+    /**
+     * Searches the genre table given a search term
+     * @param searchTerm
+     * @return 
+     */
+    public ResultSet searchGenre(String searchTerm) {
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.GENRE
+                    + " WHERE GenreName LIKE '%" + searchTerm + "%'";
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
+    /**
+     * Searches the publisher table given a search term
+     * @param searchTerm
+     * @return 
+     */
+    public ResultSet searchPublisher(String searchTerm) {
+        try {
+            String query  = "SELECT * FROM " + DBEnumeration.PUBLISHER
+                    + " WHERE PublisherName LIKE '%" + searchTerm + "%'";
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+        
+    
+    /**
+     * Searches the series table given a search term
+     * @param searchTerm
+     * @return 
+     */
+    public ResultSet searchSeries(String searchTerm) {
+        try {
+            String query  = "SELECT * FROM " + DBEnumeration.SERIES
+                    + " WHERE SeriesName LIKE '%" + searchTerm + "%'";
             return getRecords(query);
         }
         
@@ -1515,6 +1722,47 @@ public class SQLTranslator {
     
     
     /**
+     * Returns all the playlist names from the playlist table.
+     * @return 
+     */
+    public ResultSet getPlaylists() {
+        try {
+            String query  = "SELECT * FROM " + DBEnumeration.PLAYLIST;
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
+    /**
+     * Gets all content in a playlist by querying the lookup table
+     * given a playlist id and returning all records of content in that lookup table.
+     * @param playlistID
+     * @return 
+     */
+    public ResultSet getContentFromPlaylist(int playlistID) {
+        try {
+            String query = "SELECT * FROM " + DBEnumeration.PCLOOKUP
+                    + " pc JOIN " + DBEnumeration.CONTENT + " c on"
+                    + " pc.ContentID = c.ContentID WHERE pc.PlaylistID = " 
+                    + playlistID;
+            return getRecords(query);
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
+    /**
      * Gets a specific publisher by name
      * @param publisherID
      * @return 
@@ -1660,8 +1908,9 @@ public class SQLTranslator {
         try {
             String query  = "UPDATE " + DBEnumeration.CONTENT
                     + " SET WantToSync = TRUE WHERE"
-                    + " ContentID = " + contentId;
-            PreparedStatement prep = conn.prepareCall(query);
+                    + " ContentID = ?";
+            PreparedStatement prep = conn.prepareStatement(query);
+            prep.setInt(1, contentId);
             if(SQLExecute(prep)) {
                 System.out.println("Set content to sync");
                 return true;
@@ -1716,7 +1965,7 @@ public class SQLTranslator {
             String query  = "UPDATE " + DBEnumeration.CONTENT
                     + " SET WantToSync = FALSE WHERE"
                     + " ContentID = " + contentId;
-            PreparedStatement prep = conn.prepareCall(query);
+            PreparedStatement prep = conn.prepareStatement(query);
             if(SQLExecute(prep)) {
                 System.out.println("Set content to not sync");
                 return true;
