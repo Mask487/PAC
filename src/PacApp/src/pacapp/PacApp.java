@@ -42,8 +42,8 @@ public class PacApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        Transfer t = new Transfer();
-        t.initializeDesk();
+       // Transfer t = new Transfer();
+       // t.initializeDesk();
 
         AnchorPane root2 = new AnchorPane();
         Scene primary = new Scene(root2);
@@ -222,8 +222,13 @@ public class PacApp extends Application {
                 Set set = dao.getAllContentByType("EBook");
                 System.out.println("Book Pressed");
                 Iterator iter  = set.iterator();
+                int setSize = set.size();
+                Button[] listings = new Button[setSize];
+                int i = 0;
                 while(iter.hasNext()) {
-                    ebkButt(iter.next());
+                   
+                    ebkButt(iter.next(),listings,i);
+                     i++;
                 }
 
             }
@@ -484,8 +489,9 @@ public class PacApp extends Application {
     public static void podButt() {
         
     }
-    public static void ebkButt(Object objs) {
+    public static void ebkButt(Object objs,Button[] L,int i) {
         
+        L[i] = new Button();
         
         
     }
