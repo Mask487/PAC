@@ -28,7 +28,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import Database.ContentDAO;
+import NewDatabase.ContentDAO;
+import NewDatabase.Content;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -225,8 +226,9 @@ public class PacApp extends Application {
                 Button[] listings = new Button[setSize];
                 int i = 0;
                 while (iter.hasNext()) {
-
-                    ebkButt(iter.next(), listings, i);
+                    Content content = new Content();
+                    content = iter.next();
+                    ebkButt(iter.next(), listings, i,bookCont);
                     i++;
                 }
 
@@ -504,10 +506,11 @@ public class PacApp extends Application {
 
     }
 
-    public static void ebkButt(Object objs, Button[] L, int i) {
+    public static void ebkButt(Content objs, Button[] L, int i, VBox cont) {
 
-        // String name = objs.getContentName();
-        //L[i] = new Button(name);
+         String name = objs.getContentName();
+        L[i] = new Button(name);
+        cont.getChildren().add(L[i]);
     }
 
     public static void abkButt() {
