@@ -227,8 +227,8 @@ public class PacApp extends Application {
                 int i = 0;
                 while (iter.hasNext()) {
                     Content content = new Content();
-                    content = iter.next();
-                    ebkButt(iter.next(), listings, i,bookCont);
+                    content = (Content) iter.next();
+                    ebkButt(content, listings, i,bookCont);
                     i++;
                 }
 
@@ -460,7 +460,7 @@ public class PacApp extends Application {
         Button buttonTop = new Button("Top");
 
         //MusicPane
-        Label noMusic = new Label("You have no Music \n import music to get started.");
+        Label noMusic = new Label("You have no Music \n import music to get started!");
         noMusic.backgroundProperty().set(buBack);
         musicCont.getChildren().addAll(noMusic);
 
@@ -509,7 +509,7 @@ public class PacApp extends Application {
     public static void ebkButt(Content objs, Button[] L, int i, VBox cont) {
 
          String name = objs.getContentName();
-        L[i] = new Button(name);
+        L[i] = new Button(name);       
         cont.getChildren().add(L[i]);
     }
 
