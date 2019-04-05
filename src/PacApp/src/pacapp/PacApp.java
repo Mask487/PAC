@@ -32,7 +32,6 @@ import Database.ContentDAO;
 import java.util.Iterator;
 import java.util.Set;
 
-
 /**
  *
  * @author andrewmenezes
@@ -41,9 +40,9 @@ public class PacApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        
-     Transfer t = new Transfer();
-      t.initializeDesk();
+
+        Transfer t = new Transfer();
+        t.initializeDesk();
 
         AnchorPane root2 = new AnchorPane();
         Scene primary = new Scene(root2);
@@ -221,14 +220,14 @@ public class PacApp extends Application {
                 ContentDAO dao = new ContentDAO();
                 Set set = dao.getAllContentByType("EBook");
                 System.out.println("Book Pressed");
-                Iterator iter  = set.iterator();
+                Iterator iter = set.iterator();
                 int setSize = set.size();
                 Button[] listings = new Button[setSize];
                 int i = 0;
-                while(iter.hasNext()) {
-                   
-                    ebkButt(iter.next(),listings,i);
-                     i++;
+                while (iter.hasNext()) {
+
+                    ebkButt(iter.next(), listings, i);
+                    i++;
                 }
 
             }
@@ -288,11 +287,15 @@ public class PacApp extends Application {
         bvbutt.getChildren().addAll(settingsB);
 
         // Create music pane
+        musicCont.backgroundProperty().set(cenBack);
+        musicPane.backgroundProperty().set(cenBack);
         musicPane.setFitToWidth(true);
         musicPane.setFitToHeight(true);
         musicPane.setPannable(false);
 
         // Create book pane
+        bookCont.backgroundProperty().set(cenBack);
+        bookPane.backgroundProperty().set(cenBack);
         bookPane.setFitToWidth(true);
         bookPane.setFitToHeight(true);
         bookPane.setPannable(false);
@@ -301,6 +304,8 @@ public class PacApp extends Application {
         bookCont.getChildren().addAll(noBook);
 
         // Create audio book pane
+        audioBookCont.backgroundProperty().set(cenBack);
+        audioBookPane.backgroundProperty().set(cenBack);
         audioBookPane.setFitToWidth(true);
         audioBookPane.setFitToHeight(true);
         audioBookPane.setPannable(false);
@@ -309,6 +314,8 @@ public class PacApp extends Application {
         audioBookCont.getChildren().addAll(noAudioBook);
 
         // Create app pane
+        appCont.backgroundProperty().set(cenBack);
+        appPane.backgroundProperty().set(cenBack);
         appPane.setFitToWidth(true);
         appPane.setFitToHeight(true);
         appPane.setPannable(false);
@@ -316,20 +323,24 @@ public class PacApp extends Application {
         noApp.backgroundProperty().set(buBack);
         appCont.getChildren().addAll(noApp);
 
-        // Create  pane
+        // Create podcast pane
+        podcastCont.backgroundProperty().set(cenBack);
+        podcastPane.backgroundProperty().set(cenBack);
         podcastPane.setFitToWidth(true);
         podcastPane.setFitToHeight(true);
         podcastPane.setPannable(false);
         Label nopodcast = new Label("You have no podcasts \n import podcasts to get started.");
-        nopodcast.backgroundProperty().set(buBack); 
+        nopodcast.backgroundProperty().set(buBack);
         podcastCont.getChildren().addAll(nopodcast);
 
         // Create video pane
+        videoCont.backgroundProperty().set(cenBack);
+        videoPane.backgroundProperty().set(cenBack);
         videoPane.setFitToWidth(true);
         videoPane.setFitToHeight(true);
         videoPane.setPannable(false);
         Label noVideo = new Label("You have no videos \n import videos to get started.");
-        noVideo.backgroundProperty().set(buBack); 
+        noVideo.backgroundProperty().set(buBack);
         videoCont.getChildren().addAll(noVideo);
 
         // create settings VBox
@@ -482,29 +493,31 @@ public class PacApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
     public static void musButt() {
-        
+
     }
+
     public static void podButt() {
-        
+
     }
-    public static void ebkButt(Object objs,Button[] L,int i) {
-        
-       // String name = objs.getContentName();
-        L[i] = new Button(name);
-        
-        
+
+    public static void ebkButt(Object objs, Button[] L, int i) {
+
+        // String name = objs.getContentName();
+        //L[i] = new Button(name);
     }
+
     public static void abkButt() {
-        
+
     }
+
     public static void vidButt() {
-        
+
     }
+
     public static void infButt() {
-        
+
     }
-    
 
 }
