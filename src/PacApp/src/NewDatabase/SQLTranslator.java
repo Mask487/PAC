@@ -2199,7 +2199,7 @@ public class SQLTranslator {
         File file = new File(workingDirectory);
         String parentDirectory = file.getParent();
         File file2 = new File(parentDirectory);
-        String databaseDirectory = file2.getParent() + "\\Database\\PACDB.db";
+        String databaseDirectory = file2.getParent() + "/Database/PACDB.db";
         
         return constant + databaseDirectory;
     }

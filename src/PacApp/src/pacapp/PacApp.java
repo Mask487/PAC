@@ -28,6 +28,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import Database.ContentDAO;
+import java.util.Iterator;
+import java.util.Set;
+
 
 /**
  *
@@ -37,6 +41,9 @@ public class PacApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        
+     Transfer t = new Transfer();
+      t.initializeDesk();
 
         AnchorPane root2 = new AnchorPane();
         Scene primary = new Scene(root2);
@@ -211,7 +218,18 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(bookPane);
+                ContentDAO dao = new ContentDAO();
+                Set set = dao.getAllContentByType("EBook");
                 System.out.println("Book Pressed");
+                Iterator iter  = set.iterator();
+                int setSize = set.size();
+                Button[] listings = new Button[setSize];
+                int i = 0;
+                while(iter.hasNext()) {
+                   
+                    ebkButt(iter.next(),listings,i);
+                     i++;
+                }
 
             }
         });
@@ -471,7 +489,11 @@ public class PacApp extends Application {
     public static void podButt() {
         
     }
-    public static void ebkButt() {
+    public static void ebkButt(Object objs,Button[] L,int i) {
+        
+       // String name = objs.getContentName();
+        L[i] = new Button(name);
+        
         
     }
     public static void abkButt() {
