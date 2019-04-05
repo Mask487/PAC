@@ -36,52 +36,18 @@ public class SQLiteTest {
         String location = "C:/Test/ultimatetest.mp3";
         String url = null;
         boolean wantToSync = false;
+        ContentDAO cdao = new ContentDAO();
+        PlaylistDAO pdao = new PlaylistDAO();
+        Set playlists = pdao.getAllPlaylists();
+        Iterator pDAOIterator = playlists.iterator();
         
-        ContentDAO dao = new ContentDAO();
-        //Content content = dao.getContent(contentName, contentType, creatorName);
-        //System.out.println(content.getContentName());
-        Set all = dao.getAllContent();
-
-        Iterator iter = all.iterator();
-        while(iter.hasNext()) {
-            System.out.println(iter.next().toString());
-        }
+        Playlist playlist1 =  (Playlist) pDAOIterator.next();
+        pdao.getContentFromPlaylist(playlist1);
+        System.out.println(playlist1.toString());
         
-//        Content content3 = dao.getContentByID(4);
-//        System.out.println(content3.toString());
-//        
-//        dao.deleteContent(content3);
-
-        //test.addContentTest(location, "Podcast");
-        //MetaDataReader.genericReader("C:/Test/test3.pdf");
-        //Content newContent = new Content(contentName, contentType, creatorName, );
-        //dao.getContent(contentName, contentType, creatorName);
-        //test.test1("C:/Test/test1.mp3");
-        //test.addPlaylist("Test play");
-        //test.addContent(contentType, creatorName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url, wantToSync, location);
-        //test.setSyncStatus(contentName, contentType, creatorName);
-        //test.addToPlaylist(contentName, contentType, creatorName, "Test play");
-        //test.deleteContent(contentName, contentType, creatorName);
-        //test.deleteContent(contentName, contentType, creatorName);
-        //DBPrint.printContents(test.getAllContent());
-//        DBPrint.printContents(test.getContentByType(contentType));
-//        
-//        String test3 = "C:/Test/test1.mp3";
-//        MetaDataReader mdr = new MetaDataReader();
-//        mdr.MetaDataReader(test3);
-//        System.out.println(mdr.getTitle());
-//        System.out.println(mdr.getCreator());
-        //DBPrint.printContents(test.getAllGenres());
+        Set contents = cdao.getAllContent();
+        Set contents2 = cdao.searchAllTablesBySearchTermAndType("ant", "EBook");
+        Content[] content2;
         
-        //System.out.println(test.getCreatorCount("J", "Tyler", "Oleson"));
-//        test.addToPlaylist("Test", "Podcsaegeasgast", "newPlaylist");
-//
-//        //DBDirectories.createDirectoy("Series");
-//        
-//    Path currentRelativePath = Paths.get("");
-//    String s = currentRelativePath.toAbsolutePath().toString();
-//    String r = DBEnumeration.PROJECTDIRECTORY + "ContentFiles";
-//    DBDirectories.createDirectoy(r);
-        //System.out.println("Current relative path is: " + s);
     }
 }

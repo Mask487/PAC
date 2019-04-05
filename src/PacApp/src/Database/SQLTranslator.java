@@ -1514,6 +1514,14 @@ public class SQLTranslator {
     }
     
     
+//    public ResultSet getContentFromPlaylist(int playlistID) {
+//        try {
+//            String query = "SELECT * FROM " + DBEnumeration.PCLOOKUP
+//                    + " pc JOIN " + DBEnumeration.CONTENT + " "
+//        }
+//    }
+    
+    
     /**
      * Gets a specific publisher by name
      * @param publisherID

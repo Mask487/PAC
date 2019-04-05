@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.List;
@@ -48,7 +49,7 @@ public class ContentDAO {
      * @param contentId
      * @return 
      */
-    public Content getContentByID(int contentId) {
+    public Content getContent(int contentId) {
         ResultSet res = sql.getContentByID(contentId);
         return extractDataFromResultSet(res);
     }
@@ -289,6 +290,27 @@ public class ContentDAO {
         return null;
     }
     
+    
+    
+    public Set getAllContentBySyncStatus() {
+        ResultSet res = sql.getContentBySyncStatus();
+        Set contents = new HashSet();
+        try {
+            while(res.next()) {
+                Content content = extractDataFromResultSet(res);
+                contents.add(content);
+            }
+            
+            return contents;
+        }
+        
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+    }
+    
 
     /**
      * Gets all content of a certain type, denoted by that types id
@@ -342,6 +364,15 @@ public class ContentDAO {
         
         return null;
     }
+    
+    
+//    public Set getAllContentByTypeAndSearch(String contentType, String searchTerm) {
+//        Set set  = getAllContentByType(contentType);
+//        
+//        Iterator iter = set.iterator();
+//        
+//        
+//    }
     
     
     /**
@@ -485,6 +516,31 @@ public class ContentDAO {
      */
     public boolean unsetSyncStatus(Content content) {
         return sql.unsetSyncStatus(content.getContentID());
+    }
+    
+    
+    
+    
+    public Set searchAllTablesBySearchTermAndType(String searchTerm, String contentType) {
+        ResultSet res = sql.searchAllTablesByKeyTermAndContentType(searchTerm, contentType);
+        
+        try {
+            Set contents = new HashSet();
+            
+            while(res.next()) {
+                Content content = extractDataFromResultSet(res);
+                contents.add(content);
+            }
+            
+            return contents;
+        }
+        
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+            
+        }
+        
+        return null;
     }
     
     
