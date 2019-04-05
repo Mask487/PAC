@@ -1,28 +1,34 @@
 package pacapp;
 
-
+import NewDatabase.ContentDAO;
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
+
+import java.awt.*;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.nio.Buffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.net.DatagramSocket;
 import java.sql.*;
+import java.util.Timer;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-class Transfer extends Thread implements TransferObject{
+class Transfer extends Thread implements pacapp.TransferObject {
     private PortableDevice pD = null;
     private PortableDeviceManager pDM;
     private String ip;
     private String adbPath = null;
     private String backupPath = null;
     private String mainPath = System.getProperty("user.dir");
+    private boolean pIFlag = false;
 
 
     public void initializeDesk() throws FileNotFoundException {
@@ -52,6 +58,7 @@ class Transfer extends Thread implements TransferObject{
         6 -
         7 - Podcast
         */
+
         Connection c = null;
         Statement stmt = null;
         ArrayList<String> locations = null;
@@ -66,6 +73,7 @@ class Transfer extends Thread implements TransferObject{
             stmt = c.createStatement();
             //SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID, and c.SyncStatusID = FALSE;
             ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID;");
+
             while(rs.next()){
                 String test;
                 test = rs.getString("Location");
@@ -90,56 +98,55 @@ class Transfer extends Thread implements TransferObject{
         }
 
 
+
+
         return locations;
     }
 
+
     public void initializePhone(int i) {
         PortableDeviceFolderObject pFO = null;
-        pDM = new PortableDeviceManager();
-        pD = pDM.getDevices()[i];
-        File file = new File("\\PACFILES");
-        boolean condition = false;
-
-        //gets ip for wifi transfer
-        try(final DatagramSocket socket = new DatagramSocket()){
-            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
-            ip = socket.getLocalAddress().getHostAddress();
-        } catch (SocketException e) {
-            e.printStackTrace();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-
-
-        //open phone
-        pD.open();
-
-        //checks root of phone for folder
-        boolean pod = doesFolderExist("PODCASTS", pD);
-        boolean ebooks = doesFolderExist("EBOOKS", pD);
-        boolean pacfiles = doesFolderExist("PACFILES", pD);
-        if (!pod) {
-            createFolder("podcasts", pD);
-        }
-        if (!ebooks) {
-            createFolder("ebooks", pD);
-        }
-        if (!pacfiles) {
-            createFolder("pacfiles", pD);
-        }
-        pD.close();
-    }
-
-    public boolean isPhoneConnected(){
+        PortableDeviceManager pDM = new PortableDeviceManager();
         try{
-            if(pDM.getDevices().length > 0){
-                return true;
+            pD = pDM.getDevices()[i];
+            File file = new File("\\PACFILES");
+            boolean condition = false;
+
+            //gets ip for wifi transfer
+            try(final DatagramSocket socket = new DatagramSocket()){
+                socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+                ip = socket.getLocalAddress().getHostAddress();
+            } catch (SocketException e) {
+                e.printStackTrace();
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
             }
-        }catch(NullPointerException e){
-            return false;
+
+
+            //open phone
+            pD.open();
+
+            //checks root of phone for folder
+            boolean pod = doesFolderExist("PODCASTS", pD);
+            boolean ebooks = doesFolderExist("EBOOKS", pD);
+            boolean pacfiles = doesFolderExist("PACFILES", pD);
+            if (!pod) {
+                createFolder("podcasts", pD);
+            }
+            if (!ebooks) {
+                createFolder("ebooks", pD);
+            }
+            if (!pacfiles) {
+                createFolder("pacfiles", pD);
+            }
+            pD.close();
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("No Pnone Connected");
         }
-        return false;
+
     }
+
+
 
     public boolean setMainPath(String path){
         File file = new File(path);
@@ -277,8 +284,7 @@ class Transfer extends Thread implements TransferObject{
     }
 
     public void wifiSetup() throws IOException {
-
-
+        //not done
     }
 
 
@@ -477,6 +483,49 @@ class Transfer extends Thread implements TransferObject{
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void checkConnection(boolean b){
+        class PhoneConnection extends Thread{
+            private volatile boolean flag = true;
+            private volatile boolean pIFlag = false;
+            //private volatile boolean con = false;
+            public void stopRunning(){
+                flag = false;
+            }
+            public void run(){
+                while(flag){
+                    System.out.println("Running...");
+                    try{
+
+                        if(pIFlag == false){
+                            initializePhone(0);
+                            pDM.getDevices()[0].getRootObjects();
+                            System.out.println("Phone Initialized");
+                            pIFlag = true;
+                            //con = true;
+                        }else if(pIFlag == true){
+                            System.out.println("Phone Connected");
+                            pDM.getDevices()[0].getRootObjects();
+                        }
+                    }catch (NullPointerException e){
+                        System.out.println("Not Connected!");
+                        pIFlag = false;
+                        //con = false;
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        System.out.println("Not Connected");
+                        pIFlag = false;
+                        //con = false;
+                    }
+                }
+                System.out.println("Stopped...");
+            }
+        }
+        PhoneConnection pc = new PhoneConnection();
+        pc.start();
+        if(b == false){
+            pc.stopRunning();
         }
     }
 

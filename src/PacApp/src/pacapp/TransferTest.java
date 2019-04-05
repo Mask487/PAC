@@ -1,6 +1,5 @@
 package pacapp;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,25 +12,19 @@ public class TransferTest
         File file = new File("D:\\Desktop\\stuff\\");
         File file1 = new File("D:\\Desktop\\stuff1");
         ArrayList<File> files = new ArrayList<File>(Arrays.asList(file.listFiles()));
-        Transfer t = new Transfer();
+        pacapp.Transfer t = new pacapp.Transfer();
         t.initializeDesk();
-        //t.initializePhone(0);
-        //System.out.println("Phone Name: " + t.getPhoneName() + "\nPhone Model: " + t.getPhoneModel() + "\nBattery Level: " + t.getPhoneBattery());
+        //t.checkConnection(true);
+        t.initializePhone(0);
+        System.out.println("Phone Name: " + t.getPhoneName() + "\nPhone Model: " + t.getPhoneModel() + "\nBattery Level: " + t.getPhoneBattery());
         //t.addEbook(files);
         //t.getFolder("podcasts", file1);
         //t.backup("Backup");
         //t.setAdbPath("C:\\Users\\quinc\\AppData\\Local\\Android\\Sdk\\platform-tools");
         //t.getAdbPath();
         //t.setBackupPath("D:\\Desktop\\BACKUP");
-        //System.out.println("IP: "+ t.getIp());
+        System.out.println("IP: "+ t.getIp());
         //t.getPhoneIp();
-        //t.syncQueuery();
-        if(t.isPhoneConnected() == true){
-            System.out.println("That shit is true babeh!!");
-        }else{
-            System.out.println("No phone");
-        }
-
-
+        t.syncQueuery();
     }
 }
