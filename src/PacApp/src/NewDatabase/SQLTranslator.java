@@ -1315,7 +1315,7 @@ public class SQLTranslator {
     public ResultSet getContentByType(String contentType) {
         
         try {
-            String query = "SELECT ContentName FROM " + DBEnumeration.CONTENT
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
                     + " c WHERE c.ContentTypeID = (SELECT ContentTypeID FROM "
                     + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '" 
                     + contentType + "')";

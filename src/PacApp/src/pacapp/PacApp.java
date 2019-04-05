@@ -227,7 +227,7 @@ public class PacApp extends Application {
                 int i = 0;
                 while (iter.hasNext()) {
                     Content content = new Content();
-                    content = (Content) iter.next();
+                    content = (NewDatabase.Content) iter.next();
                     ebkButt(content, listings, i,bookCont);
                     i++;
                 }
@@ -510,6 +510,15 @@ public class PacApp extends Application {
 
          String name = objs.getContentName();
         L[i] = new Button(name);
+         L[i].setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println(name + " Pressed");
+
+            }
+         });
         cont.getChildren().add(L[i]);
     }
 
