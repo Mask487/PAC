@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import org.apache.commons.io.FilenameUtils;
 import java.io.IOException;
 import java.nio.file.*;
+import Util.ContentLocationDirectory;
 /**
  * @author Jacob Oleson
  * 
@@ -2387,22 +2388,22 @@ public class SQLTranslator {
      * @param contentType
      */
     private String setContentLocation (String contentName, String contentType, String genreName, String seriesName) {  
-        String location = DBEnumeration.UNKNOWN;
+        String location = ContentLocationDirectory.CONTENTFILEDIRECTORY;
         
         //Genre name given
         if(!genreName.equals(DBEnumeration.UNKNOWN)) {
                 //Series name given                
                 if(!seriesName.equals(DBEnumeration.UNKNOWN)) {
-                    location = DBEnumeration.PROJECTDIRECTORY 
-                            + contentType + "/" + genreName
-                            + "/" + seriesName + "/";
+                    location = ContentLocationDirectory.CONTENTFILEDIRECTORY 
+                            + contentType + File.separator + genreName
+                            + File.separator + seriesName + File.separator;
                     }
 
                 //No series name given
                 else {
-                    location = DBEnumeration.PROJECTDIRECTORY 
-                            + contentType + "/" + genreName + "/" + DBEnumeration.UNKNOWN
-                            + "/";
+                    location = ContentLocationDirectory.CONTENTFILEDIRECTORY
+                            + contentType + File.separator + genreName + File.separator + DBEnumeration.UNKNOWN
+                            + File.separator;
 
                 }
             }
@@ -2411,16 +2412,16 @@ public class SQLTranslator {
             else {
                 //Series name given
                 if(!seriesName.equals(DBEnumeration.UNKNOWN)) {
-                    location = DBEnumeration.PROJECTDIRECTORY 
-                            + contentType + "/" + DBEnumeration.UNKNOWN
-                            + "/" + seriesName + "/";
+                    location = ContentLocationDirectory.CONTENTFILEDIRECTORY
+                            + contentType + File.separator + DBEnumeration.UNKNOWN
+                            + File.separator  + seriesName + File.separator ;
                 }
 
                 //No series name given
                 else {
-                    location = DBEnumeration.PROJECTDIRECTORY 
-                            + contentType + "/" + DBEnumeration.UNKNOWN
-                            + "/" + DBEnumeration.UNKNOWN + "/";
+                    location = ContentLocationDirectory.CONTENTFILEDIRECTORY 
+                            + contentType + File.separator  + DBEnumeration.UNKNOWN
+                            + File.separator  + DBEnumeration.UNKNOWN + File.separator ;
                 }
             }
         
@@ -2448,7 +2449,8 @@ public class SQLTranslator {
         File file = new File(workingDirectory);
         String parentDirectory = file.getParent();
         File file2 = new File(parentDirectory);
-        String databaseDirectory = file2.getParent() + "/Database/PACDB.db";
+        String databaseDirectory = file2.getParent() + File.separator  + "Database"
+                + File.separator + "PACDB.db";
         
         return constant + databaseDirectory;
     }
