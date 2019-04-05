@@ -61,7 +61,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
         Connection c = null;
         Statement stmt = null;
-        ArrayList<String> locations = null;
+        ArrayList<String> locations = new ArrayList<String>();
         String location;
         String contentName;
         String type;
@@ -72,34 +72,29 @@ class Transfer extends Thread implements pacapp.TransferObject {
             System.out.println("Opened Database");
             stmt = c.createStatement();
             //SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID, and c.SyncStatusID = FALSE;
-            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID;");
-
+            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID and c.WantToSync = TRUE;");
             while(rs.next()){
-                String test;
-                test = rs.getString("Location");
+                //String test;
+                //test = rs.getString("Location");
                 if(rs.getString("Location") == null){
                     System.out.println("location is null");
                 }else if(rs.getString("Location") != null){
-                    locations.add(test);
+                    System.out.println(rs.getString("Location"));
+                    locations.add(rs.getString("Location"));
                 }
-
             }
-            for(int i = 0; i < locations.size(); i++){
+            int x = locations.size();
+            for(int i = 0; i < x; i++){
                 System.out.println(locations.get(i));
             }
             rs.close();
             stmt.close();
             c.close();
-
         }catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-
-
-
-
         return locations;
     }
 
@@ -666,4 +661,10 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
         return target;
     }
+}
+
+class FileA{
+    String location;
+    int type;
+
 }
