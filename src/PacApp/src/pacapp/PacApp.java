@@ -218,6 +218,7 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(bookPane);
+                bookCont.getChildren().clear();
                 ContentDAO dao = new ContentDAO();
                 Set set = dao.getAllContentByType("EBook");
                 System.out.println("Book Pressed");

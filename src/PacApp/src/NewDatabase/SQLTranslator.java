@@ -232,7 +232,7 @@ public class SQLTranslator {
                 //Set the file into new filepath on device.
                 
                 //Original filepath
-                File file = new File(filePath);
+                /*File file = new File(filePath);
                 
                 //Make parent directories for new filepath
                 DBDirectories.createDirectories(location);
@@ -241,7 +241,7 @@ public class SQLTranslator {
                 if(file.renameTo(new File(fileName))) {
                     //file.delete();
                     System.out.println("File moved successfully");
-                }
+                }*/
                 
                 System.out.println("Content added successfully");
                 return true;    
@@ -2388,10 +2388,10 @@ public class SQLTranslator {
      * @param contentType
      */
     private String setContentLocation (String contentName, String contentType, String genreName, String seriesName) {  
-        String location = ContentLocationDirectory.CONTENTFILEDIRECTORY;
-        
+        //String location = ContentLocationDirectory.CONTENTFILEDIRECTORY;
+        String location;
         //Genre name given
-        if(!genreName.equals(DBEnumeration.UNKNOWN)) {
+        /*if(!genreName.equals(DBEnumeration.UNKNOWN)) {
                 //Series name given                
                 if(!seriesName.equals(DBEnumeration.UNKNOWN)) {
                     location = ContentLocationDirectory.CONTENTFILEDIRECTORY 
@@ -2423,8 +2423,8 @@ public class SQLTranslator {
                             + contentType + File.separator  + DBEnumeration.UNKNOWN
                             + File.separator  + DBEnumeration.UNKNOWN + File.separator ;
                 }
-            }
-        
+            }*/
+        location = "/Users/andrewmenezes/Documents/GitHub/PAC/";
         return location;
     }
     
