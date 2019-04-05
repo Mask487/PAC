@@ -18,6 +18,12 @@ public class Test{
         bookList = rec.RecommendBook("series");
         
         System.out.println(bookList);
+        
+        for (Book b : bookList){
+            System.out.println(b.getTitle());
+            System.out.println(b.getAuthors());
+            System.out.println("");
+        }
         //stats.BookStats();
         
         /*File file = new File("C:/Users/cothe/Desktop/test.jpeg");
