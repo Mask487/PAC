@@ -31,7 +31,7 @@ import javafx.scene.image.ImageView;
 import Database.ContentDAO;
 import java.util.Iterator;
 import java.util.Set;
-//import pacapp.TransferObject;
+
 
 /**
  *
@@ -42,8 +42,8 @@ public class PacApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-       // Transfer t = new Transfer();
-       // t.initializeDesk();
+     Transfer t = new Transfer();
+      t.initializeDesk();
 
         AnchorPane root2 = new AnchorPane();
         Scene primary = new Scene(root2);
@@ -491,7 +491,8 @@ public class PacApp extends Application {
     }
     public static void ebkButt(Object objs,Button[] L,int i) {
         
-        L[i] = new Button();
+       // String name = objs.getContentName();
+        L[i] = new Button(name);
         
         
     }
