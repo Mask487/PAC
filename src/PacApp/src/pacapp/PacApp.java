@@ -208,9 +208,24 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();//(phoneMidRow, musicPane);
                 mainStack.getChildren().add(musicPane);
+                musicCont.getChildren().clear();
+                ContentDAO dao = new ContentDAO();
+                Set mset = dao.getAllContentByType("Music");
                 System.out.println("Music Pressed");
+                Iterator miter = mset.iterator();
+                int setSize = mset.size();
+                Button[] listings = new Button[setSize];
+                int i = 0;
+                while (miter.hasNext()) {
+                    Content content = new Content();
+                    content = (NewDatabase.Content) miter.next();
+                    musButt(content, listings, i,musicCont,buBack);
+                    i++;
+                }
 
             }
+
+
         });
 
         book.setOnAction(new EventHandler<ActionEvent>() {
@@ -229,7 +244,7 @@ public class PacApp extends Application {
                 while (iter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) iter.next();
-                    ebkButt(content, listings, i,bookCont);
+                    ebkButt(content, listings, i,bookCont,buBack);
                     i++;
                 }
 
@@ -241,9 +256,24 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(audioBookPane);
-                System.out.println("Audio Books Pressed");
+                audioBookCont.getChildren().clear();
+                ContentDAO dao = new ContentDAO();
+                Set abset = dao.getAllContentByType("Audio Book");
+                System.out.println("Audio Book Pressed");
+                Iterator abiter = abset.iterator();
+                int setSize = abset.size();
+                Button[] listings = new Button[setSize];
+                int i = 0;
+                while (abiter.hasNext()) {
+                    Content content = new Content();
+                    content = (NewDatabase.Content) abiter.next();
+                    abkButt(content, listings, i,audioBookCont,buBack);
+                    i++;
+                }
 
             }
+
+
         });
 
         podcast.setOnAction(new EventHandler<ActionEvent>() {
@@ -251,9 +281,24 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(podcastPane);
+                podcastCont.getChildren().clear();
+                ContentDAO dao = new ContentDAO();
+                Set podcastset = dao.getAllContentByType("Podcast");
                 System.out.println("podcast Pressed");
+                Iterator podcastiter = podcastset.iterator();
+                int setSize = podcastset.size();
+                Button[] listings = new Button[setSize];
+                int i = 0;
+                while (podcastiter.hasNext()) {
+                    Content content = new Content();
+                    content = (NewDatabase.Content) podcastiter.next();
+                    podButt(content, listings, i,podcastCont,buBack);
+                    i++;
+                }
 
             }
+
+
         });
 
         video.setOnAction(new EventHandler<ActionEvent>() {
@@ -261,9 +306,24 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(videoPane);
-                System.out.println("video Pressed");
-
+                videoCont.getChildren().clear();
+            ContentDAO dao = new ContentDAO();
+            Set videoset = dao.getAllContentByType("video");
+            System.out.println("video Pressed");
+            Iterator videoiter = videoset.iterator();
+            int setSize = videoset.size();
+            Button[] listings = new Button[setSize];
+            int i = 0;
+            while (videoiter.hasNext()) {
+                Content content = new Content();
+                content = (NewDatabase.Content) videoiter.next();
+                vidButt(content, listings, i,videoCont,buBack);
+                i++;
             }
+
+        }
+
+
         });
 
         apps.setOnAction(new EventHandler<ActionEvent>() {
@@ -499,18 +559,48 @@ public class PacApp extends Application {
         launch(args);
     }
 
-    public static void musButt() {
+    public static void musButt(Content objs, Button[] L, int i, VBox cont, Background b) {
 
+        String name = objs.getContentName();
+        L[i] = new Button(name);
+        L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].backgroundProperty().set(b);
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println(name + " Pressed");
+
+            }
+        });
+        cont.getChildren().add(L[i]);
     }
 
-    public static void podButt() {
+    public static void podButt(Content objs, Button[] L, int i, VBox cont, Background b) {
 
+        String name = objs.getContentName();
+        L[i] = new Button(name);
+        L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].backgroundProperty().set(b);
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println(name + " Pressed");
+
+            }
+        });
+        cont.getChildren().add(L[i]);
     }
 
-    public static void ebkButt(Content objs, Button[] L, int i, VBox cont) {
+    public static void ebkButt(Content objs, Button[] L, int i, VBox cont, Background b) {
 
          String name = objs.getContentName();
         L[i] = new Button(name);
+        L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].backgroundProperty().set(b);
          L[i].setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -523,12 +613,39 @@ public class PacApp extends Application {
         cont.getChildren().add(L[i]);
     }
 
-    public static void abkButt() {
+    public static void abkButt(Content objs, Button[] L, int i, VBox cont, Background b) {
 
+        String name = objs.getContentName();
+        L[i] = new Button(name);
+        L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].backgroundProperty().set(b);
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println(name + " Pressed");
+
+            }
+        });
+        cont.getChildren().add(L[i]);
     }
+    public static void vidButt(Content objs, Button[] L, int i, VBox cont, Background b) {
 
-    public static void vidButt() {
+        String name = objs.getContentName();
+        L[i] = new Button(name);
+        L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].backgroundProperty().set(b);
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
 
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println(name + " Pressed");
+
+            }
+        });
+        cont.getChildren().add(L[i]);
     }
 
     public static void infButt() {
