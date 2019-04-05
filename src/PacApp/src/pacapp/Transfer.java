@@ -1,5 +1,6 @@
 package pacapp;
 
+import NewDatabase.ContentDAO;
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
 
@@ -20,7 +21,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-class Transfer extends Thread implements TransferObject{
+class Transfer extends Thread implements pacapp.TransferObject {
     private PortableDevice pD = null;
     private PortableDeviceManager pDM;
     private String ip;
@@ -57,6 +58,7 @@ class Transfer extends Thread implements TransferObject{
         6 -
         7 - Podcast
         */
+
         Connection c = null;
         Statement stmt = null;
         ArrayList<String> locations = null;
@@ -96,20 +98,16 @@ class Transfer extends Thread implements TransferObject{
         }
 
 
+
+
         return locations;
     }
 
-    private void setpDM(){
-        pDM = new PortableDeviceManager();
-    }
 
     public void initializePhone(int i) {
         PortableDeviceFolderObject pFO = null;
-        setpDM();
+        PortableDeviceManager pDM = new PortableDeviceManager();
         try{
-            if(pDM == null){
-                setpDM();
-            }
             pD = pDM.getDevices()[i];
             File file = new File("\\PACFILES");
             boolean condition = false;
