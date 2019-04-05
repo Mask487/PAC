@@ -12,7 +12,7 @@ public class TransferTest
         File file = new File("D:\\Desktop\\stuff\\");
         File file1 = new File("D:\\Desktop\\stuff1");
         ArrayList<File> files = new ArrayList<File>(Arrays.asList(file.listFiles()));
-        Transfer t = new Transfer();
+        pacapp.Transfer t = new pacapp.Transfer();
         t.initializeDesk();
         //t.checkConnection(true);
         t.initializePhone(0);
