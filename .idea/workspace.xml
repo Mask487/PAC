@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,12 +37,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
+            <state relative-caret-position="796">
               <caret line="537" column="45" selection-start-line="537" selection-start-column="45" selection-end-line="537" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#22651#22652#0" expanded="true" />
-                <element signature="e#22679#22680#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,7 +58,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-21447">
+            <state relative-caret-position="360">
               <caret line="34" column="114" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="114" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -75,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="2487" lean-forward="true" selection-start-line="2487" selection-end-line="2487" />
+            <state relative-caret-position="36930">
+              <caret line="2487" selection-start-line="2487" selection-end-line="2487" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -174,10 +169,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="13" />
-    <option name="y" value="23" />
-    <option name="width" value="1562" />
-    <option name="height" value="827" />
+    <option name="x" value="27" />
+    <option name="y" value="67" />
+    <option name="width" value="1442" />
+    <option name="height" value="756" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -185,6 +180,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -240,17 +236,10 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Util" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="PACTest" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -374,10 +363,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="13" y="23" width="1562" height="827" extended-state="0" />
+    <frame x="1" y="442" width="1442" height="756" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16447368" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18071428" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -386,7 +375,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22993197" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25451806" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43365696" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -578,10 +567,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="796">
+          <caret line="537" column="45" selection-start-line="537" selection-start-column="45" selection-end-line="537" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="34" column="114" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="114" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36930">
+          <caret line="2487" selection-start-line="2487" selection-end-line="2487" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Util/ContentLocationDirectory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -617,45 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="18" selection-start-column="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21447">
-          <caret line="34" column="114" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="114" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Util/ContentLocationDirectory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="2487" lean-forward="true" selection-start-line="2487" selection-end-line="2487" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="537" column="45" selection-start-line="537" selection-start-column="45" selection-end-line="537" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#22651#22652#0" expanded="true" />
-            <element signature="e#22679#22680#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
