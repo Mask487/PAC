@@ -167,7 +167,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="114" />
+    <option name="x" value="113" />
     <option name="y" value="24" />
     <option name="width" value="1442" />
     <option name="height" value="756" />
@@ -337,10 +337,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="114" y="24" width="1442" height="756" extended-state="0" />
+    <frame x="113" y="24" width="1442" height="756" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18071428" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18071428" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -349,7 +349,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.25451806" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25451806" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43365696" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
