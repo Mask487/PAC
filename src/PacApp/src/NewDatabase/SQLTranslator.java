@@ -68,14 +68,14 @@ public class SQLTranslator {
      * @param location
      * @param url
      * @param wantToSync
-     * @param filePath
+     * @param originalFilePath
      * @return true if content added successfully and false otherwise.
      */
     public boolean addContent(String contentType, 
             String creatorName, String genreName, String publisherName, String seriesName, 
             String contentName, String contentDescription, String uploadDate,
             int pageCount, String duration, String isbn, boolean explicit, 
-            String location, String url, boolean wantToSync, String filePath) {
+            String location, String url, boolean wantToSync, String originalFilePath) {
         
         try {
             if(conn == null) {
@@ -91,6 +91,9 @@ public class SQLTranslator {
 //                fileName = contentName + ".epub";
 //            }
 //            
+
+            originalFilePath = cleanOriginalFilePath(originalFilePath);
+            
             if(contentType == null) {
                 contentType = DBEnumeration.UNKNOWN;
             }
@@ -212,7 +215,7 @@ public class SQLTranslator {
             location = setContentLocation(contentName, contentType, genreName, seriesName);
             
             //Get the content extension (mp3, epub, etc.)
-            String ext = getExtension(filePath);
+            String ext = getExtension(originalFilePath);
                         
             // the absoulte filepath to the content. This will be put in DB.
             String fileName = location + contentName + "." + ext;
@@ -2320,6 +2323,18 @@ public class SQLTranslator {
 //            if (name.contains(" ")) {
 //                name = name.replace(" ", "_");
 //            }
+            
+            return name;
+    }
+    
+    
+        private String cleanOriginalFilePath(String name) {
+            if(name.contains("[")) {
+                name = name.replace("[", "");
+            }
+            if(name.contains("]")) {
+                name = name.replace("]", "");
+            }
             
             return name;
     }
