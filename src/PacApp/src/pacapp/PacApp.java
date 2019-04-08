@@ -6,6 +6,8 @@
 package pacapp;
 
 import java.io.File;
+
+import NewDatabase.SQLTranslator;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -39,7 +41,7 @@ public class PacApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
+        SQLTranslator sql = new SQLTranslator();
         Transfer t = new Transfer();
         t.initializeDesk();
 
@@ -796,7 +798,8 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    // addContent(audioBook,);
+
+                    sql.addContent("" + db.getFiles().toString(),"audioBook");
                     System.out.println("audio book added");
                     audioBookTester.setText(db.getFiles().toString());
                     success = true;
