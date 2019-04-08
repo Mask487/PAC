@@ -14,11 +14,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.net.DatagramSocket;
 import java.sql.*;
-import java.util.Timer;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 class Transfer extends Thread implements pacapp.TransferObject {
     private PortableDevice pD = null;
@@ -27,8 +22,6 @@ class Transfer extends Thread implements pacapp.TransferObject {
     private String adbPath = null;
     private String backupPath = null;
     private String mainPath = System.getProperty("user.dir");
-    private boolean pIFlag = false;
-
 
     public void initializeDesk() throws FileNotFoundException {
         File file = new File(mainPath + "\\PAC_config.cfg");
@@ -36,66 +29,12 @@ class Transfer extends Thread implements pacapp.TransferObject {
             System.out.println("Config path doesnt exist");
             PrintWriter w = new PrintWriter("PAC_Config.cfg");
             w.println("adb_directory = \"\"");
-            w.println("backup_directory = \"\"");
+            w.println("backup_directory = \"" + mainPath + "\"Backups\"");
             w.println("phone_ip = \"\"");
             w.close();
             file = new File("PAC_Config.cfg");
         }
-
         //System.out.println(file.getAbsolutePath());
-
-    }
-
-    public ArrayList<FileA> syncQueuery(){
-        /*
-        Content Type
-        1 - Audiobook
-        2 - EBook
-        3 -
-        4 -
-        5 -
-        6 -
-        7 - Podcast
-        */
-
-        System.out.println();
-        Connection c = null;
-        Statement stmt = null;
-        ArrayList<FileA> locations = new ArrayList<FileA>();
-        String location;
-        String contentName;
-        String type;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:Database\\PACDB.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened Database");
-            stmt = c.createStatement();
-            //SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID, and c.SyncStatusID = FALSE;
-            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID and c.WantToSync = TRUE;");
-            while(rs.next()){
-                if(rs.getString("Location") == null){
-                    System.out.println("location is null");
-                }else if(rs.getString("Location") != null){
-                    System.out.println(rs.getString("Location"));
-                    System.out.println(rs.getString("ContentName"));
-                    System.out.println(rs.getString("ContentType"));
-                    String locationString = rs.getString("Location");
-                    String nameString = rs.getString("ContentName");
-                    String id = rs.getString("ContentType");
-                    FileA fileaccess = new FileA(locationString, nameString, id);
-                    locations.add(fileaccess);
-                }
-            }
-            rs.close();
-            stmt.close();
-            c.close();
-        }catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        return locations;
     }
 
     public void initializePhone(int i) {
@@ -224,6 +163,21 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return true;
     }
 
+    public String getBackupPath() throws IOException{
+        if (this.backupPath != null){
+            return this.backupPath;
+        }else{
+            File file = new File(this.mainPath + "\\PAC_Config.cfg");
+            String conString = fileToString(file);
+            String[] a = conString.split("backup_directory \"");
+            String[] b = a[1].split("\"");
+            String path = b[0];
+            System.out.println("get backup path test: " + path);
+            this.backupPath = path;
+        }
+        return this.backupPath;
+    }
+
     //change path files to something more universal
     public void getPhoneIp() throws IOException {
         String addr = mainPath + "\\addrs.txt";
@@ -294,6 +248,58 @@ class Transfer extends Thread implements pacapp.TransferObject {
     public String getPhoneName() {
         String out;
         return out = pD.getFriendlyName();
+    }
+
+    public ArrayList<FileA> syncQueuery(){
+        /*
+        Content Type
+        1 - Audiobook
+        2 - EBook
+        3 -
+        4 -
+        5 -
+        6 -
+        7 - Podcast
+        */
+
+        System.out.println();
+        Connection c = null;
+        Statement stmt = null;
+        ArrayList<FileA> locations = new ArrayList<FileA>();
+        String location;
+        String contentName;
+        String type;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:Database\\PACDB.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened Database");
+            stmt = c.createStatement();
+            //SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID, and c.SyncStatusID = FALSE;
+            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID and c.WantToSync = TRUE;");
+            while(rs.next()){
+                if(rs.getString("Location") == null){
+                    System.out.println("location is null");
+                }else if(rs.getString("Location") != null){
+                    System.out.println(rs.getString("Location"));
+                    System.out.println(rs.getString("ContentName"));
+                    System.out.println(rs.getString("ContentType"));
+                    String locationString = rs.getString("Location");
+                    String nameString = rs.getString("ContentName");
+                    String id = rs.getString("ContentType");
+                    FileA fileaccess = new FileA(locationString, nameString, id);
+                    locations.add(fileaccess);
+                }
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return locations;
     }
 
     public void sync(){
@@ -478,48 +484,15 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void checkConnection(boolean b){
-        class PhoneConnection extends Thread{
-            private volatile boolean flag = true;
-            private volatile boolean pIFlag = false;
-            //private volatile boolean con = false;
-            public void stopRunning(){
-                flag = false;
-            }
-            public void run(){
-                while(flag){
-                    System.out.println("Running...");
-                    try{
-
-                        if(pIFlag == false){
-                            initializePhone(0);
-                            pDM.getDevices()[0].getRootObjects();
-                            System.out.println("Phone Initialized");
-                            pIFlag = true;
-                            //con = true;
-                        }else if(pIFlag == true){
-                            System.out.println("Phone Connected");
-                            pDM.getDevices()[0].getRootObjects();
-                        }
-                    }catch (NullPointerException e){
-                        System.out.println("Not Connected!");
-                        pIFlag = false;
-                        //con = false;
-                    }catch (ArrayIndexOutOfBoundsException e){
-                        System.out.println("Not Connected");
-                        pIFlag = false;
-                        //con = false;
-                    }
-                }
-                System.out.println("Stopped...");
-            }
+    /*
+    public boolean checkConnection(){
+        pd.
+        if(pD.){
+            return true;
         }
-        PhoneConnection pc = new PhoneConnection();
-        pc.start();
-        if(b == false){
-            pc.stopRunning();
-        }
+        return false;
     }
+    */
 
     public void backup(){
         //add backup folder check here
@@ -574,6 +547,12 @@ class Transfer extends Thread implements pacapp.TransferObject {
         t.start();
 
     }
+
+    /*
+    public void restore(){
+        File file = new file()
+    }
+    */
 
     private void recur(PortableDeviceFolderObject object, String tab, File file) {
         tab = tab + "    ";

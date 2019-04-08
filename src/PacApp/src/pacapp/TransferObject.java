@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 //check backup method just in case
 //finish clone
-//query
 //autodetect usb
 //syncQueuery thread conflicts with backup
 
@@ -39,11 +38,11 @@ public interface TransferObject
     boolean setMainPath(String path);
     boolean setAdbPath(String path) throws IOException;
     boolean doesFolderExist(String folderName, PortableDevice pD);
-    void checkConnection(boolean b);
     String getPhoneModel();
     String getPhoneName();
     String getIp();
     String getAdbPath() throws IOException;
+    String getBackupPath() throws IOException;
     ArrayList<FileA> syncQueuery();
 
 

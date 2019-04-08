@@ -28,7 +28,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import Database.ContentDAO;
+import NewDatabase.ContentDAO;
 import java.util.Iterator;
 import java.util.Set;
 
