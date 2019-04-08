@@ -524,6 +524,7 @@ public class PacApp extends Application {
         musicProgressSlider.setMin(0);
         musicProgressSlider.setMax(100);
         musicProgressSlider.setValue(0);
+        musicProgressSlider.setPadding(sliderIn);
         //Play
         Image PlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
         ImageView musicPlayIcon = new ImageView();
@@ -610,6 +611,88 @@ public class PacApp extends Application {
         musicControll.getChildren().addAll(musicBack,musicPlay,musicForward,musicMute,musicVolumeSlider);
 //// end music controll
 
+
+        //Podcast Controll
+
+        //Podcast volume slider
+        Slider podcastVolumeSlider = new Slider();
+        podcastVolumeSlider.setMin(0);
+        podcastVolumeSlider.setMax(100);
+        podcastVolumeSlider.setValue(0);
+        podcastVolumeSlider.setPadding(sliderIn);
+        //podcast progress slider
+        Slider podcastProgressSlider = new Slider();
+        podcastProgressSlider.setMin(0);
+        podcastProgressSlider.setMax(100);
+        podcastProgressSlider.setValue(0);
+        podcastProgressSlider.setPadding(sliderIn);
+        //Play
+        Button podcastPlay = new Button("",musicPlayIcon);       //Creates button
+
+        podcastPlay.backgroundProperty().set(buBack);         //adds transparent background
+        podcastPlay.setPadding(inset);
+
+        podcastPlay.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Podcast Play Pressed");
+
+            }
+        });
+        // forward
+        Button podcastForward = new Button("",forwardMusicIcon);       //Creates button
+        podcastForward.backgroundProperty().set(buBack);         //adds transparent background
+        podcastForward.setPadding(inset);
+
+        podcastForward.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Podcast Forward Pressed");
+
+            }
+        });
+        //Backward
+        Button podcastBack = new Button("",musicBackIcon);       //Creates button
+
+        podcastBack.backgroundProperty().set(buBack);         //adds transparent background
+        podcastBack.setPadding(inset);
+
+        podcastBack.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("podcst Back Pressed");
+
+            }
+        });
+
+        //Volume
+
+        Button podcastMute = new Button("",musicMuteIcon);       //Creates button
+        if(podcastVolumeSlider.getValue() <= 0.33 && podcastVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
+        if(podcastVolumeSlider.getValue() >= 0.66){musicMuteIcon.setImage(highVol);     }             //adds icon to imageview
+        if(podcastVolumeSlider.getValue() <= 0.66 && podcastVolumeSlider.getValue() >= 0.33){musicMuteIcon.setImage(midVolIcon);    }              //adds icon to imageview
+
+        podcastMute.backgroundProperty().set(buBack);         //adds transparent background
+        podcastMute.setPadding(inset);
+
+        podcastMute.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("podcast Mute Pressed");
+                musicVolumeSlider.setValue(0);
+                musicMuteIcon.setImage(muteIcon);
+
+
+            }
+        });
+
+
+       podcastControll.getChildren().addAll(podcastBack,podcastPlay,podcastForward,podcastMute,podcastVolumeSlider);
+//// end podcast controll
 
 
          Label musicTester = new Label("");

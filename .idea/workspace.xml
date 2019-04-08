@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/ForwardButton.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/ForwardButton.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/HighVol.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/HighVol.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/LowVol.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/LowVol.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/MidVol.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/MidVol.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/Mute.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/Mute.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/PlayButton.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/PlayButton.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/backwardButton.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/backwardButton.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,11 +37,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-10123">
-              <caret line="272" column="58" selection-start-line="272" selection-start-column="58" selection-end-line="272" selection-end-column="58" />
+            <state relative-caret-position="216">
+              <caret line="691" lean-forward="true" selection-start-line="691" selection-end-line="691" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#33675#33676#0" expanded="true" />
+                <element signature="e#36847#36848#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -180,8 +173,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="71" />
-    <option name="y" value="76" />
+    <option name="x" value="64" />
+    <option name="y" value="60" />
     <option name="width" value="1442" />
     <option name="height" value="756" />
   </component>
@@ -350,7 +343,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="71" y="76" width="1442" height="756" extended-state="0" />
+    <frame x="64" y="60" width="1442" height="756" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18071428" />
@@ -625,11 +618,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10123">
-          <caret line="272" column="58" selection-start-line="272" selection-start-column="58" selection-end-line="272" selection-end-column="58" />
+        <state relative-caret-position="216">
+          <caret line="691" lean-forward="true" selection-start-line="691" selection-end-line="691" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#33675#33676#0" expanded="true" />
+            <element signature="e#36847#36848#0" expanded="true" />
           </folding>
         </state>
       </provider>
