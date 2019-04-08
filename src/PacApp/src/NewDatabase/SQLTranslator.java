@@ -32,8 +32,15 @@ public class SQLTranslator {
      * in relation to where this file is in the project directory.
      * For now just specify where it is on your own machine.
      */
-    //private final String dbLocationPath = "jdbc:sqlite:C:\\PAC\\Database\\PACDB.db";
-    private final String dbLocationPath = getPathToDB();
+    
+    /**This finds relative path to the db file in the project.
+     * With this we should no longer have to hardcode anything
+     * Still needs to be tested on MAC but I believe
+     * that File knows which OS it's on to determine what sort of 
+     * file separator to use (either / or \)
+     */
+    private File file = new File("PACDB.db").getAbsoluteFile();
+    private final String dbLocationPath = "jdbc:sqlite:".concat(file.toString());
     
     /**
      * Adds a new piece of content to DB. Desperately needs to be refactored down.
@@ -88,15 +95,18 @@ public class SQLTranslator {
             if(creatorName == null) {
                 creatorName = DBEnumeration.UNKNOWN;
             }
+            creatorName = cleanString(creatorName);
             if(genreName == null) {
                 genreName = DBEnumeration.UNKNOWN;
             }
             if(publisherName == null) {
                 publisherName = DBEnumeration.UNKNOWN;
             }
+            publisherName = cleanString(publisherName);
             if(seriesName == null) {
                 seriesName = DBEnumeration.UNKNOWN;
             }
+            seriesName = cleanString(seriesName);
             if(contentName == null) {
                 contentName = DBEnumeration.UNKNOWN;
             }
@@ -104,6 +114,7 @@ public class SQLTranslator {
             if(contentDescription == null) {
                 contentDescription = DBEnumeration.UNKNOWN;
             }
+            contentDescription = cleanString(contentDescription);
             if(uploadDate == null) {
                 uploadDate = "2019-04-03";
             }
@@ -231,7 +242,7 @@ public class SQLTranslator {
                 //Set the file into new filepath on device.
                 
                 //Original filepath
-                File file = new File(filePath);
+                /*File file = new File(filePath);
                 
                 //Make parent directories for new filepath
                 DBDirectories.createDirectories(location);
@@ -240,7 +251,7 @@ public class SQLTranslator {
                 if(file.renameTo(new File(fileName))) {
                     //file.delete();
                     System.out.println("File moved successfully");
-                }
+                }*/
                 
                 System.out.println("Content added successfully");
                 return true;    
@@ -258,6 +269,31 @@ public class SQLTranslator {
         
         //Default Value
         return false;
+    }
+    
+    
+    /**
+     * Adds content based off a filepath to the downloaded file and a type.
+     * @param filePath
+     * @param contentType
+     * @return 
+     */
+    public boolean addContent(String filePath, String contentType) {
+        String ext = getExtension(filePath);
+        Content content = null;
+        switch(ext){
+            case "mp3": 
+                content = MetaDataReader.mp3Reader(contentType, filePath);
+                break;
+            case "epub":
+                content = MetaDataReader.ePubReader(filePath);
+        }
+
+        return addContent(contentType, content.getCreatorName(), content.getGenreName(),
+                content.getPublisherName(), content.getSeriesName(), content.getContentName(),
+                content.getContentDescription(), content.getUploadDate(), content.getPageCount(),
+                content.getDuration(), content.getIsbn(), content.isExplicit(), null,
+                content.getUrl(), content.getWantToSync(), filePath);
     }
     
     
@@ -979,7 +1015,7 @@ public class SQLTranslator {
     public ResultSet getAllContentTypes() {
         
         try {
-            String query = "SELECT ContentType FROM " + DBEnumeration.CONTENTTYPE;
+            String query = "SELECT * FROM " + DBEnumeration.CONTENTTYPE;
             return getRecords(query);
         }
         
@@ -1021,7 +1057,7 @@ public class SQLTranslator {
     public ResultSet getAllGenres() {
         
         try {
-            String query = "SELECT GenreName FROM " + DBEnumeration.GENRE;
+            String query = "SELECT * FROM " + DBEnumeration.GENRE;
             return getRecords(query);
         }
         
@@ -1041,7 +1077,7 @@ public class SQLTranslator {
     public ResultSet getAllPublishers() {
         
         try {
-            String query = "SELECT PublisherName FROM Publisher";
+            String query = "SELECT * FROM Publisher";
             return getRecords(query);
         }
         
@@ -1061,7 +1097,7 @@ public class SQLTranslator {
     public ResultSet getAllSeries() {
         
         try {
-            String query = "SELECT SeriesName FROM " + DBEnumeration.SERIES;
+            String query = "SELECT * FROM " + DBEnumeration.SERIES;
             return getRecords(query);
         }
         
@@ -1082,7 +1118,7 @@ public class SQLTranslator {
     public ResultSet getContentByCreator(String creatorName) {
           
         try {
-            String query = "SELECT ContentName FROM " + DBEnumeration.CONTENT  
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT  
                     + " WHERE CreatorID = (SELECT CreatorID FROM " + DBEnumeration.CREATOR
                     + " WHERE CreatorName = '" + creatorName + "')";
             return getRecords(query);
@@ -1314,7 +1350,7 @@ public class SQLTranslator {
     public ResultSet getContentByType(String contentType) {
         
         try {
-            String query = "SELECT ContentName FROM " + DBEnumeration.CONTENT
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
                     + " c WHERE c.ContentTypeID = (SELECT ContentTypeID FROM "
                     + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '" 
                     + contentType + "')";
@@ -2152,9 +2188,9 @@ public class SQLTranslator {
      */
     private static String cleanString(String name) {
         
-            if (name.contains("!")) {
-                name = name.replace("!", "");
-            }
+//            if (name.contains("!")) {
+//                name = name.replace("!", "");
+//            }
             if (name.contains("/")) {
                 name = name.replace("/", "");
             }
@@ -2167,30 +2203,33 @@ public class SQLTranslator {
             if (name.contains("%")) {
                 name = name.replace("%", "");
             }
+            if(name.contains("\'")) {
+                name = name.replace("\'", "");
+            }
             if (name.contains("*")) {
                 name = name.replace("*", "");
             }
-            if (name.contains(":")) {
-                name = name.replace(":", "");
-            }
-            if (name.contains("|")) {
-                name = name.replace("|", "");
-            }
+//            if (name.contains(":")) {
+//                name = name.replace(":", "");
+//            }
+//            if (name.contains("|")) {
+//                name = name.replace("|", "");
+//            }
             if (name.contains("\"")) {
                 name = name.replace("\"", "");
             }
-            if (name.contains("<")) {
-                name = name.replace(">", "");
-            }
-            if (name.contains(">")) {
-                name = name.replace(">", "");
-            }
+//            if (name.contains("<")) {
+//                name = name.replace(">", "");
+//            }
+//            if (name.contains(">")) {
+//                name = name.replace(">", "");
+//            }
             if (name.contains(".")) {
                 name = name.replace(".", "");
             }
-            if (name.contains(" ")) {
-                name = name.replace(" ", "_");
-            }
+//            if (name.contains(" ")) {
+//                name = name.replace(" ", "_");
+//            }
             
             return name;
     }
@@ -2387,22 +2426,23 @@ public class SQLTranslator {
      * @param contentType
      */
     private String setContentLocation (String contentName, String contentType, String genreName, String seriesName) {  
-        String location = DBEnumeration.UNKNOWN;
+        File file1 = new File("ContentFiles").getAbsoluteFile();
+        String location = file1.toString();
         
         //Genre name given
         if(!genreName.equals(DBEnumeration.UNKNOWN)) {
                 //Series name given                
                 if(!seriesName.equals(DBEnumeration.UNKNOWN)) {
-                    location = DBEnumeration.PROJECTDIRECTORY 
-                            + contentType + "/" + genreName
-                            + "/" + seriesName + "/";
+                    location = location + File.separator 
+                            + contentType + File.separator + genreName
+                            + File.separator + seriesName + File.separator;
                     }
 
                 //No series name given
                 else {
-                    location = DBEnumeration.PROJECTDIRECTORY 
-                            + contentType + "/" + genreName + "/" + DBEnumeration.UNKNOWN
-                            + "/";
+                    location = location + File.separator 
+                            + contentType + File.separator + genreName + File.separator + DBEnumeration.UNKNOWN
+                            + File.separator;
 
                 }
             }
@@ -2411,16 +2451,16 @@ public class SQLTranslator {
             else {
                 //Series name given
                 if(!seriesName.equals(DBEnumeration.UNKNOWN)) {
-                    location = DBEnumeration.PROJECTDIRECTORY 
-                            + contentType + "/" + DBEnumeration.UNKNOWN
-                            + "/" + seriesName + "/";
+                    location = location + File.separator 
+                            + contentType + File.separator + DBEnumeration.UNKNOWN
+                            + File.separator  + seriesName + File.separator ;
                 }
 
                 //No series name given
                 else {
-                    location = DBEnumeration.PROJECTDIRECTORY 
-                            + contentType + "/" + DBEnumeration.UNKNOWN
-                            + "/" + DBEnumeration.UNKNOWN + "/";
+                    location = location + File.separator 
+                            + contentType + File.separator  + DBEnumeration.UNKNOWN
+                            + File.separator  + DBEnumeration.UNKNOWN + File.separator ;
                 }
             }
         
@@ -2442,15 +2482,17 @@ public class SQLTranslator {
     
     
     private String getPathToDB() {
-        
+        System.getProperty("file.separator");
         final String constant = "jdbc:sqlite:";
         String workingDirectory = System.getProperty("user.dir");
         File file = new File(workingDirectory);
         String parentDirectory = file.getParent();
         File file2 = new File(parentDirectory);
-        String databaseDirectory = file2.getParent() + "/Database/PACDB.db";
+        String databaseDirectory = file2.getParent() + File.separator  + "Database"
+                + File.separator + "PACDB.db";
         
         return constant + databaseDirectory;
+        //return ("File:PACDB.db");
     }
     
     
@@ -2470,24 +2512,5 @@ public class SQLTranslator {
             Logger.getLogger(SQLTranslator.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-    
-    
-    public boolean addContent(String filePath, String contentType) {
-        String ext = getExtension(filePath);
-        Content content = null;
-        switch(ext){
-            case "mp3": 
-                content = MetaDataReader.mp3Reader(contentType, filePath);
-                break;
-            case "epub":
-                content = MetaDataReader.ePubReader(filePath);
-        }
-
-        return addContent(contentType, content.getCreatorName(), content.getGenreName(),
-                content.getPublisherName(), content.getSeriesName(), content.getContentName(),
-                content.getContentDescription(), content.getUploadDate(), content.getPageCount(),
-                content.getDuration(), content.getIsbn(), content.isExplicit(), null,
-                content.getUrl(), content.getWantToSync(), filePath);
     }
 }
