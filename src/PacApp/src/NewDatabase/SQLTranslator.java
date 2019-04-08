@@ -249,16 +249,16 @@ public class SQLTranslator {
                 //Set the file into new filepath on device.
                 
                 //Original filepath
-                /*File file = new File(filePath);
+                File file = new File(originalFilePath);
                 
                 //Make parent directories for new filepath
                 DBDirectories.createDirectories(location);
                 
-                //New filepath for application.
+               // New filepath for application.
                 if(file.renameTo(new File(fileName))) {
-                    //file.delete();
+                    file.delete();
                     System.out.println("File moved successfully");
-                }*/
+                }
                 
                 System.out.println("Content added successfully");
                 return true;    
@@ -2328,15 +2328,21 @@ public class SQLTranslator {
     }
     
     
-        private String cleanOriginalFilePath(String name) {
-            if(name.contains("[")) {
-                name = name.replace("[", "");
-            }
-            if(name.contains("]")) {
-                name = name.replace("]", "");
-            }
-            
-            return name;
+    /**
+     * Cleans the original file path of the content of any brackets that appear
+     * on Andrew's computer.
+     * @param name
+     * @return 
+     */
+    private String cleanOriginalFilePath(String name) {
+        if(name.contains("[")) {
+            name = name.replace("[", "");
+        }
+        if(name.contains("]")) {
+            name = name.replace("]", "");
+        }
+
+        return name;
     }
     
     
