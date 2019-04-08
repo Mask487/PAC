@@ -458,6 +458,7 @@ public class PacApp extends Application {
         sync.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                t.initializePhone(0);
                 t.sync();
                 System.out.println("Sync Pressed");
 
@@ -472,6 +473,7 @@ public class PacApp extends Application {
         backup.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                t.initializePhone(0);
                 t.backup();
                 System.out.println("backup Pressed");
 
@@ -727,7 +729,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                   // addContent(Music,);
+                    sql.addContent("" + db.getFiles().toString(),"Music");
                     System.out.println("music added");
                     musicTester.setText(db.getFiles().toString());
                     success = true;
@@ -764,6 +766,7 @@ public class PacApp extends Application {
                 boolean success = false;
                 if (db.hasFiles()) {
                     // addContent("EBook,);
+                    sql.addContent("" + db.getFiles().toString(),"EBook");
                     System.out.println("eBook added");
                     ebookTester.setText(db.getFiles().toString());
                     success = true;
@@ -835,7 +838,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    // addContent(Video,);
+                    sql.addContent("" + db.getFiles().toString(),"Video");
                     System.out.println("video added");
                     videoTester.setText(db.getFiles().toString());
                     success = true;
@@ -870,7 +873,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    // addContent(Podcast,);
+                    sql.addContent("" + db.getFiles().toString(),"Podcast");
                     System.out.println("podcast added");
                     podcastTester.setText(db.getFiles().toString());
                     success = true;
@@ -905,7 +908,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    // addContent(App,);
+                    sql.addContent("" + db.getFiles().toString(),"App");
                     System.out.println("app added");
                     appTester.setText(db.getFiles().toString());
                     success = true;

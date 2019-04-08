@@ -2,49 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/NewDatabase/SQLTranslator.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/NewDatabase/SQLTranslator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$22.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$25.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$26.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$27.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$28.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$29.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$30.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$31.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$31.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$32.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$32.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$33.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$33.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$34.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$34.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$35.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$35.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$36.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$36.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$37.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$37.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,20 +43,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="801" column="75" selection-start-line="801" selection-start-column="75" selection-end-line="801" selection-end-column="75" />
+            <state relative-caret-position="266">
+              <caret line="473" column="21" lean-forward="true" selection-start-line="473" selection-start-column="21" selection-end-line="473" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="73">
-              <caret line="289" column="50" selection-start-line="289" selection-start-column="50" selection-end-line="289" selection-end-column="50" />
+              <caret line="289" column="48" selection-start-line="289" selection-start-column="48" selection-end-line="289" selection-end-column="48" />
               <folding>
                 <element signature="e#69928#69929#0" expanded="true" />
                 <element signature="e#69956#69957#0" expanded="true" />
@@ -153,8 +111,8 @@
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java" />
-        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" />
       </list>
     </option>
   </component>
@@ -178,6 +136,68 @@
             <path>
               <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
               <item name="PAC" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="audioBook" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="audioBook" type="462c0819:PsiDirectoryNode" />
+              <item name="Alternative" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="audioBook" type="462c0819:PsiDirectoryNode" />
+              <item name="Alternative" type="462c0819:PsiDirectoryNode" />
+              <item name="UNKNOWN" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="audioBook" type="462c0819:PsiDirectoryNode" />
+              <item name="Pop Rock" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="audioBook" type="462c0819:PsiDirectoryNode" />
+              <item name="Pop Rock" type="462c0819:PsiDirectoryNode" />
+              <item name="UNKNOWN" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="Music" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="Music" type="462c0819:PsiDirectoryNode" />
+              <item name="Classical" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="Music" type="462c0819:PsiDirectoryNode" />
+              <item name="Classical" type="462c0819:PsiDirectoryNode" />
+              <item name="Land of the Mountain and the FlooD" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
@@ -350,7 +370,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="98" y="81" width="1442" height="756" extended-state="0" />
+    <frame x="249" y="221" width="1442" height="756" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18285714" />
@@ -614,17 +634,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="801" column="75" selection-start-line="801" selection-start-column="75" selection-end-line="801" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="73">
-          <caret line="289" column="50" selection-start-line="289" selection-start-column="50" selection-end-line="289" selection-end-column="50" />
+          <caret line="289" column="48" selection-start-line="289" selection-start-column="48" selection-end-line="289" selection-end-column="48" />
           <folding>
             <element signature="e#69928#69929#0" expanded="true" />
             <element signature="e#69956#69957#0" expanded="true" />
@@ -641,6 +654,13 @@
             <element signature="e#70716#70717#0" expanded="true" />
             <element signature="e#70744#70745#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="473" column="21" lean-forward="true" selection-start-line="473" selection-start-column="21" selection-end-line="473" selection-end-column="21" />
         </state>
       </provider>
     </entry>
