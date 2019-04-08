@@ -13,7 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -21,14 +21,9 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import NewDatabase.ContentDAO;
@@ -53,7 +48,7 @@ public class PacApp extends Application {
 
         primary.fillProperty().set(Paint.valueOf("505050"));
         stage.setScene(primary);
-        root2.setMinSize(720, 480);
+        root2.setMinSize(750, 510);
         //root2.setMaxSize(1600,900);
 
         Insets bFillIn = new Insets(0);
@@ -82,6 +77,15 @@ public class PacApp extends Application {
         TilePane appCont = new TilePane();
         ScrollPane appPane = new ScrollPane(appCont);
         VBox settingsList = new VBox();
+        HBox musicControll = new HBox(10);
+        HBox videoControll = new HBox(10);
+        HBox podcastControll = new HBox(10);
+        HBox ebookControll = new HBox(10);
+        HBox audioBoookControll = new HBox(10);
+        HBox phoneProgress = new HBox(10);
+        Button throwaway = new Button("");
+
+
 
         //create background anchor
         root2.setRightAnchor(bp, 0.0);
@@ -106,6 +110,9 @@ public class PacApp extends Application {
         BackgroundFill cenFill = new BackgroundFill(Paint.valueOf("414141"), bFillCR, bFillIn);
         Background cenBack = new Background(cenFill);
         centerAnchorPane.setBackground(cenBack);
+
+
+        throwaway.backgroundProperty().set(buBack);
 
         // Sidebar Button for the Music Section
         Image musicIconP = new Image("MusicIcon.png");   //Load Music Icon for imageview
@@ -203,8 +210,10 @@ public class PacApp extends Application {
         //Create horizontal Box for bottom controlls
         HBox bottomButt = new HBox();
         bottomButt.setPadding(new Insets(5));
-        ProgressBar mainProg = new ProgressBar(0); //setProgress()
-        bottomButt.getChildren().addAll(mainProg);
+
+
+
+
 
         music.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -261,7 +270,7 @@ public class PacApp extends Application {
                 mainStack.getChildren().add(audioBookPane);
                 audioBookCont.getChildren().clear();
                 ContentDAO dao = new ContentDAO();
-                Set abset = dao.getAllContentByType("Audio Book");
+                Set abset = dao.getAllContentByType("audioBook");
                 System.out.println("Audio Book Pressed");
                 Iterator abiter = abset.iterator();
                 int setSize = abset.size();
@@ -311,7 +320,7 @@ public class PacApp extends Application {
                 mainStack.getChildren().add(videoPane);
                 videoCont.getChildren().clear();
             ContentDAO dao = new ContentDAO();
-            Set videoset = dao.getAllContentByType("video");
+            Set videoset = dao.getAllContentByType("Video");
             System.out.println("video Pressed");
             Iterator videoiter = videoset.iterator();
             int setSize = videoset.size();
@@ -349,7 +358,7 @@ public class PacApp extends Application {
             }
         });
 
-        vbutt.getChildren().addAll(music, book, aBook, podcast, video, apps, phoneB);
+        vbutt.getChildren().addAll(music, book, aBook, podcast, video, apps, phoneB,throwaway);
         bvbutt.getChildren().addAll(settingsB);
 
         // Create music pane
@@ -365,10 +374,7 @@ public class PacApp extends Application {
         bookPane.setFitToWidth(true);
         bookPane.setFitToHeight(true);
         bookPane.setPannable(false);
-        Label noBook = new Label("You have no Books \n import Books to get started.");
 
-        noBook.backgroundProperty().set(cenBack);
-        bookCont.getChildren().addAll(noBook);
 
         // Create audio book pane
         audioBookCont.backgroundProperty().set(cenBack);
@@ -376,9 +382,7 @@ public class PacApp extends Application {
         audioBookPane.setFitToWidth(true);
         audioBookPane.setFitToHeight(true);
         audioBookPane.setPannable(false);
-        Label noAudioBook = new Label("You have no audio books \n import audio Books to get started.");
-        noAudioBook.backgroundProperty().set(buBack);
-        audioBookCont.getChildren().addAll(noAudioBook);
+
 
         // Create app pane
         appCont.backgroundProperty().set(cenBack);
@@ -386,10 +390,7 @@ public class PacApp extends Application {
         appPane.setFitToWidth(true);
         appPane.setFitToHeight(true);
         appPane.setPannable(false);
-        Label noApp = new Label("You have no apps \n import apps to get started.");
-        noApp.setTextFill(Paint.valueOf("101010"));
-        noApp.backgroundProperty().set(buBack);
-        appCont.getChildren().addAll(noApp);
+
 
         // Create podcast pane
         podcastCont.backgroundProperty().set(cenBack);
@@ -397,9 +398,7 @@ public class PacApp extends Application {
         podcastPane.setFitToWidth(true);
         podcastPane.setFitToHeight(true);
         podcastPane.setPannable(false);
-        Label nopodcast = new Label("You have no podcasts \n import podcasts to get started.");
-        nopodcast.backgroundProperty().set(buBack);
-        podcastCont.getChildren().addAll(nopodcast);
+
 
         // Create video pane
         videoCont.backgroundProperty().set(cenBack);
@@ -407,9 +406,7 @@ public class PacApp extends Application {
         videoPane.setFitToWidth(true);
         videoPane.setFitToHeight(true);
         videoPane.setPannable(false);
-        Label noVideo = new Label("You have no videos \n import videos to get started.");
-        noVideo.backgroundProperty().set(buBack);
-        videoCont.getChildren().addAll(noVideo);
+
 
         // create settings VBox
         Button lightMode = new Button("Change to light mode.");       //Creates button
@@ -483,7 +480,7 @@ public class PacApp extends Application {
 //                System.out.println("copy entered");
 //
 //            }
-//        });
+//        });   2EB900 green color
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -496,10 +493,11 @@ public class PacApp extends Application {
         Button android = new Button("Duplicate Phone", Android);
         copy.backgroundProperty().set(buBack);
 
+
         VBox midButt = new VBox();
         midButt.setPadding(new Insets(5, 5, 5, 5));
         midButt.setSpacing(50);
-        midButt.getChildren().addAll(sync, backup, copy);
+        midButt.getChildren().addAll(sync, backup, copy,throwaway);
 
         phoneB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -511,7 +509,110 @@ public class PacApp extends Application {
             }
         });
 
-        Label musicTester = new Label("");
+        Insets sliderIn = new Insets(8.0,0.0,8.0,0.0);
+
+        //Music Controll
+
+        //music volume slider
+        Slider musicVolumeSlider = new Slider();
+        musicVolumeSlider.setMin(0);
+        musicVolumeSlider.setMax(100);
+        musicVolumeSlider.setValue(0);
+        musicVolumeSlider.setPadding(sliderIn);
+        //music progress slider
+        Slider musicProgressSlider = new Slider();
+        musicProgressSlider.setMin(0);
+        musicProgressSlider.setMax(100);
+        musicProgressSlider.setValue(0);
+        //Play
+        Image PlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
+        ImageView musicPlayIcon = new ImageView();
+        musicPlayIcon.setImage(PlayIcon);                  //adds icon to imageview
+        Button musicPlay = new Button("",musicPlayIcon);       //Creates button
+
+        musicPlay.backgroundProperty().set(buBack);         //adds transparent background
+        musicPlay.setPadding(inset);
+
+        musicPlay.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Music Play Pressed");
+
+            }
+        });
+        // forward
+        Image forwardIcon = new Image("ForwardButton.png");   //Load forward  Icon for imageview
+        ImageView forwardMusicIcon = new ImageView();
+        forwardMusicIcon.setImage(forwardIcon);                  //adds icon to imageview
+        Button musicForward = new Button("",forwardMusicIcon);       //Creates button
+
+        musicForward.backgroundProperty().set(buBack);         //adds transparent background
+        musicForward.setPadding(inset);
+
+        musicForward.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Music Forward Pressed");
+
+            }
+        });
+    //Backward
+        Image BackIcon = new Image("backwardButton.png");   //Load Back  Icon for imageview
+        ImageView musicBackIcon = new ImageView();
+        musicBackIcon.setImage(BackIcon);                  //adds icon to imageview
+        Button musicBack = new Button("",musicBackIcon);       //Creates button
+
+        musicBack.backgroundProperty().set(buBack);         //adds transparent background
+        musicBack.setPadding(inset);
+
+        musicBack.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Music Back Pressed");
+
+            }
+        });
+
+        //Volume
+        Image muteIcon = new Image("Mute.png");   //Load play  Icon for imageview
+        ImageView musicMuteIcon = new ImageView();
+        musicMuteIcon.setImage(muteIcon);                  //adds icon to imageview
+        Button musicMute = new Button("",musicMuteIcon);       //Creates button
+        Image lowVolIcon = new Image("LowVol.png");   //Load play  Icon for imageview
+        ImageView musicLowIcon = new ImageView();
+        if(musicVolumeSlider.getValue() <= 0.33 && musicVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
+        Image highVol = new Image("HighVol.png");   //Load play  Icon for imageview
+        ImageView highVolIcon = new ImageView();
+        if(musicVolumeSlider.getValue() >= 0.66){musicMuteIcon.setImage(highVol);     }             //adds icon to imageview
+        Image midVolIcon = new Image("MidVol.png");   //Load play  Icon for imageview
+        ImageView midVol = new ImageView();
+        if(musicVolumeSlider.getValue() <= 0.66 && musicVolumeSlider.getValue() >= 0.33){musicMuteIcon.setImage(midVolIcon);    }              //adds icon to imageview
+
+        musicMute.backgroundProperty().set(buBack);         //adds transparent background
+        musicMute.setPadding(inset);
+
+        musicMute.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Music Mute Pressed");
+                musicVolumeSlider.setValue(0);
+                musicMuteIcon.setImage(muteIcon);
+
+
+            }
+        });
+
+
+        musicControll.getChildren().addAll(musicBack,musicPlay,musicForward,musicMute,musicVolumeSlider);
+//// end music controll
+
+
+
+         Label musicTester = new Label("");
         musicCont.getChildren().add(musicTester);
         //drag and drop music
         musicCont.setOnDragOver(new EventHandler<DragEvent>() {
@@ -520,7 +621,7 @@ public class PacApp extends Application {
             public void handle(DragEvent event) {
                 if (event.getGestureSource() != musicCont
                         && event.getDragboard().hasFiles()) {
-                    /* allow for both copying and moving, whatever user chooses */
+
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 }
                 event.consume();
@@ -534,7 +635,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                   // addContent(,);
+                   // addContent(Music,);
                     System.out.println("music added");
                     musicTester.setText(db.getFiles().toString());
                     success = true;
@@ -556,7 +657,7 @@ public class PacApp extends Application {
             public void handle(DragEvent event) {
                 if (event.getGestureSource() != bookCont
                         && event.getDragboard().hasFiles()) {
-                    /* allow for both copying and moving, whatever user chooses */
+
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 }
                 event.consume();
@@ -570,8 +671,8 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    // addContent(,);
-                    System.out.println("e book added");
+                    // addContent("EBook,);
+                    System.out.println("eBook added");
                     ebookTester.setText(db.getFiles().toString());
                     success = true;
                 }
@@ -591,7 +692,7 @@ public class PacApp extends Application {
             public void handle(DragEvent event) {
                 if (event.getGestureSource() != audioBookCont
                         && event.getDragboard().hasFiles()) {
-                    /* allow for both copying and moving, whatever user chooses */
+
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 }
                 event.consume();
@@ -605,7 +706,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    // addContent(,);
+                    // addContent(audioBook,);
                     System.out.println("audio book added");
                     audioBookTester.setText(db.getFiles().toString());
                     success = true;
@@ -627,7 +728,7 @@ public class PacApp extends Application {
             public void handle(DragEvent event) {
                 if (event.getGestureSource() != videoCont
                         && event.getDragboard().hasFiles()) {
-                    /* allow for both copying and moving, whatever user chooses */
+
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 }
                 event.consume();
@@ -641,7 +742,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    // addContent(,);
+                    // addContent(Video,);
                     System.out.println("video added");
                     videoTester.setText(db.getFiles().toString());
                     success = true;
@@ -662,7 +763,7 @@ public class PacApp extends Application {
             public void handle(DragEvent event) {
                 if (event.getGestureSource() != podcastCont
                         && event.getDragboard().hasFiles()) {
-                    /* allow for both copying and moving, whatever user chooses */
+
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 }
                 event.consume();
@@ -676,7 +777,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    // addContent(,);
+                    // addContent(Podcast,);
                     System.out.println("podcast added");
                     podcastTester.setText(db.getFiles().toString());
                     success = true;
@@ -697,7 +798,7 @@ public class PacApp extends Application {
             public void handle(DragEvent event) {
                 if (event.getGestureSource() != appCont
                         && event.getDragboard().hasFiles()) {
-                    /* allow for both copying and moving, whatever user chooses */
+
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 }
                 event.consume();
@@ -711,7 +812,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    // addContent(,);
+                    // addContent(App,);
                     System.out.println("app added");
                     appTester.setText(db.getFiles().toString());
                     success = true;
@@ -724,6 +825,9 @@ public class PacApp extends Application {
             }
         });
 
+
+       // bottomButt.getChildren().addAll();
+
         mainStack.getChildren().setAll(phoneMidRow, musicPane);
         tAnchor.getChildren().addAll(mainStack);
         tAnchor.setRightAnchor(mainStack, 25.0);// area around
@@ -731,29 +835,24 @@ public class PacApp extends Application {
         tAnchor.setBottomAnchor(mainStack, 25.0);// area around
         tAnchor.setTopAnchor(mainStack, 25.0);// area around
 
-        // test buttons
-        Button buttonSave = new Button("right");
-        Button buttonCancel = new Button("left");
-        Button buttonTop = new Button("Top");
-
         //MusicPane
-        Label noMusic = new Label("You have no Music \n import music to get started!");
+        Label noMusic = new Label("You have no content\nImport content, into the appropriate pane, via drag and drop.");
+        noMusic.setFont(new Font(25.0));
         noMusic.backgroundProperty().set(buBack);
         musicCont.getChildren().addAll(noMusic);
 
         phoneMidRow.getChildren().addAll(Android, midButt);
-        // Button buttonbottom = new Button("bottom");
         centerAnchorPane.getChildren().addAll(tAnchor);
         centerAnchorPane.setRightAnchor(tAnchor, 5.0);
         centerAnchorPane.setLeftAnchor(tAnchor, 5.0);
         centerAnchorPane.setTopAnchor(tAnchor, 5.0);
         centerAnchorPane.setBottomAnchor(tAnchor, 5.0);
 
-        bottomAnchorPane.getChildren().addAll(bottomButt);
-        bottomAnchorPane.setRightAnchor(bottomButt, 5.0);
-        bottomAnchorPane.setLeftAnchor(bottomButt, 5.0);
-        bottomAnchorPane.setTopAnchor(bottomButt, .0);
-        bottomAnchorPane.setBottomAnchor(bottomButt, .0);
+        bottomAnchorPane.getChildren().addAll(musicControll);
+        bottomAnchorPane.setRightAnchor(musicControll, 10.0);
+        bottomAnchorPane.setLeftAnchor(musicControll, 10.0);
+        bottomAnchorPane.setTopAnchor(musicControll, 10.0);
+        bottomAnchorPane.setBottomAnchor(musicControll, 10.0);
         leftButtonPane.getChildren().addAll(vbutt, bvbutt);
         topAnchorPane.getChildren().addAll(hSearch);
         leftButtonPane.setTopAnchor(vbutt, 0.0);

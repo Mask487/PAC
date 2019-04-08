@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="" />
+    <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/PacApp/src/ForwardButton.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/ForwardButton.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PacApp/src/HighVol.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/HighVol.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PacApp/src/LowVol.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/LowVol.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PacApp/src/MidVol.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/MidVol.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PacApp/src/Mute.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/Mute.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PacApp/src/PlayButton.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/PlayButton.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PacApp/src/backwardButton.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/backwardButton.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,10 +44,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="510" column="13" lean-forward="true" selection-start-line="510" selection-start-column="13" selection-end-line="510" selection-end-column="13" />
+            <state relative-caret-position="-10123">
+              <caret line="272" column="58" selection-start-line="272" selection-start-column="58" selection-end-line="272" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#33675#33676#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -56,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="34" column="114" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="114" />
+            <state relative-caret-position="131">
+              <caret line="2234" column="26" selection-start-line="2234" selection-start-column="19" selection-end-line="2234" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -136,6 +146,9 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>buBack</find>
+      <find>neB</find>
+      <find>no mu</find>
+      <find>addCont</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -167,8 +180,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="113" />
-    <option name="y" value="24" />
+    <option name="x" value="71" />
+    <option name="y" value="76" />
     <option name="width" value="1442" />
     <option name="height" value="756" />
   </component>
@@ -337,7 +350,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="113" y="24" width="1442" height="756" extended-state="0" />
+    <frame x="71" y="76" width="1442" height="756" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18071428" />
@@ -348,7 +361,7 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3298193" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25451806" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43365696" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -359,7 +372,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32827735" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32680723" />
       <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32936078" />
       <window_info anchor="bottom" id="DB Execution Console" order="14" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -452,9 +465,9 @@
           <properties />
           <option name="timeStamp" value="34" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java</url>
-          <line>240</line>
+          <line>249</line>
           <properties />
           <option name="timeStamp" value="35" />
         </line-breakpoint>
@@ -541,33 +554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="510" column="13" lean-forward="true" selection-start-line="510" selection-start-column="13" selection-end-line="510" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="34" column="114" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="114" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36930">
@@ -617,6 +603,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="18" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="2234" column="26" selection-start-line="2234" selection-start-column="19" selection-end-line="2234" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10123">
+          <caret line="272" column="58" selection-start-line="272" selection-start-column="58" selection-end-line="272" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#33675#33676#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
