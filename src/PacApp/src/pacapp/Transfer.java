@@ -29,7 +29,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
             System.out.println("Config path doesnt exist");
             PrintWriter w = new PrintWriter("PAC_Config.cfg");
             w.println("adb_directory = \"\"");
-            w.println("backup_directory = \"" + mainPath + "\"Backups\"");
+            w.println("backup_directory = \"" + mainPath + "\\Backups\\\"");
             w.println("phone_ip = \"\"");
             w.close();
             file = new File("PAC_Config.cfg");
@@ -164,15 +164,16 @@ class Transfer extends Thread implements pacapp.TransferObject {
     }
 
     public String getBackupPath() throws IOException{
-        if (this.backupPath != null){
+        if (this.backupPath != null) {
             return this.backupPath;
         }else{
             File file = new File(this.mainPath + "\\PAC_Config.cfg");
             String conString = fileToString(file);
-            String[] a = conString.split("backup_directory \"");
+            String[] a = conString.split("backup_directory = \"");
+            //System.out.println("test " + a[0] + "\ntest " + a[1]);
             String[] b = a[1].split("\"");
             String path = b[0];
-            System.out.println("get backup path test: " + path);
+            //System.out.println("get backup path test: " + path);
             this.backupPath = path;
         }
         return this.backupPath;
@@ -500,7 +501,6 @@ class Transfer extends Thread implements pacapp.TransferObject {
         //make sure phone model is here
         String pModel = getPhoneModel();
         String time = new SimpleDateFormat("yyyy-MM-dd_HHmm").format(Calendar.getInstance().getTime());
-
         class BackupThread implements Runnable{
             //String path;
             BackupThread(String string) {
@@ -548,11 +548,15 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     }
 
-    /*
-    public void restore(){
-        File file = new file()
+
+    public void restore()throws IOException{
+        File bfolder = new File(this.getBackupPath());
+        File[] backups = bfolder.listFiles();
+        if(backups.length == 1){
+            pctoP((setTargetFolder("Phone", pD)), backups[0]);
+        }
     }
-    */
+
 
     private void recur(PortableDeviceFolderObject object, String tab, File file) {
         tab = tab + "    ";
