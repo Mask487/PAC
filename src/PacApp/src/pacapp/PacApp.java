@@ -243,6 +243,31 @@ public class PacApp extends Application {
 
         });
 
+        apps.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+                mainStack.getChildren().add(appPane);
+                appCont.getChildren().clear();
+                ContentDAO dao = new ContentDAO();
+                Set appset = dao.getAllContentByType("App");
+                System.out.println("App Pressed");
+                Iterator appiter = appset.iterator();
+                int setSize = appset.size();
+                Button[] listings = new Button[setSize];
+                int i = 0;
+                while (appiter.hasNext()) {
+                    Content content = new Content();
+                    content = (NewDatabase.Content) appiter.next();
+                    appButt(content, listings, i,appCont,buBack);
+                    i++;
+                }
+
+            }
+
+
+        });
+
         book.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -1059,8 +1084,22 @@ public class PacApp extends Application {
         cont.getChildren().add(L[i]);
     }
 
-    public static void infButt() {
+    public static void appButt(Content objs, Button[] L, int i, TilePane cont, Background b) {
 
+        String name = objs.getContentName();
+        L[i] = new Button(name);
+        L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].backgroundProperty().set(b);
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println(name + " Pressed");
+
+            }
+        });
+        cont.getChildren().add(L[i]);
     }
 
 }
