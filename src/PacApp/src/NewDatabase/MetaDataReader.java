@@ -133,7 +133,7 @@ public class MetaDataReader {
             content.setContentName(metadata.get("title"));
             content.setSeriesName(metadata.get("Series"));
             content.setCreatorName(metadata.get("Author"));
-            content.setGenreName("Genre");
+            content.setGenreName(metadata.get("Genre"));
             content.setContentTypeName("EBook");
             content.setUploadDate(metadata.get("Creation-Date"));
             content.setPublisherName(metadata.get("Publisher"));
@@ -186,7 +186,7 @@ public class MetaDataReader {
             content.setContentName(metadata.get("title"));
             content.setSeriesName(metadata.get("Series"));
             content.setCreatorName(metadata.get("Author"));
-            content.setGenreName("Genre");
+            content.setGenreName(metadata.get("Genre"));
             content.setContentTypeName("EBook");
             content.setUploadDate(metadata.get("Creation-Date"));
             content.setPublisherName(metadata.get("Publisher"));
