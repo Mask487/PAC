@@ -3,18 +3,17 @@ package pacapp;
 import jmtp.PortableDevice;
 import jmtp.PortableDeviceFolderObject;
 import jmtp.PortableDeviceObject;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 //check backup method just in case
 //finish clone
 //query
 //autodetect usb
-//syncQueuery thread conflicts wiht backup
+//syncQueuery thread conflicts with backup
 
 public interface TransferObject
 {
@@ -24,8 +23,7 @@ public interface TransferObject
     void ptoPC(PortableDeviceObject pDO, String file);
     void getFolder(String folder, File file);
     void backup();
-    void addFiles(File file, char choice);
-    void addFiles(ArrayList<File> files, char choice);
+    void addFiles(ArrayList<FileA> files);
     void addPodcast(File file);
     void addPodcast(ArrayList<File> files);
     void addEBook(File file);
@@ -34,6 +32,8 @@ public interface TransferObject
     void addMusic(ArrayList<File> files);
     void addVideos(File file);
     void addVideos(ArrayList<File> files);
+    void addAudioBook(File file);
+    void addAudioBook(ArrayList<File> files);
     int getPhoneBattery();
     void getPhoneIp() throws IOException;
     boolean setMainPath(String path);
@@ -44,7 +44,7 @@ public interface TransferObject
     String getPhoneName();
     String getIp();
     String getAdbPath() throws IOException;
-    ArrayList<String> syncQueuery();
+    ArrayList<FileA> syncQueuery();
 
 
 

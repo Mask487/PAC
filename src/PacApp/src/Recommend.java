@@ -1,6 +1,6 @@
 
-import NewDatabase.SQLTranslator;
-import NewDatabase.ContentDAO;
+import Database.SQLTranslator;
+import Database.ContentDAO;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,16 +28,16 @@ public class Recommend {
         String st = searchType;
 
         if (st.equals("genre")) {
-            ContentDAO dao = new NewDatabase.ContentDAO();
+            ContentDAO dao = new Database.ContentDAO();
             searchTerms = dao.getAllGenres();
         } else if (st.equals("author")) {
-            ContentDAO dao = new NewDatabase.ContentDAO();
+            ContentDAO dao = new Database.ContentDAO();
             searchTerms = dao.getAllCreators();
         } else if (st.equals("series")) {
-            ContentDAO dao = new NewDatabase.ContentDAO();
+            ContentDAO dao = new Database.ContentDAO();
             searchTerms = dao.getAllSeries();
         } else if (st.equals("publisher")) {
-            ContentDAO dao = new NewDatabase.ContentDAO();
+            ContentDAO dao = new Database.ContentDAO();
             searchTerms = dao.getAllPublishers();
         } else {
             //should eventually return a message popup containing the string

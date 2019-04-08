@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PAC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PAC.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/src/TransferTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/src/TransferTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,46 +25,87 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="PACDB" type="feb32156:DbDataSourceImpl" />
-      </path>
-    </expand>
+    <expand />
     <select />
-  </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="691" lean-forward="true" selection-start-line="691" selection-end-line="691" />
+            <state relative-caret-position="-403">
+              <caret line="81" column="64" selection-start-line="81" selection-start-column="64" selection-end-line="81" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#36847#36848#0" expanded="true" />
+                <element signature="method#initializeDesk#0;class#Transfer#0" />
+                <element signature="e#1817#1824#0" expanded="true" />
+                <element signature="method#initializePhone#0;class#Transfer#0" />
+                <element signature="method#setMainPath#0;class#Transfer#0" />
+                <element signature="method#fileToString#0;class#Transfer#0" />
+                <element signature="method#setAdbPath#0;class#Transfer#0" />
+                <element signature="method#getAdbPath#0;class#Transfer#0" />
+                <element signature="method#setBackupPath#0;class#Transfer#0" />
+                <element signature="method#getPhoneIp#0;class#Transfer#0" />
+                <element signature="method#getIp#0;class#Transfer#0" />
+                <element signature="method#wifiSetup#0;class#Transfer#0" />
+                <element signature="method#getPhoneModel#0;class#Transfer#0" />
+                <element signature="method#getPhoneBattery#0;class#Transfer#0" />
+                <element signature="method#getPhoneName#0;class#Transfer#0" />
+                <element signature="method#sync#0;class#Transfer#0" />
+                <element signature="method#addFiles#1;class#Transfer#0" />
+                <element signature="method#addPodcast#0;class#Transfer#0" />
+                <element signature="method#addPodcast#1;class#Transfer#0" />
+                <element signature="method#addEBook#0;class#Transfer#0" />
+                <element signature="method#addEbook#0;class#Transfer#0" />
+                <element signature="method#addAudioBook#0;class#Transfer#0" />
+                <element signature="method#addAudiobook#0;class#Transfer#0" />
+                <element signature="method#addMusic#0;class#Transfer#0" />
+                <element signature="method#addMusic#1;class#Transfer#0" />
+                <element signature="method#addVideos#0;class#Transfer#0" />
+                <element signature="method#addVideos#1;class#Transfer#0" />
+                <element signature="method#getFolder#0;class#Transfer#0" />
+                <element signature="method#ptoPC#0;class#Transfer#0" />
+                <element signature="method#pctoP#0;class#Transfer#0" />
+                <element signature="method#checkConnection#0;class#Transfer#0" />
+                <element signature="method#backup#0;class#Transfer#0" />
+                <element signature="method#recur#0;class#Transfer#0" />
+                <element signature="method#doesFileExist#0;class#Transfer#0" />
+                <element signature="method#doesFolderExist#0;class#Transfer#0" />
+                <element signature="method#createFolder#0;class#Transfer#0" />
+                <element signature="method#setTargetFolder#0;class#Transfer#0" />
+                <element signature="class#FileA#0" />
+                <element signature="e#22358#22359#0" expanded="true" />
+                <element signature="e#22393#22394#0" expanded="true" />
+                <element signature="e#22427#22428#0" expanded="true" />
+                <element signature="e#22463#22464#0" expanded="true" />
+                <element signature="e#22489#22490#0" expanded="true" />
+                <element signature="e#22521#22522#0" expanded="true" />
+                <element signature="e#22734#22735#0" expanded="true" />
+                <element signature="e#22774#22775#0" expanded="true" />
+                <element signature="e#22801#22802#0" expanded="true" />
+                <element signature="e#22831#22832#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="2234" column="26" selection-start-line="2234" selection-start-column="19" selection-end-line="2234" selection-end-column="26" />
+            <state relative-caret-position="304">
+              <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,67 +114,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36930">
-              <caret line="2487" selection-start-line="2487" selection-end-line="2487" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/Util/ContentLocationDirectory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3Connection.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1905">
-              <caret line="147" column="78" selection-start-line="147" selection-start-column="78" selection-end-line="147" selection-end-column="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Content.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5010">
-              <caret line="347" selection-start-line="347" selection-end-line="347" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3ResultSet.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3645">
-              <caret line="266" selection-start-line="266" selection-end-line="266" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="18" selection-start-column="18" selection-end-column="18" />
+        <entry file="db://3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection">
+          <provider selected="true" editor-type-id="0.CONSOLE">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -138,10 +126,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>buBack</find>
-      <find>neB</find>
-      <find>no mu</find>
-      <find>addCont</find>
+      <find>user</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -159,24 +144,23 @@
         <option value="$PROJECT_DIR$/src/PacApp/transfere/src/TransferObject.java" />
         <option value="$PROJECT_DIR$/src/PacApp/transfere/src/TransferTest.java" />
         <option value="$PROJECT_DIR$/src/PacApp/transfere/src/Transfer.java" />
-        <option value="3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection" />
         <option value="$PROJECT_DIR$/src/PacApp/src/transfere/src/TransferObject.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/transfere/src/TransferTest.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/transfere/src/Transfer.java" />
-        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" />
-        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java" />
-        <option value="$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java" />
-        <option value="$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java" />
-        <option value="$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7d0e9485-04a8-448b-b033-3203095771e8/console.sql" />
+        <option value="3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
-    <option name="y" value="60" />
-    <option name="width" value="1442" />
-    <option name="height" value="756" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="170" />
+    <option name="y" value="112" />
+    <option name="width" value="1562" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -184,8 +168,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -196,11 +180,27 @@
             <path>
               <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
               <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
               <item name="Database" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
               <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="nbproject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -215,6 +215,30 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="PacApp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="NewDatabase" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pacapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -224,11 +248,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql&#10;sqlite" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554483747973" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554756553004" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Libraries/tika-app-1.20.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -253,23 +276,10 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.PacApp">
+  <component name="RunManager" selected="Application.Transfer Test">
     <configuration name="PacApp" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pacapp.PacApp" />
       <module name="PAC" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SQLiteTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="NewDatabase.SQLiteTest" />
-      <module name="PAC" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="NewDatabase.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -284,13 +294,7 @@
     <list>
       <item itemvalue="Application.PacApp" />
       <item itemvalue="Application.Transfer Test" />
-      <item itemvalue="Application.SQLiteTest" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.SQLiteTest" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -326,12 +330,13 @@
       <workItem from="1553796234951" duration="8832000" />
       <workItem from="1554234233262" duration="4755000" />
       <workItem from="1554481803267" duration="1929000" />
-      <workItem from="1554484199726" duration="530000" />
+      <workItem from="1554484199726" duration="4309000" />
+      <workItem from="1554752336587" duration="4166000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80028000" />
+    <option name="totallyTimeSpent" value="87973000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -343,46 +348,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="60" width="1442" height="756" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18071428" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298193" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25451806" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.43365696" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32871288" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32680723" />
-      <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32936078" />
-      <window_info anchor="bottom" id="DB Execution Console" order="14" weight="0.32936078" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
-      <window_info anchor="right" id="Maven Projects" order="8" />
-      <window_info anchor="right" id="Maven" order="9" />
-      <window_info anchor="right" id="DB Browser" order="10" weight="0.18869936" />
-      <window_info anchor="right" id="Coverage" order="11" side_tool="true" visible="true" weight="0.32960525" />
-    </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1315229" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16204691" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -391,13 +360,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.23168316" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39869988" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23185265" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.2524377" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32871288" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
@@ -414,7 +383,42 @@
       <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
       <window_info anchor="right" id="Maven Projects" order="8" />
       <window_info anchor="right" id="Maven" order="9" />
-      <window_info anchor="right" id="DB Browser" order="10" weight="0.18869936" />
+      <window_info anchor="right" id="DB Browser" order="10" visible="true" weight="0.18869936" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15884861" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.23185265" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39869988" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.32827735" />
+      <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32936078" />
+      <window_info anchor="bottom" id="DB Execution Console" order="14" weight="0.32936078" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="Maven" order="9" />
+      <window_info anchor="right" id="DB Browser" order="10" visible="true" weight="0.18869936" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -458,31 +462,86 @@
           <properties />
           <option name="timeStamp" value="34" />
         </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java</url>
-          <line>249</line>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>76</line>
           <properties />
-          <option name="timeStamp" value="35" />
+          <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java</url>
-          <line>38</line>
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>77</line>
           <properties />
-          <option name="timeStamp" value="36" />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>78</line>
+          <properties />
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>79</line>
+          <properties />
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>86</line>
+          <properties />
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java</url>
+          <line>27</line>
+          <properties />
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>80</line>
+          <properties />
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>81</line>
+          <properties />
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>299</line>
+          <properties />
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PAC$SQLiteTest.ic" NAME="SQLiteTest Coverage Results" MODIFIED="1554491702334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>NewDatabase.*</FILTER>
-    </SUITE>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/transfere/src/trans.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/ClassLoader.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/Runtime.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/System.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/ClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="1866" selection-start-line="1866" selection-end-line="1866" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/Runtime.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="869" selection-start-line="869" selection-end-line="869" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="1121" selection-start-line="1121" selection-end-line="1121" />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$PROJECT_DIR$/src/transfere/jmtp.jar!/be/derycke/pieter/com/COM.class" />
     <entry file="jar://$PROJECT_DIR$/src/transfere/jmtp.jar!/be/derycke/pieter/com/Guid.class" />
     <entry file="jar://$PROJECT_DIR$/src/transfere/jmtp.jar!/jmtp/PortableDeviceToHostImpl32.class" />
@@ -491,15 +550,37 @@
     <entry file="file://$PROJECT_DIR$/src/transfere/src/TransferTest.java" />
     <entry file="file://$PROJECT_DIR$/src/transfere/src/Transfer.java" />
     <entry file="file://$PROJECT_DIR$/PAC_Config.txt" />
-    <entry file="uml://DATABASE/3d806b0f-2f65-4593-8909-6b28c2a0cef3" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/io/FileInputStream.java" />
+    <entry file="uml://DATABASE/3d806b0f-2f65-4593-8909-6b28c2a0cef3">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>DATABASE</ID>
+          <OriginalElement>3d806b0f-2f65-4593-8909-6b28c2a0cef3</OriginalElement>
+          <nodes />
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="806.0" y="285.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Key columns</Category>
+            <Category>Columns</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/io/FileInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="194" selection-start-line="194" selection-end-line="194" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/transfere/src/Transfer.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/transfere/src/TransferObject.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/transfere/src/TransferTest.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/transfere/src/TransferObject.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/transfere/src/TransferTest.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/transfere/src/Transfer.java" />
-    <entry file="db://3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/MetaDataReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -507,10 +588,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java">
+    <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+        <state>
+          <caret column="73" selection-start-column="73" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3831">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7d0e9485-04a8-448b-b033-3203095771e8/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Content.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addrs.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8211">
+          <caret line="493" column="29" selection-start-line="493" selection-start-column="29" selection-end-line="493" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -520,89 +632,22 @@
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Podcast Icon.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java">
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="11" selection-start-column="11" selection-end-column="11" />
+        <state relative-caret-position="433">
+          <caret line="493" column="46" selection-start-line="493" selection-start-column="46" selection-end-line="493" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#19380#19381#0" expanded="true" />
+            <element signature="e#19408#19409#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="64" column="24" selection-start-line="64" selection-start-column="24" selection-end-line="64" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addrs.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/BookSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36930">
-          <caret line="2487" selection-start-line="2487" selection-end-line="2487" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Util/ContentLocationDirectory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3Connection.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1905">
-          <caret line="147" column="78" selection-start-line="147" selection-start-column="78" selection-end-line="147" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Content.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5010">
-          <caret line="347" selection-start-line="347" selection-end-line="347" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3ResultSet.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3645">
-          <caret line="266" selection-start-line="266" selection-end-line="266" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" selection-start-column="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="2234" column="26" selection-start-line="2234" selection-start-column="19" selection-end-line="2234" selection-end-column="26" />
+        <state relative-caret-position="17">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -611,18 +656,105 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="289">
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
+    <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3Connection.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="691" lean-forward="true" selection-start-line="691" selection-end-line="691" />
+        <state relative-caret-position="952">
+          <caret line="74" column="45" selection-start-line="74" selection-start-column="45" selection-end-line="74" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3ResultSet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4131">
+          <caret line="266" selection-start-line="266" selection-end-line="266" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="db://3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection">
+      <provider selected="true" editor-type-id="0.CONSOLE">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#36847#36848#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-403">
+          <caret line="81" column="64" selection-start-line="81" selection-start-column="64" selection-end-line="81" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#initializeDesk#0;class#Transfer#0" />
+            <element signature="e#1817#1824#0" expanded="true" />
+            <element signature="method#initializePhone#0;class#Transfer#0" />
+            <element signature="method#setMainPath#0;class#Transfer#0" />
+            <element signature="method#fileToString#0;class#Transfer#0" />
+            <element signature="method#setAdbPath#0;class#Transfer#0" />
+            <element signature="method#getAdbPath#0;class#Transfer#0" />
+            <element signature="method#setBackupPath#0;class#Transfer#0" />
+            <element signature="method#getPhoneIp#0;class#Transfer#0" />
+            <element signature="method#getIp#0;class#Transfer#0" />
+            <element signature="method#wifiSetup#0;class#Transfer#0" />
+            <element signature="method#getPhoneModel#0;class#Transfer#0" />
+            <element signature="method#getPhoneBattery#0;class#Transfer#0" />
+            <element signature="method#getPhoneName#0;class#Transfer#0" />
+            <element signature="method#sync#0;class#Transfer#0" />
+            <element signature="method#addFiles#1;class#Transfer#0" />
+            <element signature="method#addPodcast#0;class#Transfer#0" />
+            <element signature="method#addPodcast#1;class#Transfer#0" />
+            <element signature="method#addEBook#0;class#Transfer#0" />
+            <element signature="method#addEbook#0;class#Transfer#0" />
+            <element signature="method#addAudioBook#0;class#Transfer#0" />
+            <element signature="method#addAudiobook#0;class#Transfer#0" />
+            <element signature="method#addMusic#0;class#Transfer#0" />
+            <element signature="method#addMusic#1;class#Transfer#0" />
+            <element signature="method#addVideos#0;class#Transfer#0" />
+            <element signature="method#addVideos#1;class#Transfer#0" />
+            <element signature="method#getFolder#0;class#Transfer#0" />
+            <element signature="method#ptoPC#0;class#Transfer#0" />
+            <element signature="method#pctoP#0;class#Transfer#0" />
+            <element signature="method#checkConnection#0;class#Transfer#0" />
+            <element signature="method#backup#0;class#Transfer#0" />
+            <element signature="method#recur#0;class#Transfer#0" />
+            <element signature="method#doesFileExist#0;class#Transfer#0" />
+            <element signature="method#doesFolderExist#0;class#Transfer#0" />
+            <element signature="method#createFolder#0;class#Transfer#0" />
+            <element signature="method#setTargetFolder#0;class#Transfer#0" />
+            <element signature="class#FileA#0" />
+            <element signature="e#22358#22359#0" expanded="true" />
+            <element signature="e#22393#22394#0" expanded="true" />
+            <element signature="e#22427#22428#0" expanded="true" />
+            <element signature="e#22463#22464#0" expanded="true" />
+            <element signature="e#22489#22490#0" expanded="true" />
+            <element signature="e#22521#22522#0" expanded="true" />
+            <element signature="e#22734#22735#0" expanded="true" />
+            <element signature="e#22774#22775#0" expanded="true" />
+            <element signature="e#22801#22802#0" expanded="true" />
+            <element signature="e#22831#22832#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -684,6 +816,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -691,7 +824,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Libraries</last-edited>
+          <last-edited>tika-app-1.20</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
