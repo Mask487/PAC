@@ -32,8 +32,8 @@ public class SQLTranslator {
      * in relation to where this file is in the project directory.
      * For now just specify where it is on your own machine.
      */
-    private final String dbLocationPath = "jdbc:sqlite:/Users/andrewmenezes/Documents/GitHub/PAC/Database/PACDB.db";
-    //private final String dbLocationPath = getPathToDB();
+    //private final String dbLocationPath = "jdbc:sqlite:C:\\PAC\\Database\\PACDB.db";
+    private final String dbLocationPath = getPathToDB();
     
     /**
      * Adds a new piece of content to DB. Desperately needs to be refactored down.

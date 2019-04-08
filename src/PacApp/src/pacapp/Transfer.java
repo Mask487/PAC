@@ -3,7 +3,6 @@ package pacapp;
 import NewDatabase.ContentDAO;
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
-
 import java.awt.*;
 import java.io.*;
 import java.math.BigInteger;
@@ -47,7 +46,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     }
 
-    public ArrayList<String> syncQueuery(){
+    public ArrayList<FileA> syncQueuery(){
         /*
         Content Type
         1 - Audiobook
@@ -59,9 +58,10 @@ class Transfer extends Thread implements pacapp.TransferObject {
         7 - Podcast
         */
 
+        System.out.println();
         Connection c = null;
         Statement stmt = null;
-        ArrayList<String> locations = new ArrayList<String>();
+        ArrayList<FileA> locations = new ArrayList<FileA>();
         String location;
         String contentName;
         String type;
@@ -74,18 +74,18 @@ class Transfer extends Thread implements pacapp.TransferObject {
             //SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID, and c.SyncStatusID = FALSE;
             ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID and c.WantToSync = TRUE;");
             while(rs.next()){
-                //String test;
-                //test = rs.getString("Location");
                 if(rs.getString("Location") == null){
                     System.out.println("location is null");
                 }else if(rs.getString("Location") != null){
                     System.out.println(rs.getString("Location"));
-                    locations.add(rs.getString("Location"));
+                    System.out.println(rs.getString("ContentName"));
+                    System.out.println(rs.getString("ContentType"));
+                    String locationString = rs.getString("Location");
+                    String nameString = rs.getString("ContentName");
+                    String id = rs.getString("ContentType");
+                    FileA fileaccess = new FileA(locationString, nameString, id);
+                    locations.add(fileaccess);
                 }
-            }
-            int x = locations.size();
-            for(int i = 0; i < x; i++){
-                System.out.println(locations.get(i));
             }
             rs.close();
             stmt.close();
@@ -97,7 +97,6 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
         return locations;
     }
-
 
     public void initializePhone(int i) {
         PortableDeviceFolderObject pFO = null;
@@ -136,12 +135,10 @@ class Transfer extends Thread implements pacapp.TransferObject {
             }
             pD.close();
         }catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("No Pnone Connected");
+            System.out.println("No Phone Connected");
         }
 
     }
-
-
 
     public boolean setMainPath(String path){
         File file = new File(path);
@@ -270,7 +267,6 @@ class Transfer extends Thread implements pacapp.TransferObject {
         this.ip = ip;
     }
 
-
     public String getIp(){
         if (this.ip != null){
             return this.ip;
@@ -282,14 +278,11 @@ class Transfer extends Thread implements pacapp.TransferObject {
         //not done
     }
 
-
     //returns phone model
     public String getPhoneModel() {
         String out = "";
         return out = pD.getModel();
     }
-
-
 
     //returns battery percentage
     public int getPhoneBattery() {
@@ -303,47 +296,38 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return out = pD.getFriendlyName();
     }
 
-    public void addFiles(File file, char choice){
-        switch(choice){
-            case 'p':
-                addPodcast(file);
-                break;
-            case 'e':
-                addEBook(file);
-                break;
-            case 'm':
-                addMusic(file);
-                break;
-            case 'v':
-                addVideos(file);
-                break;
-        }
-    }
-
     public void sync(){
-
+        //calls syncQueuery method to make a list of items that need to be synced to the phone
+        ArrayList<FileA> queue = syncQueuery();
+        addFiles(queue);
     }
 
-    public void addFiles(ArrayList<File> files, char choice){
-        switch(choice){
-            case 'p':
-                addPodcast(files);
-                break;
-            case 'e':
-                addEbook(files);
-                break;
-            case 'm':
-                addMusic(files);
-                break;
-            case 'v':
-                addVideos(files);
-                break;
+    public void addFiles(ArrayList<FileA> files){
+        for (int i = 0; i < files.size(); i++) {
+            File file = new File(files.get(i).getLocation());
+            switch(files.get(i).getType().toUpperCase()){
+                case "PODCAST":
+                    addPodcast(file);
+                    break;
+                case "EBOOK":
+                    addEBook(file);
+                    break;
+                case "MUSIC":
+                    addMusic(file);
+                    break;
+                case "VIDEO":
+                    addVideos(file);
+                    break;
+                case "AUDIOBOOK":
+                    addAudioBook(file);
+                    break;
+            }
         }
+
     }
 
     //add single Podcast
-    public void addPodcast(File file)
-    {
+    public void addPodcast(File file) {
         if (doesFolderExist("podcasts", pD))
         {
             pctoP(setTargetFolder("podcasts", pD), file);
@@ -355,8 +339,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
     }
 
     //add multiple podcasts
-    public void addPodcast(ArrayList<File> files)
-    {
+    public void addPodcast(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
             if (doesFolderExist("podcasts", pD))
@@ -369,8 +352,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addEBook(File file)
-    {
+    public void addEBook(File file) {
         if (doesFolderExist("eBooks", pD))
         {
             pctoP(setTargetFolder("ebooks", pD), file);
@@ -380,8 +362,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addEbook(ArrayList<File> files)
-    {
+    public void addEbook(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
             if (doesFolderExist("eBooks", pD))
@@ -394,8 +375,30 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addMusic(File file)
-    {
+    public void addAudioBook(File file){
+        if (doesFolderExist("AudioBooks", pD))
+        {
+            pctoP(setTargetFolder("AudioBooks", pD), file);
+        }else{
+            createFolder("AudioBooks", pD);
+            pctoP(setTargetFolder("AudioBooks", pD), file);
+        }
+    }
+
+    public void addAudioBook(ArrayList<File> files){
+        for (int i = 0; i < files.size(); i++) {
+            File file = files.get(i);
+            if (doesFolderExist("AudioBooks", pD))
+            {
+                pctoP(setTargetFolder("AudioBooks", pD), file);
+            }else{
+                createFolder("AudioBooks", pD);
+                pctoP(setTargetFolder("AudioBooks", pD), file);
+            }
+        }
+    }
+
+    public void addMusic(File file) {
         if (doesFolderExist("music", pD))
         {
             pctoP(setTargetFolder("music", pD), file);
@@ -405,8 +408,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addMusic(ArrayList<File> files)
-    {
+    public void addMusic(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
             if (doesFolderExist("music", pD))
@@ -419,8 +421,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addVideos(File file)
-    {
+    public void addVideos(File file) {
         if (doesFolderExist("videos", pD))
         {
             pctoP(setTargetFolder("videos", pD), file);
@@ -430,8 +431,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addVideos(ArrayList<File> files)
-    {
+    public void addVideos(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
             if (doesFolderExist("videos", pD))
@@ -444,8 +444,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void getFolder(String folder, File file)
-    {
+    public void getFolder(String folder, File file) {
         PortableDeviceObject[] folderFiles = setTargetFolder(folder, pD).getChildObjects();
         for (int i = 0; i < folderFiles.length; i++) {
             System.out.println(folderFiles[i].getOriginalFileName());
@@ -454,8 +453,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void ptoPC(PortableDeviceObject pDO, String file)
-    {
+    public void ptoPC(PortableDeviceObject pDO, String file) {
         PortableDeviceToHostImpl32 copy = new PortableDeviceToHostImpl32();
         try
         {
@@ -467,8 +465,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     }
 
-    public void pctoP(PortableDeviceFolderObject targetFolder, File file)
-    {
+    public void pctoP(PortableDeviceFolderObject targetFolder, File file) {
         if (doesFileExist(targetFolder, file) == false) {
             System.out.println(file.getName() + " not added: already exists");
         } else {
@@ -578,8 +575,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     }
 
-    private void recur(PortableDeviceFolderObject object, String tab, File file)
-    {
+    private void recur(PortableDeviceFolderObject object, String tab, File file) {
         tab = tab + "    ";
 
         for (PortableDeviceObject obj : object.getChildObjects())
@@ -597,8 +593,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
     }
 
     //when adding files, checks to see if file doesn't already exist
-    private boolean doesFileExist(PortableDeviceFolderObject targetFolder, File file)
-    {
+    private boolean doesFileExist(PortableDeviceFolderObject targetFolder, File file) {
         PortableDeviceObject[] items = targetFolder.getChildObjects();
         for (int i = 0; i < items.length; i++) {
             if (items[i].getOriginalFileName().equalsIgnoreCase(file.getName())){
@@ -610,8 +605,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
     }
 
     //checks if folder exists on device
-    public boolean doesFolderExist(String folderName, PortableDevice pD)
-    {
+    public boolean doesFolderExist(String folderName, PortableDevice pD) {
         //boolean condition = false;
         for (PortableDeviceObject obj1 : pD.getRootObjects())
         {
@@ -630,8 +624,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return false;
     }
 
-    private void createFolder(String folderName, PortableDevice pD)
-    {
+    private void createFolder(String folderName, PortableDevice pD) {
         //PortableDeviceFolderObject target = ;
         for (PortableDeviceObject obj1 : pD.getRootObjects())
         {
@@ -664,7 +657,36 @@ class Transfer extends Thread implements pacapp.TransferObject {
 }
 
 class FileA{
-    String location;
-    int type;
-
+    String location, filename, type;
+    FileA(String location, String type){
+        this.location = location;
+        this.filename = "Unknown";
+        this.type = type;
+    }
+    FileA(String location, String filename, String type){
+        this.location = location;
+        this.filename = filename;
+        this.type = type;
+    }
+    public String getLocation(){
+        return this.location;
+    }
+    public String getFilename(){
+        return this.filename;
+    }
+    public String getType(){
+        return this.type;
+    }
+    public void setLocation(String location){
+        File file = new File(location);
+        if(file.isFile()){
+            this.location = location;
+        }
+    }
+    public void setFilename(String filename){
+        this.filename = filename;
+    }
+    public void setType(String type){
+        this.type = type;
+    }
 }

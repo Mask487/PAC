@@ -33,7 +33,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
+            <state relative-caret-position="238">
               <caret line="14" selection-start-line="14" selection-end-line="14" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -42,30 +42,70 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Podcast Icon.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="493" column="46" selection-start-line="493" selection-start-column="46" selection-end-line="493" selection-end-column="46" />
+            <state relative-caret-position="-403">
+              <caret line="81" column="64" selection-start-line="81" selection-start-column="64" selection-end-line="81" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#19380#19381#0" expanded="true" />
-                <element signature="e#19408#19409#0" expanded="true" />
+                <element signature="method#initializeDesk#0;class#Transfer#0" />
+                <element signature="e#1817#1824#0" expanded="true" />
+                <element signature="method#initializePhone#0;class#Transfer#0" />
+                <element signature="method#setMainPath#0;class#Transfer#0" />
+                <element signature="method#fileToString#0;class#Transfer#0" />
+                <element signature="method#setAdbPath#0;class#Transfer#0" />
+                <element signature="method#getAdbPath#0;class#Transfer#0" />
+                <element signature="method#setBackupPath#0;class#Transfer#0" />
+                <element signature="method#getPhoneIp#0;class#Transfer#0" />
+                <element signature="method#getIp#0;class#Transfer#0" />
+                <element signature="method#wifiSetup#0;class#Transfer#0" />
+                <element signature="method#getPhoneModel#0;class#Transfer#0" />
+                <element signature="method#getPhoneBattery#0;class#Transfer#0" />
+                <element signature="method#getPhoneName#0;class#Transfer#0" />
+                <element signature="method#sync#0;class#Transfer#0" />
+                <element signature="method#addFiles#1;class#Transfer#0" />
+                <element signature="method#addPodcast#0;class#Transfer#0" />
+                <element signature="method#addPodcast#1;class#Transfer#0" />
+                <element signature="method#addEBook#0;class#Transfer#0" />
+                <element signature="method#addEbook#0;class#Transfer#0" />
+                <element signature="method#addAudioBook#0;class#Transfer#0" />
+                <element signature="method#addAudiobook#0;class#Transfer#0" />
+                <element signature="method#addMusic#0;class#Transfer#0" />
+                <element signature="method#addMusic#1;class#Transfer#0" />
+                <element signature="method#addVideos#0;class#Transfer#0" />
+                <element signature="method#addVideos#1;class#Transfer#0" />
+                <element signature="method#getFolder#0;class#Transfer#0" />
+                <element signature="method#ptoPC#0;class#Transfer#0" />
+                <element signature="method#pctoP#0;class#Transfer#0" />
+                <element signature="method#checkConnection#0;class#Transfer#0" />
+                <element signature="method#backup#0;class#Transfer#0" />
+                <element signature="method#recur#0;class#Transfer#0" />
+                <element signature="method#doesFileExist#0;class#Transfer#0" />
+                <element signature="method#doesFolderExist#0;class#Transfer#0" />
+                <element signature="method#createFolder#0;class#Transfer#0" />
+                <element signature="method#setTargetFolder#0;class#Transfer#0" />
+                <element signature="class#FileA#0" />
+                <element signature="e#22358#22359#0" expanded="true" />
+                <element signature="e#22393#22394#0" expanded="true" />
+                <element signature="e#22427#22428#0" expanded="true" />
+                <element signature="e#22463#22464#0" expanded="true" />
+                <element signature="e#22489#22490#0" expanded="true" />
+                <element signature="e#22521#22522#0" expanded="true" />
+                <element signature="e#22734#22735#0" expanded="true" />
+                <element signature="e#22774#22775#0" expanded="true" />
+                <element signature="e#22801#22802#0" expanded="true" />
+                <element signature="e#22831#22832#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="49" column="27" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
+            <state relative-caret-position="304">
+              <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,57 +122,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="11" selection-start-column="11" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="74" column="76" selection-start-line="74" selection-start-column="76" selection-end-line="74" selection-end-column="76" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1819#1827#0" expanded="true" />
-                <element signature="e#15074#15075#0" expanded="true" />
-                <element signature="e#15118#15119#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6840">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Content.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1974">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/addrs.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>user</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -155,12 +150,13 @@
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7d0e9485-04a8-448b-b033-3203095771e8/console.sql" />
-        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" />
         <option value="3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="170" />
     <option name="y" value="112" />
     <option name="width" value="1562" />
@@ -172,6 +168,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -226,19 +224,33 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="NewDatabase" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pacapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Util" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql&#10;sqlite" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554483747973" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554756553004" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Libraries/tika-app-1.20.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -264,7 +276,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.PacApp">
+  <component name="RunManager" selected="Application.Transfer Test">
     <configuration name="PacApp" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pacapp.PacApp" />
       <module name="PAC" />
@@ -319,11 +331,12 @@
       <workItem from="1554234233262" duration="4755000" />
       <workItem from="1554481803267" duration="1929000" />
       <workItem from="1554484199726" duration="4309000" />
+      <workItem from="1554752336587" duration="4166000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83807000" />
+    <option name="totallyTimeSpent" value="87973000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -336,8 +349,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16044776" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16204691" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -346,8 +360,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.23185265" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39869988" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23185265" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.2524377" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
@@ -450,25 +464,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>78</line>
+          <line>76</line>
           <properties />
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>79</line>
+          <line>77</line>
           <properties />
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>80</line>
+          <line>78</line>
           <properties />
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>81</line>
+          <line>79</line>
           <properties />
           <option name="timeStamp" value="43" />
         </line-breakpoint>
@@ -476,25 +490,31 @@
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
           <line>86</line>
           <properties />
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>87</line>
-          <properties />
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>85</line>
-          <properties />
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>82</line>
-          <properties />
           <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java</url>
+          <line>27</line>
+          <properties />
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>80</line>
+          <properties />
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>81</line>
+          <properties />
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>299</line>
+          <properties />
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -591,7 +611,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Content.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1974">
+        <state relative-caret-position="187">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
@@ -599,37 +619,10 @@
     <entry file="file://$PROJECT_DIR$/addrs.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="11" selection-start-column="11" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="49" column="27" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="db://3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection">
-      <provider selected="true" editor-type-id="0.CONSOLE">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="8211">
+          <caret line="493" column="29" selection-start-line="493" selection-start-column="29" selection-end-line="493" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -651,23 +644,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="74" column="76" selection-start-line="74" selection-start-column="76" selection-end-line="74" selection-end-column="76" />
+        <state relative-caret-position="17">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1819#1827#0" expanded="true" />
-            <element signature="e#15074#15075#0" expanded="true" />
-            <element signature="e#15118#15119#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6840">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state relative-caret-position="289">
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3Connection.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="74" column="45" selection-start-line="74" selection-start-column="45" selection-end-line="74" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3ResultSet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4131">
+          <caret line="266" selection-start-line="266" selection-end-line="266" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="db://3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection">
+      <provider selected="true" editor-type-id="0.CONSOLE">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-403">
+          <caret line="81" column="64" selection-start-line="81" selection-start-column="64" selection-end-line="81" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#initializeDesk#0;class#Transfer#0" />
+            <element signature="e#1817#1824#0" expanded="true" />
+            <element signature="method#initializePhone#0;class#Transfer#0" />
+            <element signature="method#setMainPath#0;class#Transfer#0" />
+            <element signature="method#fileToString#0;class#Transfer#0" />
+            <element signature="method#setAdbPath#0;class#Transfer#0" />
+            <element signature="method#getAdbPath#0;class#Transfer#0" />
+            <element signature="method#setBackupPath#0;class#Transfer#0" />
+            <element signature="method#getPhoneIp#0;class#Transfer#0" />
+            <element signature="method#getIp#0;class#Transfer#0" />
+            <element signature="method#wifiSetup#0;class#Transfer#0" />
+            <element signature="method#getPhoneModel#0;class#Transfer#0" />
+            <element signature="method#getPhoneBattery#0;class#Transfer#0" />
+            <element signature="method#getPhoneName#0;class#Transfer#0" />
+            <element signature="method#sync#0;class#Transfer#0" />
+            <element signature="method#addFiles#1;class#Transfer#0" />
+            <element signature="method#addPodcast#0;class#Transfer#0" />
+            <element signature="method#addPodcast#1;class#Transfer#0" />
+            <element signature="method#addEBook#0;class#Transfer#0" />
+            <element signature="method#addEbook#0;class#Transfer#0" />
+            <element signature="method#addAudioBook#0;class#Transfer#0" />
+            <element signature="method#addAudiobook#0;class#Transfer#0" />
+            <element signature="method#addMusic#0;class#Transfer#0" />
+            <element signature="method#addMusic#1;class#Transfer#0" />
+            <element signature="method#addVideos#0;class#Transfer#0" />
+            <element signature="method#addVideos#1;class#Transfer#0" />
+            <element signature="method#getFolder#0;class#Transfer#0" />
+            <element signature="method#ptoPC#0;class#Transfer#0" />
+            <element signature="method#pctoP#0;class#Transfer#0" />
+            <element signature="method#checkConnection#0;class#Transfer#0" />
+            <element signature="method#backup#0;class#Transfer#0" />
+            <element signature="method#recur#0;class#Transfer#0" />
+            <element signature="method#doesFileExist#0;class#Transfer#0" />
+            <element signature="method#doesFolderExist#0;class#Transfer#0" />
+            <element signature="method#createFolder#0;class#Transfer#0" />
+            <element signature="method#setTargetFolder#0;class#Transfer#0" />
+            <element signature="class#FileA#0" />
+            <element signature="e#22358#22359#0" expanded="true" />
+            <element signature="e#22393#22394#0" expanded="true" />
+            <element signature="e#22427#22428#0" expanded="true" />
+            <element signature="e#22463#22464#0" expanded="true" />
+            <element signature="e#22489#22490#0" expanded="true" />
+            <element signature="e#22521#22522#0" expanded="true" />
+            <element signature="e#22734#22735#0" expanded="true" />
+            <element signature="e#22774#22775#0" expanded="true" />
+            <element signature="e#22801#22802#0" expanded="true" />
+            <element signature="e#22831#22832#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
