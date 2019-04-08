@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author Jacob Oleson
  * 
- * @update 4/03/2019
+ * @update 4/08/2019
  * 
  * A data access object that communicates with the Translator Interface to the sqlite db
  * to insert, delete, and read from the db. This file only interacts
@@ -500,7 +500,7 @@ public class ContentDAO {
     
     
     /**
-     * Set the sync status for a piece of content to true
+     * Set the sync status for a piece of content to true (i.e they do want it to sync)
      * @param content
      * @return 
      */
@@ -510,7 +510,7 @@ public class ContentDAO {
     
     
     /**
-     * Set the sync status for a piece of content to false
+     * Set the sync status for a piece of content to false (i.e they don't want it to sync)
      * @param content
      * @return 
      */

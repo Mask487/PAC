@@ -11,10 +11,13 @@ import java.util.logging.Logger;
 import org.apache.commons.io.FilenameUtils;
 import java.io.IOException;
 import java.nio.file.*;
+//import Default.Book;
+//import Default.Podcast;
+//import Default.Song;
 /**
  * @author Jacob Oleson
  * 
- * @update 4/02/2019
+ * @update 4/08/2019
  * 
  * Translator class that actually speaks to the DB File.
  */
@@ -25,7 +28,6 @@ public class SQLTranslator {
     
     //Establishes connection to db file.
     private static Connection conn;
-    MetaDataReader mdr = new MetaDataReader();
     /**
      * The jdbc:sqlite: part is permanent. The part after that specifies
      * the filepath. There needs to be a way to specify the filepath 
@@ -115,9 +117,11 @@ public class SQLTranslator {
                 contentDescription = DBEnumeration.UNKNOWN;
             }
             contentDescription = cleanString(contentDescription);
+            //Must follow yyyy-mm-dd
             if(uploadDate == null) {
                 uploadDate = "2019-04-03";
             }
+            //Must follow hh:mm:ss
             if(duration == null) {
                 duration = "00:00:00";
             }
@@ -280,13 +284,19 @@ public class SQLTranslator {
      */
     public boolean addContent(String filePath, String contentType) {
         String ext = getExtension(filePath);
-        Content content = null;
+        Content content;
         switch(ext){
             case "mp3": 
                 content = MetaDataReader.mp3Reader(contentType, filePath);
                 break;
             case "epub":
+                //This is an ebook, does not need to send content type
                 content = MetaDataReader.ePubReader(filePath);
+                break;
+            default:
+                //This one is harder to work out. Not satisfied with it yet. 
+                content = MetaDataReader.genericReader(filePath);
+                break;
         }
 
         return addContent(contentType, content.getCreatorName(), content.getGenreName(),
@@ -296,6 +306,53 @@ public class SQLTranslator {
                 content.getUrl(), content.getWantToSync(), filePath);
     }
     
+        
+//    /**
+//     * Test with the objects Cody has done to add them into the database.
+//     * Still need to extract more information from these objects 
+//     * and make sure that the packaging of them is good with Cody and Andrew
+//     * @param book
+//     * @param contentType since there are multiple book objects 
+//     *      its important to pass this one's type 
+//     *      (i.e AudioBook, EBook, or Book).
+//     * @param originalFilePath
+//     * @return 
+//     */
+//    public boolean addBook(Book book, String contentType, String originalFilePath) {
+//        return addContent(contentType, book.getAuthors(), null, 
+//                null, null, book.getTitle(), null, book.getPublishYear(),  Integer.parseInt(book.getPageCount()),
+//                null, book.getISBN(), false, null, null, false, originalFilePath);
+//    }
+//    
+//    
+//    /**
+//     * Same as above, just with the music object.
+//     * @param song
+//     * @param originalFilePath
+//     * @return 
+//     */
+//    public boolean addMusic(Song song, String originalFilePath) {
+//        String contentType = "Music";
+//        return addContent(contentType, song.getArtist(), song.getGenre(), null, 
+//                song.getAlbum(), song.getTitle(), null, null, 0, song.getDuration(), 
+//                null, false, null, null, false, originalFilePath);
+//    }
+//    
+//    
+//    /**
+//     * Same as above, just with the pod cast object.
+//     * @param podcast
+//     * @param originalFilePath
+//     * @return 
+//     */
+//    public boolean addPodcast(Podcast podcast, String originalFilePath) {
+//        String contentType = "Podcast";
+//        return addContent(contentType, podcast.getAuthor(), null,
+//                null, null, podcast.getTitle(), podcast.getDescription(), null,
+//                0, podcast.getDuration(), null, false, null, podcast.getUrl(),
+//                false, originalFilePath);
+//    }
+        
     
     /**
      * Adds a new content type that the DB can hold.
@@ -995,7 +1052,8 @@ public class SQLTranslator {
     public ResultSet getAllContent() {        
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.CONTENT;
+            String query = "SELECT * FROM " + DBEnumeration.CONTENT
+                    + " ORDER BY ContentName";
             return getRecords(query);
         }
         
@@ -1015,7 +1073,8 @@ public class SQLTranslator {
     public ResultSet getAllContentTypes() {
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.CONTENTTYPE;
+            String query = "SELECT * FROM " + DBEnumeration.CONTENTTYPE
+                    + " ORDER BY ContentType";
             return getRecords(query);
         }
         
@@ -1037,7 +1096,8 @@ public class SQLTranslator {
     public ResultSet getAllCreators() {
         
         try {
-            String query = "SELECT CreatorName FROM " + DBEnumeration.CREATOR;
+            String query = "SELECT * FROM " + DBEnumeration.CREATOR
+                    + " ORDER BY CreatorName";
             return getRecords(query);
         }
         
@@ -1057,7 +1117,8 @@ public class SQLTranslator {
     public ResultSet getAllGenres() {
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.GENRE;
+            String query = "SELECT * FROM " + DBEnumeration.GENRE
+                    + " ORDER BY GenreName";
             return getRecords(query);
         }
         
@@ -1077,7 +1138,8 @@ public class SQLTranslator {
     public ResultSet getAllPublishers() {
         
         try {
-            String query = "SELECT * FROM Publisher";
+            String query = "SELECT * FROM " + DBEnumeration.PUBLISHER
+                    + " ORDER BY PublisherName";
             return getRecords(query);
         }
         
@@ -1097,7 +1159,8 @@ public class SQLTranslator {
     public ResultSet getAllSeries() {
         
         try {
-            String query = "SELECT * FROM " + DBEnumeration.SERIES;
+            String query = "SELECT * FROM " + DBEnumeration.SERIES
+                    + " ORDER BY SeriesName";
             return getRecords(query);
         }
         
@@ -1120,7 +1183,8 @@ public class SQLTranslator {
         try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT  
                     + " WHERE CreatorID = (SELECT CreatorID FROM " + DBEnumeration.CREATOR
-                    + " WHERE CreatorName = '" + creatorName + "')";
+                    + " WHERE CreatorName = '" + creatorName + "')"
+                    + " ORDER BY ContentName";
             return getRecords(query);
         } 
         
@@ -1140,7 +1204,8 @@ public class SQLTranslator {
         
     try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT  
-                    + " WHERE CreatorID = " + creatorID;
+                    + " WHERE CreatorID = " + creatorID
+                    + " ORDER BY ContentName";
             return getRecords(query);
         }
         
@@ -1183,7 +1248,8 @@ public class SQLTranslator {
         try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT 
                     + " c WHERE c.GenreID = (SELECT GenreID FROM " + DBEnumeration.GENRE
-                    + " WHERE GenreName = '" + genreName + "')";
+                    + " WHERE GenreName = '" + genreName + "')"
+                    + " ORDER BY ContentName";
             return getRecords(query);
         }
         
@@ -1199,7 +1265,8 @@ public class SQLTranslator {
     public ResultSet getContentByGenre(int genreID) {
         try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT
-                    + " WHERE GenreID = " + genreID;
+                    + " WHERE GenreID = " + genreID
+                    + " ORDER BY ContentName";
             return getRecords(query);
         }
         
@@ -1268,7 +1335,8 @@ public class SQLTranslator {
         try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT
                     + " c WHERE c.PublisherID = (SELECT PublisherID FROM " + DBEnumeration.PUBLISHER
-                    + " WHERE PublisherName = '" + publisherName + "')";
+                    + " WHERE PublisherName = '" + publisherName + "')"
+                    + " ORDER BY ContentName";
             return getRecords(query);
         }
         
@@ -1284,7 +1352,8 @@ public class SQLTranslator {
     public ResultSet getContentByPublisher(int publisherID) {
         try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT
-                    + " WHERE PublisherID = " + publisherID;
+                    + " WHERE PublisherID = " + publisherID
+                    + " ORDER BY ContentName";
             
             return getRecords(query);
         }
@@ -1307,7 +1376,8 @@ public class SQLTranslator {
         try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT 
                     + " c WHERE SeriesID = (SELECT SeriesID FROM " + DBEnumeration.SERIES
-                    + " WHERE SeriesName = '" + seriesName + "')";
+                    + " WHERE SeriesName = '" + seriesName + "')"
+                    + " ORDER BY ContentName";
                     
             return getRecords(query);
         }
@@ -1329,7 +1399,8 @@ public class SQLTranslator {
     public ResultSet getContentBySeries(int seriesID) {
         try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT 
-                    + " WHERE SeriesID = " + seriesID;
+                    + " WHERE SeriesID = " + seriesID
+                    + " ORDER BY ContentName";
             
             return getRecords(query);
         }
@@ -1353,7 +1424,7 @@ public class SQLTranslator {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT
                     + " c WHERE c.ContentTypeID = (SELECT ContentTypeID FROM "
                     + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '" 
-                    + contentType + "')";
+                    + contentType + "')" + " ORDER BY ContentName";
             return getRecords(query);
         }
         
@@ -1372,7 +1443,8 @@ public class SQLTranslator {
     public ResultSet getContentBySyncStatus() {
         try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT
-                    + " WHERE WantToSync = TRUE";
+                    + " WHERE WantToSync = TRUE"
+                    + " ORDER BY ContentName";
             
             return getRecords(query);
         }
@@ -1393,7 +1465,8 @@ public class SQLTranslator {
     public ResultSet getContentByType(int contentTypeID) {
         try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT
-                    + " WHERE ContentTypeID = " + contentTypeID;
+                    + " WHERE ContentTypeID = " + contentTypeID
+                    + " ORDER BY ContentName";
             return getRecords(query);
         }
         
@@ -1418,7 +1491,7 @@ public class SQLTranslator {
                     + " OR ContentDescription LIKE '%" + searchTerm + "%'"
                     + " AND ContentTypeID = (SELECT ContentTypeID FROM " 
                     + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '" 
-                    + contentType + "')";
+                    + contentType + "') ORDER BY ContentName";
             return getRecords(query);
         }
         
@@ -1434,7 +1507,8 @@ public class SQLTranslator {
         try {
             String query = "SELECT * FROM " + DBEnumeration.CONTENT
                     + " WHERE ContentName LIKE '%" + searchTerm + "%'"
-                    + " OR ContentDescription LIKE '%" + searchTerm + "%'";
+                    + " OR ContentDescription LIKE '%" + searchTerm + "%'"
+                    + " ORDER BY ContentName";
             return getRecords(query);
         }
         
@@ -1465,7 +1539,8 @@ public class SQLTranslator {
                     + " OR cr.CreatorName LIKE '%" + searchTerm + "%' OR "
                     + " g.GenreName LIKE '%" + searchTerm + "%' OR"
                     + " p.PublisherName LIKE '%" + searchTerm + "%' OR"
-                    + " s.SeriesName LIKE '%" + searchTerm + "%')";
+                    + " s.SeriesName LIKE '%" + searchTerm + "%')"
+                    + " ORDER BY ContentName";
             return getRecords(query);
         }
         
@@ -1500,7 +1575,7 @@ public class SQLTranslator {
                     + " s.SeriesName LIKE '%" + searchTerm + "%'"
                     + " AND ContentTypeID = (SELECT ContentTypeID FROM "
                     + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '"
-                    + contentType + "')";
+                    + contentType + "') ORDER BY ContentName";
             return getRecords(query);
         }
         
@@ -1520,7 +1595,8 @@ public class SQLTranslator {
     public ResultSet searchCreator(String searchTerm) {
         try {
             String query  = "SELECT * FROM " + DBEnumeration.CREATOR
-                    + " WHERE CreatorName LIKE '%" + searchTerm + "%'";
+                    + " WHERE CreatorName LIKE '%" + searchTerm + "%'"
+                    + " ORDER BY CreatorName";
             return getRecords(query);
         }
         
@@ -1540,7 +1616,8 @@ public class SQLTranslator {
     public ResultSet searchGenre(String searchTerm) {
         try {
             String query = "SELECT * FROM " + DBEnumeration.GENRE
-                    + " WHERE GenreName LIKE '%" + searchTerm + "%'";
+                    + " WHERE GenreName LIKE '%" + searchTerm + "%'"
+                    + " ORDER BY GenreName";
             return getRecords(query);
         }
         
@@ -1560,7 +1637,8 @@ public class SQLTranslator {
     public ResultSet searchPublisher(String searchTerm) {
         try {
             String query  = "SELECT * FROM " + DBEnumeration.PUBLISHER
-                    + " WHERE PublisherName LIKE '%" + searchTerm + "%'";
+                    + " WHERE PublisherName LIKE '%" + searchTerm + "%'"
+                    + " ORDER BY PublisherName";
             return getRecords(query);
         }
         
@@ -1580,7 +1658,8 @@ public class SQLTranslator {
     public ResultSet searchSeries(String searchTerm) {
         try {
             String query  = "SELECT * FROM " + DBEnumeration.SERIES
-                    + " WHERE SeriesName LIKE '%" + searchTerm + "%'";
+                    + " WHERE SeriesName LIKE '%" + searchTerm + "%'"
+                    + " ORDER BY SeriesName";
             return getRecords(query);
         }
         
@@ -1594,18 +1673,23 @@ public class SQLTranslator {
     
     /**
      * Gets a specific content type from the db. 
-     * @param contentTypeID
+     * @param contentType
      * @return
      */
-    public int getContentTypeID(String contentTypeID) {
+    public int getContentTypeID(String contentType) {
         
             String query = "SELECT ContentTypeID FROM ContentType "
-                    + "WHERE ContentType = '" + contentTypeID + "'";
+                    + "WHERE ContentType = '" + contentType + "'";
             return getKey(query);
 
     }
     
     
+    /**
+     * Returns the name of a content type given its id.
+     * @param contentTypeID
+     * @return 
+     */
     public String getContentTypeName(int contentTypeID) {
         try {
             String query = "SELECT ContentType FROM  " + DBEnumeration.CONTENTTYPE
@@ -1637,6 +1721,11 @@ public class SQLTranslator {
     }
        
     
+    /**
+     * Returns a creator's id given their name
+     * @param creatorName
+     * @return 
+     */
     public int getCreatorID(String creatorName) {
             String query = "SELECT CreatorID FROM " + DBEnumeration.CREATOR
                     + " WHERE CreatorName = '" + creatorName + "'";
@@ -1645,6 +1734,11 @@ public class SQLTranslator {
     }
     
     
+    /**
+     * Returns a creator's name given their id.
+     * @param creatorID
+     * @return 
+     */
     public String getCreatorName(int creatorID) {
         try {
             String query = "SELECT CreatorName FROM " + DBEnumeration.CREATOR
@@ -1763,7 +1857,8 @@ public class SQLTranslator {
      */
     public ResultSet getPlaylists() {
         try {
-            String query  = "SELECT * FROM " + DBEnumeration.PLAYLIST;
+            String query  = "SELECT * FROM " + DBEnumeration.PLAYLIST
+                    + " ORDER BY PlaylistName";
             return getRecords(query);
         }
         
@@ -1857,6 +1952,11 @@ public class SQLTranslator {
     }
     
     
+    /**
+     * Returns the name of a series given its id.
+     * @param seriesID
+     * @return 
+     */
     public String getSeriesName(int seriesID) {
         try {
             String query = "SELECT SeriesName FROM " + DBEnumeration.SERIES
@@ -1872,6 +1972,11 @@ public class SQLTranslator {
     }
     
     
+    /**
+     * Returns the id of a series given its name
+     * @param seriesName
+     * @return 
+     */
     public int getSeriesID(String seriesName) {
         String query = "SELECT SeriesID FROM " + DBEnumeration.SERIES
                 + " WHERE SeriesName = '" + seriesName + "'";
@@ -2131,21 +2236,6 @@ public class SQLTranslator {
     }
     
     
-    /**
-     * Close connection stream to DB File. 
-     */
-    public void closeConnection() {
-        if(conn != null) {
-            try{
-                conn.close();
-            }
-            catch(SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-    
-    
     /*
      * Checks if a record exists in DB. Returns true if no record exists.
      * @param query
@@ -2279,25 +2369,6 @@ public class SQLTranslator {
     
     
     /**
-     * private method that each getter can use to retrieve records
-     * @param query
-     * @return res
-     * @throws SQLException
-     * @throws ClassNotFoundException 
-     */
-    private ResultSet getRecords(String query) throws SQLException, ClassNotFoundException {
-        
-        if(conn == null) {
-            getConnection();
-        }
-        
-        Statement stmt = conn.createStatement();
-        ResultSet res = stmt.executeQuery(query);
-        return res;
-    }
-    
-    
-    /**
      * Returns the key of a given record. 
      * @param query
      * @return 
@@ -2313,6 +2384,25 @@ public class SQLTranslator {
             System.out.println(e.getMessage());
             return 0;
         }
+    }
+    
+    
+    /**
+     * private method that each getter can use to retrieve records
+     * @param query
+     * @return res
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    private ResultSet getRecords(String query) throws SQLException, ClassNotFoundException {
+        
+        if(conn == null) {
+            getConnection();
+        }
+        
+        Statement stmt = conn.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res;
     }
     
     
@@ -2335,6 +2425,60 @@ public class SQLTranslator {
                 " WHERE " + columnName + " NOT IN (SELECT " + columnName + " FROM " 
                 + DBEnumeration.CONTENT + ")";
         return deleteFromDB(removeColumn);
+    }
+    
+    
+    /**
+     * Sets a file path for a new piece of content. Needs to create a new 
+     * directory if needed(possibly for a series, music/photo album, etc.)
+     * Content should be divided into directories of that content's type. Then
+     * further divided by series. If no series, go into folder called unlisted.
+     * Then in their series folder they'll exist as accessible files. 
+     * Alternatively, we could just divide by series, no need to divide by type.
+     * @param contentName 
+     * @param series
+     * @param contentType
+     */
+    private String setContentLocation (String contentName, String contentType, String genreName, String seriesName) {  
+        File file1 = new File("ContentFiles").getAbsoluteFile();
+        String location = file1.toString();
+        
+        //Genre name given
+        if(!genreName.equals(DBEnumeration.UNKNOWN)) {
+                //Series name given                
+                if(!seriesName.equals(DBEnumeration.UNKNOWN)) {
+                    location = location + File.separator 
+                            + contentType + File.separator + genreName
+                            + File.separator + seriesName + File.separator;
+                    }
+
+                //No series name given
+                else {
+                    location = location + File.separator 
+                            + contentType + File.separator + genreName + File.separator + DBEnumeration.UNKNOWN
+                            + File.separator;
+
+                }
+            }
+
+            //No genre name given
+            else {
+                //Series name given
+                if(!seriesName.equals(DBEnumeration.UNKNOWN)) {
+                    location = location + File.separator 
+                            + contentType + File.separator + DBEnumeration.UNKNOWN
+                            + File.separator  + seriesName + File.separator ;
+                }
+
+                //No series name given
+                else {
+                    location = location + File.separator 
+                            + contentType + File.separator  + DBEnumeration.UNKNOWN
+                            + File.separator  + DBEnumeration.UNKNOWN + File.separator ;
+                }
+            }
+        
+        return location;
     }
     
  
@@ -2408,66 +2552,8 @@ public class SQLTranslator {
         } 
         
         return successful;
-    }
-    
-    
-       
-
-    
-    /**
-     * Sets a file path for a new piece of content. Needs to create a new 
-     * directory if needed(possibly for a series, music/photo album, etc.)
-     * Content should be divided into directories of that content's type. Then
-     * further divided by series. If no series, go into folder called unlisted.
-     * Then in their series folder they'll exist as accessible files. 
-     * Alternatively, we could just divide by series, no need to divide by type.
-     * @param contentName 
-     * @param series
-     * @param contentType
-     */
-    private String setContentLocation (String contentName, String contentType, String genreName, String seriesName) {  
-        File file1 = new File("ContentFiles").getAbsoluteFile();
-        String location = file1.toString();
-        
-        //Genre name given
-        if(!genreName.equals(DBEnumeration.UNKNOWN)) {
-                //Series name given                
-                if(!seriesName.equals(DBEnumeration.UNKNOWN)) {
-                    location = location + File.separator 
-                            + contentType + File.separator + genreName
-                            + File.separator + seriesName + File.separator;
-                    }
-
-                //No series name given
-                else {
-                    location = location + File.separator 
-                            + contentType + File.separator + genreName + File.separator + DBEnumeration.UNKNOWN
-                            + File.separator;
-
-                }
-            }
-
-            //No genre name given
-            else {
-                //Series name given
-                if(!seriesName.equals(DBEnumeration.UNKNOWN)) {
-                    location = location + File.separator 
-                            + contentType + File.separator + DBEnumeration.UNKNOWN
-                            + File.separator  + seriesName + File.separator ;
-                }
-
-                //No series name given
-                else {
-                    location = location + File.separator 
-                            + contentType + File.separator  + DBEnumeration.UNKNOWN
-                            + File.separator  + DBEnumeration.UNKNOWN + File.separator ;
-                }
-            }
-        
-        return location;
-    }
-    
-    
+    }  
+  
     
     /**
      * Get file extension for file path given in addContent
@@ -2481,22 +2567,14 @@ public class SQLTranslator {
     }
     
     
-    private String getPathToDB() {
-        System.getProperty("file.separator");
-        final String constant = "jdbc:sqlite:";
-        String workingDirectory = System.getProperty("user.dir");
-        File file = new File(workingDirectory);
-        String parentDirectory = file.getParent();
-        File file2 = new File(parentDirectory);
-        String databaseDirectory = file2.getParent() + File.separator  + "Database"
-                + File.separator + "PACDB.db";
-        
-        return constant + databaseDirectory;
-        //return ("File:PACDB.db");
-    }
     
-    
-    
+    /**
+     * Gets a piece of content, not by id, but by its name, type and creator
+     * @param contentName
+     * @param contentType
+     * @param creatorName
+     * @return 
+     */
     public ResultSet getContentTest(String contentName, String contentType, String creatorName) {
         String query = "SELECT * FROM " + DBEnumeration.CONTENT
                 + " WHERE ContentName = '" + contentName + "' AND"

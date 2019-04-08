@@ -11,7 +11,7 @@ import java.util.Set;
  *
  * @author Jacob Oleson
  * 
- * @update 4/01/19
+ * @update 4/08/19
  * 
  * Simple test that calls the DB interface to add info to the DB file.
  */
@@ -58,13 +58,23 @@ public class SQLiteTest {
         System.out.println(playlist1.toString());
         
         Set contents = cdao.getAllContent();
-        Set contents2 = cdao.searchAllTablesBySearchTermAndType("ant", "EBook");
-        Iterator iter2 = contents2.iterator();
+        Iterator iterTest = contents.iterator();
+        Content contentTest2 = cdao.getContent(2);
+//        Set contents2 = cdao.searchAllTablesBySearchTermAndType("ant", "EBook");
+//        Iterator iter2 = contents2.iterator();
+//        
+//        //System.out.println(iter2.next().toString());
+//        Content test3 = (Content) iter2.next();
+//        System.out.println(test3.getContentName());
+//        
+//        Set content5 = cdao.getAllContent();
+//        Iterator iter5 = content5.iterator();
+//        while(iter5.hasNext()) {
+//            System.out.println(iter5.next().toString());
+//        }
         
-        Content test3 = (Content) iter2.next();
-        System.out.println(test3.getContentName());
-        String workingDirectory = System.getProperty("user.dir");
-        System.out.println("File Path: " + new File("PACDB.db").getAbsolutePath());
+        
+        
         
         
     }
