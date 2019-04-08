@@ -84,6 +84,7 @@ public class PacApp extends Application {
         HBox audioBoookControll = new HBox(10);
         HBox phoneProgress = new HBox(10);
         Button throwaway = new Button("");
+        VBox phoneStack = new VBox();
 
 
 
@@ -436,6 +437,12 @@ public class PacApp extends Application {
         Android.setPreserveRatio(true);
         Android.setSmooth(true);
         Android.setCache(true);
+//
+//        if(t.checkConnection()){
+//        Label battery = new Label("" + t.getPhoneBattery());
+//        Label phoneName = new Label("" + t.getPhoneModel());}
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       // phoneStack.getChildren().addAll(Android,phoneName,battery);
 
         HBox phoneMidRow = new HBox();
         phoneMidRow.setPadding(new Insets(5, 5, 5, 5));
@@ -449,7 +456,7 @@ public class PacApp extends Application {
         sync.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                t.sync();
                 System.out.println("Sync Pressed");
 
             }
@@ -463,7 +470,7 @@ public class PacApp extends Application {
         backup.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                t.backup();
                 System.out.println("backup Pressed");
 
             }
@@ -484,7 +491,7 @@ public class PacApp extends Application {
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                t.backup();
                 System.out.println("copy Pressed");
 
             }
@@ -924,7 +931,7 @@ public class PacApp extends Application {
         noMusic.backgroundProperty().set(buBack);
         musicCont.getChildren().addAll(noMusic);
 
-        phoneMidRow.getChildren().addAll(Android, midButt);
+        phoneMidRow.getChildren().addAll(phoneStack, midButt);
         centerAnchorPane.getChildren().addAll(tAnchor);
         centerAnchorPane.setRightAnchor(tAnchor, 5.0);
         centerAnchorPane.setLeftAnchor(tAnchor, 5.0);
