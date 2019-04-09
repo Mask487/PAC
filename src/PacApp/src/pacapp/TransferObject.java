@@ -8,7 +8,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//finish clone
+//important
+//finish restore
+
+//if
 //autodetect usb
 //syncQueuery thread conflicts with backup
 //stop backup/restore button

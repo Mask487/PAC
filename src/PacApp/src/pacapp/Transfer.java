@@ -698,9 +698,16 @@ class Transfer extends Thread implements pacapp.TransferObject {
         for (int i = 0; i < files.length; i++) {
             if(!doesFolderExist(files[i].getName(), pD) && files[i].isDirectory()){
                 createFolder(files[i].getName(), pD);
+                File newFile = new File(files[i].getAbsolutePath());
+                retEach(file);
+            }else if(doesFolderExist(files[i].getName(), pD) && files[i].isDirectory()){
+                File newFile = new File(files[i].getAbsolutePath());
+                retEach(file);
             }
             System.out.println(files[i].getName());
-            File newFile = new File(files[i].getAbsolutePath());
+
+
+
             //retEach();
         }
 
