@@ -37,7 +37,7 @@ public interface TransferObject
     void getPhoneIp() throws IOException;
     boolean setMainPath(String path);
     boolean setAdbPath(String path) throws IOException;
-    boolean doesFolderExist(String folderName, PortableDevice pD);
+    //boolean doesFolderExist(String folderName, PortableDevice pD);
     String getPhoneModel();
     String getPhoneName();
     String getIp();

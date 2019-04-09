@@ -15,7 +15,7 @@ public class TransferTest
         pacapp.Transfer t = new pacapp.Transfer();
         t.initializeDesk();
         //t.checkConnection(true);
-        //t.initializePhone(0);
+        t.initializePhone(0);
         //System.out.println("Phone Name: " + t.getPhoneName() + "\nPhone Model: " + t.getPhoneModel() + "\nBattery Level: " + t.getPhoneBattery());
         //t.addEbook(files);
         //t.getFolder("podcasts", file1);
