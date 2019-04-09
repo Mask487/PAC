@@ -97,41 +97,58 @@ public class SQLTranslator {
             if(contentType == null) {
                 contentType = DBEnumeration.UNKNOWN;
             }
+            
             if(creatorName == null) {
                 creatorName = DBEnumeration.UNKNOWN;
             }
+            //Doesn't remove spaces
             creatorName = cleanOtherString(creatorName);
+            
+            //Removes spaces as well.
             if(genreName == null) {
                 genreName = DBEnumeration.UNKNOWN;
             }
+            genreName = cleanString(genreName);
+            
+
             if(publisherName == null) {
                 publisherName = DBEnumeration.UNKNOWN;
             }
+            //Doesn't remove spaces
             publisherName = cleanOtherString(publisherName);
+            
             if(seriesName == null) {
                 seriesName = DBEnumeration.UNKNOWN;
             }
-            seriesName = cleanOtherString(seriesName);
+            //Removes spaces
+            seriesName = cleanString(seriesName);
+            
             if(contentName == null) {
                 contentName = DBEnumeration.UNKNOWN;
             }
             //Cleans it of spaces too
             contentName  = cleanString(contentName);
+            
             if(contentDescription == null) {
                 contentDescription = DBEnumeration.UNKNOWN;
             }
-            contentDescription = cleanString(contentDescription);
+            //Does not remove spaces
+            contentDescription = cleanOtherString(contentDescription);
+            
             //Must follow yyyy-mm-dd
             if(uploadDate == null) {
                 uploadDate = "2019-04-03";
             }
+            
             //Must follow hh:mm:ss
             if(duration == null) {
                 duration = "00:00:00";
             }
+            
             if(isbn == null) {
                 isbn = "null";
             }
+            
             if(url == null) {
                 url = DBEnumeration.UNKNOWN;
             }
