@@ -237,7 +237,7 @@ public class SQLTranslator {
             String ext = getExtension(originalFilePath);
                         
             // the absoulte filepath to the content. This will be put in DB.
-            String fileName = location + contentName + "." + ext;
+            String fileName = location + cleanString(contentName) + "." + ext;
             
             //Query to insert content into db.
             String query = "INSERT INTO " + DBEnumeration.CONTENT 

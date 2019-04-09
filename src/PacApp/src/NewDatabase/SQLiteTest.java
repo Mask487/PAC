@@ -81,5 +81,9 @@ public class SQLiteTest {
         while(iterResult.hasNext()) {
             System.out.println(iterResult.next().toString());
         }
+        
+        test.addContent("C:/Test/Test.epub", contentType);
     }
+    
+    
 }
