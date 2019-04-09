@@ -103,12 +103,12 @@ public class SQLTranslator {
             }
             //Doesn't remove spaces
             creatorName = cleanOtherString(creatorName);
-            
-            //Removes spaces as well.
+
             if(genreName == null) {
                 genreName = DBEnumeration.UNKNOWN;
             }
-            genreName = cleanString(genreName);
+            //Does not removes spaces
+            genreName = cleanOtherString(genreName);
             
 
             if(publisherName == null) {
@@ -120,14 +120,14 @@ public class SQLTranslator {
             if(seriesName == null) {
                 seriesName = DBEnumeration.UNKNOWN;
             }
-            //Removes spaces
-            seriesName = cleanString(seriesName);
+            //Doesn't remove spaces
+            seriesName = cleanOtherString(seriesName);
             
             if(contentName == null) {
                 contentName = DBEnumeration.UNKNOWN;
             }
-            //Cleans it of spaces too
-            contentName  = cleanString(contentName);
+            //Doesn't removes spaces
+            contentName  = cleanOtherString(contentName);
             
             if(contentDescription == null) {
                 contentDescription = DBEnumeration.UNKNOWN;
@@ -230,7 +230,8 @@ public class SQLTranslator {
              */
 
             //Set the parent directories for a new file
-            location = setContentLocation(contentName, contentType, genreName, seriesName);
+            //This removes these paraemeters of spaces. File paths do not like spaces.
+            location = setContentLocation(cleanString(contentName), cleanString(contentType), cleanString(genreName), cleanString(seriesName));
             
             //Get the content extension (mp3, epub, etc.)
             String ext = getExtension(originalFilePath);
