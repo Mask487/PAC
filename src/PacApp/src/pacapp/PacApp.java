@@ -18,9 +18,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -32,6 +35,9 @@ import NewDatabase.ContentDAO;
 import NewDatabase.Content;
 import java.util.Iterator;
 import java.util.Set;
+import javafx.scene.input.MouseButton;
+
+import static javafx.scene.input.MouseButton.SECONDARY;
 
 /**
  *
@@ -87,6 +93,8 @@ public class PacApp extends Application {
         HBox phoneProgress = new HBox(10);
         Button throwaway = new Button("");
         VBox phoneStack = new VBox();
+        VBox searchResults = new VBox();
+        ScrollPane searchPane = new ScrollPane(searchResults);
 
 
 
@@ -204,13 +212,35 @@ public class PacApp extends Application {
         search.backgroundProperty().set(buBack);
         hSearch.getChildren().add(search);
 
-//        AnchorPane bottomPadL = new AnchorPane();
-//        bottomPadL.backgroundProperty().set(testBack);
-//        bottomPadL.setMinWidth(300);
-//        AnchorPane bottomPadR = new AnchorPane();
-//        bottomPadR.backgroundProperty().set(testBack);
-//        bottomPadR.setMinWidth(300);
-        //Create horizontal Box for bottom controlls
+        search.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent Enter){
+                String term = search.getCharacters().toString();
+                System.out.println("Search Term " + term);
+                search.setText("");
+                SQLTranslator searchSql = new SQLTranslator();
+//                ResultSet searchSet = searchSql.searchAllTablesByKeyTerm(term);
+//                mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+//                mainStack.getChildren().add(searchPane);
+//               // ContentDAO dao = new ContentDAO();
+//               // Set searchSet = dao.getAllContentByType("Music");
+//                Iterator miter = searchSet.iterator();
+//                int setSize = searchSet.size();
+//                Button[] listings = new Button[setSize];
+//                int i = 0;
+//                while (miter.hasNext()) {
+//                    Content content = new Content();
+//                    content = (NewDatabase.Content) miter.next();
+//                    musButt(content, listings, i,musicCont,buBack);
+//                    i++;
+//                }
+
+
+
+            }
+        });
+
+
         HBox bottomButt = new HBox();
         bottomButt.setPadding(new Insets(5));
 
@@ -575,6 +605,7 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
 
                 System.out.println("Music Play Pressed");
+                //musicPlayer.play();
 
             }
         });
@@ -1005,7 +1036,9 @@ public class PacApp extends Application {
 
             @Override
             public void handle(ActionEvent press) {
-
+                Media song = new Media("file://" + objs.getLocation());
+                MediaPlayer musicTester = new MediaPlayer(song);
+                musicTester.play();
                 System.out.println(name + " Pressed");
 
             }
@@ -1055,10 +1088,19 @@ public class PacApp extends Application {
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
+        MouseEvent click;
+
+
+
+
+
+
         L[i].setOnAction(new EventHandler<ActionEvent>() {
+
 
             @Override
             public void handle(ActionEvent press) {
+
 
                 System.out.println(name + " Pressed");
 
@@ -1085,6 +1127,24 @@ public class PacApp extends Application {
     }
 
     public static void appButt(Content objs, Button[] L, int i, TilePane cont, Background b) {
+
+        String name = objs.getContentName();
+        L[i] = new Button(name);
+        L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].backgroundProperty().set(b);
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println(name + " Pressed");
+
+            }
+        });
+        cont.getChildren().add(L[i]);
+    }
+
+    public static void searchButt(Content objs, Button[] L, int i, VBox cont, Background b) {
 
         String name = objs.getContentName();
         L[i] = new Button(name);

@@ -84,8 +84,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="43" column="48" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="48" />
+            <state relative-caret-position="254">
+              <caret line="1040" column="27" selection-start-line="1040" selection-start-column="27" selection-end-line="1040" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -93,24 +96,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-313">
-              <caret column="20" lean-forward="true" selection-start-column="20" selection-end-column="20" />
-              <folding>
-                <element signature="e#69928#69929#0" expanded="true" />
-                <element signature="e#69956#69957#0" expanded="true" />
-                <element signature="e#70070#70071#0" expanded="true" />
-                <element signature="e#70098#70099#0" expanded="true" />
-                <element signature="e#70205#70206#0" expanded="true" />
-                <element signature="e#70233#70234#0" expanded="true" />
-                <element signature="e#70336#70337#0" expanded="true" />
-                <element signature="e#70364#70365#0" expanded="true" />
-                <element signature="e#70442#70443#0" expanded="true" />
-                <element signature="e#70470#70471#0" expanded="true" />
-                <element signature="e#70582#70583#0" expanded="true" />
-                <element signature="e#70610#70611#0" expanded="true" />
-                <element signature="e#70716#70717#0" expanded="true" />
-                <element signature="e#70744#70745#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="109">
+              <caret line="1077" selection-start-line="1077" selection-end-line="1077" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="197">
+              <caret line="347" selection-start-line="347" selection-end-line="347" />
             </state>
           </provider>
         </entry>
@@ -125,6 +121,10 @@
       <find>addCont</find>
       <find>syn</find>
       <find>music</find>
+      <find>searchS</find>
+      <find>searchA</find>
+      <find>searchAll</find>
+      <find>allc</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -156,10 +156,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="285" />
-    <option name="y" value="210" />
+    <option name="x" value="72" />
+    <option name="y" value="49" />
     <option name="width" value="1442" />
-    <option name="height" value="756" />
+    <option name="height" value="697" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -167,7 +167,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -175,68 +174,6 @@
             <path>
               <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
               <item name="PAC" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
-              <item name="audioBook" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
-              <item name="audioBook" type="462c0819:PsiDirectoryNode" />
-              <item name="Alternative" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
-              <item name="audioBook" type="462c0819:PsiDirectoryNode" />
-              <item name="Alternative" type="462c0819:PsiDirectoryNode" />
-              <item name="UNKNOWN" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
-              <item name="audioBook" type="462c0819:PsiDirectoryNode" />
-              <item name="Pop Rock" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
-              <item name="audioBook" type="462c0819:PsiDirectoryNode" />
-              <item name="Pop Rock" type="462c0819:PsiDirectoryNode" />
-              <item name="UNKNOWN" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
-              <item name="Music" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
-              <item name="Music" type="462c0819:PsiDirectoryNode" />
-              <item name="Classical" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="ContentFiles" type="462c0819:PsiDirectoryNode" />
-              <item name="Music" type="462c0819:PsiDirectoryNode" />
-              <item name="Classical" type="462c0819:PsiDirectoryNode" />
-              <item name="Land of the Mountain and the FlooD" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
@@ -286,6 +223,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -409,10 +347,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="285" y="210" width="1442" height="756" extended-state="0" />
+    <frame x="72" y="49" width="1442" height="697" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18285714" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.185" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -421,17 +359,17 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3298193" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.25451806" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27933884" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43222892" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3289256" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32871288" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32680723" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32561985" />
       <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32936078" />
       <window_info anchor="bottom" id="DB Execution Console" order="14" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -526,7 +464,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java</url>
-          <line>250</line>
+          <line>280</line>
           <properties />
           <option name="timeStamp" value="37" />
         </line-breakpoint>
@@ -560,13 +498,7 @@
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/transfere/src/TransferTest.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/transfere/src/Transfer.java" />
     <entry file="db://3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection" />
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/MetaDataReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/MetaDataReader.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -605,16 +537,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="2234" column="26" selection-start-line="2234" selection-start-column="19" selection-end-line="2234" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -650,22 +573,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="347" selection-start-line="347" selection-end-line="347" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcl/PacApp/src/pacapp/PacApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#39999#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/srcl/PacApp/src/pacapp/PacApp.java" />
     <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -673,33 +581,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="347" selection-start-line="347" selection-end-line="347" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-313">
-          <caret column="20" lean-forward="true" selection-start-column="20" selection-end-column="20" />
-          <folding>
-            <element signature="e#69928#69929#0" expanded="true" />
-            <element signature="e#69956#69957#0" expanded="true" />
-            <element signature="e#70070#70071#0" expanded="true" />
-            <element signature="e#70098#70099#0" expanded="true" />
-            <element signature="e#70205#70206#0" expanded="true" />
-            <element signature="e#70233#70234#0" expanded="true" />
-            <element signature="e#70336#70337#0" expanded="true" />
-            <element signature="e#70364#70365#0" expanded="true" />
-            <element signature="e#70442#70443#0" expanded="true" />
-            <element signature="e#70470#70471#0" expanded="true" />
-            <element signature="e#70582#70583#0" expanded="true" />
-            <element signature="e#70610#70611#0" expanded="true" />
-            <element signature="e#70716#70717#0" expanded="true" />
-            <element signature="e#70744#70745#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="109">
+          <caret line="1077" selection-start-line="1077" selection-end-line="1077" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="43" column="48" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="48" />
+        <state relative-caret-position="254">
+          <caret line="1040" column="27" selection-start-line="1040" selection-start-column="27" selection-end-line="1040" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
