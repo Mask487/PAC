@@ -21,7 +21,7 @@ public interface TransferObject
     void pctoP(PortableDeviceFolderObject targetFolder, File file);
     void ptoPC(PortableDeviceObject pDO, String file);
     void getFolder(String folder, File file);
-    void backup();
+    void backup() throws IOException;
     void addFiles(ArrayList<FileA> files);
     void addPodcast(File file);
     void addPodcast(ArrayList<File> files);
@@ -37,7 +37,7 @@ public interface TransferObject
     void getPhoneIp() throws IOException;
     boolean setMainPath(String path);
     boolean setAdbPath(String path) throws IOException;
-    boolean doesFolderExist(String folderName, PortableDevice pD);
+    //boolean doesFolderExist(String folderName, PortableDevice pD);
     String getPhoneModel();
     String getPhoneName();
     String getIp();
