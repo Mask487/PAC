@@ -41,42 +41,45 @@ public class SQLiteTest {
         boolean wantToSync = false;
         String filePath = "";
         //test.addContent(contentType, creatorName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url, wantToSync, filePath);
-        test.addContent("C:/Test/test4.epub", contentType);
+        //test.addContent("C:/Test/test4.epub", contentType);
         
-//        File file1 = new File("ContentFiles").getAbsoluteFile();
-//        System.out.println(file1.toString());
-//        ContentDAO cdao = new ContentDAO();
-//        PlaylistDAO pdao = new PlaylistDAO();
-//        //cdao.insertContent("C:/Test/FreePodcast.mp3", "Podcast");
-//        Set contents0 = cdao.getAllContent();
-//        Set playlists = pdao.getAllPlaylists();
-//        Iterator pDAOIterator = playlists.iterator();
-//        Content contentTest = cdao.getContent(3);
-//        
-//        Playlist playlist1 =  (Playlist) pDAOIterator.next();
-//        pdao.insertContentIntoPlaylist(contentTest, playlist1);
-//        pdao.getContentFromPlaylist(playlist1);
-//        System.out.println(playlist1.toString());
-//        
-//        Set contents = cdao.getAllContent();
-//        Iterator iterTest = contents.iterator();
-//        Content contentTest2 = cdao.getContent(2);
-//        Set contents2 = cdao.searchAllTablesBySearchTermAndType("ant", "EBook");
-//        Iterator iter2 = contents2.iterator();
-//        
-//        //System.out.println(iter2.next().toString());
-//        Content test3 = (Content) iter2.next();
-//        System.out.println(test3.getContentName());
-//        
-//        Set content5 = cdao.getAllContent();
-//        Iterator iter5 = content5.iterator();
-//        while(iter5.hasNext()) {
-//            System.out.println(iter5.next().toString());
-//        }
+        File file1 = new File("ContentFiles").getAbsoluteFile();
+        System.out.println(file1.toString());
+        ContentDAO cdao = new ContentDAO();
+        PlaylistDAO pdao = new PlaylistDAO();
+        //cdao.insertContent("C:/Test/FreePodcast.mp3", "Podcast");
+        Set contents0 = cdao.getAllContent();
+        Set playlists = pdao.getAllPlaylists();
+        Iterator pDAOIterator = playlists.iterator();
+        Content contentTest = cdao.getContent(3);
         
+        Playlist playlist1 =  (Playlist) pDAOIterator.next();
+        pdao.insertContentIntoPlaylist(contentTest, playlist1);
+        pdao.getContentFromPlaylist(playlist1);
+        System.out.println(playlist1.toString());
         
+        Set contents = cdao.getAllContent();
+        Iterator iterTest = contents.iterator();
+        Content contentTest2 = cdao.getContent(2);
+        Set contents2 = cdao.searchAllTablesBySearchTermAndType("ant", "EBook");
+        Iterator iter2 = contents2.iterator();
         
+        //System.out.println(iter2.next().toString());
+        Content test3 = (Content) iter2.next();
+        System.out.println(test3.getContentName());
         
+        Set content5 = cdao.getAllContent();
+        Iterator iter5 = content5.iterator();
+        while(iter5.hasNext()) {
+            System.out.println(iter5.next().toString());
+        }
         
+        Set contentsResult = cdao.searchAllTablesBySearchTerm("t");
+        Iterator iterResult = contentsResult.iterator();
+        
+        System.out.println("The results are: ");
+        while(iterResult.hasNext()) {
+            System.out.println(iterResult.next().toString());
+        }
     }
 }

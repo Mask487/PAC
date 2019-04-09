@@ -1542,7 +1542,7 @@ public class SQLTranslator {
                     + " OR cr.CreatorName LIKE '%" + searchTerm + "%' OR "
                     + " g.GenreName LIKE '%" + searchTerm + "%' OR"
                     + " p.PublisherName LIKE '%" + searchTerm + "%' OR"
-                    + " s.SeriesName LIKE '%" + searchTerm + "%')"
+                    + " s.SeriesName LIKE '%" + searchTerm + "%'"
                     + " ORDER BY ContentName";
             return getRecords(query);
         }
