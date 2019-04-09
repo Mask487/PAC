@@ -41,7 +41,7 @@ public class PacApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        
+
      Transfer t = new Transfer();
       t.initializeDesk();
 
@@ -79,6 +79,16 @@ public class PacApp extends Application {
         TilePane appCont = new TilePane();
         ScrollPane appPane = new ScrollPane(appCont);
         VBox settingsList = new VBox();
+        HBox musicControll = new HBox(10);
+        HBox videoControll = new HBox(10);
+        HBox podcastControll = new HBox(10);
+        HBox ebookControll = new HBox(10);
+        HBox audioBoookControll = new HBox(10);
+        HBox phoneProgress = new HBox(10);
+        Button throwaway = new Button("");
+        VBox phoneStack = new VBox();
+
+
 
         //create background anchor
         root2.setRightAnchor(bp, 0.0);
@@ -107,7 +117,7 @@ public class PacApp extends Application {
         // Sidebar Button for the Music Section
         Image musicIconP = new Image("MusicIcon.png");   //Load Music Icon for imageview
         ImageView musicIcon = new ImageView();
-        musicIcon.setImage(musicIconP);                  //adds icon to imageview           
+        musicIcon.setImage(musicIconP);                  //adds icon to imageview
         Button music = new Button("", musicIcon);       //Creates button with image
         music.backgroundProperty().set(buBack);         //adds transparent background
         music.setPadding(inset);
@@ -115,7 +125,7 @@ public class PacApp extends Application {
         // Sidebar Button for the Books Section
         Image bookIconP = new Image("BookIcon.png");   //Load book Icon for imageview
         ImageView bookIcon = new ImageView();
-        bookIcon.setImage(bookIconP);                  //adds icon to imageview           
+        bookIcon.setImage(bookIconP);                  //adds icon to imageview
         Button book = new Button("", bookIcon);       //Creates button with image
         book.backgroundProperty().set(buBack);         //adds transparent background
         book.setPadding(inset);
@@ -123,7 +133,7 @@ public class PacApp extends Application {
         // Sidebar Button for the Audio Books Section
         Image aBookIconP = new Image("AudioBook.png");   //Load audio book Icon for imageview
         ImageView aBookIcon = new ImageView();
-        aBookIcon.setImage(aBookIconP);                  //adds icon to imageview           
+        aBookIcon.setImage(aBookIconP);                  //adds icon to imageview
         Button aBook = new Button("", aBookIcon);       //Creates button with image
         aBook.backgroundProperty().set(buBack);         //adds transparent background
         aBook.setPadding(inset);
@@ -131,7 +141,7 @@ public class PacApp extends Application {
         // Sidebar Button for the podcasts Section
         Image podcastIconP = new Image("PodcastIcon.png");   //Load podcasts Icon for imageview
         ImageView podcastIcon = new ImageView();
-        podcastIcon.setImage(podcastIconP);                  //adds icon to imageview           
+        podcastIcon.setImage(podcastIconP);                  //adds icon to imageview
         Button podcast = new Button("", podcastIcon);       //Creates button with image
         podcast.backgroundProperty().set(buBack);         //adds transparent background
         podcast.setPadding(inset);
@@ -139,7 +149,7 @@ public class PacApp extends Application {
         // Sidebar Button for the video Section
         Image videoIconP = new Image("VideoIcon.png");   //Load video Icon for imageview
         ImageView videoIcon = new ImageView();
-        videoIcon.setImage(videoIconP);                  //adds icon to imageview           
+        videoIcon.setImage(videoIconP);                  //adds icon to imageview
         Button video = new Button("", videoIcon);       //Creates button with image
         video.backgroundProperty().set(buBack);         //adds transparent background
         video.setPadding(inset);
@@ -147,21 +157,21 @@ public class PacApp extends Application {
         // Sidebar Button for the apps Section
         Image appsIconP = new Image("AppsIcon.png");   //Load apps Icon for imageview
         ImageView appsIcon = new ImageView();
-        appsIcon.setImage(appsIconP);                  //adds icon to imageview           
+        appsIcon.setImage(appsIconP);                  //adds icon to imageview
         Button apps = new Button("", appsIcon);       //Creates button with image
         apps.backgroundProperty().set(buBack);         //adds transparent background
         apps.setPadding(inset);
 
         Image phoneIcon = new Image("Phone.png");   //Load Phone Icon for imageview
         ImageView phone = new ImageView();
-        phone.setImage(phoneIcon);                  //adds icon to imageview           
+        phone.setImage(phoneIcon);                  //adds icon to imageview
         Button phoneB = new Button("", phone);       //Creates button with image
         phoneB.backgroundProperty().set(buBack);         //adds transparent background
         phoneB.setPadding(inset);
 
         Image settingsIcon = new Image("Settings.png");   //Load Phone Icon for imageview
         ImageView settings = new ImageView();
-        settings.setImage(settingsIcon);                  //adds icon to imageview           
+        settings.setImage(settingsIcon);                  //adds icon to imageview
         Button settingsB = new Button("", settings);       //Creates button with image
         settingsB.backgroundProperty().set(buBack);         //adds transparent background
         settingsB.setPadding(inset);
@@ -226,7 +236,7 @@ public class PacApp extends Application {
                 Button[] listings = new Button[setSize];
                 int i = 0;
                 while(iter.hasNext()) {
-                   
+
                     ebkButt(iter.next(),listings,i);
                      i++;
                 }
@@ -321,7 +331,7 @@ public class PacApp extends Application {
         podcastPane.setFitToHeight(true);
         podcastPane.setPannable(false);
         Label nopodcast = new Label("You have no podcasts \n import podcasts to get started.");
-        nopodcast.backgroundProperty().set(buBack); 
+        nopodcast.backgroundProperty().set(buBack);
         podcastCont.getChildren().addAll(nopodcast);
 
         // Create video pane
@@ -329,11 +339,11 @@ public class PacApp extends Application {
         videoPane.setFitToHeight(true);
         videoPane.setPannable(false);
         Label noVideo = new Label("You have no videos \n import videos to get started.");
-        noVideo.backgroundProperty().set(buBack); 
+        noVideo.backgroundProperty().set(buBack);
         videoCont.getChildren().addAll(noVideo);
 
         // create settings VBox
-        Button lightMode = new Button("Change to light mode.");       //Creates button 
+        Button lightMode = new Button("Change to light mode.");       //Creates button
         lightMode.backgroundProperty().set(buBack);         //adds transparent background
         lightMode.setTextFill(Paint.valueOf("D146FF"));
         lightMode.setPadding(inset);
@@ -360,12 +370,18 @@ public class PacApp extends Application {
         Android.setPreserveRatio(true);
         Android.setSmooth(true);
         Android.setCache(true);
+//
+//        if(t.checkConnection()){
+//        Label battery = new Label("" + t.getPhoneBattery());
+//        Label phoneName = new Label("" + t.getPhoneModel());}
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       // phoneStack.getChildren().addAll(Android,phoneName,battery);
 
         HBox phoneMidRow = new HBox();
         phoneMidRow.setPadding(new Insets(5, 5, 5, 5));
         phoneMidRow.setSpacing(50);
 
-        Button sync = new Button("Sync Phone");       //Creates button 
+        Button sync = new Button("Sync Phone");       //Creates button
         sync.setTextFill(Paint.valueOf("D146FF"));
         sync.backgroundProperty().set(buBack);         //adds transparent background
         sync.setPadding(inset);
@@ -373,13 +389,13 @@ public class PacApp extends Application {
         sync.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                t.sync();
                 System.out.println("Sync Pressed");
 
             }
         });
 
-        Button backup = new Button("Backup Phone");       //Creates button 
+        Button backup = new Button("Backup Phone");       //Creates button
         backup.setTextFill(Paint.valueOf("D146FF"));
         backup.backgroundProperty().set(buBack);         //adds transparent background
         backup.setPadding(inset);
@@ -387,13 +403,13 @@ public class PacApp extends Application {
         backup.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                t.backup();
                 System.out.println("backup Pressed");
 
             }
         });
 
-        Button copy = new Button("Duplicate Phone");       //Creates button 
+        Button copy = new Button("Duplicate Phone");       //Creates button
         copy.setTextFill(Paint.valueOf("D146FF"));
         copy.backgroundProperty().set(buBack);         //adds transparent background
 
@@ -408,7 +424,7 @@ public class PacApp extends Application {
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                t.backup();
                 System.out.println("copy Pressed");
 
             }
@@ -449,8 +465,7 @@ public class PacApp extends Application {
         noMusic.backgroundProperty().set(buBack);
         musicCont.getChildren().addAll(noMusic);
 
-        phoneMidRow.getChildren().addAll(Android, midButt);
-        // Button buttonbottom = new Button("bottom");
+        phoneMidRow.getChildren().addAll(phoneStack, midButt);
         centerAnchorPane.getChildren().addAll(tAnchor);
         centerAnchorPane.setRightAnchor(tAnchor, 5.0);
         centerAnchorPane.setLeftAnchor(tAnchor, 5.0);
@@ -482,31 +497,31 @@ public class PacApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
     public static void musButt() {
-        
+
     }
     public static void podButt() {
-        
+
     }
     public static void ebkButt(Object objs,Button[] L,int i) {
-        
+
        // String name = objs.getContentName();
         //L[i] = new Button(name);
        //L[i] = new Button(name);
 
-        
-        
+
+
     }
     public static void abkButt() {
-        
+
     }
     public static void vidButt() {
-        
+
     }
     public static void infButt() {
-        
+
     }
-    
+
 
 }
