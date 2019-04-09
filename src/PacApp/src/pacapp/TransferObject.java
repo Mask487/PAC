@@ -21,7 +21,7 @@ public interface TransferObject
     void pctoP(PortableDeviceFolderObject targetFolder, File file);
     void ptoPC(PortableDeviceObject pDO, String file);
     void getFolder(String folder, File file);
-    void backup();
+    void backup() throws IOException;
     void addFiles(ArrayList<FileA> files);
     void addPodcast(File file);
     void addPodcast(ArrayList<File> files);

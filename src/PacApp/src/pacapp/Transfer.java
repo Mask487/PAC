@@ -20,8 +20,9 @@ class Transfer extends Thread implements pacapp.TransferObject {
     private PortableDeviceManager pDM;
     private String ip;
     private String adbPath = null;
-    private String backupPath = null;
     private String mainPath = System.getProperty("user.dir");
+    private String backupPath = null;
+
 
     private void createFolder(String folderName, PortableDevice pD) {
         //PortableDeviceFolderObject target = ;
@@ -573,11 +574,12 @@ class Transfer extends Thread implements pacapp.TransferObject {
     }
     */
 
-    public void backup(){
+    public void backup() throws IOException {
         //add backup folder check here
-        String path = this.backupPath;
+        String path = getBackupPath();
         //make sure phone model is here
         String pModel = getPhoneModel();
+        //pModel = pModel.replaceAll("");
         String time = new SimpleDateFormat("yyyy-MM-dd_HHmm").format(Calendar.getInstance().getTime());
         class BackupThread implements Runnable{
             //String path;
@@ -589,8 +591,10 @@ class Transfer extends Thread implements pacapp.TransferObject {
                 System.out.println("Thread starting");
                 PortableDeviceFolderObject target = null;
                 File file = new File(path + "\\" + pModel + "\\" + time);
+                //String test = file.toString();
                 if(!file.isDirectory()){
-                    file.mkdir();
+                    file.mkdirs();
+                    System.out.println(file.toString());
                 }
                 for (PortableDeviceObject obj1 : pD.getRootObjects())
                 {
@@ -631,6 +635,17 @@ class Transfer extends Thread implements pacapp.TransferObject {
         File[] backups = bfolder.listFiles();
         if(backups.length == 1){
             pctoP((setTargetFolder("Phone", pD)), backups[0]);
+        }else if(backups == null){
+            System.out.println("No Backups Found!");
+        }else{
+
+        }
+    }
+
+    public void newestFolder(File[] dir){
+        File file = dir[0];
+        for (int i = 0; i < dir.length; i++) {
+            System.out.println(file.getName());
         }
     }
 
