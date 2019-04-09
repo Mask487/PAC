@@ -8,10 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-//check backup method just in case
 //finish clone
-//query
 //autodetect usb
 //syncQueuery thread conflicts with backup
 
@@ -22,7 +19,7 @@ public interface TransferObject
     void pctoP(PortableDeviceFolderObject targetFolder, File file);
     void ptoPC(PortableDeviceObject pDO, String file);
     void getFolder(String folder, File file);
-    void backup();
+    void backup() throws IOException;
     void addFiles(ArrayList<FileA> files);
     void addPodcast(File file);
     void addPodcast(ArrayList<File> files);
@@ -38,12 +35,12 @@ public interface TransferObject
     void getPhoneIp() throws IOException;
     boolean setMainPath(String path);
     boolean setAdbPath(String path) throws IOException;
-    boolean doesFolderExist(String folderName, PortableDevice pD);
-    void checkConnection(boolean b);
+    //boolean doesFolderExist(String folderName, PortableDevice pD);
     String getPhoneModel();
     String getPhoneName();
     String getIp();
     String getAdbPath() throws IOException;
+    String getBackupPath() throws IOException;
     ArrayList<FileA> syncQueuery();
 
 
