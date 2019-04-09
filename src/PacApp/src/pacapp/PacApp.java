@@ -284,6 +284,12 @@ public class PacApp extends Application {
                 System.out.println("App Pressed");
                 Iterator appiter = appset.iterator();
                 int setSize = appset.size();
+                if(setSize == 0){
+                    Label noapps = new Label("You have no Apps.\n\nDrag and Drop apps into this window to add to your collection.");
+                    noapps.setFont(new Font(20.0));
+                    noapps.backgroundProperty().set(buBack);
+                    appCont.getChildren().addAll(noapps);
+                }
                 Button[] listings = new Button[setSize];
                 int i = 0;
                 while (appiter.hasNext()) {
@@ -309,6 +315,12 @@ public class PacApp extends Application {
                 System.out.println("Book Pressed");
                 Iterator iter = set.iterator();
                 int setSize = set.size();
+                if(setSize == 0){
+                    Label noEBooks = new Label("You have no eBooks.\n\nDrag and Drop eBooks into this window to add to your collection.");
+                    noEBooks.setFont(new Font(20.0));
+                    noEBooks.backgroundProperty().set(buBack);
+                   bookCont.getChildren().addAll(noEBooks);
+                }
                 Button[] listings = new Button[setSize];
                 int i = 0;
                 while (iter.hasNext()) {
@@ -332,6 +344,12 @@ public class PacApp extends Application {
                 System.out.println("Audio Book Pressed");
                 Iterator abiter = abset.iterator();
                 int setSize = abset.size();
+                if(setSize == 0){
+                    Label noABooks = new Label("You have no Audio Books.\n\nDrag and Drop Audio Books into this window to add to your collection.");
+                    noABooks.setFont(new Font(20.0));
+                    noABooks.backgroundProperty().set(buBack);
+                    audioBookCont.getChildren().addAll(noABooks);
+                }
                 Button[] listings = new Button[setSize];
                 int i = 0;
                 while (abiter.hasNext()) {
@@ -357,6 +375,12 @@ public class PacApp extends Application {
                 System.out.println("podcast Pressed");
                 Iterator podcastiter = podcastset.iterator();
                 int setSize = podcastset.size();
+                if(setSize == 0){
+                    Label nopodcasts = new Label("You have no Podcasts.\n\nDrag and Drop Podcasts into this window to add to your collection.");
+                    nopodcasts.setFont(new Font(20.0));
+                    nopodcasts.backgroundProperty().set(buBack);
+                    podcastCont.getChildren().addAll(nopodcasts);
+                }
                 Button[] listings = new Button[setSize];
                 int i = 0;
                 while (podcastiter.hasNext()) {
@@ -382,6 +406,12 @@ public class PacApp extends Application {
             System.out.println("video Pressed");
             Iterator videoiter = videoset.iterator();
             int setSize = videoset.size();
+                if(setSize == 0){
+                    Label noVideos = new Label("You have no videos.\n\nDrag and Drop videos into this window to add to your collection.");
+                    noVideos.setFont(new Font(20.0));
+                    noVideos.backgroundProperty().set(buBack);
+                    videoCont.getChildren().addAll(noVideos);
+                }
             Button[] listings = new Button[setSize];
             int i = 0;
             while (videoiter.hasNext()) {
@@ -469,7 +499,7 @@ public class PacApp extends Application {
         // create settings VBox
         Button lightMode = new Button("Change to light mode.");       //Creates button
         lightMode.backgroundProperty().set(buBack);         //adds transparent background
-        lightMode.setTextFill(Paint.valueOf("D146FF"));
+        lightMode.setTextFill(Paint.valueOf("BBBBBB"));
         lightMode.setPadding(inset);
 
         lightMode.setOnAction(new EventHandler<ActionEvent>() {
@@ -506,7 +536,7 @@ public class PacApp extends Application {
         phoneMidRow.setSpacing(50);
 
         Button sync = new Button("Sync Phone");       //Creates button
-        sync.setTextFill(Paint.valueOf("D146FF"));
+        sync.setTextFill(Paint.valueOf("BBBBBB"));
         sync.backgroundProperty().set(buBack);         //adds transparent background
         sync.setPadding(inset);
 
@@ -521,7 +551,7 @@ public class PacApp extends Application {
         });
 
         Button backup = new Button("Backup Phone");       //Creates button
-        backup.setTextFill(Paint.valueOf("D146FF"));
+        backup.setTextFill(Paint.valueOf("BBBBBB"));
         backup.backgroundProperty().set(buBack);         //adds transparent background
         backup.setPadding(inset);
 
@@ -536,7 +566,7 @@ public class PacApp extends Application {
         });
 
         Button copy = new Button("Duplicate Phone");       //Creates button
-        copy.setTextFill(Paint.valueOf("D146FF"));
+        copy.setTextFill(Paint.valueOf("BBBBBB"));
         copy.backgroundProperty().set(buBack);         //adds transparent background
 
 //        copy.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -988,10 +1018,29 @@ public class PacApp extends Application {
         tAnchor.setTopAnchor(mainStack, 25.0);// area around
 
         //MusicPane
-        Label noMusic = new Label("You have no content\nImport content, into the appropriate pane, via drag and drop.");
-        noMusic.setFont(new Font(25.0));
-        noMusic.backgroundProperty().set(buBack);
-        musicCont.getChildren().addAll(noMusic);
+        mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+        mainStack.getChildren().add(musicPane);
+        musicCont.getChildren().clear();
+        ContentDAO dao = new ContentDAO();
+        Set mset = dao.getAllContentByType("Music");
+        System.out.println("Music Showing");
+        Iterator miter = mset.iterator();
+        int setSize = mset.size();
+        if(setSize == 0){
+            Label noMusic = new Label("You have no music.\n\nDrag and Drop music into this window to add to your collection.");
+            noMusic.setFont(new Font(25.0));
+            noMusic.backgroundProperty().set(buBack);
+            musicCont.getChildren().addAll(noMusic);
+        }
+        Button[] listings = new Button[setSize];
+        int i = 0;
+        while (miter.hasNext()) {
+            Content content = new Content();
+            content = (NewDatabase.Content) miter.next();
+            musButt(content, listings, i,musicCont,buBack);
+            i++;
+        }
+
 
         phoneMidRow.getChildren().addAll(phoneStack, midButt);
         centerAnchorPane.getChildren().addAll(tAnchor);
