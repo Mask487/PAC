@@ -24,15 +24,11 @@ public interface DBInterface {
      */
     public void getConnection() throws SQLException, ClassNotFoundException;
     
-    
-    public void closeConnection();
-    
-    
     public boolean addContent(String contentType,String creatorName, 
             String genreName, String publisherName, String seriesName, 
             String contentName, String contentDescription, String uploadDate,
             int pageCount, String duration, String isbn, boolean explicit, 
-            String location, String url, boolean wantToSync, String filePath) throws SQLException, ClassNotFoundException;
+            String location, String url, boolean wantToSync, String filePath);
     
     
     public boolean addContentType(String contentTypeName);

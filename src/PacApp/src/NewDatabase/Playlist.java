@@ -59,7 +59,7 @@ public class Playlist {
         String allContent = "";
         Iterator iter = contents.iterator();
         while(iter.hasNext()) {
-            allContent = allContent.concat(iter.next().toString());
+            allContent = allContent.concat(iter.next().toString() + "\n");
         }
         
         return allContent;

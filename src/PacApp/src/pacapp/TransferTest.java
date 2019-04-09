@@ -15,16 +15,18 @@ public class TransferTest
         pacapp.Transfer t = new pacapp.Transfer();
         t.initializeDesk();
         //t.checkConnection(true);
-        t.initializePhone(0);
-        System.out.println("Phone Name: " + t.getPhoneName() + "\nPhone Model: " + t.getPhoneModel() + "\nBattery Level: " + t.getPhoneBattery());
+        //t.initializePhone(0);
+        //System.out.println("Phone Name: " + t.getPhoneName() + "\nPhone Model: " + t.getPhoneModel() + "\nBattery Level: " + t.getPhoneBattery());
         //t.addEbook(files);
         //t.getFolder("podcasts", file1);
         //t.backup("Backup");
         //t.setAdbPath("C:\\Users\\quinc\\AppData\\Local\\Android\\Sdk\\platform-tools");
         //t.getAdbPath();
         //t.setBackupPath("D:\\Desktop\\BACKUP");
-        System.out.println("IP: "+ t.getIp());
+        //System.out.println("IP: "+ t.getIp());
         //t.getPhoneIp();
+        t.getBackupPath();
         t.syncQueuery();
+
     }
 }

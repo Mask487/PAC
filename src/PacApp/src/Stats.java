@@ -1,11 +1,10 @@
-import Database.ContentDAO;
-import Database.SQLTranslator;
-import Database.ContentDAO;
+import NewDatabase.ContentDAO;
+import NewDatabase.SQLTranslator;
 import java.util.ArrayList;
 import java.util.List;
 public class Stats{
-    SQLTranslator db = new Database.SQLTranslator();
-    ContentDAO dao = new Database.ContentDAO();
+    SQLTranslator db = new NewDatabase.SQLTranslator();
+    ContentDAO dao = new NewDatabase.ContentDAO();
     String BookStats(String statType){
         List<String[]> genres = new ArrayList<>();
         List<String[]> authors = new ArrayList<>();
