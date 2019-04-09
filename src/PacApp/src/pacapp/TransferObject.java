@@ -11,6 +11,7 @@ import java.util.ArrayList;
 //finish clone
 //autodetect usb
 //syncQueuery thread conflicts with backup
+//stop backup/restore button
 
 public interface TransferObject
 {
