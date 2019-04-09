@@ -100,21 +100,22 @@ public class SQLTranslator {
             if(creatorName == null) {
                 creatorName = DBEnumeration.UNKNOWN;
             }
-            creatorName = cleanString(creatorName);
+            creatorName = cleanOtherString(creatorName);
             if(genreName == null) {
                 genreName = DBEnumeration.UNKNOWN;
             }
             if(publisherName == null) {
                 publisherName = DBEnumeration.UNKNOWN;
             }
-            publisherName = cleanString(publisherName);
+            publisherName = cleanOtherString(publisherName);
             if(seriesName == null) {
                 seriesName = DBEnumeration.UNKNOWN;
             }
-            seriesName = cleanString(seriesName);
+            seriesName = cleanOtherString(seriesName);
             if(contentName == null) {
                 contentName = DBEnumeration.UNKNOWN;
             }
+            //Cleans it of spaces too
             contentName  = cleanString(contentName);
             if(contentDescription == null) {
                 contentDescription = DBEnumeration.UNKNOWN;
@@ -2281,9 +2282,9 @@ public class SQLTranslator {
      */
     private static String cleanString(String name) {
         
-//            if (name.contains("!")) {
-//                name = name.replace("!", "");
-//            }
+            if (name.contains("!")) {
+                name = name.replace("!", "");
+            }
             if (name.contains("/")) {
                 name = name.replace("/", "");
             }
@@ -2302,27 +2303,27 @@ public class SQLTranslator {
             if (name.contains("*")) {
                 name = name.replace("*", "");
             }
-//            if (name.contains(":")) {
-//                name = name.replace(":", "");
-//            }
-//            if (name.contains("|")) {
-//                name = name.replace("|", "");
-//            }
+            if (name.contains(":")) {
+                name = name.replace(":", "");
+            }
+            if (name.contains("|")) {
+                name = name.replace("|", "");
+            }
             if (name.contains("\"")) {
                 name = name.replace("\"", "");
             }
-//            if (name.contains("<")) {
-//                name = name.replace(">", "");
-//            }
-//            if (name.contains(">")) {
-//                name = name.replace(">", "");
-//            }
+            if (name.contains("<")) {
+                name = name.replace(">", "");
+            }
+            if (name.contains(">")) {
+                name = name.replace(">", "");
+            }
             if (name.contains(".")) {
                 name = name.replace(".", "");
             }
-//            if (name.contains(" ")) {
-//                name = name.replace(" ", "_");
-//            }
+            if (name.contains(" ")) {
+                name = name.replace(" ", "_");
+            }
             
             return name;
     }
@@ -2611,5 +2612,54 @@ public class SQLTranslator {
             Logger.getLogger(SQLTranslator.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    
+    private String cleanOtherString(String name) {
+        
+        if (name.contains("!")) {
+            name = name.replace("!", "");
+        }
+        if (name.contains("/")) {
+            name = name.replace("/", "");
+        }
+        if (name.contains("\\")) {
+            name = name.replace("\\", "");
+        }
+        if (name.contains("?")) {
+            name = name.replace("?", "");
+        }
+        if (name.contains("%")) {
+            name = name.replace("%", "");
+        }
+        if(name.contains("\'")) {
+            name = name.replace("\'", "");
+        }
+        if (name.contains("*")) {
+            name = name.replace("*", "");
+        }
+        if (name.contains(":")) {
+            name = name.replace(":", "");
+        }
+        if (name.contains("|")) {
+            name = name.replace("|", "");
+        }
+        if (name.contains("\"")) {
+            name = name.replace("\"", "");
+        }
+        if (name.contains("<")) {
+            name = name.replace(">", "");
+        }
+        if (name.contains(">")) {
+            name = name.replace(">", "");
+        }
+        if (name.contains(".")) {
+            name = name.replace(".", "");
+        }
+//        if (name.contains(" ")) {
+//            name = name.replace(" ", "_");
+//        }
+
+        return name;
     }
 }
