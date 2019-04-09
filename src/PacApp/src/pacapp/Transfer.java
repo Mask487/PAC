@@ -11,6 +11,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.net.DatagramSocket;
 import java.sql.*;
@@ -24,6 +25,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
     private String backupPath = null;
 
 
+    //creates folder on the root of the device
     private void createFolder(String folderName, PortableDevice pD) {
         //PortableDeviceFolderObject target = ;
         for (PortableDeviceObject obj1 : pD.getRootObjects())
@@ -36,6 +38,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //sets the target folder on the phone
     private PortableDeviceFolderObject setTargetFolder(String folderName, PortableDevice pD) {
         PortableDeviceFolderObject target = null;
         for (PortableDeviceObject obj1 : pD.getRootObjects())//gets root files of phone
@@ -55,6 +58,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return target;
     }
 
+    //checks if file exists on the phone
     private boolean doesFileExist(PortableDeviceFolderObject targetFolder, File file) {
         PortableDeviceObject[] items = targetFolder.getChildObjects();
         for (int i = 0; i < items.length; i++) {
@@ -86,6 +90,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return false;
     }
 
+    //returns string of the contents of a text file
     private String fileToString(File file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
@@ -100,6 +105,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return ret;
     }
 
+    //method to recursively search through files on phone
+    //called by backup method
     private void recur(PortableDeviceFolderObject object, String tab, File file) {
         tab = tab + "    ";
 
@@ -117,6 +124,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //checks if config file exists on pc
+    //if not a config file is created
     public void initializeDesk() throws FileNotFoundException {
         File file = new File(mainPath + "\\PAC_config.cfg");
         if(file.isFile() == false){
@@ -131,6 +140,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         //System.out.println(file.getAbsolutePath());
     }
 
+    //checks phone if folders exist on the phone
     public void initializePhone(int i) {
         PortableDeviceFolderObject pFO = null;
         PortableDeviceManager pDM = new PortableDeviceManager();
@@ -157,6 +167,9 @@ class Transfer extends Thread implements pacapp.TransferObject {
             boolean pod = doesFolderExist("PODCASTS", pD);
             boolean ebooks = doesFolderExist("EBOOKS", pD);
             boolean pacfiles = doesFolderExist("PACFILES", pD);
+            boolean audiobooks = doesFolderExist("AUDIOBOOKS", pD);
+            boolean music = doesFolderExist("MUSIC", pD);
+            boolean videos = doesFolderExist("VIDEOS", pD);
             if (!pod) {
                 createFolder("podcasts", pD);
             }
@@ -166,6 +179,15 @@ class Transfer extends Thread implements pacapp.TransferObject {
             if (!pacfiles) {
                 createFolder("pacfiles", pD);
             }
+            if (!audiobooks) {
+                createFolder("audiobooks", pD);
+            }
+            if (!music) {
+                createFolder("music", pD);
+            }
+            if (!videos) {
+                createFolder("videos", pD);
+            }
             pD.close();
         }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("No Phone Connected");
@@ -173,6 +195,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     }
 
+    //sets path to adb.exe in config file
     public boolean setAdbPath(String path) throws IOException {
         String x = "adb_directory = \"";
         int i = x.length();
@@ -200,6 +223,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return true;
     }
 
+    //returns the path to adb file
     public String getAdbPath() throws IOException {
         if(this.adbPath != null){
             //System.out.println("Path exists: " + this.adbPath);
@@ -216,6 +240,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return this.adbPath;
     }
 
+    //sets path to backup folder in config file
     public boolean setBackupPath(String path) throws IOException {
         String x = "backup_directory = \"";
         int i = x.length();
@@ -234,6 +259,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return true;
     }
 
+    //retruns backup folder path from config file
     public String getBackupPath() throws IOException{
         if (this.backupPath != null) {
             return this.backupPath;
@@ -250,6 +276,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return this.backupPath;
     }
 
+    //sets main path of program
     public boolean setMainPath(String path){
         File file = new File(path);
         if (file.exists() && file.isDirectory()){
@@ -259,17 +286,19 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return false;
     }
 
+    //returns main path of program
     public String getMainPath(){
         return this.mainPath;
     }
 
+    //searches phone using adb to get ip address
     public void getPhoneIp() throws IOException {
         String addr = mainPath + "\\addrs.txt";
         String longIp = "";
         String ip = "";
 
-        //adbPath
-        //System.out.println("cd \"" + this.adbPath + "\" ");
+        //calls command prompt and runs adb.exe
+        //checks if phone is connected and copppies ip output to file named addrs.txt
         ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "cd \"" + this.adbPath + "\" " +
                 "&& adb devices " +
                 "&& adb shell ip route > " + addr + " ");
@@ -305,6 +334,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         this.ip = ip;
     }
 
+    //returns string of phone ip address
     public String getIp(){
         if (this.ip != null){
             return this.ip;
@@ -438,6 +468,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //adds single ebooks
     public void addEBook(File file) {
         if (doesFolderExist("eBooks", pD))
         {
@@ -448,6 +479,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //adds multiple ebooks
     public void addEbook(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
@@ -461,6 +493,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //add single audiobooks
     public void addAudioBook(File file){
         if (doesFolderExist("AudioBooks", pD))
         {
@@ -471,6 +504,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //add multiple audiobooks
     public void addAudioBook(ArrayList<File> files){
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
@@ -484,6 +518,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //add a single song
     public void addMusic(File file) {
         if (doesFolderExist("music", pD))
         {
@@ -494,6 +529,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //add multiple songs
     public void addMusic(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
@@ -507,6 +543,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //add a single video
     public void addVideos(File file) {
         if (doesFolderExist("videos", pD))
         {
@@ -517,6 +554,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //add multiple videos
     public void addVideos(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
@@ -530,6 +568,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //returns folder
     public void getFolder(String folder, File file) {
         PortableDeviceObject[] folderFiles = setTargetFolder(folder, pD).getChildObjects();
         for (int i = 0; i < folderFiles.length; i++) {
@@ -539,6 +578,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    //transfers files from phone to pc
     public void ptoPC(PortableDeviceObject pDO, String file) {
         PortableDeviceToHostImpl32 copy = new PortableDeviceToHostImpl32();
         try
@@ -551,6 +591,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     }
 
+    //transfers files from the pc to phone
     public void pctoP(PortableDeviceFolderObject targetFolder, File file) {
         if (doesFileExist(targetFolder, file) == false) {
             System.out.println(file.getName() + " not added: already exists");
@@ -564,16 +605,19 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    /*
+    //Checks if a phone ic currently connected
     public boolean checkConnection(){
-        pd.
-        if(pD.){
-            return true;
+        try{
+            if(pD.getRootObjects() != null){
+                return true;
+            }
+        }catch(NullPointerException e){
+            System.out.println("No Phone Connected");
         }
         return false;
     }
-    */
 
+    //makes a copy of the phones storage and puts it in backup folder on pc
     public void backup() throws IOException {
         //add backup folder check here
         String path = getBackupPath();
@@ -590,7 +634,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
             public void run() {
                 System.out.println("Thread starting");
                 PortableDeviceFolderObject target = null;
-                File file = new File(path + "\\" + pModel + "\\" + time);
+                File file = new File(path + "\\" + time);
+                //File file = new File(path + "\\" + pModel + "\\" + time);
                 //String test = file.toString();
                 if(!file.isDirectory()){
                     file.mkdirs();
@@ -633,20 +678,38 @@ class Transfer extends Thread implements pacapp.TransferObject {
     public void restore()throws IOException{
         File bfolder = new File(this.getBackupPath());
         File[] backups = bfolder.listFiles();
+        File newest;
+
         if(backups.length == 1){
-            pctoP((setTargetFolder("Phone", pD)), backups[0]);
+            newest = new File(backups[0].getAbsolutePath() + "\\Phone");
+            System.out.println(newest.getAbsolutePath());
+            pctoP(setRoot("phone"), newest);
         }else if(backups == null){
             System.out.println("No Backups Found!");
         }else{
+            Arrays.sort(backups);
+            newest = new File(backups[0].getAbsolutePath() + "\\Phone");
+            System.out.println(newest.getAbsolutePath());
+            pctoP((setTargetFolder("Phone", pD)), newest);
 
         }
     }
 
-    public void newestFolder(File[] dir){
-        File file = dir[0];
-        for (int i = 0; i < dir.length; i++) {
-            System.out.println(file.getName());
+    public PortableDeviceFolderObject setRoot(String name){
+        PortableDeviceFolderObject target = null;
+        for (PortableDeviceObject obj1 : pD.getRootObjects())//gets root files of phone
+        {
+            if (obj1 instanceof PortableDeviceStorageObject)//if obj is phone storage or sd storage
+            {
+                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
+                if(store.getDescription().equalsIgnoreCase(name)){
+                    target = (PortableDeviceFolderObject) store;
+                }else{
+                    return null;
+                }
+            }
         }
+        return target;
     }
 
     public void wifiSetup() throws IOException {
