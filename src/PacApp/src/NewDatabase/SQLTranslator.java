@@ -97,40 +97,58 @@ public class SQLTranslator {
             if(contentType == null) {
                 contentType = DBEnumeration.UNKNOWN;
             }
+            
             if(creatorName == null) {
                 creatorName = DBEnumeration.UNKNOWN;
             }
-            creatorName = cleanString(creatorName);
+            //Doesn't remove spaces
+            creatorName = cleanOtherString(creatorName);
+
             if(genreName == null) {
                 genreName = DBEnumeration.UNKNOWN;
             }
+            //Does not removes spaces
+            genreName = cleanOtherString(genreName);
+            
+
             if(publisherName == null) {
                 publisherName = DBEnumeration.UNKNOWN;
             }
-            publisherName = cleanString(publisherName);
+            //Doesn't remove spaces
+            publisherName = cleanOtherString(publisherName);
+            
             if(seriesName == null) {
                 seriesName = DBEnumeration.UNKNOWN;
             }
-            seriesName = cleanString(seriesName);
+            //Doesn't remove spaces
+            seriesName = cleanOtherString(seriesName);
+            
             if(contentName == null) {
                 contentName = DBEnumeration.UNKNOWN;
             }
-            contentName  = cleanString(contentName);
+            //Doesn't removes spaces
+            contentName  = cleanOtherString(contentName);
+            
             if(contentDescription == null) {
                 contentDescription = DBEnumeration.UNKNOWN;
             }
-            contentDescription = cleanString(contentDescription);
+            //Does not remove spaces
+            contentDescription = cleanOtherString(contentDescription);
+            
             //Must follow yyyy-mm-dd
             if(uploadDate == null) {
                 uploadDate = "2019-04-03";
             }
+            
             //Must follow hh:mm:ss
             if(duration == null) {
                 duration = "00:00:00";
             }
+            
             if(isbn == null) {
                 isbn = "null";
             }
+            
             if(url == null) {
                 url = DBEnumeration.UNKNOWN;
             }
@@ -212,13 +230,14 @@ public class SQLTranslator {
              */
 
             //Set the parent directories for a new file
-            location = setContentLocation(contentName, contentType, genreName, seriesName);
+            //This removes these paraemeters of spaces. File paths do not like spaces.
+            location = setContentLocation(cleanString(contentName), cleanString(contentType), cleanString(genreName), cleanString(seriesName));
             
             //Get the content extension (mp3, epub, etc.)
             String ext = getExtension(originalFilePath);
                         
             // the absoulte filepath to the content. This will be put in DB.
-            String fileName = location + contentName + "." + ext;
+            String fileName = location + cleanString(contentName) + "." + ext;
             
             //Query to insert content into db.
             String query = "INSERT INTO " + DBEnumeration.CONTENT 
@@ -1542,7 +1561,7 @@ public class SQLTranslator {
                     + " OR cr.CreatorName LIKE '%" + searchTerm + "%' OR "
                     + " g.GenreName LIKE '%" + searchTerm + "%' OR"
                     + " p.PublisherName LIKE '%" + searchTerm + "%' OR"
-                    + " s.SeriesName LIKE '%" + searchTerm + "%')"
+                    + " s.SeriesName LIKE '%" + searchTerm + "%'"
                     + " ORDER BY ContentName";
             return getRecords(query);
         }
@@ -2281,9 +2300,9 @@ public class SQLTranslator {
      */
     private static String cleanString(String name) {
         
-//            if (name.contains("!")) {
-//                name = name.replace("!", "");
-//            }
+            if (name.contains("!")) {
+                name = name.replace("!", "");
+            }
             if (name.contains("/")) {
                 name = name.replace("/", "");
             }
@@ -2302,27 +2321,27 @@ public class SQLTranslator {
             if (name.contains("*")) {
                 name = name.replace("*", "");
             }
-//            if (name.contains(":")) {
-//                name = name.replace(":", "");
-//            }
-//            if (name.contains("|")) {
-//                name = name.replace("|", "");
-//            }
+            if (name.contains(":")) {
+                name = name.replace(":", "");
+            }
+            if (name.contains("|")) {
+                name = name.replace("|", "");
+            }
             if (name.contains("\"")) {
                 name = name.replace("\"", "");
             }
-//            if (name.contains("<")) {
-//                name = name.replace(">", "");
-//            }
-//            if (name.contains(">")) {
-//                name = name.replace(">", "");
-//            }
+            if (name.contains("<")) {
+                name = name.replace(">", "");
+            }
+            if (name.contains(">")) {
+                name = name.replace(">", "");
+            }
             if (name.contains(".")) {
                 name = name.replace(".", "");
             }
-//            if (name.contains(" ")) {
-//                name = name.replace(" ", "_");
-//            }
+            if (name.contains(" ")) {
+                name = name.replace(" ", "_");
+            }
             
             return name;
     }
@@ -2611,5 +2630,54 @@ public class SQLTranslator {
             Logger.getLogger(SQLTranslator.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    
+    private String cleanOtherString(String name) {
+        
+        if (name.contains("!")) {
+            name = name.replace("!", "");
+        }
+        if (name.contains("/")) {
+            name = name.replace("/", "");
+        }
+        if (name.contains("\\")) {
+            name = name.replace("\\", "");
+        }
+        if (name.contains("?")) {
+            name = name.replace("?", "");
+        }
+        if (name.contains("%")) {
+            name = name.replace("%", "");
+        }
+        if(name.contains("\'")) {
+            name = name.replace("\'", "");
+        }
+        if (name.contains("*")) {
+            name = name.replace("*", "");
+        }
+        if (name.contains(":")) {
+            name = name.replace(":", "");
+        }
+        if (name.contains("|")) {
+            name = name.replace("|", "");
+        }
+        if (name.contains("\"")) {
+            name = name.replace("\"", "");
+        }
+        if (name.contains("<")) {
+            name = name.replace(">", "");
+        }
+        if (name.contains(">")) {
+            name = name.replace(">", "");
+        }
+        if (name.contains(".")) {
+            name = name.replace(".", "");
+        }
+//        if (name.contains(" ")) {
+//            name = name.replace(" ", "_");
+//        }
+
+        return name;
     }
 }

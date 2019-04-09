@@ -8,11 +8,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//important
+//finish restore
 
-//check backup method just in case
-//finish clone
+//if
 //autodetect usb
 //syncQueuery thread conflicts with backup
+//stop backup/restore button
 
 public interface TransferObject
 {

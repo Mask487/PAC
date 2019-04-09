@@ -418,7 +418,11 @@ public class ContentDAO {
      */
     public boolean insertContent(Content content) {
         
-        boolean success = sql.addContent(content.getContentTypeName(), content.getCreatorName(), content.getGenreName(), content.getPublisherName(), content.getSeriesName(), content.getContentName(), content.getContentDescription(), content.getUploadDate(), content.getPageCount(), content.getDuration(), content.getIsbn(), content.isExplicit(), content.getLocation(), content.getUrl(), content.getWantToSync(), content.getOriginalFilePath());
+        boolean success = sql.addContent(content.getContentTypeName(), content.getCreatorName(),
+                content.getGenreName(), content.getPublisherName(), content.getSeriesName(), content.getContentName(),
+                content.getContentDescription(), content.getUploadDate(), content.getPageCount(), content.getDuration(),
+                content.getIsbn(), content.isExplicit(), content.getLocation(), content.getUrl(),
+                content.getWantToSync(), content.getOriginalFilePath());
         
         return success;   
     }
@@ -519,8 +523,39 @@ public class ContentDAO {
     }
     
     
+    /**
+     * Searches all tables by a search term.
+     * @param searchTerm
+     * @return 
+     */
+    public Set searchAllTablesBySearchTerm(String searchTerm) {
+        ResultSet res = sql.searchAllTablesByKeyTerm(searchTerm);
+        
+        try {
+            Set contents = new HashSet();
+            
+            while(res.next()) {
+                Content content = extractDataFromResultSet(res);
+                contents.add(content);
+            }
+            
+            return contents;
+        }
+        
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+     }
     
     
+    /**
+     * Calls SQL translator to search all its tables by a seach term and of a given content type.
+     * @param searchTerm
+     * @param contentType
+     * @return 
+     */
     public Set searchAllTablesBySearchTermAndType(String searchTerm, String contentType) {
         ResultSet res = sql.searchAllTablesByKeyTermAndContentType(searchTerm, contentType);
         
