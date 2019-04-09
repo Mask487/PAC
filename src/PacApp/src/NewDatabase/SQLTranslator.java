@@ -2354,16 +2354,7 @@ public class SQLTranslator {
      * @param name
      * @return
      */
-    private String cleanOriginalFilePath(String name) {
-        if(name.contains("[")) {
-            name = name.replace("[", "");
-        }
-        if(name.contains("]")) {
-            name = name.replace("]", "");
-        }
 
-        return name;
-    }
 
 
     /**
@@ -2477,7 +2468,7 @@ public class SQLTranslator {
      * Then in their series folder they'll exist as accessible files.
      * Alternatively, we could just divide by series, no need to divide by type.
      * @param contentName
-     * @param series
+     * @param seriesName
      * @param contentType
      */
     private String setContentLocation (String contentName, String contentType, String genreName, String seriesName) {
