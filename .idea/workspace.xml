@@ -1,7 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="" />
+    <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$19.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$20.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$21.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$22.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$23.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$24.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$25.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$26.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$27.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$28.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$29.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$30.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$31.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$31.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$32.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$32.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$33.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$33.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$34.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$34.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$35.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$35.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$36.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$36.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$37.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$37.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$38.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$38.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$39.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$39.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$40.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$40.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$41.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$41.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp.class" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +79,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="405" column="18" selection-start-line="405" selection-start-column="18" selection-end-line="405" selection-end-column="18" />
+            <state relative-caret-position="-4540">
+              <caret line="577" column="15" lean-forward="true" selection-start-line="577" selection-start-column="15" selection-end-line="577" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#19994#19995#0" expanded="true" />
@@ -69,9 +112,16 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user</find>
-      <find>config pat</find>
-      <find>sync</find>
+      <find>buBack</find>
+      <find>neB</find>
+      <find>no mu</find>
+      <find>addCont</find>
+      <find>syn</find>
+      <find>music</find>
+      <find>searchS</find>
+      <find>searchA</find>
+      <find>searchAll</find>
+      <find>allc</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -91,8 +141,11 @@
         <option value="$PROJECT_DIR$/src/PacApp/src/transfere/src/TransferObject.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/transfere/src/TransferTest.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/transfere/src/Transfer.java" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7d0e9485-04a8-448b-b033-3203095771e8/console.sql" />
-        <option value="3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" />
         <option value="$PROJECT_DIR$/PAC_Config.cfg" />
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java" />
@@ -101,11 +154,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="139" />
+    <option name="y" value="205" />
+    <option name="width" value="1442" />
+    <option name="height" value="672" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -278,10 +331,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="139" y="205" width="1442" height="672" extended-state="0" />
+    <frame x="113" y="96" width="1442" height="672" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18714286" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18714286" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -289,18 +342,18 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2913793" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.2524377" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3298193" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2913793" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43222892" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3289256" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32827735" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32561985" />
       <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32936078" />
       <window_info anchor="bottom" id="DB Execution Console" order="14" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -624,38 +677,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="db://3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection" />
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Stats.java">
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java" />
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+        <state relative-caret-position="255">
+          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/src/Libraries/jmtp.jar!/jmtp/PortableDeviceManagerImplWin32.class">
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Util/ContentLocationDirectory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        <state relative-caret-position="150">
+          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/jre/lib/jmtp.jar!/jmtp/PortableDeviceManager.class" />
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/BookLookupTest.java">
+    <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3Connection.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="15" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
+        <state relative-caret-position="377">
+          <caret line="147" column="78" selection-start-line="147" selection-start-column="78" selection-end-line="147" selection-end-column="78" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Content.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="405" column="18" selection-start-line="405" selection-start-column="18" selection-end-line="405" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#19994#19995#0" expanded="true" />
-            <element signature="e#20022#20023#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="165">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3ResultSet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3645">
+          <caret line="266" selection-start-line="266" selection-end-line="266" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcl/PacApp/src/pacapp/PacApp.java" />
+    <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -663,13 +725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16005">
           <caret line="1077" selection-start-line="1077" selection-end-line="1077" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>

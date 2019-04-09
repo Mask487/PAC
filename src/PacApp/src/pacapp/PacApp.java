@@ -6,6 +6,8 @@
 package pacapp;
 
 import java.io.File;
+
+import NewDatabase.SQLTranslator;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,9 +15,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -31,6 +39,9 @@ import javafx.scene.image.ImageView;
 import NewDatabase.ContentDAO;
 import java.util.Iterator;
 import java.util.Set;
+import javafx.scene.input.MouseButton;
+
+import static javafx.scene.input.MouseButton.SECONDARY;
 
 
 /**
@@ -41,9 +52,9 @@ public class PacApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
-     Transfer t = new Transfer();
-      t.initializeDesk();
+        SQLTranslator sql = new SQLTranslator();
+        Transfer t = new Transfer();
+        t.initializeDesk();
 
         AnchorPane root2 = new AnchorPane();
         Scene primary = new Scene(root2);
@@ -87,6 +98,8 @@ public class PacApp extends Application {
         HBox phoneProgress = new HBox(10);
         Button throwaway = new Button("");
         VBox phoneStack = new VBox();
+        VBox searchResults = new VBox();
+        ScrollPane searchPane = new ScrollPane(searchResults);
 
 
 
@@ -201,13 +214,35 @@ public class PacApp extends Application {
         search.backgroundProperty().set(buBack);
         hSearch.getChildren().add(search);
 
-//        AnchorPane bottomPadL = new AnchorPane();
-//        bottomPadL.backgroundProperty().set(testBack);
-//        bottomPadL.setMinWidth(300);
-//        AnchorPane bottomPadR = new AnchorPane();
-//        bottomPadR.backgroundProperty().set(testBack);
-//        bottomPadR.setMinWidth(300);
-        //Create horizontal Box for bottom controlls
+        search.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent Enter){
+                String term = search.getCharacters().toString();
+                System.out.println("Search Term " + term);
+                search.setText("");
+                SQLTranslator searchSql = new SQLTranslator();
+//                ResultSet searchSet = searchSql.searchAllTablesByKeyTerm(term);
+//                mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+//                mainStack.getChildren().add(searchPane);
+//               // ContentDAO dao = new ContentDAO();
+//               // Set searchSet = dao.getAllContentByType("Music");
+//                Iterator miter = searchSet.iterator();
+//                int setSize = searchSet.size();
+//                Button[] listings = new Button[setSize];
+//                int i = 0;
+//                while (miter.hasNext()) {
+//                    Content content = new Content();
+//                    content = (NewDatabase.Content) miter.next();
+//                    musButt(content, listings, i,musicCont,buBack);
+//                    i++;
+//                }
+
+
+
+            }
+        });
+
+
         HBox bottomButt = new HBox();
         bottomButt.setPadding(new Insets(5));
         ProgressBar mainProg = new ProgressBar(0); //setProgress()
@@ -223,6 +258,37 @@ public class PacApp extends Application {
             }
         });
 
+        apps.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+                mainStack.getChildren().add(appPane);
+                appCont.getChildren().clear();
+                ContentDAO dao = new ContentDAO();
+                Set appset = dao.getAllContentByType("App");
+                System.out.println("App Pressed");
+                Iterator appiter = appset.iterator();
+                int setSize = appset.size();
+                if(setSize == 0){
+                    Label noapps = new Label("You have no Apps.\n\nDrag and Drop apps into this window to add to your collection.");
+                    noapps.setFont(new Font(20.0));
+                    noapps.backgroundProperty().set(buBack);
+                    appCont.getChildren().addAll(noapps);
+                }
+                Button[] listings = new Button[setSize];
+                int i = 0;
+                while (appiter.hasNext()) {
+                    Content content = new Content();
+                    content = (NewDatabase.Content) appiter.next();
+                    appButt(content, listings, i,appCont,buBack);
+                    i++;
+                }
+
+            }
+
+
+        });
+
         book.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -233,6 +299,12 @@ public class PacApp extends Application {
                 System.out.println("Book Pressed");
                 Iterator iter  = set.iterator();
                 int setSize = set.size();
+                if(setSize == 0){
+                    Label noEBooks = new Label("You have no eBooks.\n\nDrag and Drop eBooks into this window to add to your collection.");
+                    noEBooks.setFont(new Font(20.0));
+                    noEBooks.backgroundProperty().set(buBack);
+                   bookCont.getChildren().addAll(noEBooks);
+                }
                 Button[] listings = new Button[setSize];
                 int i = 0;
                 while(iter.hasNext()) {
@@ -249,7 +321,26 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(audioBookPane);
-                System.out.println("Audio Books Pressed");
+                audioBookCont.getChildren().clear();
+                ContentDAO dao = new ContentDAO();
+                Set abset = dao.getAllContentByType("audioBook");
+                System.out.println("Audio Book Pressed");
+                Iterator abiter = abset.iterator();
+                int setSize = abset.size();
+                if(setSize == 0){
+                    Label noABooks = new Label("You have no Audio Books.\n\nDrag and Drop Audio Books into this window to add to your collection.");
+                    noABooks.setFont(new Font(20.0));
+                    noABooks.backgroundProperty().set(buBack);
+                    audioBookCont.getChildren().addAll(noABooks);
+                }
+                Button[] listings = new Button[setSize];
+                int i = 0;
+                while (abiter.hasNext()) {
+                    Content content = new Content();
+                    content = (NewDatabase.Content) abiter.next();
+                    abkButt(content, listings, i,audioBookCont,buBack);
+                    i++;
+                }
 
             }
         });
@@ -260,6 +351,22 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(podcastPane);
                 System.out.println("podcast Pressed");
+                Iterator podcastiter = podcastset.iterator();
+                int setSize = podcastset.size();
+                if(setSize == 0){
+                    Label nopodcasts = new Label("You have no Podcasts.\n\nDrag and Drop Podcasts into this window to add to your collection.");
+                    nopodcasts.setFont(new Font(20.0));
+                    nopodcasts.backgroundProperty().set(buBack);
+                    podcastCont.getChildren().addAll(nopodcasts);
+                }
+                Button[] listings = new Button[setSize];
+                int i = 0;
+                while (podcastiter.hasNext()) {
+                    Content content = new Content();
+                    content = (NewDatabase.Content) podcastiter.next();
+                    podButt(content, listings, i,podcastCont,buBack);
+                    i++;
+                }
 
             }
         });
@@ -269,7 +376,29 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(videoPane);
-                System.out.println("video Pressed");
+                videoCont.getChildren().clear();
+            ContentDAO dao = new ContentDAO();
+            Set videoset = dao.getAllContentByType("Video");
+            System.out.println("video Pressed");
+            Iterator videoiter = videoset.iterator();
+            int setSize = videoset.size();
+                if(setSize == 0){
+                    Label noVideos = new Label("You have no videos.\n\nDrag and Drop videos into this window to add to your collection.");
+                    noVideos.setFont(new Font(20.0));
+                    noVideos.backgroundProperty().set(buBack);
+                    videoCont.getChildren().addAll(noVideos);
+                }
+            Button[] listings = new Button[setSize];
+            int i = 0;
+            while (videoiter.hasNext()) {
+                Content content = new Content();
+                content = (NewDatabase.Content) videoiter.next();
+                vidButt(content, listings, i,videoCont,buBack);
+                i++;
+            }
+
+        }
+
 
             }
         });
@@ -345,7 +474,7 @@ public class PacApp extends Application {
         // create settings VBox
         Button lightMode = new Button("Change to light mode.");       //Creates button
         lightMode.backgroundProperty().set(buBack);         //adds transparent background
-        lightMode.setTextFill(Paint.valueOf("D146FF"));
+        lightMode.setTextFill(Paint.valueOf("BBBBBB"));
         lightMode.setPadding(inset);
 
         lightMode.setOnAction(new EventHandler<ActionEvent>() {
@@ -382,13 +511,14 @@ public class PacApp extends Application {
         phoneMidRow.setSpacing(50);
 
         Button sync = new Button("Sync Phone");       //Creates button
-        sync.setTextFill(Paint.valueOf("D146FF"));
+        sync.setTextFill(Paint.valueOf("BBBBBB"));
         sync.backgroundProperty().set(buBack);         //adds transparent background
         sync.setPadding(inset);
 
         sync.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                t.initializePhone(0);
                 t.sync();
                 System.out.println("Sync Pressed");
 
@@ -396,13 +526,14 @@ public class PacApp extends Application {
         });
 
         Button backup = new Button("Backup Phone");       //Creates button
-        backup.setTextFill(Paint.valueOf("D146FF"));
+        backup.setTextFill(Paint.valueOf("BBBBBB"));
         backup.backgroundProperty().set(buBack);         //adds transparent background
         backup.setPadding(inset);
 
         backup.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                t.initializePhone(0);
                 t.backup();
                 System.out.println("backup Pressed");
 
@@ -410,7 +541,7 @@ public class PacApp extends Application {
         });
 
         Button copy = new Button("Duplicate Phone");       //Creates button
-        copy.setTextFill(Paint.valueOf("D146FF"));
+        copy.setTextFill(Paint.valueOf("BBBBBB"));
         copy.backgroundProperty().set(buBack);         //adds transparent background
 
 //        copy.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -448,6 +579,411 @@ public class PacApp extends Application {
             }
         });
 
+        Insets sliderIn = new Insets(8.0,0.0,8.0,0.0);
+
+        //Music Controll
+
+        //music volume slider
+        Slider musicVolumeSlider = new Slider();
+        musicVolumeSlider.setMin(0);
+        musicVolumeSlider.setMax(100);
+        musicVolumeSlider.setValue(0);
+        musicVolumeSlider.setPadding(sliderIn);
+        //music progress slider
+        Slider musicProgressSlider = new Slider();
+        musicProgressSlider.setMin(0);
+        musicProgressSlider.setMax(100);
+        musicProgressSlider.setValue(0);
+        musicProgressSlider.setPadding(sliderIn);
+        //Play
+        Image PlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
+        ImageView musicPlayIcon = new ImageView();
+        musicPlayIcon.setImage(PlayIcon);                  //adds icon to imageview
+        Button musicPlay = new Button("",musicPlayIcon);       //Creates button
+
+        musicPlay.backgroundProperty().set(buBack);         //adds transparent background
+        musicPlay.setPadding(inset);
+
+        musicPlay.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Music Play Pressed");
+                //musicPlayer.play();
+
+            }
+        });
+        // forward
+        Image forwardIcon = new Image("ForwardButton.png");   //Load forward  Icon for imageview
+        ImageView forwardMusicIcon = new ImageView();
+        forwardMusicIcon.setImage(forwardIcon);                  //adds icon to imageview
+        Button musicForward = new Button("",forwardMusicIcon);       //Creates button
+
+        musicForward.backgroundProperty().set(buBack);         //adds transparent background
+        musicForward.setPadding(inset);
+
+        musicForward.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Music Forward Pressed");
+
+            }
+        });
+    //Backward
+        Image BackIcon = new Image("backwardButton.png");   //Load Back  Icon for imageview
+        ImageView musicBackIcon = new ImageView();
+        musicBackIcon.setImage(BackIcon);                  //adds icon to imageview
+        Button musicBack = new Button("",musicBackIcon);       //Creates button
+
+        musicBack.backgroundProperty().set(buBack);         //adds transparent background
+        musicBack.setPadding(inset);
+
+        musicBack.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Music Back Pressed");
+
+            }
+        });
+
+        //Volume
+        Image muteIcon = new Image("Mute.png");   //Load play  Icon for imageview
+        ImageView musicMuteIcon = new ImageView();
+        musicMuteIcon.setImage(muteIcon);                  //adds icon to imageview
+        Button musicMute = new Button("",musicMuteIcon);       //Creates button
+        Image lowVolIcon = new Image("LowVol.png");   //Load play  Icon for imageview
+        ImageView musicLowIcon = new ImageView();
+        if(musicVolumeSlider.getValue() <= 0.33 && musicVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
+        Image highVol = new Image("HighVol.png");   //Load play  Icon for imageview
+        ImageView highVolIcon = new ImageView();
+        if(musicVolumeSlider.getValue() >= 0.66){musicMuteIcon.setImage(highVol);     }             //adds icon to imageview
+        Image midVolIcon = new Image("MidVol.png");   //Load play  Icon for imageview
+        ImageView midVol = new ImageView();
+        if(musicVolumeSlider.getValue() <= 0.66 && musicVolumeSlider.getValue() >= 0.33){musicMuteIcon.setImage(midVolIcon);    }              //adds icon to imageview
+
+        musicMute.backgroundProperty().set(buBack);         //adds transparent background
+        musicMute.setPadding(inset);
+
+        musicMute.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Music Mute Pressed");
+                musicVolumeSlider.setValue(0);
+                musicMuteIcon.setImage(muteIcon);
+
+
+            }
+        });
+
+
+        musicControll.getChildren().addAll(musicBack,musicPlay,musicForward,musicMute,musicVolumeSlider);
+//// end music controll
+
+
+        //Podcast Controll
+
+        //Podcast volume slider
+        Slider podcastVolumeSlider = new Slider();
+        podcastVolumeSlider.setMin(0);
+        podcastVolumeSlider.setMax(100);
+        podcastVolumeSlider.setValue(0);
+        podcastVolumeSlider.setPadding(sliderIn);
+        //podcast progress slider
+        Slider podcastProgressSlider = new Slider();
+        podcastProgressSlider.setMin(0);
+        podcastProgressSlider.setMax(100);
+        podcastProgressSlider.setValue(0);
+        podcastProgressSlider.setPadding(sliderIn);
+        //Play
+        Button podcastPlay = new Button("",musicPlayIcon);       //Creates button
+
+        podcastPlay.backgroundProperty().set(buBack);         //adds transparent background
+        podcastPlay.setPadding(inset);
+
+        podcastPlay.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Podcast Play Pressed");
+
+            }
+        });
+        // forward
+        Button podcastForward = new Button("",forwardMusicIcon);       //Creates button
+        podcastForward.backgroundProperty().set(buBack);         //adds transparent background
+        podcastForward.setPadding(inset);
+
+        podcastForward.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Podcast Forward Pressed");
+
+            }
+        });
+        //Backward
+        Button podcastBack = new Button("",musicBackIcon);       //Creates button
+
+        podcastBack.backgroundProperty().set(buBack);         //adds transparent background
+        podcastBack.setPadding(inset);
+
+        podcastBack.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("podcst Back Pressed");
+
+            }
+        });
+
+        //Volume
+
+        Button podcastMute = new Button("",musicMuteIcon);       //Creates button
+        if(podcastVolumeSlider.getValue() <= 0.33 && podcastVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
+        if(podcastVolumeSlider.getValue() >= 0.66){musicMuteIcon.setImage(highVol);     }             //adds icon to imageview
+        if(podcastVolumeSlider.getValue() <= 0.66 && podcastVolumeSlider.getValue() >= 0.33){musicMuteIcon.setImage(midVolIcon);    }              //adds icon to imageview
+
+        podcastMute.backgroundProperty().set(buBack);         //adds transparent background
+        podcastMute.setPadding(inset);
+
+        podcastMute.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("podcast Mute Pressed");
+                musicVolumeSlider.setValue(0);
+                musicMuteIcon.setImage(muteIcon);
+
+
+            }
+        });
+
+
+       podcastControll.getChildren().addAll(podcastBack,podcastPlay,podcastForward,podcastMute,podcastVolumeSlider);
+//// end podcast controll
+
+
+         Label musicTester = new Label("");
+        musicCont.getChildren().add(musicTester);
+        //drag and drop music
+        musicCont.setOnDragOver(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != musicCont
+                        && event.getDragboard().hasFiles()) {
+
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+
+        musicCont.setOnDragDropped(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasFiles()) {
+                    sql.addContent("" + db.getFiles().toString(),"Music");
+                    System.out.println("music added");
+                    musicTester.setText(db.getFiles().toString());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully
+                 * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
+
+        Label ebookTester = new Label("");
+        bookCont.getChildren().add(ebookTester);
+        //drag and drop ebooks
+        bookCont.setOnDragOver(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != bookCont
+                        && event.getDragboard().hasFiles()) {
+
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+
+        bookCont.setOnDragDropped(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasFiles()) {
+                    // addContent("EBook,);
+                    sql.addContent("" + db.getFiles().toString(),"EBook");
+                    System.out.println("eBook added");
+                    ebookTester.setText(db.getFiles().toString());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully
+                 * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
+        Label audioBookTester = new Label("");
+        audioBookCont.getChildren().add(audioBookTester);
+        //drag and drop audio books
+        audioBookCont.setOnDragOver(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != audioBookCont
+                        && event.getDragboard().hasFiles()) {
+
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+
+        audioBookCont.setOnDragDropped(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasFiles()) {
+
+                    sql.addContent("" + db.getFiles().toString(),"audioBook");
+                    System.out.println("audio book added");
+                    audioBookTester.setText(db.getFiles().toString());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully
+                 * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
+
+        Label videoTester = new Label("");
+        videoCont.getChildren().add(videoTester);
+        //drag and drop music
+        videoCont.setOnDragOver(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != videoCont
+                        && event.getDragboard().hasFiles()) {
+
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+
+        videoCont.setOnDragDropped(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasFiles()) {
+                    sql.addContent("" + db.getFiles().toString(),"Video");
+                    System.out.println("video added");
+                    videoTester.setText(db.getFiles().toString());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully
+                 * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
+        Label podcastTester = new Label("");
+        podcastCont.getChildren().add(podcastTester);
+        //drag and drop podcasts
+        podcastCont.setOnDragOver(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != podcastCont
+                        && event.getDragboard().hasFiles()) {
+
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+
+        podcastCont.setOnDragDropped(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasFiles()) {
+                    sql.addContent("" + db.getFiles().toString(),"Podcast");
+                    System.out.println("podcast added");
+                    podcastTester.setText(db.getFiles().toString());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully
+                 * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
+        Label appTester = new Label("");
+        appCont.getChildren().add(appTester);
+        //drag and drop apps
+        appCont.setOnDragOver(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != appCont
+                        && event.getDragboard().hasFiles()) {
+
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+
+        appCont.setOnDragDropped(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasFiles()) {
+                    sql.addContent("" + db.getFiles().toString(),"App");
+                    System.out.println("app added");
+                    appTester.setText(db.getFiles().toString());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully
+                 * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
+
+
+       // bottomButt.getChildren().addAll();
+
         mainStack.getChildren().setAll(phoneMidRow, musicPane);
         tAnchor.getChildren().addAll(mainStack);
         tAnchor.setRightAnchor(mainStack, 25.0);// area around
@@ -461,9 +997,29 @@ public class PacApp extends Application {
         Button buttonTop = new Button("Top");
 
         //MusicPane
-        Label noMusic = new Label("You have no Music \n import music to get started.");
-        noMusic.backgroundProperty().set(buBack);
-        musicCont.getChildren().addAll(noMusic);
+        mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+        mainStack.getChildren().add(musicPane);
+        musicCont.getChildren().clear();
+        ContentDAO dao = new ContentDAO();
+        Set mset = dao.getAllContentByType("Music");
+        System.out.println("Music Showing");
+        Iterator miter = mset.iterator();
+        int setSize = mset.size();
+        if(setSize == 0){
+            Label noMusic = new Label("You have no music.\n\nDrag and Drop music into this window to add to your collection.");
+            noMusic.setFont(new Font(25.0));
+            noMusic.backgroundProperty().set(buBack);
+            musicCont.getChildren().addAll(noMusic);
+        }
+        Button[] listings = new Button[setSize];
+        int i = 0;
+        while (miter.hasNext()) {
+            Content content = new Content();
+            content = (NewDatabase.Content) miter.next();
+            musButt(content, listings, i,musicCont,buBack);
+            i++;
+        }
+
 
         phoneMidRow.getChildren().addAll(phoneStack, midButt);
         centerAnchorPane.getChildren().addAll(tAnchor);
@@ -500,6 +1056,16 @@ public class PacApp extends Application {
 
     public static void musButt() {
 
+            @Override
+            public void handle(ActionEvent press) {
+                Media song = new Media("file://" + objs.getLocation());
+                MediaPlayer musicTester = new MediaPlayer(song);
+                musicTester.play();
+                System.out.println(name + " Pressed");
+
+            }
+        });
+        cont.getChildren().add(L[i]);
     }
     public static void podButt() {
 
@@ -515,12 +1081,70 @@ public class PacApp extends Application {
     }
     public static void abkButt() {
 
+    public static void abkButt(Content objs, Button[] L, int i, VBox cont, Background b) {
+
+        String name = objs.getContentName();
+        L[i] = new Button(name);
+        L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].backgroundProperty().set(b);
+        MouseEvent click;
+
+
+
+
+
+
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
+
+
+            @Override
+            public void handle(ActionEvent press) {
+
+
+                System.out.println(name + " Pressed");
+
+            }
+        });
+        cont.getChildren().add(L[i]);
     }
     public static void vidButt() {
 
     }
-    public static void infButt() {
 
+    public static void appButt(Content objs, Button[] L, int i, TilePane cont, Background b) {
+
+        String name = objs.getContentName();
+        L[i] = new Button(name);
+        L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].backgroundProperty().set(b);
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println(name + " Pressed");
+
+            }
+        });
+        cont.getChildren().add(L[i]);
+    }
+
+    public static void searchButt(Content objs, Button[] L, int i, VBox cont, Background b) {
+
+        String name = objs.getContentName();
+        L[i] = new Button(name);
+        L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].backgroundProperty().set(b);
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println(name + " Pressed");
+
+            }
+        });
+        cont.getChildren().add(L[i]);
     }
 
 
