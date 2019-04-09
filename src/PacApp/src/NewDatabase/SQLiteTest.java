@@ -41,6 +41,7 @@ public class SQLiteTest {
         boolean wantToSync = false;
         String filePath = "";
         //test.addContent(contentType, creatorName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url, wantToSync, filePath);
+        //test.addContent("C:/Test/test4.epub", contentType);
         
         File file1 = new File("ContentFiles").getAbsoluteFile();
         System.out.println(file1.toString());
@@ -60,22 +61,25 @@ public class SQLiteTest {
         Set contents = cdao.getAllContent();
         Iterator iterTest = contents.iterator();
         Content contentTest2 = cdao.getContent(2);
-//        Set contents2 = cdao.searchAllTablesBySearchTermAndType("ant", "EBook");
-//        Iterator iter2 = contents2.iterator();
-//        
-//        //System.out.println(iter2.next().toString());
-//        Content test3 = (Content) iter2.next();
-//        System.out.println(test3.getContentName());
-//        
-//        Set content5 = cdao.getAllContent();
-//        Iterator iter5 = content5.iterator();
-//        while(iter5.hasNext()) {
-//            System.out.println(iter5.next().toString());
-//        }
+        Set contents2 = cdao.searchAllTablesBySearchTermAndType("ant", "EBook");
+        Iterator iter2 = contents2.iterator();
         
+        //System.out.println(iter2.next().toString());
+        Content test3 = (Content) iter2.next();
+        System.out.println(test3.getContentName());
         
+        Set content5 = cdao.getAllContent();
+        Iterator iter5 = content5.iterator();
+        while(iter5.hasNext()) {
+            System.out.println(iter5.next().toString());
+        }
         
+        Set contentsResult = cdao.searchAllTablesBySearchTerm("t");
+        Iterator iterResult = contentsResult.iterator();
         
-        
+        System.out.println("The results are: ");
+        while(iterResult.hasNext()) {
+            System.out.println(iterResult.next().toString());
+        }
     }
 }

@@ -68,14 +68,14 @@ public class SQLTranslator {
      * @param location
      * @param url
      * @param wantToSync
-     * @param filePath
+     * @param originalFilePath
      * @return true if content added successfully and false otherwise.
      */
     public boolean addContent(String contentType, 
             String creatorName, String genreName, String publisherName, String seriesName, 
             String contentName, String contentDescription, String uploadDate,
             int pageCount, String duration, String isbn, boolean explicit, 
-            String location, String url, boolean wantToSync, String filePath) {
+            String location, String url, boolean wantToSync, String originalFilePath) {
         
         try {
             if(conn == null) {
@@ -91,27 +91,31 @@ public class SQLTranslator {
 //                fileName = contentName + ".epub";
 //            }
 //            
+
+            originalFilePath = cleanOriginalFilePath(originalFilePath);
+            
             if(contentType == null) {
                 contentType = DBEnumeration.UNKNOWN;
             }
             if(creatorName == null) {
                 creatorName = DBEnumeration.UNKNOWN;
             }
-            creatorName = cleanString(creatorName);
+            creatorName = cleanOtherString(creatorName);
             if(genreName == null) {
                 genreName = DBEnumeration.UNKNOWN;
             }
             if(publisherName == null) {
                 publisherName = DBEnumeration.UNKNOWN;
             }
-            publisherName = cleanString(publisherName);
+            publisherName = cleanOtherString(publisherName);
             if(seriesName == null) {
                 seriesName = DBEnumeration.UNKNOWN;
             }
-            seriesName = cleanString(seriesName);
+            seriesName = cleanOtherString(seriesName);
             if(contentName == null) {
                 contentName = DBEnumeration.UNKNOWN;
             }
+            //Cleans it of spaces too
             contentName  = cleanString(contentName);
             if(contentDescription == null) {
                 contentDescription = DBEnumeration.UNKNOWN;
@@ -212,7 +216,7 @@ public class SQLTranslator {
             location = setContentLocation(contentName, contentType, genreName, seriesName);
             
             //Get the content extension (mp3, epub, etc.)
-            String ext = getExtension(filePath);
+            String ext = getExtension(originalFilePath);
                         
             // the absoulte filepath to the content. This will be put in DB.
             String fileName = location + contentName + "." + ext;
@@ -246,16 +250,16 @@ public class SQLTranslator {
                 //Set the file into new filepath on device.
                 
                 //Original filepath
-                /*File file = new File(filePath);
+                File file = new File(originalFilePath);
                 
                 //Make parent directories for new filepath
                 DBDirectories.createDirectories(location);
                 
-                //New filepath for application.
+               // New filepath for application.
                 if(file.renameTo(new File(fileName))) {
-                    //file.delete();
+                    file.delete();
                     System.out.println("File moved successfully");
-                }*/
+                }
                 
                 System.out.println("Content added successfully");
                 return true;    
@@ -1539,7 +1543,7 @@ public class SQLTranslator {
                     + " OR cr.CreatorName LIKE '%" + searchTerm + "%' OR "
                     + " g.GenreName LIKE '%" + searchTerm + "%' OR"
                     + " p.PublisherName LIKE '%" + searchTerm + "%' OR"
-                    + " s.SeriesName LIKE '%" + searchTerm + "%')"
+                    + " s.SeriesName LIKE '%" + searchTerm + "%'"
                     + " ORDER BY ContentName";
             return getRecords(query);
         }
@@ -2278,9 +2282,9 @@ public class SQLTranslator {
      */
     private static String cleanString(String name) {
         
-//            if (name.contains("!")) {
-//                name = name.replace("!", "");
-//            }
+            if (name.contains("!")) {
+                name = name.replace("!", "");
+            }
             if (name.contains("/")) {
                 name = name.replace("/", "");
             }
@@ -2299,29 +2303,47 @@ public class SQLTranslator {
             if (name.contains("*")) {
                 name = name.replace("*", "");
             }
-//            if (name.contains(":")) {
-//                name = name.replace(":", "");
-//            }
-//            if (name.contains("|")) {
-//                name = name.replace("|", "");
-//            }
+            if (name.contains(":")) {
+                name = name.replace(":", "");
+            }
+            if (name.contains("|")) {
+                name = name.replace("|", "");
+            }
             if (name.contains("\"")) {
                 name = name.replace("\"", "");
             }
-//            if (name.contains("<")) {
-//                name = name.replace(">", "");
-//            }
-//            if (name.contains(">")) {
-//                name = name.replace(">", "");
-//            }
+            if (name.contains("<")) {
+                name = name.replace(">", "");
+            }
+            if (name.contains(">")) {
+                name = name.replace(">", "");
+            }
             if (name.contains(".")) {
                 name = name.replace(".", "");
             }
-//            if (name.contains(" ")) {
-//                name = name.replace(" ", "_");
-//            }
+            if (name.contains(" ")) {
+                name = name.replace(" ", "_");
+            }
             
             return name;
+    }
+    
+    
+    /**
+     * Cleans the original file path of the content of any brackets that appear
+     * on Andrew's computer.
+     * @param name
+     * @return 
+     */
+    private String cleanOriginalFilePath(String name) {
+        if(name.contains("[")) {
+            name = name.replace("[", "");
+        }
+        if(name.contains("]")) {
+            name = name.replace("]", "");
+        }
+
+        return name;
     }
     
     
@@ -2590,5 +2612,54 @@ public class SQLTranslator {
             Logger.getLogger(SQLTranslator.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    
+    private String cleanOtherString(String name) {
+        
+        if (name.contains("!")) {
+            name = name.replace("!", "");
+        }
+        if (name.contains("/")) {
+            name = name.replace("/", "");
+        }
+        if (name.contains("\\")) {
+            name = name.replace("\\", "");
+        }
+        if (name.contains("?")) {
+            name = name.replace("?", "");
+        }
+        if (name.contains("%")) {
+            name = name.replace("%", "");
+        }
+        if(name.contains("\'")) {
+            name = name.replace("\'", "");
+        }
+        if (name.contains("*")) {
+            name = name.replace("*", "");
+        }
+        if (name.contains(":")) {
+            name = name.replace(":", "");
+        }
+        if (name.contains("|")) {
+            name = name.replace("|", "");
+        }
+        if (name.contains("\"")) {
+            name = name.replace("\"", "");
+        }
+        if (name.contains("<")) {
+            name = name.replace(">", "");
+        }
+        if (name.contains(">")) {
+            name = name.replace(">", "");
+        }
+        if (name.contains(".")) {
+            name = name.replace(".", "");
+        }
+//        if (name.contains(" ")) {
+//            name = name.replace(" ", "_");
+//        }
+
+        return name;
     }
 }

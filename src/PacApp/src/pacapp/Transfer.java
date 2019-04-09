@@ -3,7 +3,6 @@ package pacapp;
 import NewDatabase.ContentDAO;
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
-
 import java.awt.*;
 import java.io.*;
 import java.math.BigInteger;
@@ -12,98 +11,136 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.net.DatagramSocket;
 import java.sql.*;
-import java.util.Timer;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 class Transfer extends Thread implements pacapp.TransferObject {
     private PortableDevice pD = null;
     private PortableDeviceManager pDM;
     private String ip;
     private String adbPath = null;
-    private String backupPath = null;
     private String mainPath = System.getProperty("user.dir");
-    private boolean pIFlag = false;
+    private String backupPath = null;
 
 
+    //creates folder on the root of the device
+    private void createFolder(String folderName, PortableDevice pD) {
+        //PortableDeviceFolderObject target = ;
+        for (PortableDeviceObject obj1 : pD.getRootObjects())
+        {
+            if (obj1 instanceof PortableDeviceStorageObject)
+            {
+                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
+                store.createFolderObject(folderName);
+            }
+        }
+    }
+
+    //sets the target folder on the phone
+    private PortableDeviceFolderObject setTargetFolder(String folderName, PortableDevice pD) {
+        PortableDeviceFolderObject target = null;
+        for (PortableDeviceObject obj1 : pD.getRootObjects())//gets root files of phone
+        {
+            if (obj1 instanceof PortableDeviceStorageObject)//if obj is phone storage or sd storage
+            {
+                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
+                for (PortableDeviceObject obj2 : store.getChildObjects())//gets child objects of internal or sd
+                {
+                    if (obj2.getOriginalFileName().equalsIgnoreCase(folderName))
+                    {
+                        target = (PortableDeviceFolderObject) obj2;
+                    }
+                }
+            }
+        }
+        return target;
+    }
+
+    //checks if file exists on the phone
+    private boolean doesFileExist(PortableDeviceFolderObject targetFolder, File file) {
+        PortableDeviceObject[] items = targetFolder.getChildObjects();
+        for (int i = 0; i < items.length; i++) {
+            if (items[i].getOriginalFileName().equalsIgnoreCase(file.getName())){
+                //System.out.println(items[i].getOriginalFileName());
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //checks if folder exists on device
+    private boolean doesFolderExist(String folderName, PortableDevice pD) {
+        //boolean condition = false;
+        for (PortableDeviceObject obj1 : pD.getRootObjects())
+        {
+            if (obj1 instanceof PortableDeviceStorageObject)
+            {
+                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
+                for (PortableDeviceObject obj2 : store.getChildObjects())
+                {
+                    if (obj2.getOriginalFileName().equalsIgnoreCase(folderName))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    //returns string of the contents of a text file
+    private String fileToString(File file) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String line;
+        String ret;
+        StringBuffer sb = new StringBuffer();
+        while((line = br.readLine()) != null){
+            sb.append(line);
+            sb.append("\n");
+        }
+        ret = sb.toString();
+        br.close();
+        return ret;
+    }
+
+    //method to recursively search through files on phone
+    //called by backup method
+    private void recur(PortableDeviceFolderObject object, String tab, File file) {
+        tab = tab + "    ";
+
+        for (PortableDeviceObject obj : object.getChildObjects())
+        {
+            System.out.println(tab + obj.getName());
+            if (obj instanceof PortableDeviceFolderObject){
+                File tempFile = new File(file.getPath() + "\\" + obj.getName());
+                if(!tempFile.isDirectory()){
+                    tempFile.mkdir();
+                }
+                recur((PortableDeviceFolderObject) obj, tab, tempFile);
+            }
+            ptoPC(obj, file.getPath());
+        }
+    }
+
+    //checks if config file exists on pc
+    //if not a config file is created
     public void initializeDesk() throws FileNotFoundException {
         File file = new File(mainPath + "\\PAC_config.cfg");
         if(file.isFile() == false){
             System.out.println("Config path doesnt exist");
             PrintWriter w = new PrintWriter("PAC_Config.cfg");
             w.println("adb_directory = \"\"");
-            w.println("backup_directory = \"\"");
+            w.println("backup_directory = \"" + mainPath + "\\Backups\\\"");
             w.println("phone_ip = \"\"");
             w.close();
             file = new File("PAC_Config.cfg");
         }
-
         //System.out.println(file.getAbsolutePath());
-
     }
 
-    public ArrayList<String> syncQueuery(){
-        /*
-        Content Type
-        1 - Audiobook
-        2 - EBook
-        3 -
-        4 -
-        5 -
-        6 -
-        7 - Podcast
-        */
-
-        Connection c = null;
-        Statement stmt = null;
-        ArrayList<String> locations = null;
-        String location;
-        String contentName;
-        String type;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:Database\\PACDB.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened Database");
-            stmt = c.createStatement();
-            //SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID, and c.SyncStatusID = FALSE;
-            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID;");
-
-            while(rs.next()){
-                String test;
-                test = rs.getString("Location");
-                if(rs.getString("Location") == null){
-                    System.out.println("location is null");
-                }else if(rs.getString("Location") != null){
-                    locations.add(test);
-                }
-
-            }
-            for(int i = 0; i < locations.size(); i++){
-                System.out.println(locations.get(i));
-            }
-            rs.close();
-            stmt.close();
-            c.close();
-
-        }catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-
-
-
-
-        return locations;
-    }
-
-
+    //checks phone if folders exist on the phone
     public void initializePhone(int i) {
         PortableDeviceFolderObject pFO = null;
         PortableDeviceManager pDM = new PortableDeviceManager();
@@ -130,6 +167,9 @@ class Transfer extends Thread implements pacapp.TransferObject {
             boolean pod = doesFolderExist("PODCASTS", pD);
             boolean ebooks = doesFolderExist("EBOOKS", pD);
             boolean pacfiles = doesFolderExist("PACFILES", pD);
+            boolean audiobooks = doesFolderExist("AUDIOBOOKS", pD);
+            boolean music = doesFolderExist("MUSIC", pD);
+            boolean videos = doesFolderExist("VIDEOS", pD);
             if (!pod) {
                 createFolder("podcasts", pD);
             }
@@ -139,38 +179,23 @@ class Transfer extends Thread implements pacapp.TransferObject {
             if (!pacfiles) {
                 createFolder("pacfiles", pD);
             }
+            if (!audiobooks) {
+                createFolder("audiobooks", pD);
+            }
+            if (!music) {
+                createFolder("music", pD);
+            }
+            if (!videos) {
+                createFolder("videos", pD);
+            }
             pD.close();
         }catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("No Pnone Connected");
+            System.out.println("No Phone Connected");
         }
 
     }
 
-
-
-    public boolean setMainPath(String path){
-        File file = new File(path);
-        if (file.exists() && file.isDirectory()){
-            this.mainPath = path;
-            return true;
-        }
-        return false;
-    }
-
-    private String fileToString(File file) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String line;
-        String ret;
-        StringBuffer sb = new StringBuffer();
-        while((line = br.readLine()) != null){
-            sb.append(line);
-            sb.append("\n");
-        }
-        ret = sb.toString();
-        br.close();
-        return ret;
-    }
-
+    //sets path to adb.exe in config file
     public boolean setAdbPath(String path) throws IOException {
         String x = "adb_directory = \"";
         int i = x.length();
@@ -198,6 +223,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return true;
     }
 
+    //returns the path to adb file
     public String getAdbPath() throws IOException {
         if(this.adbPath != null){
             //System.out.println("Path exists: " + this.adbPath);
@@ -214,6 +240,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return this.adbPath;
     }
 
+    //sets path to backup folder in config file
     public boolean setBackupPath(String path) throws IOException {
         String x = "backup_directory = \"";
         int i = x.length();
@@ -232,14 +259,46 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return true;
     }
 
-    //change path files to something more universal
+    //retruns backup folder path from config file
+    public String getBackupPath() throws IOException{
+        if (this.backupPath != null) {
+            return this.backupPath;
+        }else{
+            File file = new File(this.mainPath + "\\PAC_Config.cfg");
+            String conString = fileToString(file);
+            String[] a = conString.split("backup_directory = \"");
+            //System.out.println("test " + a[0] + "\ntest " + a[1]);
+            String[] b = a[1].split("\"");
+            String path = b[0];
+            //System.out.println("get backup path test: " + path);
+            this.backupPath = path;
+        }
+        return this.backupPath;
+    }
+
+    //sets main path of program
+    public boolean setMainPath(String path){
+        File file = new File(path);
+        if (file.exists() && file.isDirectory()){
+            this.mainPath = path;
+            return true;
+        }
+        return false;
+    }
+
+    //returns main path of program
+    public String getMainPath(){
+        return this.mainPath;
+    }
+
+    //searches phone using adb to get ip address
     public void getPhoneIp() throws IOException {
         String addr = mainPath + "\\addrs.txt";
         String longIp = "";
         String ip = "";
 
-        //adbPath
-        //System.out.println("cd \"" + this.adbPath + "\" ");
+        //calls command prompt and runs adb.exe
+        //checks if phone is connected and copppies ip output to file named addrs.txt
         ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "cd \"" + this.adbPath + "\" " +
                 "&& adb devices " +
                 "&& adb shell ip route > " + addr + " ");
@@ -275,7 +334,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         this.ip = ip;
     }
 
-
+    //returns string of phone ip address
     public String getIp(){
         if (this.ip != null){
             return this.ip;
@@ -283,18 +342,11 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return "No ip Specified";
     }
 
-    public void wifiSetup() throws IOException {
-        //not done
-    }
-
-
     //returns phone model
     public String getPhoneModel() {
         String out = "";
         return out = pD.getModel();
     }
-
-
 
     //returns battery percentage
     public int getPhoneBattery() {
@@ -308,47 +360,90 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return out = pD.getFriendlyName();
     }
 
-    public void addFiles(File file, char choice){
-        switch(choice){
-            case 'p':
-                addPodcast(file);
-                break;
-            case 'e':
-                addEBook(file);
-                break;
-            case 'm':
-                addMusic(file);
-                break;
-            case 'v':
-                addVideos(file);
-                break;
+    public ArrayList<FileA> syncQueuery(){
+        /*
+        Content Type
+        1 - Audiobook
+        2 - EBook
+        3 -
+        4 -
+        5 -
+        6 -
+        7 - Podcast
+        */
+
+        System.out.println();
+        Connection c = null;
+        Statement stmt = null;
+        ArrayList<FileA> locations = new ArrayList<FileA>();
+        String location;
+        String contentName;
+        String type;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:Database\\PACDB.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened Database");
+            stmt = c.createStatement();
+            //SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID, and c.SyncStatusID = FALSE;
+            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID and c.WantToSync = TRUE;");
+            while(rs.next()){
+                if(rs.getString("Location") == null){
+                    System.out.println("location is null");
+                }else if(rs.getString("Location") != null){
+                    System.out.println(rs.getString("Location"));
+                    System.out.println(rs.getString("ContentName"));
+                    System.out.println(rs.getString("ContentType"));
+                    String locationString = rs.getString("Location");
+                    String nameString = rs.getString("ContentName");
+                    String id = rs.getString("ContentType");
+                    FileA fileaccess = new FileA(locationString, nameString, id);
+                    locations.add(fileaccess);
+                }
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
         }
+        return locations;
     }
 
     public void sync(){
-
+        //calls syncQueuery method to make a list of items that need to be synced to the phone
+        ArrayList<FileA> queue = syncQueuery();
+        addFiles(queue);
     }
 
-    public void addFiles(ArrayList<File> files, char choice){
-        switch(choice){
-            case 'p':
-                addPodcast(files);
-                break;
-            case 'e':
-                addEbook(files);
-                break;
-            case 'm':
-                addMusic(files);
-                break;
-            case 'v':
-                addVideos(files);
-                break;
+    public void addFiles(ArrayList<FileA> files){
+        for (int i = 0; i < files.size(); i++) {
+            File file = new File(files.get(i).getLocation());
+            switch(files.get(i).getType().toUpperCase()){
+                case "PODCAST":
+                    addPodcast(file);
+                    break;
+                case "EBOOK":
+                    addEBook(file);
+                    break;
+                case "MUSIC":
+                    addMusic(file);
+                    break;
+                case "VIDEO":
+                    addVideos(file);
+                    break;
+                case "AUDIOBOOK":
+                    addAudioBook(file);
+                    break;
+            }
         }
+
     }
 
     //add single Podcast
-    public void addPodcast(File file)
-    {
+    public void addPodcast(File file) {
         if (doesFolderExist("podcasts", pD))
         {
             pctoP(setTargetFolder("podcasts", pD), file);
@@ -360,8 +455,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
     }
 
     //add multiple podcasts
-    public void addPodcast(ArrayList<File> files)
-    {
+    public void addPodcast(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
             if (doesFolderExist("podcasts", pD))
@@ -374,8 +468,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addEBook(File file)
-    {
+    //adds single ebooks
+    public void addEBook(File file) {
         if (doesFolderExist("eBooks", pD))
         {
             pctoP(setTargetFolder("ebooks", pD), file);
@@ -385,8 +479,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addEbook(ArrayList<File> files)
-    {
+    //adds multiple ebooks
+    public void addEbook(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
             if (doesFolderExist("eBooks", pD))
@@ -399,8 +493,33 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addMusic(File file)
-    {
+    //add single audiobooks
+    public void addAudioBook(File file){
+        if (doesFolderExist("AudioBooks", pD))
+        {
+            pctoP(setTargetFolder("AudioBooks", pD), file);
+        }else{
+            createFolder("AudioBooks", pD);
+            pctoP(setTargetFolder("AudioBooks", pD), file);
+        }
+    }
+
+    //add multiple audiobooks
+    public void addAudioBook(ArrayList<File> files){
+        for (int i = 0; i < files.size(); i++) {
+            File file = files.get(i);
+            if (doesFolderExist("AudioBooks", pD))
+            {
+                pctoP(setTargetFolder("AudioBooks", pD), file);
+            }else{
+                createFolder("AudioBooks", pD);
+                pctoP(setTargetFolder("AudioBooks", pD), file);
+            }
+        }
+    }
+
+    //add a single song
+    public void addMusic(File file) {
         if (doesFolderExist("music", pD))
         {
             pctoP(setTargetFolder("music", pD), file);
@@ -410,8 +529,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addMusic(ArrayList<File> files)
-    {
+    //add multiple songs
+    public void addMusic(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
             if (doesFolderExist("music", pD))
@@ -424,8 +543,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addVideos(File file)
-    {
+    //add a single video
+    public void addVideos(File file) {
         if (doesFolderExist("videos", pD))
         {
             pctoP(setTargetFolder("videos", pD), file);
@@ -435,8 +554,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void addVideos(ArrayList<File> files)
-    {
+    //add multiple videos
+    public void addVideos(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
             if (doesFolderExist("videos", pD))
@@ -449,8 +568,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void getFolder(String folder, File file)
-    {
+    //returns folder
+    public void getFolder(String folder, File file) {
         PortableDeviceObject[] folderFiles = setTargetFolder(folder, pD).getChildObjects();
         for (int i = 0; i < folderFiles.length; i++) {
             System.out.println(folderFiles[i].getOriginalFileName());
@@ -459,8 +578,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void ptoPC(PortableDeviceObject pDO, String file)
-    {
+    //transfers files from phone to pc
+    public void ptoPC(PortableDeviceObject pDO, String file) {
         PortableDeviceToHostImpl32 copy = new PortableDeviceToHostImpl32();
         try
         {
@@ -472,8 +591,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     }
 
-    public void pctoP(PortableDeviceFolderObject targetFolder, File file)
-    {
+    //transfers files from the pc to phone
+    public void pctoP(PortableDeviceFolderObject targetFolder, File file) {
         if (doesFileExist(targetFolder, file) == false) {
             System.out.println(file.getName() + " not added: already exists");
         } else {
@@ -486,56 +605,26 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
-    public void checkConnection(boolean b){
-        class PhoneConnection extends Thread{
-            private volatile boolean flag = true;
-            private volatile boolean pIFlag = false;
-            //private volatile boolean con = false;
-            public void stopRunning(){
-                flag = false;
+    //Checks if a phone ic currently connected
+    public boolean checkConnection(){
+        try{
+            if(pD.getRootObjects() != null){
+                return true;
             }
-            public void run(){
-                while(flag){
-                    System.out.println("Running...");
-                    try{
-
-                        if(pIFlag == false){
-                            initializePhone(0);
-                            pDM.getDevices()[0].getRootObjects();
-                            System.out.println("Phone Initialized");
-                            pIFlag = true;
-                            //con = true;
-                        }else if(pIFlag == true){
-                            System.out.println("Phone Connected");
-                            pDM.getDevices()[0].getRootObjects();
-                        }
-                    }catch (NullPointerException e){
-                        System.out.println("Not Connected!");
-                        pIFlag = false;
-                        //con = false;
-                    }catch (ArrayIndexOutOfBoundsException e){
-                        System.out.println("Not Connected");
-                        pIFlag = false;
-                        //con = false;
-                    }
-                }
-                System.out.println("Stopped...");
-            }
+        }catch(NullPointerException e){
+            System.out.println("No Phone Connected");
         }
-        PhoneConnection pc = new PhoneConnection();
-        pc.start();
-        if(b == false){
-            pc.stopRunning();
-        }
+        return false;
     }
 
-    public void backup(){
+    //makes a copy of the phones storage and puts it in backup folder on pc
+    public void backup() throws IOException {
         //add backup folder check here
-        String path = this.backupPath;
+        String path = getBackupPath();
         //make sure phone model is here
         String pModel = getPhoneModel();
+        //pModel = pModel.replaceAll("");
         String time = new SimpleDateFormat("yyyy-MM-dd_HHmm").format(Calendar.getInstance().getTime());
-
         class BackupThread implements Runnable{
             //String path;
             BackupThread(String string) {
@@ -545,9 +634,12 @@ class Transfer extends Thread implements pacapp.TransferObject {
             public void run() {
                 System.out.println("Thread starting");
                 PortableDeviceFolderObject target = null;
-                File file = new File(path + "\\" + pModel + "\\" + time);
+                File file = new File(path + "\\" + time);
+                //File file = new File(path + "\\" + pModel + "\\" + time);
+                //String test = file.toString();
                 if(!file.isDirectory()){
-                    file.mkdir();
+                    file.mkdirs();
+                    System.out.println(file.toString());
                 }
                 for (PortableDeviceObject obj1 : pD.getRootObjects())
                 {
@@ -583,87 +675,79 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     }
 
-    private void recur(PortableDeviceFolderObject object, String tab, File file)
-    {
-        tab = tab + "    ";
+    public void restore()throws IOException{
+        File bfolder = new File(this.getBackupPath());
+        File[] backups = bfolder.listFiles();
+        File newest;
 
-        for (PortableDeviceObject obj : object.getChildObjects())
-        {
-            System.out.println(tab + obj.getName());
-            if (obj instanceof PortableDeviceFolderObject){
-                File tempFile = new File(file.getPath() + "\\" + obj.getName());
-                if(!tempFile.isDirectory()){
-                    tempFile.mkdir();
-                }
-                recur((PortableDeviceFolderObject) obj, tab, tempFile);
-            }
-            ptoPC(obj, file.getPath());
+        if(backups.length == 1){
+            newest = new File(backups[0].getAbsolutePath() + "\\Phone");
+            System.out.println(newest.getAbsolutePath());
+            pctoP(setRoot("phone"), newest);
+        }else if(backups == null){
+            System.out.println("No Backups Found!");
+        }else{
+            Arrays.sort(backups);
+            newest = new File(backups[0].getAbsolutePath() + "\\Phone");
+            System.out.println(newest.getAbsolutePath());
+            pctoP((setTargetFolder("Phone", pD)), newest);
+
         }
     }
 
-    //when adding files, checks to see if file doesn't already exist
-    private boolean doesFileExist(PortableDeviceFolderObject targetFolder, File file)
-    {
-        PortableDeviceObject[] items = targetFolder.getChildObjects();
-        for (int i = 0; i < items.length; i++) {
-            if (items[i].getOriginalFileName().equalsIgnoreCase(file.getName())){
-                //System.out.println(items[i].getOriginalFileName());
-                return false;
-            }
-        }
-        return true;
-    }
-
-    //checks if folder exists on device
-    public boolean doesFolderExist(String folderName, PortableDevice pD)
-    {
-        //boolean condition = false;
-        for (PortableDeviceObject obj1 : pD.getRootObjects())
-        {
-            if (obj1 instanceof PortableDeviceStorageObject)
-            {
-                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
-                for (PortableDeviceObject obj2 : store.getChildObjects())
-                {
-                    if (obj2.getOriginalFileName().equalsIgnoreCase(folderName))
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    private void createFolder(String folderName, PortableDevice pD)
-    {
-        //PortableDeviceFolderObject target = ;
-        for (PortableDeviceObject obj1 : pD.getRootObjects())
-        {
-            if (obj1 instanceof PortableDeviceStorageObject)
-            {
-                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
-                store.createFolderObject(folderName);
-            }
-        }
-    }
-
-    private PortableDeviceFolderObject setTargetFolder(String folderName, PortableDevice pD) {
+    public PortableDeviceFolderObject setRoot(String name){
         PortableDeviceFolderObject target = null;
         for (PortableDeviceObject obj1 : pD.getRootObjects())//gets root files of phone
         {
             if (obj1 instanceof PortableDeviceStorageObject)//if obj is phone storage or sd storage
             {
                 PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
-                for (PortableDeviceObject obj2 : store.getChildObjects())//gets child objects of internal or sd
-                {
-                    if (obj2.getOriginalFileName().equalsIgnoreCase(folderName))
-                    {
-                        target = (PortableDeviceFolderObject) obj2;
-                    }
+                if(store.getDescription().equalsIgnoreCase(name)){
+                    target = (PortableDeviceFolderObject) store;
+                }else{
+                    return null;
                 }
             }
         }
         return target;
+    }
+
+    public void wifiSetup() throws IOException {
+        //not done
+    }
+}
+
+class FileA{
+    String location, filename, type;
+    FileA(String location, String type){
+        this.location = location;
+        this.filename = "Unknown";
+        this.type = type;
+    }
+    FileA(String location, String filename, String type){
+        this.location = location;
+        this.filename = filename;
+        this.type = type;
+    }
+    public String getLocation(){
+        return this.location;
+    }
+    public String getFilename(){
+        return this.filename;
+    }
+    public String getType(){
+        return this.type;
+    }
+    public void setLocation(String location){
+        File file = new File(location);
+        if(file.isFile()){
+            this.location = location;
+        }
+    }
+    public void setFilename(String filename){
+        this.filename = filename;
+    }
+    public void setType(String type){
+        this.type = type;
     }
 }

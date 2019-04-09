@@ -7,12 +7,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jdom-1.0" level="project" />
     <orderEntry type="library" name="jmtp" level="project" />
     <orderEntry type="library" name="json-20180813" level="project" />
-    <orderEntry type="library" name="jdom-1.0" level="project" />
     <orderEntry type="library" name="rome-1.0" level="project" />
     <orderEntry type="library" name="sqlite-jdbc-3.23.1" level="project" />
     <orderEntry type="library" name="tika-app-1.20" level="project" />
-    <orderEntry type="library" name="Libraries" level="project" />
   </component>
 </module>

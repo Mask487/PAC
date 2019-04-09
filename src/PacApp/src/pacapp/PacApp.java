@@ -13,23 +13,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import NewDatabase.ContentDAO;
-import NewDatabase.Content;
 import java.util.Iterator;
 import java.util.Set;
+
 
 /**
  *
@@ -40,15 +42,15 @@ public class PacApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Transfer t = new Transfer();
-        t.initializeDesk();
+     Transfer t = new Transfer();
+      t.initializeDesk();
 
         AnchorPane root2 = new AnchorPane();
         Scene primary = new Scene(root2);
 
         primary.fillProperty().set(Paint.valueOf("505050"));
         stage.setScene(primary);
-        root2.setMinSize(750, 510);
+        root2.setMinSize(720, 480);
         //root2.setMaxSize(1600,900);
 
         Insets bFillIn = new Insets(0);
@@ -111,9 +113,6 @@ public class PacApp extends Application {
         BackgroundFill cenFill = new BackgroundFill(Paint.valueOf("414141"), bFillCR, bFillIn);
         Background cenBack = new Background(cenFill);
         centerAnchorPane.setBackground(cenBack);
-
-
-        throwaway.backgroundProperty().set(buBack);
 
         // Sidebar Button for the Music Section
         Image musicIconP = new Image("MusicIcon.png");   //Load Music Icon for imageview
@@ -211,34 +210,17 @@ public class PacApp extends Application {
         //Create horizontal Box for bottom controlls
         HBox bottomButt = new HBox();
         bottomButt.setPadding(new Insets(5));
-
-
-
-
+        ProgressBar mainProg = new ProgressBar(0); //setProgress()
+        bottomButt.getChildren().addAll(mainProg);
 
         music.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();//(phoneMidRow, musicPane);
                 mainStack.getChildren().add(musicPane);
-                musicCont.getChildren().clear();
-                ContentDAO dao = new ContentDAO();
-                Set mset = dao.getAllContentByType("Music");
                 System.out.println("Music Pressed");
-                Iterator miter = mset.iterator();
-                int setSize = mset.size();
-                Button[] listings = new Button[setSize];
-                int i = 0;
-                while (miter.hasNext()) {
-                    Content content = new Content();
-                    content = (NewDatabase.Content) miter.next();
-                    musButt(content, listings, i,musicCont,buBack);
-                    i++;
-                }
 
             }
-
-
         });
 
         book.setOnAction(new EventHandler<ActionEvent>() {
@@ -246,19 +228,17 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(bookPane);
-                bookCont.getChildren().clear();
                 ContentDAO dao = new ContentDAO();
                 Set set = dao.getAllContentByType("EBook");
                 System.out.println("Book Pressed");
-                Iterator iter = set.iterator();
+                Iterator iter  = set.iterator();
                 int setSize = set.size();
                 Button[] listings = new Button[setSize];
                 int i = 0;
-                while (iter.hasNext()) {
-                    Content content = new Content();
-                    content = (NewDatabase.Content) iter.next();
-                    ebkButt(content, listings, i,bookCont,buBack);
-                    i++;
+                while(iter.hasNext()) {
+
+                    ebkButt(iter.next(),listings,i);
+                     i++;
                 }
 
             }
@@ -269,24 +249,9 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(audioBookPane);
-                audioBookCont.getChildren().clear();
-                ContentDAO dao = new ContentDAO();
-                Set abset = dao.getAllContentByType("audioBook");
-                System.out.println("Audio Book Pressed");
-                Iterator abiter = abset.iterator();
-                int setSize = abset.size();
-                Button[] listings = new Button[setSize];
-                int i = 0;
-                while (abiter.hasNext()) {
-                    Content content = new Content();
-                    content = (NewDatabase.Content) abiter.next();
-                    abkButt(content, listings, i,audioBookCont,buBack);
-                    i++;
-                }
+                System.out.println("Audio Books Pressed");
 
             }
-
-
         });
 
         podcast.setOnAction(new EventHandler<ActionEvent>() {
@@ -294,24 +259,9 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(podcastPane);
-                podcastCont.getChildren().clear();
-                ContentDAO dao = new ContentDAO();
-                Set podcastset = dao.getAllContentByType("Podcast");
                 System.out.println("podcast Pressed");
-                Iterator podcastiter = podcastset.iterator();
-                int setSize = podcastset.size();
-                Button[] listings = new Button[setSize];
-                int i = 0;
-                while (podcastiter.hasNext()) {
-                    Content content = new Content();
-                    content = (NewDatabase.Content) podcastiter.next();
-                    podButt(content, listings, i,podcastCont,buBack);
-                    i++;
-                }
 
             }
-
-
         });
 
         video.setOnAction(new EventHandler<ActionEvent>() {
@@ -319,24 +269,9 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(videoPane);
-                videoCont.getChildren().clear();
-            ContentDAO dao = new ContentDAO();
-            Set videoset = dao.getAllContentByType("Video");
-            System.out.println("video Pressed");
-            Iterator videoiter = videoset.iterator();
-            int setSize = videoset.size();
-            Button[] listings = new Button[setSize];
-            int i = 0;
-            while (videoiter.hasNext()) {
-                Content content = new Content();
-                content = (NewDatabase.Content) videoiter.next();
-                vidButt(content, listings, i,videoCont,buBack);
-                i++;
+                System.out.println("video Pressed");
+
             }
-
-        }
-
-
         });
 
         apps.setOnAction(new EventHandler<ActionEvent>() {
@@ -359,55 +294,53 @@ public class PacApp extends Application {
             }
         });
 
-        vbutt.getChildren().addAll(music, book, aBook, podcast, video, apps, phoneB,throwaway);
+        vbutt.getChildren().addAll(music, book, aBook, podcast, video, apps, phoneB);
         bvbutt.getChildren().addAll(settingsB);
 
         // Create music pane
-        musicCont.backgroundProperty().set(cenBack);
-        musicPane.backgroundProperty().set(cenBack);
         musicPane.setFitToWidth(true);
         musicPane.setFitToHeight(true);
         musicPane.setPannable(false);
 
         // Create book pane
-        bookCont.backgroundProperty().set(cenBack);
-        bookPane.backgroundProperty().set(cenBack);
         bookPane.setFitToWidth(true);
         bookPane.setFitToHeight(true);
         bookPane.setPannable(false);
-
+        Label noBook = new Label("You have no Books \n import Books to get started.");
+        noBook.backgroundProperty().set(buBack);
+        bookCont.getChildren().addAll(noBook);
 
         // Create audio book pane
-        audioBookCont.backgroundProperty().set(cenBack);
-        audioBookPane.backgroundProperty().set(cenBack);
         audioBookPane.setFitToWidth(true);
         audioBookPane.setFitToHeight(true);
         audioBookPane.setPannable(false);
-
+        Label noAudioBook = new Label("You have no audio books \n import audio Books to get started.");
+        noAudioBook.backgroundProperty().set(buBack);
+        audioBookCont.getChildren().addAll(noAudioBook);
 
         // Create app pane
-        appCont.backgroundProperty().set(cenBack);
-        appPane.backgroundProperty().set(cenBack);
         appPane.setFitToWidth(true);
         appPane.setFitToHeight(true);
         appPane.setPannable(false);
+        Label noApp = new Label("You have no apps \n import apps to get started.");
+        noApp.backgroundProperty().set(buBack);
+        appCont.getChildren().addAll(noApp);
 
-
-        // Create podcast pane
-        podcastCont.backgroundProperty().set(cenBack);
-        podcastPane.backgroundProperty().set(cenBack);
+        // Create  pane
         podcastPane.setFitToWidth(true);
         podcastPane.setFitToHeight(true);
         podcastPane.setPannable(false);
-
+        Label nopodcast = new Label("You have no podcasts \n import podcasts to get started.");
+        nopodcast.backgroundProperty().set(buBack);
+        podcastCont.getChildren().addAll(nopodcast);
 
         // Create video pane
-        videoCont.backgroundProperty().set(cenBack);
-        videoPane.backgroundProperty().set(cenBack);
         videoPane.setFitToWidth(true);
         videoPane.setFitToHeight(true);
         videoPane.setPannable(false);
-
+        Label noVideo = new Label("You have no videos \n import videos to get started.");
+        noVideo.backgroundProperty().set(buBack);
+        videoCont.getChildren().addAll(noVideo);
 
         // create settings VBox
         Button lightMode = new Button("Change to light mode.");       //Creates button
@@ -487,7 +420,7 @@ public class PacApp extends Application {
 //                System.out.println("copy entered");
 //
 //            }
-//        });   2EB900 green color
+//        });
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -500,11 +433,10 @@ public class PacApp extends Application {
         Button android = new Button("Duplicate Phone", Android);
         copy.backgroundProperty().set(buBack);
 
-
         VBox midButt = new VBox();
         midButt.setPadding(new Insets(5, 5, 5, 5));
         midButt.setSpacing(50);
-        midButt.getChildren().addAll(sync, backup, copy,throwaway);
+        midButt.getChildren().addAll(sync, backup, copy);
 
         phoneB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -516,408 +448,6 @@ public class PacApp extends Application {
             }
         });
 
-        Insets sliderIn = new Insets(8.0,0.0,8.0,0.0);
-
-        //Music Controll
-
-        //music volume slider
-        Slider musicVolumeSlider = new Slider();
-        musicVolumeSlider.setMin(0);
-        musicVolumeSlider.setMax(100);
-        musicVolumeSlider.setValue(0);
-        musicVolumeSlider.setPadding(sliderIn);
-        //music progress slider
-        Slider musicProgressSlider = new Slider();
-        musicProgressSlider.setMin(0);
-        musicProgressSlider.setMax(100);
-        musicProgressSlider.setValue(0);
-        musicProgressSlider.setPadding(sliderIn);
-        //Play
-        Image PlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
-        ImageView musicPlayIcon = new ImageView();
-        musicPlayIcon.setImage(PlayIcon);                  //adds icon to imageview
-        Button musicPlay = new Button("",musicPlayIcon);       //Creates button
-
-        musicPlay.backgroundProperty().set(buBack);         //adds transparent background
-        musicPlay.setPadding(inset);
-
-        musicPlay.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println("Music Play Pressed");
-
-            }
-        });
-        // forward
-        Image forwardIcon = new Image("ForwardButton.png");   //Load forward  Icon for imageview
-        ImageView forwardMusicIcon = new ImageView();
-        forwardMusicIcon.setImage(forwardIcon);                  //adds icon to imageview
-        Button musicForward = new Button("",forwardMusicIcon);       //Creates button
-
-        musicForward.backgroundProperty().set(buBack);         //adds transparent background
-        musicForward.setPadding(inset);
-
-        musicForward.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println("Music Forward Pressed");
-
-            }
-        });
-    //Backward
-        Image BackIcon = new Image("backwardButton.png");   //Load Back  Icon for imageview
-        ImageView musicBackIcon = new ImageView();
-        musicBackIcon.setImage(BackIcon);                  //adds icon to imageview
-        Button musicBack = new Button("",musicBackIcon);       //Creates button
-
-        musicBack.backgroundProperty().set(buBack);         //adds transparent background
-        musicBack.setPadding(inset);
-
-        musicBack.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println("Music Back Pressed");
-
-            }
-        });
-
-        //Volume
-        Image muteIcon = new Image("Mute.png");   //Load play  Icon for imageview
-        ImageView musicMuteIcon = new ImageView();
-        musicMuteIcon.setImage(muteIcon);                  //adds icon to imageview
-        Button musicMute = new Button("",musicMuteIcon);       //Creates button
-        Image lowVolIcon = new Image("LowVol.png");   //Load play  Icon for imageview
-        ImageView musicLowIcon = new ImageView();
-        if(musicVolumeSlider.getValue() <= 0.33 && musicVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
-        Image highVol = new Image("HighVol.png");   //Load play  Icon for imageview
-        ImageView highVolIcon = new ImageView();
-        if(musicVolumeSlider.getValue() >= 0.66){musicMuteIcon.setImage(highVol);     }             //adds icon to imageview
-        Image midVolIcon = new Image("MidVol.png");   //Load play  Icon for imageview
-        ImageView midVol = new ImageView();
-        if(musicVolumeSlider.getValue() <= 0.66 && musicVolumeSlider.getValue() >= 0.33){musicMuteIcon.setImage(midVolIcon);    }              //adds icon to imageview
-
-        musicMute.backgroundProperty().set(buBack);         //adds transparent background
-        musicMute.setPadding(inset);
-
-        musicMute.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println("Music Mute Pressed");
-                musicVolumeSlider.setValue(0);
-                musicMuteIcon.setImage(muteIcon);
-
-
-            }
-        });
-
-
-        musicControll.getChildren().addAll(musicBack,musicPlay,musicForward,musicMute,musicVolumeSlider);
-//// end music controll
-
-
-        //Podcast Controll
-
-        //Podcast volume slider
-        Slider podcastVolumeSlider = new Slider();
-        podcastVolumeSlider.setMin(0);
-        podcastVolumeSlider.setMax(100);
-        podcastVolumeSlider.setValue(0);
-        podcastVolumeSlider.setPadding(sliderIn);
-        //podcast progress slider
-        Slider podcastProgressSlider = new Slider();
-        podcastProgressSlider.setMin(0);
-        podcastProgressSlider.setMax(100);
-        podcastProgressSlider.setValue(0);
-        podcastProgressSlider.setPadding(sliderIn);
-        //Play
-        Button podcastPlay = new Button("",musicPlayIcon);       //Creates button
-
-        podcastPlay.backgroundProperty().set(buBack);         //adds transparent background
-        podcastPlay.setPadding(inset);
-
-        podcastPlay.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println("Podcast Play Pressed");
-
-            }
-        });
-        // forward
-        Button podcastForward = new Button("",forwardMusicIcon);       //Creates button
-        podcastForward.backgroundProperty().set(buBack);         //adds transparent background
-        podcastForward.setPadding(inset);
-
-        podcastForward.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println("Podcast Forward Pressed");
-
-            }
-        });
-        //Backward
-        Button podcastBack = new Button("",musicBackIcon);       //Creates button
-
-        podcastBack.backgroundProperty().set(buBack);         //adds transparent background
-        podcastBack.setPadding(inset);
-
-        podcastBack.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println("podcst Back Pressed");
-
-            }
-        });
-
-        //Volume
-
-        Button podcastMute = new Button("",musicMuteIcon);       //Creates button
-        if(podcastVolumeSlider.getValue() <= 0.33 && podcastVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
-        if(podcastVolumeSlider.getValue() >= 0.66){musicMuteIcon.setImage(highVol);     }             //adds icon to imageview
-        if(podcastVolumeSlider.getValue() <= 0.66 && podcastVolumeSlider.getValue() >= 0.33){musicMuteIcon.setImage(midVolIcon);    }              //adds icon to imageview
-
-        podcastMute.backgroundProperty().set(buBack);         //adds transparent background
-        podcastMute.setPadding(inset);
-
-        podcastMute.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println("podcast Mute Pressed");
-                musicVolumeSlider.setValue(0);
-                musicMuteIcon.setImage(muteIcon);
-
-
-            }
-        });
-
-
-       podcastControll.getChildren().addAll(podcastBack,podcastPlay,podcastForward,podcastMute,podcastVolumeSlider);
-//// end podcast controll
-
-
-         Label musicTester = new Label("");
-        musicCont.getChildren().add(musicTester);
-        //drag and drop music
-        musicCont.setOnDragOver(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                if (event.getGestureSource() != musicCont
-                        && event.getDragboard().hasFiles()) {
-
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
-
-        musicCont.setOnDragDropped(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasFiles()) {
-                   // addContent(Music,);
-                    System.out.println("music added");
-                    musicTester.setText(db.getFiles().toString());
-                    success = true;
-                }
-                /* let the source know whether the string was successfully
-                 * transferred and used */
-                event.setDropCompleted(success);
-
-                event.consume();
-            }
-        });
-
-        Label ebookTester = new Label("");
-        bookCont.getChildren().add(ebookTester);
-        //drag and drop ebooks
-        bookCont.setOnDragOver(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                if (event.getGestureSource() != bookCont
-                        && event.getDragboard().hasFiles()) {
-
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
-
-        bookCont.setOnDragDropped(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasFiles()) {
-                    // addContent("EBook,);
-                    System.out.println("eBook added");
-                    ebookTester.setText(db.getFiles().toString());
-                    success = true;
-                }
-                /* let the source know whether the string was successfully
-                 * transferred and used */
-                event.setDropCompleted(success);
-
-                event.consume();
-            }
-        });
-        Label audioBookTester = new Label("");
-        audioBookCont.getChildren().add(audioBookTester);
-        //drag and drop audio books
-        audioBookCont.setOnDragOver(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                if (event.getGestureSource() != audioBookCont
-                        && event.getDragboard().hasFiles()) {
-
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
-
-        audioBookCont.setOnDragDropped(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasFiles()) {
-                    // addContent(audioBook,);
-                    System.out.println("audio book added");
-                    audioBookTester.setText(db.getFiles().toString());
-                    success = true;
-                }
-                /* let the source know whether the string was successfully
-                 * transferred and used */
-                event.setDropCompleted(success);
-
-                event.consume();
-            }
-        });
-
-        Label videoTester = new Label("");
-        videoCont.getChildren().add(videoTester);
-        //drag and drop music
-        videoCont.setOnDragOver(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                if (event.getGestureSource() != videoCont
-                        && event.getDragboard().hasFiles()) {
-
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
-
-        videoCont.setOnDragDropped(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasFiles()) {
-                    // addContent(Video,);
-                    System.out.println("video added");
-                    videoTester.setText(db.getFiles().toString());
-                    success = true;
-                }
-                /* let the source know whether the string was successfully
-                 * transferred and used */
-                event.setDropCompleted(success);
-
-                event.consume();
-            }
-        });
-        Label podcastTester = new Label("");
-        podcastCont.getChildren().add(podcastTester);
-        //drag and drop podcasts
-        podcastCont.setOnDragOver(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                if (event.getGestureSource() != podcastCont
-                        && event.getDragboard().hasFiles()) {
-
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
-
-        podcastCont.setOnDragDropped(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasFiles()) {
-                    // addContent(Podcast,);
-                    System.out.println("podcast added");
-                    podcastTester.setText(db.getFiles().toString());
-                    success = true;
-                }
-                /* let the source know whether the string was successfully
-                 * transferred and used */
-                event.setDropCompleted(success);
-
-                event.consume();
-            }
-        });
-        Label appTester = new Label("");
-        appCont.getChildren().add(appTester);
-        //drag and drop apps
-        appCont.setOnDragOver(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                if (event.getGestureSource() != appCont
-                        && event.getDragboard().hasFiles()) {
-
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
-
-        appCont.setOnDragDropped(new EventHandler<DragEvent>() {
-
-            @Override
-            public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasFiles()) {
-                    // addContent(App,);
-                    System.out.println("app added");
-                    appTester.setText(db.getFiles().toString());
-                    success = true;
-                }
-                /* let the source know whether the string was successfully
-                 * transferred and used */
-                event.setDropCompleted(success);
-
-                event.consume();
-            }
-        });
-
-
-       // bottomButt.getChildren().addAll();
-
         mainStack.getChildren().setAll(phoneMidRow, musicPane);
         tAnchor.getChildren().addAll(mainStack);
         tAnchor.setRightAnchor(mainStack, 25.0);// area around
@@ -925,9 +455,13 @@ public class PacApp extends Application {
         tAnchor.setBottomAnchor(mainStack, 25.0);// area around
         tAnchor.setTopAnchor(mainStack, 25.0);// area around
 
+        // test buttons
+        Button buttonSave = new Button("right");
+        Button buttonCancel = new Button("left");
+        Button buttonTop = new Button("Top");
+
         //MusicPane
-        Label noMusic = new Label("You have no content\nImport content, into the appropriate pane, via drag and drop.");
-        noMusic.setFont(new Font(25.0));
+        Label noMusic = new Label("You have no Music \n import music to get started.");
         noMusic.backgroundProperty().set(buBack);
         musicCont.getChildren().addAll(noMusic);
 
@@ -938,11 +472,11 @@ public class PacApp extends Application {
         centerAnchorPane.setTopAnchor(tAnchor, 5.0);
         centerAnchorPane.setBottomAnchor(tAnchor, 5.0);
 
-        bottomAnchorPane.getChildren().addAll(musicControll);
-        bottomAnchorPane.setRightAnchor(musicControll, 10.0);
-        bottomAnchorPane.setLeftAnchor(musicControll, 10.0);
-        bottomAnchorPane.setTopAnchor(musicControll, 10.0);
-        bottomAnchorPane.setBottomAnchor(musicControll, 10.0);
+        bottomAnchorPane.getChildren().addAll(bottomButt);
+        bottomAnchorPane.setRightAnchor(bottomButt, 5.0);
+        bottomAnchorPane.setLeftAnchor(bottomButt, 5.0);
+        bottomAnchorPane.setTopAnchor(bottomButt, .0);
+        bottomAnchorPane.setBottomAnchor(bottomButt, .0);
         leftButtonPane.getChildren().addAll(vbutt, bvbutt);
         topAnchorPane.getChildren().addAll(hSearch);
         leftButtonPane.setTopAnchor(vbutt, 0.0);
@@ -964,97 +498,30 @@ public class PacApp extends Application {
         launch(args);
     }
 
-    public static void musButt(Content objs, Button[] L, int i, VBox cont, Background b) {
+    public static void musButt() {
 
-        String name = objs.getContentName();
-        L[i] = new Button(name);
-        L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println(name + " Pressed");
-
-            }
-        });
-        cont.getChildren().add(L[i]);
     }
+    public static void podButt() {
 
-    public static void podButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
-        String name = objs.getContentName();
-        L[i] = new Button(name);
-        L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println(name + " Pressed");
-
-            }
-        });
-        cont.getChildren().add(L[i]);
     }
+    public static void ebkButt(Object objs,Button[] L,int i) {
 
-    public static void ebkButt(Content objs, Button[] L, int i, VBox cont, Background b) {
+       // String name = objs.getContentName();
+        //L[i] = new Button(name);
+       //L[i] = new Button(name);
 
-         String name = objs.getContentName();
-        L[i] = new Button(name);
-        L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
-         L[i].setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent press) {
 
-                System.out.println(name + " Pressed");
-
-            }
-         });
-        cont.getChildren().add(L[i]);
     }
+    public static void abkButt() {
 
-    public static void abkButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
-        String name = objs.getContentName();
-        L[i] = new Button(name);
-        L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println(name + " Pressed");
-
-            }
-        });
-        cont.getChildren().add(L[i]);
     }
-    public static void vidButt(Content objs, Button[] L, int i, VBox cont, Background b) {
+    public static void vidButt() {
 
-        String name = objs.getContentName();
-        L[i] = new Button(name);
-        L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println(name + " Pressed");
-
-            }
-        });
-        cont.getChildren().add(L[i]);
     }
-
     public static void infButt() {
 
     }
+
 
 }
