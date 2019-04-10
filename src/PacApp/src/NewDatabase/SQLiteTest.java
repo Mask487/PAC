@@ -83,23 +83,23 @@ public class SQLiteTest {
 //        }
 //
 //        test.addContent("C:/Test/Test.epub", contentType);
-        ContentDAO cdao = new ContentDAO();
-        Set contents = cdao.getAllContentByType("Podcast");
-        Iterator iter = contents.iterator();
-        while(iter.hasNext()) {
-            System.out.println(iter.next().toString());
-        }
-
-        Set contentsResult = cdao.searchAllTablesBySearchTerm("t");
-        Iterator iterResult = contentsResult.iterator();
-
-        System.out.println("The results are: ");
-        while(iterResult.hasNext()) {
-            System.out.println(iterResult.next().toString());
-        }
-
-        test.addContent("C:/Test/Test.epub", contentType);
-
-
+//        ContentDAO cdao = new ContentDAO();
+//        Set contents = cdao.getAllContentByType("Podcast");
+//        Iterator iter = contents.iterator();
+//        while(iter.hasNext()) {
+//            System.out.println(iter.next().toString());
+//        }
+//
+//        Set contentsResult = cdao.searchAllTablesBySearchTerm("t");
+//        Iterator iterResult = contentsResult.iterator();
+//
+//        System.out.println("The results are: ");
+//        while(iterResult.hasNext()) {
+//            System.out.println(iterResult.next().toString());
+//        }
+//
+//        test.addContent("C:/Test/Test.epub", contentType);
+        ContentDAO cdao = new ContentDAO(); 
+        cdao.getAllContent();
     }
 }

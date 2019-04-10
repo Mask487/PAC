@@ -5,6 +5,7 @@
  */
 package NewDatabase;
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -618,6 +619,13 @@ public class ContentDAO {
             content.setUploadDate(res.getString("Uploaddate"));
             content.setUrl(res.getString("DownloadURL"));
             content.setWantToSync(res.getBoolean("WantToSync"));
+            
+            //Check if file exists. If it doesn't, delete it from the database.
+            File temp = new File(content.getLocation());
+            if(!temp.exists()) {
+                deleteContent(content);
+                return null;
+            }
             
             return content; 
         }
