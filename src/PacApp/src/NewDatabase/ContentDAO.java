@@ -67,7 +67,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content); 
+                if(content != null) {
+                    contents.add(content);
+                } 
             }
             
             return contents;
@@ -93,8 +95,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
-                
+                if(content != null) {
+                    contents.add(content);
+                }                
             }
             
             return contents;
@@ -120,7 +123,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -147,7 +152,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
                 
             }
             return contents;
@@ -173,7 +180,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
                 
             }
             return contents;
@@ -199,7 +208,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -226,7 +237,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -253,7 +266,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
                 
             }
             return contents;
@@ -278,7 +293,9 @@ public class ContentDAO {
         try{
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -299,7 +316,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -355,7 +374,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
