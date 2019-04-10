@@ -679,11 +679,10 @@ class Transfer extends Thread implements pacapp.TransferObject {
         File bfolder = new File(this.getBackupPath());
         File[] backups = bfolder.listFiles();
         File newest;
-
         if(backups.length == 1){
             newest = new File(backups[0].getAbsolutePath() + "\\Phone");
             System.out.println(newest.getAbsolutePath());
-            pctoP(setRoot("phone"), newest);
+            retEach(newest);
         }else if(backups == null){
             System.out.println("No Backups Found!");
         }else{
@@ -691,25 +690,42 @@ class Transfer extends Thread implements pacapp.TransferObject {
             newest = new File(backups[0].getAbsolutePath() + "\\Phone");
             System.out.println(newest.getAbsolutePath());
             pctoP((setTargetFolder("Phone", pD)), newest);
-
         }
     }
 
-    public PortableDeviceFolderObject setRoot(String name){
-        PortableDeviceFolderObject target = null;
-        for (PortableDeviceObject obj1 : pD.getRootObjects())//gets root files of phone
-        {
-            if (obj1 instanceof PortableDeviceStorageObject)//if obj is phone storage or sd storage
-            {
-                PortableDeviceStorageObject store = (PortableDeviceStorageObject) obj1;
-                if(store.getDescription().equalsIgnoreCase(name)){
-                    target = (PortableDeviceFolderObject) store;
-                }else{
-                    return null;
-                }
+    private void retEach(File file){
+        File[] files = file.listFiles();//  "*\Phone\files[]"
+        for (int i = 0; i < files.length; i++) {
+            if(!doesFolderExist(files[i].getName(), pD) && files[i].isDirectory()){
+                createFolder(files[i].getName(), pD);
+                File newFile = new File(files[i].getAbsolutePath());
+                retEach(file);
+            }else if(doesFolderExist(files[i].getName(), pD) && files[i].isDirectory()){
+                File newFile = new File(files[i].getAbsolutePath());
+                retEach(file);
             }
+            System.out.println(files[i].getName());
+
+
+
+            //retEach();
         }
-        return target;
+
+        /*
+        File[] folders = file.listFiles();
+        for (int i = 0; i < folders.length; i++) {
+            System.out.println(folders[i].getName());
+            //if folder doesn't already exist on the device, then one is created
+            if(!doesFolderExist(folders[i].getName(), pD) && folders[i].isDirectory()){
+                createFolder(folders[i].getName(), pD);
+                System.out.println(folders[i].getName());
+            }
+            PortableDeviceFolderObject pDFO = setTargetFolder(folders[i].getName(), pD);//sets target folder to folder on pc
+            File inFolder = new File("TEST: "+folders[i].getAbsolutePath());
+            System.out.println(inFolder.getAbsolutePath());
+            pctoP(pDFO, inFolder);
+        }
+        */
     }
 
     public void wifiSetup() throws IOException {
