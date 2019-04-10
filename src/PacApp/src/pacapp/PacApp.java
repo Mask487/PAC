@@ -1125,8 +1125,8 @@ public class PacApp extends Application {
         centerAnchorPane.setTopAnchor(tAnchor, 5.0);
         centerAnchorPane.setBottomAnchor(tAnchor, 5.0);
 
-        bottomAnchorPane.getChildren().addAll(musicControll);
-        bottomAnchorPane.setRightAnchor(musicControll, 10.0);
+        bottomAnchorPane.getChildren().addAll(musicControll,RSSLookup);
+        bottomAnchorPane.setRightAnchor(RSSLookup, 10.0);
         bottomAnchorPane.setLeftAnchor(musicControll, 10.0);
         bottomAnchorPane.setTopAnchor(musicControll, 10.0);
         bottomAnchorPane.setBottomAnchor(musicControll, 10.0);
@@ -1200,7 +1200,8 @@ public class PacApp extends Application {
         });
 
 
-
+    String thefuquwant = objs.getLocation();
+        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
         M[i] = new Media("file://" + objs.getLocation());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
