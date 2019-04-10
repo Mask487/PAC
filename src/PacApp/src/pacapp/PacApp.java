@@ -562,12 +562,13 @@ public class PacApp extends Application {
         Android.setPreserveRatio(true);
         Android.setSmooth(true);
         Android.setCache(true);
-//
-//        if(t.checkConnection()){
-//        Label battery = new Label("" + t.getPhoneBattery());
-//        Label phoneName = new Label("" + t.getPhoneModel());}
+
+        if(t.checkConnection()){
+        Label battery = new Label("" + t.getPhoneBattery());
+        Label phoneName = new Label("" + t.getPhoneModel());
+        phoneStack.getChildren().addAll(Android,phoneName,battery);}
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // phoneStack.getChildren().addAll(Android,phoneName,battery);
+         //phoneStack.getChildren().addAll(Android,phoneName,battery);
 
         HBox phoneMidRow = new HBox();
         phoneMidRow.setPadding(new Insets(5, 5, 5, 5));
@@ -616,7 +617,7 @@ public class PacApp extends Application {
             @Override
             public void handle(ActionEvent press) {
                 try {
-                    t.backup();
+                    t.restore();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
