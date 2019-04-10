@@ -58,7 +58,7 @@ public class PacApp extends Application {
 
         primary.fillProperty().set(Paint.valueOf("505050"));
         stage.setScene(primary);
-        root2.setMinSize(750, 510);
+        root2.setPrefSize(750, 510);
         //root2.setMaxSize(1600,900);
 
         Insets bFillIn = new Insets(0);
@@ -433,7 +433,27 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(appPane);
-                System.out.println("apps Pressed");
+                ContentDAO dao = new ContentDAO();
+                Set appset = dao.getAllContentByType("App");
+                System.out.println("Apps Pressed");
+                Iterator appiter = appset.iterator();
+                int setSize = appset.size();
+                if(setSize == 0){
+                    Label noApps = new Label("You have no Apps.\n\nDrag and Drop Apps into this window to add to your collection.");
+                    noApps.setFont(new Font(20.0));
+                    noApps.backgroundProperty().set(buBack);
+                    appCont.getChildren().addAll(noApps);
+                }else{
+                    appCont.getChildren().remove(0);
+                }
+                Button[] listings = new Button[setSize];
+                int i = 0;
+                while (appiter.hasNext()) {
+                    Content content = new Content();
+                    content = (NewDatabase.Content) appiter.next();
+                    appButt(content, listings, i,appCont,buBack);
+                    i++;
+                }
 
             }
         });
@@ -444,6 +464,7 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(settingsList);
                 System.out.println("settings Pressed");
+
 
             }
         });
@@ -1188,8 +1209,12 @@ public class PacApp extends Application {
     public static void appButt(Content objs, Button[] L, int i, TilePane cont, Background b) {
 
         String name = objs.getContentName();
-        L[i] = new Button(name);
+        Image appsIcon = new Image("AppDefault.png");   //Load Phone Icon for imageview
+        ImageView appview = new ImageView();
+        appview.setImage(appsIcon);
+        L[i] = new Button(name,appview);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].setContentDisplay(ContentDisplay.TOP);
         L[i].backgroundProperty().set(b);
         L[i].setOnAction(new EventHandler<ActionEvent>() {
 
