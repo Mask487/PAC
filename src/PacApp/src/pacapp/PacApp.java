@@ -37,6 +37,7 @@ import NewDatabase.Content;
 
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
@@ -223,6 +224,8 @@ public class PacApp extends Application {
         search.backgroundProperty().set(buBack);
         hSearch.getChildren().add(search);
         hSearch.backgroundProperty().set(buBack);
+
+
 
     podcastCont.backgroundProperty().set(testBack);
 
@@ -1131,6 +1134,7 @@ public class PacApp extends Application {
 
 
         phoneMidRow.getChildren().addAll(phoneStack, midButt);
+
         centerAnchorPane.getChildren().addAll(tAnchor);
         centerAnchorPane.setRightAnchor(tAnchor, 0.0);
         centerAnchorPane.setLeftAnchor(tAnchor, 5.0);
@@ -1181,7 +1185,9 @@ public class PacApp extends Application {
 
         String thefuquwant = objs.getLocation();
         thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
-        M[i] = new Media(thefuquwant);
+        File file = new File(objs.getLocation());
+        URI uri = file.toURI();
+        M[i] = new Media(uri.toString());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1195,6 +1201,7 @@ public class PacApp extends Application {
         });
         doubleButt.getChildren().addAll(syncer,L[i]);
         cont.getChildren().add(doubleButt);
+
     }
 
     public static void podButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
@@ -1215,7 +1222,9 @@ public class PacApp extends Application {
 
     String thefuquwant = objs.getLocation();
         thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
-        M[i] = new Media(thefuquwant);
+        File file = new File(objs.getLocation());
+        URI uri = file.toURI();
+        M[i] = new Media(uri.toString());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1283,7 +1292,9 @@ public class PacApp extends Application {
 
         String thefuquwant = objs.getLocation();
         thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
-        M[i] = new Media(thefuquwant);
+        File file = new File(objs.getLocation());
+        URI uri = file.toURI();
+        M[i] = new Media(uri.toString());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1316,7 +1327,9 @@ public class PacApp extends Application {
 
         String thefuquwant = objs.getLocation();
         thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
-        M[i] = new Media(thefuquwant);
+        File file = new File(objs.getLocation());
+        URI uri = file.toURI();
+        M[i] = new Media(uri.toString());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1372,7 +1385,9 @@ public class PacApp extends Application {
 
 
 
-        M[i] = new Media("file://" + objs.getLocation());
+        File file = new File(objs.getLocation());
+        URI uri = file.toURI();
+        M[i] = new Media(uri.toString());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
