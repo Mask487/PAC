@@ -769,6 +769,29 @@ public class SQLTranslator {
         //Default Value
         return false;
     }
+    
+    
+    /**
+     * Deletes all content of a given type
+     * @param contentType
+     * @return 
+     */
+    public boolean deleteContentByType(String contentType) {
+        String query = "DELETE FROM " + DBEnumeration.CONTENT
+                + " WHERE ContentTypeID = (SELECT ContentTypeID FROM "
+                + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '" + contentType
+                + "')";
+        if(deleteFromDB(query)) {
+            System.out.println("All content of type: " + contentType
+            + " deleted");
+            return true;
+        }
+        
+        else {
+            System.out.println("Error with deleting content of type: " + contentType);
+            return false;
+        }
+    }
 
 
     /**
