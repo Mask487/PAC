@@ -669,7 +669,19 @@ public class PacApp extends Application {
                 System.out.println("URL added: " + newrl);
                 RSSLookup.setText("");
                 RSSReader rede = new RSSReader();
-                rede.DownloadPodcast(newrl);
+                class csc490 implements Runnable{
+
+                    //rede.DownloadPodcast(newrl);
+                    csc490(String stringName){
+
+                    }
+                    public void run(){
+                        RSSReader rede = new RSSReader();
+                        rede.DownloadPodcast(newrl);
+                    }
+                }
+                Thread sheets = new Thread(new csc490(newrl));
+                sheets.start();
     /////////////////////////////////////Add rss import here
 
             }
@@ -1167,8 +1179,9 @@ public class PacApp extends Application {
         });
 
 
-
-        M[i] = new Media("File:" + objs.getLocation());
+        String thefuquwant = objs.getLocation();
+        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        M[i] = new Media(thefuquwant);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1202,7 +1215,7 @@ public class PacApp extends Application {
 
     String thefuquwant = objs.getLocation();
         thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
-        M[i] = new Media("file://" + objs.getLocation());
+        M[i] = new Media(thefuquwant);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1268,8 +1281,9 @@ public class PacApp extends Application {
         });
 
 
-
-        M[i] = new Media("file://" + objs.getLocation());
+        String thefuquwant = objs.getLocation();
+        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        M[i] = new Media(thefuquwant);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1300,8 +1314,9 @@ public class PacApp extends Application {
         });
 
 
-
-        M[i] = new Media("file:" + objs.getLocation());
+        String thefuquwant = objs.getLocation();
+        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        M[i] = new Media(thefuquwant);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);

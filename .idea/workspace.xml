@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAC_Config.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/PAC_Config.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/RSSReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/RSSReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$13.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,11 +43,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="1203" column="63" selection-start-line="1203" selection-start-column="63" selection-end-line="1203" selection-end-column="63" />
+            <state relative-caret-position="898">
+              <caret line="1217" column="36" selection-start-line="1217" selection-start-column="25" selection-end-line="1217" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#45014#45015#0" expanded="true" />
+                <element signature="e#45426#45427#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,8 +71,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/RSSReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="110" column="70" selection-start-line="110" selection-start-column="70" selection-end-line="110" selection-end-column="70" />
+            <state relative-caret-position="343">
+              <caret line="94" column="73" selection-start-line="94" selection-start-column="73" selection-end-line="94" selection-end-column="73" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -171,6 +168,9 @@
       <find>rss</find>
       <find>musicContro</find>
       <find>RSS</find>
+      <find>url</find>
+      <find>temp</find>
+      <find>\</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -205,11 +205,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="372" />
+    <option name="y" value="103" />
+    <option name="width" value="1691" />
+    <option name="height" value="906" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -848,8 +848,8 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/media/Media.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/RSSReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="110" column="70" selection-start-line="110" selection-start-column="70" selection-end-line="110" selection-end-column="70" />
+        <state relative-caret-position="343">
+          <caret line="94" column="73" selection-start-line="94" selection-start-column="73" selection-end-line="94" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -858,11 +858,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="1203" column="63" selection-start-line="1203" selection-start-column="63" selection-end-line="1203" selection-end-column="63" />
+        <state relative-caret-position="898">
+          <caret line="1217" column="36" selection-start-line="1217" selection-start-column="25" selection-end-line="1217" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#45014#45015#0" expanded="true" />
+            <element signature="e#45426#45427#0" expanded="true" />
           </folding>
         </state>
       </provider>
