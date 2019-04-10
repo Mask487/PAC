@@ -100,6 +100,10 @@ public class SQLiteTest {
 //
 //        test.addContent("C:/Test/Test.epub", contentType);
         ContentDAO cdao = new ContentDAO(); 
-        cdao.getAllContent();
+        Set contents = cdao.getAllContent();
+        Iterator iter = contents.iterator();
+        while(iter.hasNext()) {
+            System.out.println(iter.next().toString());
+        }
     }
 }

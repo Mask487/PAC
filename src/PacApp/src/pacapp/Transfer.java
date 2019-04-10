@@ -419,7 +419,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
             System.out.println("Opened Database");
             stmt = c.createStatement();
             //SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID, and c.SyncStatusID = FALSE;
-            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID and c.WantToSync = TRUE;");
+            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID and c.WantToSync = 1;");
             while(rs.next()){
                 if(rs.getString("Location") == null){
                     System.out.println("location is null");
