@@ -811,11 +811,7 @@ public class SQLTranslator {
                 Files.deleteIfExists(Paths.get(filePath));
             }
             
-            catch(NoSuchFileException e) {
-                System.out.println(e.getMessage());
-            }
-            
-            catch(DirectoryNotEmptyException e) {
+            catch(NoSuchFileException | DirectoryNotEmptyException e) {
                 System.out.println(e.getMessage());
             }
             
@@ -835,6 +831,12 @@ public class SQLTranslator {
     }
     
     
+    
+    /**
+     * Deletes content from the db given the object. Deletes file as well.
+     * @param content
+     * @return 
+     */
     public boolean deleteContent(Content content) {
         return deleteContent(content.getContentName(), content.getContentTypeName(), content.getCreatorName(), content.getLocation());      
     }
