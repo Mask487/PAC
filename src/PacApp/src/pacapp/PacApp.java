@@ -36,6 +36,7 @@ import NewDatabase.Content;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.Set;
 import javafx.scene.input.MouseButton;
 
@@ -81,7 +82,8 @@ public class PacApp extends Application {
         VBox audioBookCont = new VBox();
         ScrollPane audioBookPane = new ScrollPane(audioBookCont);
         VBox podcastCont = new VBox();
-        ScrollPane podcastPane = new ScrollPane(podcastCont);
+        AnchorPane podcastPane1 = new AnchorPane(podcastCont);
+        ScrollPane podcastPane = new ScrollPane(podcastPane1);
         VBox videoCont = new VBox();
         ScrollPane videoPane = new ScrollPane(videoCont);
         TilePane appCont = new TilePane();
@@ -97,6 +99,9 @@ public class PacApp extends Application {
         VBox phoneStack = new VBox();
         VBox searchResults = new VBox();
         ScrollPane searchPane = new ScrollPane(searchResults);
+
+
+
 
 
 
@@ -261,12 +266,13 @@ public class PacApp extends Application {
                 System.out.println("Music Pressed");
                 Iterator miter = mset.iterator();
                 int setSize = mset.size();
+                Media[] mediaSet = new Media[setSize];
                 Button[] listings = new Button[setSize];
                 int i = 0;
                 while (miter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) miter.next();
-                    musButt(content, listings, i,musicCont,buBack);
+                    musButt(content, listings, i,musicCont,buBack,mediaSet);
                     i++;
                 }
 
@@ -346,6 +352,7 @@ public class PacApp extends Application {
                 System.out.println("Audio Book Pressed");
                 Iterator abiter = abset.iterator();
                 int setSize = abset.size();
+                Media[] mediaSet = new Media[setSize];
                 if(setSize == 0){
                     Label noABooks = new Label("You have no Audio Books.\n\nDrag and Drop Audio Books into this window to add to your collection.");
                     noABooks.setFont(new Font(20.0));
@@ -357,7 +364,7 @@ public class PacApp extends Application {
                 while (abiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) abiter.next();
-                    abkButt(content, listings, i,audioBookCont,buBack);
+                    abkButt(content, listings, i,audioBookCont,buBack,mediaSet);
                     i++;
                 }
 
@@ -377,6 +384,7 @@ public class PacApp extends Application {
                 System.out.println("podcast Pressed");
                 Iterator podcastiter = podcastset.iterator();
                 int setSize = podcastset.size();
+                Media[] mediaSet = new Media[setSize];
                 if(setSize == 0){
                     Label nopodcasts = new Label("You have no Podcasts.\n\nDrag and Drop Podcasts into this window to add to your collection.");
                     nopodcasts.setFont(new Font(20.0));
@@ -388,7 +396,7 @@ public class PacApp extends Application {
                 while (podcastiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) podcastiter.next();
-                    podButt(content, listings, i,podcastCont,buBack);
+                    podButt(content, listings, i,podcastCont,buBack,mediaSet);
                     i++;
                 }
 
@@ -408,6 +416,7 @@ public class PacApp extends Application {
                 System.out.println("video Pressed");
                 Iterator videoiter = videoset.iterator();
                 int setSize = videoset.size();
+                Media[] mediaSet = new Media[setSize];
                 if(setSize == 0){
                     Label noVideos = new Label("You have no videos.\n\nDrag and Drop videos into this window to add to your collection.");
                     noVideos.setFont(new Font(20.0));
@@ -419,7 +428,7 @@ public class PacApp extends Application {
                 while (videoiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) videoiter.next();
-                    vidButt(content, listings, i,videoCont,buBack);
+                    vidButt(content, listings, i,videoCont,buBack,mediaSet);
                     i++;
                 }
 
@@ -592,17 +601,10 @@ public class PacApp extends Application {
             }
         });
 
-        Button copy = new Button("Duplicate Phone");       //Creates button
+        Button copy = new Button("Restore Phone");       //Creates button
         copy.setTextFill(Paint.valueOf("BBBBBB"));
         copy.backgroundProperty().set(buBack);         //adds transparent background
 
-//        copy.setOnMouseEntered(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void enter(MouseEvent enter) {
-//
-//                System.out.println("copy entered");
-//
-//            }
 //        });   2EB900 green color
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -612,12 +614,12 @@ public class PacApp extends Application {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println("copy Pressed");
+                System.out.println("Restore Pressed");
 
             }
         });
 
-        Button android = new Button("Duplicate Phone", Android);
+        Button android = new Button("", Android);
         copy.backgroundProperty().set(buBack);
 
 
@@ -637,6 +639,36 @@ public class PacApp extends Application {
         });
 
         Insets sliderIn = new Insets(8.0,0.0,8.0,0.0);
+
+        Button rssImport = new Button("Import.");       //Creates button
+        rssImport.backgroundProperty().set(buBack);         //adds transparent background
+        rssImport.setTextFill(Paint.valueOf("BBBBBB"));
+        rssImport.setPadding(inset);
+
+
+        TextField RSSLookup = new TextField("");
+        RSSLookup.setPromptText("Import RSS feed URL");
+        RSSLookup.backgroundProperty().set(buBack);
+
+
+
+        RSSLookup.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent Enter){
+                String newrl;
+                newrl = RSSLookup.getCharacters().toString();
+                System.out.println("URL added: " + newrl);
+                RSSLookup.setText("");
+
+    /////////////////////////////////////Add rss import here
+
+            }
+        });
+
+
+        podcastPane1.backgroundProperty().setValue(cenBack);
+        podcastPane1.getChildren().add(RSSLookup);
+
 
         //Music Controll
 
@@ -1057,6 +1089,7 @@ public class PacApp extends Application {
         System.out.println("Music Showing");
         Iterator miter = mset.iterator();
         int setSize = mset.size();
+
         if(setSize == 0){
             Label noMusic = new Label("You have no music.\n\nDrag and Drop music into this window to add to your collection.");
             noMusic.setFont(new Font(25.0));
@@ -1064,11 +1097,12 @@ public class PacApp extends Application {
             musicCont.getChildren().addAll(noMusic);
         }
         Button[] listings = new Button[setSize];
+        Media[] mediaSet = new Media[setSize];
         int i = 0;
         while (miter.hasNext()) {
             Content content = new Content();
             content = (NewDatabase.Content) miter.next();
-            musButt(content, listings, i,musicCont,buBack);
+            musButt(content, listings, i,musicCont,buBack,mediaSet);
             i++;
         }
 
@@ -1106,104 +1140,169 @@ public class PacApp extends Application {
         launch(args);
     }
 
-    public static void musButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
+    public static void musButt(Content objs, Button[] L, int i, VBox cont, Background b,Media[] M) {
         String name = objs.getContentName();
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                objs.setWantToSync(!objs.getWantToSync());
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+            }
+        });
+
+
+
+        M[i] = new Media("file://" + objs.getLocation());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
 
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                Media song = new Media("file://" + objs.getLocation());
-                MediaPlayer musicTester = new MediaPlayer(song);
-                musicTester.play();
                 System.out.println(name + " Pressed");
 
             }
         });
-        cont.getChildren().add(L[i]);
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
     }
 
-    public static void podButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
+    public static void podButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
         String name = objs.getContentName();
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                objs.setWantToSync(!objs.getWantToSync());
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+            }
+        });
+
+
+
+        M[i] = new Media("file://" + objs.getLocation());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
 
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
                 System.out.println(name + " Pressed");
 
             }
         });
-        cont.getChildren().add(L[i]);
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
     }
 
     public static void ebkButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
+        System.out.println(i);
         String name = objs.getContentName();
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                objs.setWantToSync(!objs.getWantToSync());
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+            }
+        });
+
+
+
+
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
 
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
                 System.out.println(name + " Pressed");
 
             }
         });
-        cont.getChildren().add(L[i]);
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
     }
 
-    public static void abkButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
+    public static void abkButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
         String name = objs.getContentName();
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                objs.setWantToSync(!objs.getWantToSync());
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+            }
+        });
+
+
+
+        M[i] = new Media("file://" + objs.getLocation());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
-        MouseEvent click;
-
-
-
-
-
 
         L[i].setOnAction(new EventHandler<ActionEvent>() {
-
-
             @Override
             public void handle(ActionEvent press) {
-
-
                 System.out.println(name + " Pressed");
 
             }
         });
-        cont.getChildren().add(L[i]);
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
     }
-    public static void vidButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
+    public static void vidButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
         String name = objs.getContentName();
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                objs.setWantToSync(!objs.getWantToSync());
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+            }
+        });
+
+
+
+        M[i] = new Media("file://" + objs.getLocation());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
 
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
                 System.out.println(name + " Pressed");
 
             }
         });
-        cont.getChildren().add(L[i]);
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
     }
 
     public static void appButt(Content objs, Button[] L, int i, TilePane cont, Background b) {
