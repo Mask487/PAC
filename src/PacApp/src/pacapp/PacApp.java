@@ -55,7 +55,8 @@ public class PacApp extends Application {
         SQLTranslator sql = new SQLTranslator();
         Transfer t = new Transfer();
         t.initializeDesk();
-        t.initializePhone(0);
+
+           // t.initializePhone(0);
 
         AnchorPane root2 = new AnchorPane();
         Scene primary = new Scene(root2);
@@ -85,8 +86,8 @@ public class PacApp extends Application {
         VBox audioBookCont = new VBox();
         ScrollPane audioBookPane = new ScrollPane(audioBookCont);
         VBox podcastCont = new VBox();
-        AnchorPane podcastPane1 = new AnchorPane(podcastCont);
-        ScrollPane podcastPane = new ScrollPane(podcastPane1);
+        VBox podcastPane1 = new VBox();
+        ScrollPane podcastPane = new ScrollPane(podcastCont);
         VBox videoCont = new VBox();
         ScrollPane videoPane = new ScrollPane(videoCont);
         TilePane appCont = new TilePane();
@@ -221,8 +222,9 @@ public class PacApp extends Application {
         search.setPromptText("Search");
         search.backgroundProperty().set(buBack);
         hSearch.getChildren().add(search);
+        hSearch.backgroundProperty().set(buBack);
 
-
+    podcastCont.backgroundProperty().set(testBack);
 
         searchPane.backgroundProperty().set(buBack);
         searchResults.backgroundProperty().set(buBack);
@@ -673,8 +675,8 @@ public class PacApp extends Application {
         });
 
 
-        podcastPane1.backgroundProperty().setValue(cenBack);
-        podcastPane1.getChildren().add(RSSLookup);
+     //   podcastPane1.backgroundProperty().setValue(buBack);
+
 
 
         //Music Controll
@@ -1006,6 +1008,7 @@ public class PacApp extends Application {
                 event.consume();
             }
         });
+
         Label podcastTester = new Label("");
         podcastCont.getChildren().add(podcastTester);
         //drag and drop podcasts
@@ -1364,6 +1367,7 @@ public class PacApp extends Application {
 
             }
         });
+        doubleButt.backgroundProperty().set(b);
         doubleButt.getChildren().addAll(syncer,L[i]);
         cont.getChildren().add(doubleButt);
 
