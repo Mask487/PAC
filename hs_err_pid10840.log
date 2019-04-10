@@ -88,7 +88,7 @@ Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
 J 136  jmtp.PortableDeviceKeyCollectionImplWin32.clear()V (0 bytes) @ 0x000000000285be7b [0x000000000285be40+0x3b]
 J 141 C1 jmtp.WPDImplWin32.convertToPortableDeviceObject(Ljava/lang/String;Ljmtp/PortableDeviceContentImplWin32;Ljmtp/PortableDevicePropertiesImplWin32;)Ljmtp/PortableDeviceObjectImplWin32; (237 bytes) @ 0x000000000285e0d4 [0x000000000285dda0+0x334]
 j  jmtp.PortableDeviceFolderObjectImplWin32.getChildObjects()[Ljmtp/PortableDeviceObject;+36
-j  pacapp.Transfer.retEach(Ljmtp/PortableDeviceFolderObject;Ljava/io/File;)V+39
+j  recurRestore(Ljmtp/PortableDeviceFolderObject;Ljava/io/File;)V+39
 j  pacapp.Transfer.restore()V+319
 j  pacapp.TransferTest.main([Ljava/lang/String;)V+74
 v  ~StubRoutines::call_stub

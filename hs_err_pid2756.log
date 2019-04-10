@@ -89,10 +89,10 @@ J 133  jmtp.PortableDeviceKeyCollectionImplWin32.clear()V (0 bytes) @ 0x00000000
 J 138 C1 jmtp.WPDImplWin32.convertToPortableDeviceObject(Ljava/lang/String;Ljmtp/PortableDeviceContentImplWin32;Ljmtp/PortableDevicePropertiesImplWin32;)Ljmtp/PortableDeviceObjectImplWin32; (237 bytes) @ 0x00000000025bd254 [0x00000000025bcf20+0x334]
 j  jmtp.AbstractPortableDeviceContainerImplWin32.getChildObjects()[Ljmtp/PortableDeviceObject;+36
 j  pacapp.Transfer.doesFolderExist(Ljava/lang/String;Ljmtp/PortableDevice;)Z+44
-j  pacapp.Transfer.retEach(Ljava/io/File;)V+32
-j  pacapp.Transfer.retEach(Ljava/io/File;)V+127
-j  pacapp.Transfer.retEach(Ljava/io/File;)V+127
-j  pacapp.Transfer.retEach(Ljava/io/File;)V+127
+j  recurRestore(Ljava/io/File;)V+32
+j  recurRestore(Ljava/io/File;)V+127
+j  recurRestore(Ljava/io/File;)V+127
+j  recurRestore(Ljava/io/File;)V+127
 j  pacapp.Transfer.restore()V+100
 j  pacapp.TransferTest.main([Ljava/lang/String;)V+74
 v  ~StubRoutines::call_stub

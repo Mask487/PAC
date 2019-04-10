@@ -1,9 +1,8 @@
 package pacapp;
 
-import NewDatabase.ContentDAO;
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
-import java.awt.*;
+
 import java.io.*;
 import java.math.BigInteger;
 import java.net.InetAddress;
@@ -107,7 +106,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     //method to recursively search through files on phone
     //called by backup method
-    private void recur(PortableDeviceFolderObject object, String tab, File file) {
+    private void recurBackup(PortableDeviceFolderObject object, String tab, File file) {
         tab = tab + "    ";
 
         for (PortableDeviceObject obj : object.getChildObjects())
@@ -118,9 +117,43 @@ class Transfer extends Thread implements pacapp.TransferObject {
                 if(!tempFile.isDirectory()){
                     tempFile.mkdir();
                 }
-                recur((PortableDeviceFolderObject) obj, tab, tempFile);
+                recurBackup((PortableDeviceFolderObject) obj, tab, tempFile);
             }
             ptoPC(obj, file.getPath());
+        }
+    }
+
+    //recursive method that helps restore bacup to phone
+    private void recurRestore(PortableDeviceFolderObject object, File file){
+        System.out.println("+++++++++++++++++++ STEPED INTO " + object.getName());
+        File[] files = file.listFiles();
+        File add = null;
+        for (PortableDeviceObject obj : object.getChildObjects()){
+            System.out.println(obj.getName());
+            if(obj instanceof PortableDeviceFolderObject){//checks if obj is a folder
+                System.out.println("====================" + obj.getName());
+                for (int i = 0; i < files.length; i++) {
+                    System.out.println(files[i].getPath());
+                    if(obj.getName().equalsIgnoreCase(files[i].getName()) && files[i].isDirectory()){//if obj is a folder, checks to see if backup has a folder of the same name
+                        recurRestore((PortableDeviceFolderObject) obj, files[i]);
+                        System.out.println("+++++++++++++++++++ STEPED OUT " + obj.getName());
+                    }else if (files[i].isFile()){
+                        pctoP(object, files[i]);
+                    }
+                }
+            }else{
+                for (int i = 0; i < files.length; i++) {
+                    if(files[i].isFile()){//if backup has a file, adds to current target
+                        System.out.println(files[i].getPath() + " added to " + object.getName());
+                        pctoP(object, files[i]);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < files.length; i++) {
+            if(files[i].isFile()){
+                pctoP(object, files[i]);
+            }
         }
     }
 
@@ -660,7 +693,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
                                 if(!tempFile2.isDirectory()){
                                     tempFile2.mkdir();
                                 }
-                                recur((PortableDeviceFolderObject) obj2, "    ", tempFile2);
+                                recurBackup((PortableDeviceFolderObject) obj2, "    ", tempFile2);
                             }
                             ptoPC(obj2, tempFile.getPath());
                         }
@@ -675,6 +708,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     }
 
+    //restores backup to phone
     public void restore()throws IOException{
         PortableDeviceFolderObject target = null;
         File bfolder = new File(this.getBackupPath());// "*\Backups"
@@ -702,7 +736,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
                                 for (int i = 0; i < a.length; i++) {
                                     System.out.println(a[i].getPath());
                                     if(obj2.getName().equalsIgnoreCase(a[i].getName()) && a[i].isDirectory()){
-                                        retEach(target, a[i]);
+                                        recurRestore(target, a[i]);
                                     }
                                 }
                             }
@@ -712,57 +746,6 @@ class Transfer extends Thread implements pacapp.TransferObject {
             }
         }
     }
-
-    private void retEach(PortableDeviceFolderObject object, File file){
-        System.out.println("+++++++++++++++++++ STEPED INTO " + object.getName());
-        File[] files = file.listFiles();
-        File add = null;
-        for (PortableDeviceObject obj : object.getChildObjects()){
-            System.out.println(obj.getName());
-            if(obj instanceof PortableDeviceFolderObject){//checks if obj is a folder
-                System.out.println("====================" + obj.getName());
-                for (int i = 0; i < files.length; i++) {
-                    System.out.println(files[i].getPath());
-                    if(obj.getName().equalsIgnoreCase(files[i].getName()) && files[i].isDirectory()){//if obj is a folder, checks to see if backup has a folder of the same name
-                        retEach((PortableDeviceFolderObject) obj, files[i]);
-                        System.out.println("+++++++++++++++++++ STEPED OUT " + obj.getName());
-                    }else if (files[i].isFile()){
-                        pctoP(object, files[i]);
-                    }
-                }
-            }else{
-                for (int i = 0; i < files.length; i++) {
-                    if(files[i].isFile()){//if backup has a file, adds to current target
-                        System.out.println(files[i].getPath() + " added to " + object.getName());
-                        pctoP(object, files[i]);
-                    }
-                }
-            }
-        }
-        for (int i = 0; i < files.length; i++) {
-            if(files[i].isFile()){
-                pctoP(object, files[i]);
-            }
-        }
-    }
-/*
-    private void recur(PortableDeviceFolderObject object, String tab, File file) {
-        tab = tab + "    ";
-
-        for (PortableDeviceObject obj : object.getChildObjects())
-        {
-            System.out.println(tab + obj.getName());
-            if (obj instanceof PortableDeviceFolderObject){
-                File tempFile = new File(file.getPath() + "\\" + obj.getName());
-                if(!tempFile.isDirectory()){
-                    tempFile.mkdir();
-                }
-                recur((PortableDeviceFolderObject) obj, tab, tempFile);
-            }
-            ptoPC(obj, file.getPath());
-        }
-    }
-    */
 
     public void wifiSetup() throws IOException {
         //not done
