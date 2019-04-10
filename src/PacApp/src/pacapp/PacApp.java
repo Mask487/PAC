@@ -108,10 +108,10 @@ public class PacApp extends Application {
 
 
         //create background anchor
-        root2.setRightAnchor(bp, 0.0);
-        root2.setLeftAnchor(bp, 0.0);
-        root2.setBottomAnchor(bp, 0.0);
-        root2.setTopAnchor(bp, 0.0);
+        AnchorPane.setRightAnchor(bp, 0.0);
+        AnchorPane.setLeftAnchor(bp, 0.0);
+        AnchorPane.setBottomAnchor(bp, 0.0);
+        AnchorPane.setTopAnchor(bp, 0.0);
         BackgroundFill stageFill = new BackgroundFill(Paint.valueOf("505050"), bFillCR, bFillIn);
         Background stageBackFill = new Background(stageFill);
         root2.backgroundProperty().set(stageBackFill);
@@ -1082,10 +1082,10 @@ public class PacApp extends Application {
 
         mainStack.getChildren().setAll(phoneMidRow, musicPane);
         tAnchor.getChildren().addAll(mainStack);
-        tAnchor.setRightAnchor(mainStack, 25.0);// area around
-        tAnchor.setLeftAnchor(mainStack, 25.0);// area around
-        tAnchor.setBottomAnchor(mainStack, 25.0);// area around
-        tAnchor.setTopAnchor(mainStack, 25.0);// area around
+        AnchorPane.setRightAnchor(mainStack, 25.0);// area around
+        AnchorPane.setLeftAnchor(mainStack, 25.0);// area around
+        AnchorPane.setBottomAnchor(mainStack, 25.0);// area around
+        AnchorPane.setTopAnchor(mainStack, 25.0);// area around
 
         //MusicPane
         mainStack.getChildren().clear();//(phoneMidRow, musicPane);
@@ -1128,9 +1128,9 @@ public class PacApp extends Application {
         bottomAnchorPane.setBottomAnchor(musicControll, 10.0);
         leftButtonPane.getChildren().addAll(vbutt, bvbutt);
         topAnchorPane.getChildren().addAll(hSearch);
-        leftButtonPane.setTopAnchor(vbutt, 0.0);
-        leftButtonPane.setBottomAnchor(bvbutt, 0.0);
-        topAnchorPane.setRightAnchor(hSearch, 0.0);
+        AnchorPane.setTopAnchor(vbutt, 0.0);
+        AnchorPane.setBottomAnchor(bvbutt, 0.0);
+        AnchorPane.setRightAnchor(hSearch, 0.0);
         bp.setLeft(leftButtonPane);
         bp.setTop(topAnchorPane);
         bp.setBottom(bottomAnchorPane);

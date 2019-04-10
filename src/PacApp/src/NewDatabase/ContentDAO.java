@@ -454,6 +454,16 @@ public class ContentDAO {
     
     
     /**
+     * Deletes all content given a specific type
+     * @param contentType
+     * @return 
+     */
+    public boolean deleteContentByType(String contentType) {
+        return sql.deleteContentByType(contentType);
+    }
+    
+    
+    /**
      * Returns a creator's id from db given their name
      * @param creatorName
      * @return 

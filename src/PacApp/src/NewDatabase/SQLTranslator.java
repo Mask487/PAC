@@ -769,6 +769,29 @@ public class SQLTranslator {
         //Default Value
         return false;
     }
+    
+    
+    /**
+     * Deletes all content of a given type
+     * @param contentType
+     * @return 
+     */
+    public boolean deleteContentByType(String contentType) {
+        String query = "DELETE FROM " + DBEnumeration.CONTENT
+                + " WHERE ContentTypeID = (SELECT ContentTypeID FROM "
+                + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '" + contentType
+                + "')";
+        if(deleteFromDB(query)) {
+            System.out.println("All content of type: " + contentType
+            + " deleted");
+            return true;
+        }
+        
+        else {
+            System.out.println("Error with deleting content of type: " + contentType);
+            return false;
+        }
+    }
 
 
     /**
@@ -811,12 +834,8 @@ public class SQLTranslator {
             try {
                 Files.deleteIfExists(Paths.get(filePath));
             }
-
-            catch(NoSuchFileException e) {
-                System.out.println(e.getMessage());
-            }
-
-            catch(DirectoryNotEmptyException e) {
+            
+            catch(NoSuchFileException | DirectoryNotEmptyException e) {
                 System.out.println(e.getMessage());
             }
 
@@ -834,8 +853,14 @@ public class SQLTranslator {
             return false;
         }
     }
-
-
+    
+    
+    
+    /**
+     * Deletes content from the db given the object. Deletes file as well.
+     * @param content
+     * @return 
+     */
     public boolean deleteContent(Content content) {
         return deleteContent(content.getContentName(), content.getContentTypeName(), content.getCreatorName(), content.getLocation());
     }
