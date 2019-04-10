@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class TransferTest
 {
@@ -22,7 +21,7 @@ public class TransferTest
         //t.addEbook(files);
         //t.getFolder("podcasts", file1);
         //t.backup();
-        //t.restore();
+        t.restore();
         //t.setAdbPath("C:\\Users\\quinc\\AppData\\Local\\Android\\Sdk\\platform-tools");
         //t.getAdbPath();
         //t.setBackupPath("D:\\Desktop\\BACKUP");
@@ -31,8 +30,5 @@ public class TransferTest
         //t.getBackupPath();
         //t.syncQueuery();
         //t.setRoot("Phone");
-
-
-
     }
 }
