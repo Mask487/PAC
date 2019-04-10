@@ -55,6 +55,7 @@ public class PacApp extends Application {
         SQLTranslator sql = new SQLTranslator();
         Transfer t = new Transfer();
         t.initializeDesk();
+        t.initializePhone(0);
 
         AnchorPane root2 = new AnchorPane();
         Scene primary = new Scene(root2);
@@ -224,7 +225,7 @@ public class PacApp extends Application {
 
 
         searchPane.backgroundProperty().set(buBack);
-                searchResults.backgroundProperty().set(buBack);
+        searchResults.backgroundProperty().set(buBack);
 
         search.setOnAction(new EventHandler<ActionEvent>(){
             @Override
@@ -236,6 +237,7 @@ public class PacApp extends Application {
                 Set searchSet = searchSql.searchAllTablesBySearchTerm(term);
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(searchPane);
+                searchResults.getChildren().clear();
                 Iterator miter = searchSet.iterator();
                 int setSize = searchSet.size();
                 Button[] listings = new Button[setSize];
@@ -392,10 +394,6 @@ public class PacApp extends Application {
                 int setSize = podcastset.size();
                 Media[] mediaSet = new Media[setSize];
                 if(setSize == 0){
-                   // Label nopodcasts = new Label("You have no Podcasts.\n\nDrag and Drop Podcasts into this window to add to your collection.");
-                  //  nopodcasts.setFont(new Font(20.0));
-                 //   nopodcasts.backgroundProperty().set(buBack);
-                   // podcastCont.getChildren().addAll(nopodcasts);
                 }
                 Button[] listings = new Button[setSize];
                 int i = 0;
@@ -566,7 +564,8 @@ public class PacApp extends Application {
         if(t.checkConnection()){
         Label battery = new Label("" + t.getPhoneBattery());
         Label phoneName = new Label("" + t.getPhoneModel());
-        phoneStack.getChildren().addAll(Android,phoneName,battery);}
+        phoneStack.getChildren().addAll(Android,phoneName,battery);}else
+            phoneStack.getChildren().addAll(Android);
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          //phoneStack.getChildren().addAll(Android,phoneName,battery);
 
@@ -1297,7 +1296,7 @@ public class PacApp extends Application {
 
 
 
-        M[i] = new Media("file://" + objs.getLocation());
+        M[i] = new Media("file:" + objs.getLocation());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
