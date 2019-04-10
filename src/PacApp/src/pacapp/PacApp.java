@@ -34,6 +34,8 @@ import javafx.scene.image.ImageView;
 import NewDatabase.ContentDAO;
 import NewDatabase.Content;
 
+
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Optional;
@@ -219,28 +221,32 @@ public class PacApp extends Application {
         search.backgroundProperty().set(buBack);
         hSearch.getChildren().add(search);
 
+
+
+        searchPane.backgroundProperty().set(buBack);
+                searchResults.backgroundProperty().set(buBack);
+
         search.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent Enter){
                 String term = search.getCharacters().toString();
                 System.out.println("Search Term " + term);
                 search.setText("");
-                SQLTranslator searchSql = new SQLTranslator();
-//                ResultSet searchSet = searchSql.searchAllTablesByKeyTerm(term);
-//                mainStack.getChildren().clear();//(phoneMidRow, musicPane);
-//                mainStack.getChildren().add(searchPane);
-//               // ContentDAO dao = new ContentDAO();
-//               // Set searchSet = dao.getAllContentByType("Music");
-//                Iterator miter = searchSet.iterator();
-//                int setSize = searchSet.size();
-//                Button[] listings = new Button[setSize];
-//                int i = 0;
-//                while (miter.hasNext()) {
-//                    Content content = new Content();
-//                    content = (NewDatabase.Content) miter.next();
-//                    musButt(content, listings, i,musicCont,buBack);
-//                    i++;
-//                }
+                ContentDAO searchSql = new ContentDAO();
+                Set searchSet = searchSql.searchAllTablesBySearchTerm(term);
+                mainStack.getChildren().clear();
+                mainStack.getChildren().add(searchPane);
+                Iterator miter = searchSet.iterator();
+                int setSize = searchSet.size();
+                Button[] listings = new Button[setSize];
+                Media[] MediaArray = new Media[setSize];
+                int i = 0;
+                while (miter.hasNext()) {
+                    Content content = new Content();
+                    content = (NewDatabase.Content) miter.next();
+                    searchButt(content, listings, i,searchResults,buBack,MediaArray);
+                    i++;
+                }
 
 
 
@@ -386,10 +392,10 @@ public class PacApp extends Application {
                 int setSize = podcastset.size();
                 Media[] mediaSet = new Media[setSize];
                 if(setSize == 0){
-                    Label nopodcasts = new Label("You have no Podcasts.\n\nDrag and Drop Podcasts into this window to add to your collection.");
-                    nopodcasts.setFont(new Font(20.0));
-                    nopodcasts.backgroundProperty().set(buBack);
-                    podcastCont.getChildren().addAll(nopodcasts);
+                   // Label nopodcasts = new Label("You have no Podcasts.\n\nDrag and Drop Podcasts into this window to add to your collection.");
+                  //  nopodcasts.setFont(new Font(20.0));
+                 //   nopodcasts.backgroundProperty().set(buBack);
+                   // podcastCont.getChildren().addAll(nopodcasts);
                 }
                 Button[] listings = new Button[setSize];
                 int i = 0;
@@ -659,7 +665,8 @@ public class PacApp extends Application {
                 newrl = RSSLookup.getCharacters().toString();
                 System.out.println("URL added: " + newrl);
                 RSSLookup.setText("");
-
+                RSSReader rede = new RSSReader();
+                rede.DownloadPodcast(newrl);
     /////////////////////////////////////Add rss import here
 
             }
@@ -1109,7 +1116,7 @@ public class PacApp extends Application {
 
         phoneMidRow.getChildren().addAll(phoneStack, midButt);
         centerAnchorPane.getChildren().addAll(tAnchor);
-        centerAnchorPane.setRightAnchor(tAnchor, 5.0);
+        centerAnchorPane.setRightAnchor(tAnchor, 0.0);
         centerAnchorPane.setLeftAnchor(tAnchor, 5.0);
         centerAnchorPane.setTopAnchor(tAnchor, 5.0);
         centerAnchorPane.setBottomAnchor(tAnchor, 5.0);
@@ -1157,7 +1164,7 @@ public class PacApp extends Application {
 
 
 
-        M[i] = new Media("file://" + objs.getLocation());
+        M[i] = new Media("File:" + objs.getLocation());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1327,22 +1334,37 @@ public class PacApp extends Application {
         cont.getChildren().add(L[i]);
     }
 
-    public static void searchButt(Content objs, Button[] L, int i, VBox cont, Background b) {
+    public static void searchButt(Content objs, Button[] L, int i, VBox cont, Background b,Media[] M) {
 
         String name = objs.getContentName();
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                objs.setWantToSync(!objs.getWantToSync());
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+            }
+        });
+
+
+
+        M[i] = new Media("file://" + objs.getLocation());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
 
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
                 System.out.println(name + " Pressed");
 
             }
         });
-        cont.getChildren().add(L[i]);
-    }
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
 
-}
+}}

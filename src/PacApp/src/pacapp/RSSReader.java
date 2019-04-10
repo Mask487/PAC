@@ -1,3 +1,5 @@
+package pacapp;
+
 import java.io.File;
 import java.util.List;
 import java.net.URL;
@@ -14,6 +16,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+
+import NewDatabase.ContentDAO;
 
 public class RSSReader {
     
@@ -88,8 +92,9 @@ public class RSSReader {
             
             //will be changed in the future to permanent location
             //uses above formatted title to create file path
-            File file = new File("C:/Users/cothe/Desktop/" + name + ".mp3");
-            
+            File file = new File("/Desktop/" + name + ".mp3");
+            ContentDAO cdao = new ContentDAO();
+            cdao.insertContent(file.getAbsolutePath(), "Podcast");
             
             //checks if file already exists
             if (!file.exists()) {
