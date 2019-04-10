@@ -1164,7 +1164,7 @@ public class PacApp extends Application {
         });
 
 
-
+        System.out.println("FILE:  " + objs.getLocation());
         M[i] = new Media("File:" + objs.getLocation());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
