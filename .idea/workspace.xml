@@ -1,31 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" line="702" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/NewDatabase/ContentDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/NewDatabase/ContentDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/NewDatabase/SQLTranslator.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/NewDatabase/SQLTranslator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/NewDatabase/SQLiteTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/NewDatabase/SQLiteTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/FileA.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/FileA.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/PacApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/Transfer.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfere/out/production/PAC/pacapp/Transfer.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,77 +28,37 @@
     <expand />
     <select />
   </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java">
+        <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#365#371#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="741" selection-start-line="741" selection-end-line="741" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#10584#10585#0" expanded="true" />
-                <element signature="e#10620#10621#0" expanded="true" />
-                <element signature="e#13097#13104#0" expanded="true" />
-                <element signature="method#FileA#0;class#FileA#0" />
-                <element signature="method#FileA#1;class#FileA#0" />
-                <element signature="e#25601#25602#0" expanded="true" />
-                <element signature="e#25637#25638#0" expanded="true" />
-                <element signature="e#25670#25671#0" expanded="true" />
-                <element signature="e#25706#25707#0" expanded="true" />
-                <element signature="e#25735#25736#0" expanded="true" />
-                <element signature="e#25767#25768#0" expanded="true" />
-                <element signature="method#setLocation#0;class#FileA#0" />
-                <element signature="e#25980#25981#0" expanded="true" />
-                <element signature="e#26020#26021#0" expanded="true" />
-                <element signature="e#26058#26059#0" expanded="true" />
-                <element signature="e#26090#26091#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PacApp/src/BookLookupTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="410" column="20" selection-start-line="410" selection-start-column="20" selection-end-line="410" selection-end-column="40" />
+            <state relative-caret-position="1730">
+              <caret line="1122" lean-forward="true" selection-start-line="1122" selection-end-line="1122" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#19994#19995#0" expanded="true" />
-                <element signature="e#20022#20023#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/BookSearch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -125,17 +66,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="52" column="74" selection-start-line="52" selection-start-column="74" selection-end-line="52" selection-end-column="74" />
+            <state relative-caret-position="467">
+              <caret line="247" column="66" selection-start-line="247" selection-start-column="66" selection-end-line="247" selection-end-column="66" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
+            <state relative-caret-position="-65">
+              <caret line="448" selection-start-line="448" selection-end-line="452" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -144,8 +88,19 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user</find>
-      <find>config pat</find>
+      <find>buBack</find>
+      <find>neB</find>
+      <find>no mu</find>
+      <find>addCont</find>
+      <find>syn</find>
+      <find>music</find>
+      <find>searchS</find>
+      <find>searchA</find>
+      <find>searchAll</find>
+      <find>allc</find>
+      <find>cleanOriginalFile</find>
+      <find>del</find>
+      <find>gree</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -165,21 +120,24 @@
         <option value="$PROJECT_DIR$/src/PacApp/src/transfere/src/TransferObject.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/transfere/src/TransferTest.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/transfere/src/Transfer.java" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7d0e9485-04a8-448b-b033-3203095771e8/console.sql" />
-        <option value="3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java" />
         <option value="$PROJECT_DIR$/PAC_Config.cfg" />
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java" />
-        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="88" />
+    <option name="y" value="23" />
+    <option name="width" value="1442" />
+    <option name="height" value="805" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -187,7 +145,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -198,20 +155,12 @@
             <path>
               <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
               <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="Backups" type="462c0819:PsiDirectoryNode" />
+              <item name="Database" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
               <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="Backups" type="462c0819:PsiDirectoryNode" />
-              <item name="SM-G950U" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="Backups" type="462c0819:PsiDirectoryNode" />
-              <item name="SM-G950U" type="462c0819:PsiDirectoryNode" />
-              <item name="2019-04-09_1914" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
@@ -230,6 +179,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="PacApp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="NewDatabase" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
@@ -239,18 +196,29 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pacapp" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pacapp" type="462c0819:PsiDirectoryNode" />
+              <item name="Transfer.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql&#10;sqlite" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554871179285" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554834035469" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Libraries/jmtp64.dll" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -276,7 +244,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Transfer Test">
+  <component name="RunManager" selected="Application.PacApp">
     <configuration name="PacApp" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pacapp.PacApp" />
       <module name="PAC" />
@@ -333,12 +301,13 @@
       <workItem from="1554484199726" duration="4309000" />
       <workItem from="1554752336587" duration="8298000" />
       <workItem from="1554770961935" duration="6902000" />
-      <workItem from="1554847822691" duration="14000000" />
+      <workItem from="1554816637438" duration="4175000" />
+      <workItem from="1554829184447" duration="4039000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113007000" />
+    <option name="totallyTimeSpent" value="107221000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -350,10 +319,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="88" y="23" width="1442" height="805" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13219616" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19142857" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -361,18 +330,18 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23185265" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.2524377" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3298193" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.23702665" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43222892" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3289256" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32827735" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32413793" />
       <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32936078" />
       <window_info anchor="bottom" id="DB Execution Console" order="14" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -465,457 +434,174 @@
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java</url>
+          <line>36</line>
+          <properties />
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>358</line>
+          <line>437</line>
           <properties />
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>527</line>
+          <line>62</line>
           <properties />
-          <option name="timeStamp" value="61" />
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>636</line>
+          <line>63</line>
           <properties />
-          <option name="timeStamp" value="64" />
+          <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>639</line>
+          <line>595</line>
           <properties />
-          <option name="timeStamp" value="65" />
+          <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>640</line>
+          <line>596</line>
           <properties />
-          <option name="timeStamp" value="66" />
+          <option name="timeStamp" value="82" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>642</line>
+          <line>599</line>
           <properties />
-          <option name="timeStamp" value="67" />
+          <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>622</line>
+          <line>598</line>
           <properties />
-          <option name="timeStamp" value="69" />
+          <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>623</line>
+          <line>600</line>
           <properties />
-          <option name="timeStamp" value="70" />
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>624</line>
-          <properties />
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>626</line>
-          <properties />
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>627</line>
-          <properties />
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>628</line>
-          <properties />
-          <option name="timeStamp" value="74" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>641</line>
-          <properties />
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>679</line>
+          <line>602</line>
           <properties />
           <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>680</line>
+          <line>685</line>
           <properties />
           <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>682</line>
+          <line>684</line>
           <properties />
-          <option name="timeStamp" value="93" />
+          <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
           <line>683</line>
           <properties />
-          <option name="timeStamp" value="94" />
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>685</line>
+          <line>64</line>
           <properties />
-          <option name="timeStamp" value="95" />
+          <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>684</line>
+          <line>66</line>
           <properties />
-          <option name="timeStamp" value="96" />
+          <option name="timeStamp" value="91" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>686</line>
+          <line>69</line>
           <properties />
-          <option name="timeStamp" value="102" />
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
           <line>687</line>
           <properties />
-          <option name="timeStamp" value="103" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>688</line>
-          <properties />
-          <option name="timeStamp" value="104" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>681</line>
-          <properties />
-          <option name="timeStamp" value="105" />
+          <option name="timeStamp" value="93" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
           <line>689</line>
           <properties />
-          <option name="timeStamp" value="106" />
+          <option name="timeStamp" value="94" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
           <line>690</line>
           <properties />
-          <option name="timeStamp" value="107" />
+          <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
           <line>691</line>
           <properties />
-          <option name="timeStamp" value="110" />
+          <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
           <line>692</line>
           <properties />
-          <option name="timeStamp" value="116" />
+          <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>693</line>
+          <line>678</line>
           <properties />
-          <option name="timeStamp" value="117" />
+          <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>694</line>
+          <line>679</line>
           <properties />
-          <option name="timeStamp" value="118" />
+          <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>695</line>
+          <line>680</line>
           <properties />
-          <option name="timeStamp" value="119" />
+          <option name="timeStamp" value="100" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>696</line>
+          <line>472</line>
           <properties />
-          <option name="timeStamp" value="120" />
+          <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>697</line>
+          <line>446</line>
           <properties />
-          <option name="timeStamp" value="121" />
+          <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>699</line>
+          <line>338</line>
           <properties />
-          <option name="timeStamp" value="122" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>701</line>
-          <properties />
-          <option name="timeStamp" value="123" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>703</line>
-          <properties />
-          <option name="timeStamp" value="124" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>704</line>
-          <properties />
-          <option name="timeStamp" value="125" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>717</line>
-          <properties />
-          <option name="timeStamp" value="127" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>719</line>
-          <properties />
-          <option name="timeStamp" value="128" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>721</line>
-          <properties />
-          <option name="timeStamp" value="129" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>723</line>
-          <properties />
-          <option name="timeStamp" value="130" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>725</line>
-          <properties />
-          <option name="timeStamp" value="131" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>726</line>
-          <properties />
-          <option name="timeStamp" value="132" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>728</line>
-          <properties />
-          <option name="timeStamp" value="133" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>702</line>
-          <properties />
-          <option name="timeStamp" value="140" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>724</line>
-          <properties />
-          <option name="timeStamp" value="141" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>700</line>
-          <properties />
-          <option name="timeStamp" value="142" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>722</line>
-          <properties />
-          <option name="timeStamp" value="143" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>718</line>
-          <properties />
-          <option name="timeStamp" value="144" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>731</line>
-          <properties />
-          <option name="timeStamp" value="148" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>732</line>
-          <properties />
-          <option name="timeStamp" value="149" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>733</line>
-          <properties />
-          <option name="timeStamp" value="150" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>734</line>
-          <properties />
-          <option name="timeStamp" value="151" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>735</line>
-          <properties />
-          <option name="timeStamp" value="152" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>736</line>
-          <properties />
-          <option name="timeStamp" value="153" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java</url>
-          <line>23</line>
-          <properties />
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>716</line>
-          <properties />
-          <option name="timeStamp" value="155" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>705</line>
-          <properties />
-          <option name="timeStamp" value="159" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>720</line>
-          <properties />
-          <option name="timeStamp" value="160" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>727</line>
-          <properties />
-          <option name="timeStamp" value="161" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>729</line>
-          <properties />
-          <option name="timeStamp" value="162" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>698</line>
-          <properties />
-          <option name="timeStamp" value="163" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>737</line>
-          <properties />
-          <option name="timeStamp" value="164" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>738</line>
-          <properties />
-          <option name="timeStamp" value="165" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>739</line>
-          <properties />
-          <option name="timeStamp" value="166" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>740</line>
-          <properties />
-          <option name="timeStamp" value="167" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>741</line>
-          <properties />
-          <option name="timeStamp" value="168" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>742</line>
-          <properties />
-          <option name="timeStamp" value="169" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>743</line>
-          <properties />
-          <option name="timeStamp" value="170" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>744</line>
-          <properties />
-          <option name="timeStamp" value="171" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>745</line>
-          <properties />
-          <option name="timeStamp" value="172" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>746</line>
-          <properties />
-          <option name="timeStamp" value="173" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>629</line>
-          <properties method="&lt;init&gt;">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>677</line>
-          <properties class="pacapp.Transfer" method="restore">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
-          <line>715</line>
-          <properties class="pacapp.Transfer" method="retEach">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="126" />
+          <option name="timeStamp" value="105" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PAC$SQLiteTest.ic" NAME="SQLiteTest Coverage Results" MODIFIED="1554491702334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>NewDatabase.*</FILTER>
+    </SUITE>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/transfere/src/trans.java" />
@@ -930,24 +616,7 @@
     <entry file="file://$PROJECT_DIR$/src/transfere/src/TransferTest.java" />
     <entry file="file://$PROJECT_DIR$/src/transfere/src/Transfer.java" />
     <entry file="file://$PROJECT_DIR$/PAC_Config.txt" />
-    <entry file="uml://DATABASE/3d806b0f-2f65-4593-8909-6b28c2a0cef3">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>DATABASE</ID>
-          <OriginalElement>3d806b0f-2f65-4593-8909-6b28c2a0cef3</OriginalElement>
-          <nodes />
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="806.0" y="285.0" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Key columns</Category>
-            <Category>Columns</Category>
-          </Categories>
-          <SCOPE>All</SCOPE>
-        </state>
-      </provider>
-    </entry>
+    <entry file="uml://DATABASE/3d806b0f-2f65-4593-8909-6b28c2a0cef3" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/io/FileInputStream.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/transfere/src/Transfer.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/transfere/src/TransferObject.java" />
@@ -956,141 +625,147 @@
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/transfere/src/TransferTest.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/transfere/src/Transfer.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/MetaDataReader.java" />
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3831">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7d0e9485-04a8-448b-b033-3203095771e8/console.sql" />
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Content.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Podcast Icon.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Database/SQLTranslator.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        <state relative-caret-position="255">
+          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Util/ContentLocationDirectory.java" />
     <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3Connection.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="74" column="45" selection-start-line="74" selection-start-column="45" selection-end-line="74" selection-end-column="45" />
+        <state relative-caret-position="377">
+          <caret line="147" column="78" selection-start-line="147" selection-start-column="78" selection-end-line="147" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Content.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/src/PacApp/src/Libraries/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3ResultSet.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4131">
+        <state relative-caret-position="3645">
           <caret line="266" selection-start-line="266" selection-end-line="266" />
         </state>
       </provider>
     </entry>
-    <entry file="db://3ba3a03a-2e36-4774-ab0d-9ea6a4e84831/consoles/Connection" />
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/Stats.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/Libraries/jmtp.jar!/jmtp/PortableDeviceManagerImplWin32.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/jre/lib/jmtp.jar!/jmtp/PortableDeviceManager.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/srcl/PacApp/src/pacapp/PacApp.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/BookLookupTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="52" column="74" selection-start-line="52" selection-start-column="74" selection-end-line="52" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="410" column="20" selection-start-line="410" selection-start-column="20" selection-end-line="410" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#19994#19995#0" expanded="true" />
-            <element signature="e#20022#20023#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="51">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="236">
+          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#365#371#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="741" selection-start-line="741" selection-end-line="741" />
+        <state relative-caret-position="391">
+          <caret line="570" column="20" selection-start-line="570" selection-start-column="20" selection-end-line="570" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10584#10585#0" expanded="true" />
-            <element signature="e#10620#10621#0" expanded="true" />
-            <element signature="e#13097#13104#0" expanded="true" />
+            <element signature="e#745#1177#0" />
+            <element signature="e#1183#2017#0" />
+            <element signature="e#2023#2459#0" />
+            <element signature="e#2465#3172#0" />
+            <element signature="e#3178#3584#0" />
+            <element signature="e#3590#4210#0" />
+            <element signature="e#4216#4801#0" />
+            <element signature="e#5156#6932#0" />
+            <element signature="e#6206#7285#0" />
+            <element signature="e#7291#7888#0" />
+            <element signature="e#7894#8607#0" />
+            <element signature="e#8613#9235#0" />
+            <element signature="e#9241#9464#0" />
+            <element signature="e#9540#10998#0" />
+            <element signature="e#11004#11134#0" />
+            <element signature="e#11140#11264#0" />
+            <element signature="e#11270#11397#0" />
+            <element signature="e#11403#11529#0" />
+            <element signature="e#11535#13643#0" />
+            <element signature="e#13649#13842#0" />
+            <element signature="e#13848#14571#0" />
+            <element signature="e#14577#14882#0" />
+            <element signature="e#14888#15330#0" />
+            <element signature="e#15336#15605#0" />
+            <element signature="e#15611#16017#0" />
+            <element signature="e#16023#16311#0" />
+            <element signature="e#16317#16742#0" />
+            <element signature="e#16748#17013#0" />
+            <element signature="e#17019#17421#0" />
+            <element signature="e#17427#17697#0" />
+            <element signature="e#17703#18110#0" />
+            <element signature="e#18503#18823#0" />
+            <element signature="e#18829#19303#0" />
+            <element signature="e#20123#20436#0" />
+            <element signature="e#19454#21963#0" />
+            <element signature="e#21969#22684#0" />
+            <element signature="e#22690#23353#0" />
+            <element signature="e#24429#24498#0" />
+            <element signature="class#FileA#0" />
             <element signature="method#FileA#0;class#FileA#0" />
             <element signature="method#FileA#1;class#FileA#0" />
-            <element signature="e#25601#25602#0" expanded="true" />
-            <element signature="e#25637#25638#0" expanded="true" />
-            <element signature="e#25670#25671#0" expanded="true" />
-            <element signature="e#25706#25707#0" expanded="true" />
-            <element signature="e#25735#25736#0" expanded="true" />
-            <element signature="e#25767#25768#0" expanded="true" />
             <element signature="method#setLocation#0;class#FileA#0" />
-            <element signature="e#25980#25981#0" expanded="true" />
-            <element signature="e#26020#26021#0" expanded="true" />
-            <element signature="e#26058#26059#0" expanded="true" />
-            <element signature="e#26090#26091#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-65">
+          <caret line="448" selection-start-line="448" selection-end-line="452" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="247" column="66" selection-start-line="247" selection-start-column="66" selection-end-line="247" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/BookSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1730">
+          <caret line="1122" lean-forward="true" selection-start-line="1122" selection-end-line="1122" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1159,7 +834,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>jmtp</last-edited>
+          <last-edited>Libraries1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
