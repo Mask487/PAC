@@ -29,6 +29,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import NewDatabase.ContentDAO;
+
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -91,10 +93,10 @@ public class PacApp extends Application {
 
 
         //create background anchor
-        root2.setRightAnchor(bp, 0.0);
-        root2.setLeftAnchor(bp, 0.0);
-        root2.setBottomAnchor(bp, 0.0);
-        root2.setTopAnchor(bp, 0.0);
+        AnchorPane.setRightAnchor(bp, 0.0);
+        AnchorPane.setLeftAnchor(bp, 0.0);
+        AnchorPane.setBottomAnchor(bp, 0.0);
+        AnchorPane.setTopAnchor(bp, 0.0);
         BackgroundFill stageFill = new BackgroundFill(Paint.valueOf("505050"), bFillCR, bFillIn);
         Background stageBackFill = new Background(stageFill);
         root2.backgroundProperty().set(stageBackFill);
@@ -403,7 +405,11 @@ public class PacApp extends Application {
         backup.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                t.backup();
+                try {
+                    t.backup();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("backup Pressed");
 
             }
@@ -424,7 +430,11 @@ public class PacApp extends Application {
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                t.backup();
+                try {
+                    t.backup();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("copy Pressed");
 
             }
@@ -450,10 +460,10 @@ public class PacApp extends Application {
 
         mainStack.getChildren().setAll(phoneMidRow, musicPane);
         tAnchor.getChildren().addAll(mainStack);
-        tAnchor.setRightAnchor(mainStack, 25.0);// area around
-        tAnchor.setLeftAnchor(mainStack, 25.0);// area around
-        tAnchor.setBottomAnchor(mainStack, 25.0);// area around
-        tAnchor.setTopAnchor(mainStack, 25.0);// area around
+        AnchorPane.setRightAnchor(mainStack, 25.0);// area around
+        AnchorPane.setLeftAnchor(mainStack, 25.0);// area around
+        AnchorPane.setBottomAnchor(mainStack, 25.0);// area around
+        AnchorPane.setTopAnchor(mainStack, 25.0);// area around
 
         // test buttons
         Button buttonSave = new Button("right");
@@ -467,21 +477,21 @@ public class PacApp extends Application {
 
         phoneMidRow.getChildren().addAll(phoneStack, midButt);
         centerAnchorPane.getChildren().addAll(tAnchor);
-        centerAnchorPane.setRightAnchor(tAnchor, 5.0);
-        centerAnchorPane.setLeftAnchor(tAnchor, 5.0);
-        centerAnchorPane.setTopAnchor(tAnchor, 5.0);
-        centerAnchorPane.setBottomAnchor(tAnchor, 5.0);
+        AnchorPane.setRightAnchor(tAnchor, 5.0);
+        AnchorPane.setLeftAnchor(tAnchor, 5.0);
+        AnchorPane.setTopAnchor(tAnchor, 5.0);
+        AnchorPane.setBottomAnchor(tAnchor, 5.0);
 
         bottomAnchorPane.getChildren().addAll(bottomButt);
-        bottomAnchorPane.setRightAnchor(bottomButt, 5.0);
-        bottomAnchorPane.setLeftAnchor(bottomButt, 5.0);
-        bottomAnchorPane.setTopAnchor(bottomButt, .0);
-        bottomAnchorPane.setBottomAnchor(bottomButt, .0);
+        AnchorPane.setRightAnchor(bottomButt, 5.0);
+        AnchorPane.setLeftAnchor(bottomButt, 5.0);
+        AnchorPane.setTopAnchor(bottomButt, .0);
+        AnchorPane.setBottomAnchor(bottomButt, .0);
         leftButtonPane.getChildren().addAll(vbutt, bvbutt);
         topAnchorPane.getChildren().addAll(hSearch);
-        leftButtonPane.setTopAnchor(vbutt, 0.0);
-        leftButtonPane.setBottomAnchor(bvbutt, 0.0);
-        topAnchorPane.setRightAnchor(hSearch, 0.0);
+        AnchorPane.setTopAnchor(vbutt, 0.0);
+        AnchorPane.setBottomAnchor(bvbutt, 0.0);
+        AnchorPane.setRightAnchor(hSearch, 0.0);
         bp.setLeft(leftButtonPane);
         bp.setTop(topAnchorPane);
         bp.setBottom(bottomAnchorPane);
