@@ -616,6 +616,7 @@ public class PacApp extends Application {
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                t.initializePhone(0);
                 try {
                     t.restore();
                 } catch (IOException e) {
