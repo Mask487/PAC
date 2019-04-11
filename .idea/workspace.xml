@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="44dc809e-0342-454a-9002-038812838254" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1072">
+              <caret line="716" column="13" selection-start-line="716" selection-start-column="13" selection-end-line="716" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#696#1175#0" />
+                <element signature="e#1181#2057#0" />
+                <element signature="e#2063#2540#0" />
+                <element signature="e#2546#3253#0" />
+                <element signature="e#3259#3717#0" />
+                <element signature="e#3723#4443#0" />
+                <element signature="e#4449#6144#0" />
+                <element signature="e#6150#6814#0" />
+                <element signature="e#6820#8709#0" />
+                <element signature="e#8715#9836#0" />
+                <element signature="e#9842#10474#0" />
+                <element signature="e#10480#11241#0" />
+                <element signature="e#11247#11919#0" />
+                <element signature="e#11925#12180#0" />
+                <element signature="e#12291#13852#0" />
+                <element signature="e#13858#14029#0" />
+                <element signature="e#14035#14159#0" />
+                <element signature="e#14165#14292#0" />
+                <element signature="e#14298#14424#0" />
+                <element signature="e#14430#17046#0" />
+                <element signature="e#17052#17245#0" />
+                <element signature="e#17251#18030#0" />
+                <element signature="e#18036#18341#0" />
+                <element signature="e#18347#18789#0" />
+                <element signature="e#18795#19089#0" />
+                <element signature="e#19095#19528#0" />
+                <element signature="e#19534#19850#0" />
+                <element signature="e#19856#20311#0" />
+                <element signature="e#20317#20606#0" />
+                <element signature="e#20612#21039#0" />
+                <element signature="e#21045#21340#0" />
+                <element signature="e#21346#21779#0" />
+                <element signature="e#21785#22187#0" />
+                <element signature="e#22193#22552#0" />
+                <element signature="e#22558#23075#0" />
+                <element signature="e#23081#23394#0" />
+                <element signature="method#FileA#0;class#FileA#0" />
+                <element signature="method#FileA#1;class#FileA#0" />
+                <element signature="method#setLocation#0;class#FileA#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Content.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-782">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19941">
+              <caret line="1196" selection-start-line="1196" selection-end-line="1196" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLTranslator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="693">
+              <caret line="56" column="73" selection-start-line="56" selection-start-column="73" selection-end-line="56" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>buBack</find>
+      <find>neB</find>
+      <find>no mu</find>
+      <find>addCont</find>
+      <find>syn</find>
+      <find>music</find>
+      <find>searchS</find>
+      <find>searchA</find>
+      <find>searchAll</find>
+      <find>allc</find>
+      <find>cleanOriginalFile</find>
+      <find>del</find>
+      <find>gree</find>
+      <find>inset</find>
+      <find>center</find>
+      <find>podcast</find>
+      <find>sea</find>
+      <find>midbutt</find>
+      <find>phonestack</find>
+      <find>search</find>
+      <find>podcastCont</find>
+      <find>rss</find>
+      <find>musicContro</find>
+      <find>RSS</find>
+      <find>url</find>
+      <find>temp</find>
+      <find>\</find>
+      <find>musB</find>
+      <find>sync</find>
+    </findStrings>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-289" />
+    <option name="y" value="-21" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="NewDatabase" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="transfere" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554949478969" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.PacApp">
+    <configuration name="PacApp" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pacapp.PacApp" />
+      <module name="PAC" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SQLiteTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="NewDatabase.SQLiteTest" />
+      <module name="PAC" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="NewDatabase.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Transfer Test" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="pacapp.TransferTest" />
+      <module name="PAC" />
+      <method v="2">
+        <option name="MakeNoErrorCheck" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.PacApp" />
+      <item itemvalue="Application.Transfer Test" />
+      <item itemvalue="Application.SQLiteTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SQLiteTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="" />
+      <created>1549571053924</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1549571053924</updated>
+      <workItem from="1549571055496" duration="1919000" />
+      <workItem from="1550000271178" duration="29000" />
+      <workItem from="1550001286347" duration="44000" />
+      <workItem from="1550077869071" duration="339000" />
+      <workItem from="1550078268536" duration="840000" />
+      <workItem from="1550102994546" duration="3384000" />
+      <workItem from="1550517138884" duration="512000" />
+      <workItem from="1550517851682" duration="2671000" />
+      <workItem from="1550586427738" duration="4185000" />
+      <workItem from="1550597317085" duration="4519000" />
+      <workItem from="1550605357115" duration="5186000" />
+      <workItem from="1550760437020" duration="2992000" />
+      <workItem from="1550770265814" duration="3116000" />
+      <workItem from="1553023368742" duration="4451000" />
+      <workItem from="1553186154438" duration="3875000" />
+      <workItem from="1553191736978" duration="1833000" />
+      <workItem from="1553195742895" duration="4223000" />
+      <workItem from="1553622464672" duration="4674000" />
+      <workItem from="1553628457587" duration="4503000" />
+      <workItem from="1553790138749" duration="54000" />
+      <workItem from="1553790269473" duration="4712000" />
+      <workItem from="1553796234951" duration="8832000" />
+      <workItem from="1554234233262" duration="4755000" />
+      <workItem from="1554481803267" duration="1929000" />
+      <workItem from="1554484199726" duration="4309000" />
+      <workItem from="1554752336587" duration="8298000" />
+      <workItem from="1554770961935" duration="6902000" />
+      <workItem from="1554816637438" duration="4175000" />
+      <workItem from="1554829184447" duration="4039000" />
+      <workItem from="1554931745084" duration="14881000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="298000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17910448" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32868525" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2340195" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4312026" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3289256" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" order="12" visible="true" weight="0.3217768" />
+      <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32936078" />
+      <window_info anchor="bottom" id="DB Execution Console" order="14" weight="0.32936078" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="Maven" order="9" />
+      <window_info anchor="right" id="DB Browser" order="10" weight="0.15085287" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13539445" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32868525" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2340195" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43222892" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3289256" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32270917" />
+      <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32936078" />
+      <window_info anchor="bottom" id="DB Execution Console" order="14" weight="0.32936078" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="Maven" order="9" />
+      <window_info anchor="right" id="DB Browser" order="10" weight="0.15085287" />
+    </layout-to-restore>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/src/transfere" />
+    </ignored-roots>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1072">
+          <caret line="716" column="13" selection-start-line="716" selection-start-column="13" selection-end-line="716" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#696#1175#0" />
+            <element signature="e#1181#2057#0" />
+            <element signature="e#2063#2540#0" />
+            <element signature="e#2546#3253#0" />
+            <element signature="e#3259#3717#0" />
+            <element signature="e#3723#4443#0" />
+            <element signature="e#4449#6144#0" />
+            <element signature="e#6150#6814#0" />
+            <element signature="e#6820#8709#0" />
+            <element signature="e#8715#9836#0" />
+            <element signature="e#9842#10474#0" />
+            <element signature="e#10480#11241#0" />
+            <element signature="e#11247#11919#0" />
+            <element signature="e#11925#12180#0" />
+            <element signature="e#12291#13852#0" />
+            <element signature="e#13858#14029#0" />
+            <element signature="e#14035#14159#0" />
+            <element signature="e#14165#14292#0" />
+            <element signature="e#14298#14424#0" />
+            <element signature="e#14430#17046#0" />
+            <element signature="e#17052#17245#0" />
+            <element signature="e#17251#18030#0" />
+            <element signature="e#18036#18341#0" />
+            <element signature="e#18347#18789#0" />
+            <element signature="e#18795#19089#0" />
+            <element signature="e#19095#19528#0" />
+            <element signature="e#19534#19850#0" />
+            <element signature="e#19856#20311#0" />
+            <element signature="e#20317#20606#0" />
+            <element signature="e#20612#21039#0" />
+            <element signature="e#21045#21340#0" />
+            <element signature="e#21346#21779#0" />
+            <element signature="e#21785#22187#0" />
+            <element signature="e#22193#22552#0" />
+            <element signature="e#22558#23075#0" />
+            <element signature="e#23081#23394#0" />
+            <element signature="method#FileA#0;class#FileA#0" />
+            <element signature="method#FileA#1;class#FileA#0" />
+            <element signature="method#setLocation#0;class#FileA#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-782">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>PAC</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>jdom-1.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
