@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pacapp;
 
 import java.io.File;
-
 import NewDatabase.SQLTranslator;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,6 +18,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -38,10 +33,10 @@ import NewDatabase.Content;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Iterator;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+
 import javafx.scene.input.MouseButton;
+import javafx.util.Duration;
 
 import static javafx.scene.input.MouseButton.SECONDARY;
 
@@ -50,6 +45,17 @@ import static javafx.scene.input.MouseButton.SECONDARY;
  * @author andrewmenezes
  */
 public class PacApp extends Application {
+
+   static MediaView musicView = new MediaView();
+   static MediaView podcastView = new MediaView();
+   static MediaView aBookView = new MediaView();
+   static MediaView videoView = new MediaView();
+   static ContentDAO dao = new ContentDAO();
+   static List<Media> musicList = new ArrayList<>();
+    static List<Media> podcastList = new ArrayList<>();
+    static List<Media> videoList = new ArrayList<>();
+    static List<Media> abookList = new ArrayList<>();
+    static int i = 0;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -104,6 +110,7 @@ public class PacApp extends Application {
         VBox phoneStack = new VBox();
         VBox searchResults = new VBox();
         ScrollPane searchPane = new ScrollPane(searchResults);
+
 
 
 
@@ -281,6 +288,7 @@ public class PacApp extends Application {
                 int setSize = mset.size();
                 Media[] mediaSet = new Media[setSize];
                 Button[] listings = new Button[setSize];
+                musicList.clear();
                 int i = 0;
                 while (miter.hasNext()) {
                     Content content = new Content();
@@ -426,6 +434,7 @@ public class PacApp extends Application {
                 Iterator videoiter = videoset.iterator();
                 int setSize = videoset.size();
                 Media[] mediaSet = new Media[setSize];
+
                 if(setSize == 0){
                     Label noVideos = new Label("You have no videos.\n\nDrag and Drop videos into this window to add to your collection.");
                     noVideos.setFont(new Font(20.0));
@@ -723,8 +732,10 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
 
                 System.out.println("Music Play Pressed");
-                //musicPlayer.play();
-
+                musicView.getMediaPlayer().play();
+                if(musicView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
+                    musicView.getMediaPlayer().pause();
+                }
             }
         });
         // forward
@@ -739,7 +750,11 @@ public class PacApp extends Application {
         musicForward.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                musicView.getMediaPlayer().dispose();
+                i++;
+                musicView.getMediaPlayer().pause();
+                musicView.setMediaPlayer(playahMakah(musicList.get(i %= musicList.size()),musicView));
+                musicView.getMediaPlayer().play();
                 System.out.println("Music Forward Pressed");
 
             }
@@ -756,9 +771,25 @@ public class PacApp extends Application {
         musicBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                //musicView.getMediaPlayer().dispose();
+                i++;
+                //musicView.getMediaPlayer().pause();
+                System.out.println(musicView.getMediaPlayer().getCurrentTime());
+                if(musicView.getMediaPlayer().getCurrentTime().greaterThan(new Duration(5000.0))  ){
+                    musicView.getMediaPlayer().stop();
+                    musicView.getMediaPlayer().play();
 
-                System.out.println("Music Back Pressed");
+                }else{
+                    musicView.getMediaPlayer().dispose();
+                    i--;
+                    musicView.setMediaPlayer(playahMakah(musicList.get(i %= musicList.size()),musicView));
+                    musicView.getMediaPlayer().play();
 
+                }
+
+                //musicView.setMediaPlayer(playahMakah(musicList.get(i %= musicList.size()),musicView));
+               // musicView.getMediaPlayer().play();
+                System.out.println("Music back Pressed");
             }
         });
 
@@ -1176,7 +1207,9 @@ public class PacApp extends Application {
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                objs.setWantToSync(!objs.getWantToSync());
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
+
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
@@ -1188,6 +1221,7 @@ public class PacApp extends Application {
         File file = new File(objs.getLocation());
         URI uri = file.toURI();
         M[i] = new Media(uri.toString());
+        musicList.add(i,M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1195,7 +1229,17 @@ public class PacApp extends Application {
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                try{
+                    musicView.getMediaPlayer().dispose();
+                }catch(Exception E){
+                    System.out.println(E);
+                }
+
+                playahMakah(musicList.get(i) ,musicView);
+                System.out.println(musicList.get(i).toString());
                 System.out.println(name + " Pressed");
+
+                musicView.getMediaPlayer().play();
 
             }
         });
@@ -1213,7 +1257,8 @@ public class PacApp extends Application {
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                objs.setWantToSync(!objs.getWantToSync());
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
@@ -1250,7 +1295,8 @@ public class PacApp extends Application {
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                objs.setWantToSync(!objs.getWantToSync());
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
@@ -1283,7 +1329,8 @@ public class PacApp extends Application {
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                objs.setWantToSync(!objs.getWantToSync());
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
@@ -1318,7 +1365,8 @@ public class PacApp extends Application {
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                objs.setWantToSync(!objs.getWantToSync());
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
@@ -1377,7 +1425,8 @@ public class PacApp extends Application {
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                objs.setWantToSync(!objs.getWantToSync());
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
@@ -1403,4 +1452,12 @@ public class PacApp extends Application {
         doubleButt.getChildren().addAll(syncer,L[i]);
         cont.getChildren().add(doubleButt);
 
-}}
+}
+
+    public static MediaPlayer playahMakah(Media M,MediaView V){
+        MediaPlayer player = new MediaPlayer(M);
+        V.setMediaPlayer(player);
+        return player;
+    }
+}
+

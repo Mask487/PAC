@@ -8,9 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//important
-//finish restore
-
 //if
 //autodetect usb
 //syncQueuery thread conflicts with backup
@@ -18,12 +15,20 @@ import java.util.ArrayList;
 
 public interface TransferObject
 {
-    void initializePhone(int i);
     void initializeDesk() throws FileNotFoundException;
-    void pctoP(PortableDeviceFolderObject targetFolder, File file);
-    void ptoPC(PortableDeviceObject pDO, String file);
-    void getFolder(String folder, File file);
-    void backup() throws IOException;
+    void initializePhone(int i);
+    boolean setAdbPath(String path) throws IOException;
+    String getAdbPath() throws IOException;
+    boolean setBackupPath(String path) throws IOException;
+    String getBackupPath() throws IOException;
+    boolean setMainPath(String path);
+    String getMainPath();
+    void getPhoneIp() throws IOException;
+    String getIp();
+    String getPhoneModel();
+    int getPhoneBattery();
+    String getPhoneName();
+    ArrayList<FileA> syncQueuery();
     void addFiles(ArrayList<FileA> files);
     void addPodcast(File file);
     void addPodcast(ArrayList<File> files);
@@ -35,17 +40,12 @@ public interface TransferObject
     void addVideos(ArrayList<File> files);
     void addAudioBook(File file);
     void addAudioBook(ArrayList<File> files);
-    int getPhoneBattery();
-    void getPhoneIp() throws IOException;
-    boolean setMainPath(String path);
-    boolean setAdbPath(String path) throws IOException;
-    //boolean doesFolderExist(String folderName, PortableDevice pD);
-    String getPhoneModel();
-    String getPhoneName();
-    String getIp();
-    String getAdbPath() throws IOException;
-    String getBackupPath() throws IOException;
-    ArrayList<FileA> syncQueuery();
+    void getFolder(String folder, File file);
+    void ptoPC(PortableDeviceObject pDO, String file);
+    void pctoP(PortableDeviceFolderObject targetFolder, File file);
+    boolean checkConnection();
+    void backup() throws IOException;
+    void restore() throws IOException;
 
 
 

@@ -761,9 +761,11 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    /*
     public void wifiSetup() throws IOException {
         //not done
     }
+    */
 }
 
 class FileA{
