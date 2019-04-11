@@ -379,19 +379,34 @@ class Transfer extends Thread implements pacapp.TransferObject {
     //returns phone model
     public String getPhoneModel() {
         String out = "";
-        return out = pD.getModel();
+        try {
+            out = pD.getModel();
+        }catch(NullPointerException e){
+            System.out.println("Cannot get phone model: No Phone Connected");
+        }
+        return out;
     }
 
     //returns battery percentage
     public int getPhoneBattery() {
-        int out;
-        return out = pD.getPowerLevel();
+        int out = -1;
+        try {
+            out = pD.getPowerLevel();
+        }catch(NullPointerException e){
+            System.out.println("Cannot get battery percentage: No Phone Connected!");
+        }
+        return out;
     }
 
     //return name of phone
     public String getPhoneName() {
-        String out;
-        return out = pD.getFriendlyName();
+        String out = "";
+        try {
+            out = pD.getFriendlyName();
+        }catch(NullPointerException e){
+            System.out.println("Cannot get phone name: No Phone Connected!");
+        }
+        return out;
     }
 
     public ArrayList<FileA> syncQueuery(){
@@ -460,8 +475,12 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     public void sync(){
         //calls syncQueuery method to make a list of items that need to be synced to the phone
-        ArrayList<FileA> queue = syncQueuery();
-        addFiles(queue);
+        try {
+            ArrayList<FileA> queue = syncQueuery();
+            addFiles(queue);
+        }catch(NullPointerException e){
+            System.out.println("Cannot Sync");
+        }
     }
 
     public void addFiles(ArrayList<FileA> files){
@@ -688,31 +707,31 @@ class Transfer extends Thread implements pacapp.TransferObject {
                     file.mkdirs();
                     System.out.println(file.toString());
                 }
-                for (PortableDeviceObject obj1 : pD.getRootObjects())
-                {
-                    System.out.println(obj1.getName() + "\n--------------------");
-                    if (obj1 instanceof PortableDeviceStorageObject)
-                    {
-                        File tempFile = new File(file.getPath() + "\\" + obj1.getName());
-                        if (!tempFile.isDirectory()){
-                            tempFile.mkdir();
-                        }
-                        PortableDeviceStorageObject storage = (PortableDeviceStorageObject) obj1;
-                        for (PortableDeviceObject obj2 : storage.getChildObjects())
-                        {
-                            System.out.println("    " + obj2.getName());
-                            if (obj2 instanceof PortableDeviceFolderObject)
-                            {
-                                File tempFile2 = new File(tempFile.getPath() + "\\" + obj2.getName());
-                                if(!tempFile2.isDirectory()){
-                                    tempFile2.mkdir();
-                                }
-                                recurBackup((PortableDeviceFolderObject) obj2, "    ", tempFile2);
+                try {
+                    for (PortableDeviceObject obj1 : pD.getRootObjects()) {
+                        System.out.println(obj1.getName() + "\n--------------------");
+                        if (obj1 instanceof PortableDeviceStorageObject) {
+                            File tempFile = new File(file.getPath() + "\\" + obj1.getName());
+                            if (!tempFile.isDirectory()) {
+                                tempFile.mkdir();
                             }
-                            ptoPC(obj2, tempFile.getPath());
+                            PortableDeviceStorageObject storage = (PortableDeviceStorageObject) obj1;
+                            for (PortableDeviceObject obj2 : storage.getChildObjects()) {
+                                System.out.println("    " + obj2.getName());
+                                if (obj2 instanceof PortableDeviceFolderObject) {
+                                    File tempFile2 = new File(tempFile.getPath() + "\\" + obj2.getName());
+                                    if (!tempFile2.isDirectory()) {
+                                        tempFile2.mkdir();
+                                    }
+                                    recurBackup((PortableDeviceFolderObject) obj2, "    ", tempFile2);
+                                }
+                                ptoPC(obj2, tempFile.getPath());
+                            }
                         }
+                        System.out.println("");
                     }
-                    System.out.println("");
+                }catch(NullPointerException e){
+                    System.out.println("No Phone Connected");
                 }
             }
         }
