@@ -4,7 +4,6 @@
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/pause.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pause.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,11 +33,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2422">
-              <caret line="876" selection-start-line="876" selection-end-line="876" />
+            <state relative-caret-position="-2">
+              <caret line="1676" column="48" selection-start-line="1676" selection-start-column="48" selection-end-line="1676" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#49396#49397#0" expanded="true" />
+                <element signature="e#56669#56670#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -203,11 +202,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="22" />
-    <option name="y" value="227" />
-    <option name="width" value="1600" />
-    <option name="height" value="839" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="100" />
+    <option name="y" value="38" />
+    <option name="width" value="1500" />
+    <option name="height" value="804" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -382,10 +381,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1600" height="839" extended-state="6" />
+    <frame x="100" y="38" width="1500" height="804" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13478819" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14403293" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -394,7 +393,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32868525" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23427041" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24578652" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43222892" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -789,11 +788,11 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/media/Media.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2422">
-          <caret line="876" selection-start-line="876" selection-end-line="876" />
+        <state relative-caret-position="-2">
+          <caret line="1676" column="48" selection-start-line="1676" selection-start-column="48" selection-end-line="1676" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#49396#49397#0" expanded="true" />
+            <element signature="e#56669#56670#0" expanded="true" />
           </folding>
         </state>
       </provider>

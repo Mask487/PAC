@@ -104,7 +104,7 @@ public class PacApp extends Application {
         HBox videoControll = new HBox(10);
         HBox podcastControll = new HBox(10);
         HBox ebookControll = new HBox(10);
-        HBox audioBoookControll = new HBox(10);
+        HBox audioBookControll = new HBox(10);
         HBox phoneProgress = new HBox(10);
         Button throwaway = new Button("");
         VBox phoneStack = new VBox();
@@ -415,7 +415,8 @@ public class PacApp extends Application {
                     abkButt(content, listings, i,audioBookCont,buBack,mediaSet);
                     i++;
                 }
-
+                bottomAnchorPane.getChildren().clear();
+                bottomAnchorPane.getChildren().addAll(audioBookControll,RSSLookup);
             }
 
 
@@ -477,7 +478,8 @@ public class PacApp extends Application {
                     vidButt(content, listings, i,videoCont,buBack,mediaSet);
                     i++;
                 }
-
+                bottomAnchorPane.getChildren().clear();
+                bottomAnchorPane.getChildren().addAll(videoControll,RSSLookup);
             }
 
 
@@ -930,9 +932,6 @@ public class PacApp extends Application {
         //Volume
 
         Button podcastMute = new Button("",musicMuteIcon);       //Creates button
-//        if(podcastVolumeSlider.getValue() <= 0.33 && podcastVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
-//        if(podcastVolumeSlider.getValue() >= 0.66){musicMuteIcon.setImage(highVol);     }             //adds icon to imageview
-//        if(podcastVolumeSlider.getValue() <= 0.66 && podcastVolumeSlider.getValue() >= 0.33){musicMuteIcon.setImage(midVolIcon);    }              //adds icon to imageview
 
         podcastMute.backgroundProperty().set(buBack);         //adds transparent background
         podcastMute.setPadding(inset);
@@ -961,6 +960,198 @@ public class PacApp extends Application {
 
         podcastControll.getChildren().addAll(podcastBack,podcastPlay,podcastForward,podcastMute);
 //// end podcast controll
+        // start abook controll
+        //Play
+        Button abookPlay = new Button("",musicPlayIcon);       //Creates button
+
+        abookPlay.backgroundProperty().set(buBack);         //adds transparent background
+        abookPlay.setPadding(inset);
+
+        abookPlay.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Abook Play Pressed");
+                aBookView.getMediaPlayer().play();
+                musicPlayIcon.setImage(PlayIcon);
+                if(aBookView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
+                    aBookView.getMediaPlayer().pause();
+                    musicPlayIcon.setImage(PauseIcon);
+
+                }}
+        });
+        // forward
+        Button abookForward = new Button("",forwardMusicIcon);       //Creates button
+        abookForward.backgroundProperty().set(buBack);         //adds transparent background
+        abookForward.setPadding(inset);
+
+        abookForward.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                aBookView.getMediaPlayer().dispose();
+                i++;
+                aBookView.getMediaPlayer().pause();
+                aBookView.setMediaPlayer(playahMakah(abookList.get(i %= abookList.size()),aBookView));
+                aBookView.getMediaPlayer().play();
+                System.out.println("audio Book Forward Pressed");
+            }
+        });
+        //Backward
+        Button abookBack = new Button("",musicBackIcon);       //Creates button
+
+        abookBack.backgroundProperty().set(buBack);         //adds transparent background
+        abookBack.setPadding(inset);
+
+        abookBack.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                System.out.println(aBookView.getMediaPlayer().getCurrentTime());
+                if(!aBookView.getMediaPlayer().getCurrentTime().lessThan(new Duration(5000.0))  ){
+                    aBookView.getMediaPlayer().stop();
+                    aBookView.getMediaPlayer().play();
+
+                }else{
+                    aBookView.getMediaPlayer().dispose();
+                    if(i == 0){
+                        i = abookList.size();
+                    }else
+                        i--;
+                    aBookView.setMediaPlayer(playahMakah(abookList.get(i %= abookList.size()),aBookView));
+                    aBookView.getMediaPlayer().play();
+
+                }
+
+                System.out.println("Audio Book back Pressed");
+            }
+        });
+
+        //Volume
+
+        Button abookMute = new Button("",musicMuteIcon);       //Creates button
+
+        abookMute.backgroundProperty().set(buBack);         //adds transparent background
+        abookMute.setPadding(inset);
+
+        abookMute.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+
+            public void handle(ActionEvent press) {
+                aBookView.getMediaPlayer().setMute(!aBookView.getMediaPlayer().isMute());
+                System.out.println("Audio Book Mute Pressed");
+                if(aBookView.getMediaPlayer().isMute()){
+                    System.out.println(aBookView.getMediaPlayer().isMute());
+                    musicMuteIcon.setImage(muteIcon);
+                }else{
+                    System.out.println("other");
+                    musicMuteIcon.setImage(highVolIcon);
+
+                }
+                musicMuteIcon.setImage(muteIcon);
+
+
+
+            }
+        });
+
+
+        audioBookControll.getChildren().addAll(abookBack,abookPlay,abookForward,abookMute);
+        //end abook controll
+        // start video controll
+        //Play
+        Button videoPlay = new Button("",musicPlayIcon);       //Creates button
+
+        videoPlay.backgroundProperty().set(buBack);         //adds transparent background
+        videoPlay.setPadding(inset);
+
+        videoPlay.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+
+                System.out.println("Video Play Pressed");
+                videoView.getMediaPlayer().play();
+                musicPlayIcon.setImage(PlayIcon);
+                if(videoView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
+                    videoView.getMediaPlayer().pause();
+                    musicPlayIcon.setImage(PauseIcon);
+
+                }}
+        });
+        // forward
+        Button videoForward = new Button("",forwardMusicIcon);       //Creates button
+        videoForward.backgroundProperty().set(buBack);         //adds transparent background
+        videoForward.setPadding(inset);
+
+        videoForward.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                videoView.getMediaPlayer().dispose();
+                i++;
+                videoView.getMediaPlayer().pause();
+                videoView.setMediaPlayer(playahMakah(videoList.get(i %= videoList.size()),videoView));
+                videoView.getMediaPlayer().play();
+                System.out.println("video Book Forward Pressed");
+            }
+        });
+        //Backward
+        Button videoBack = new Button("",musicBackIcon);       //Creates button
+
+        videoBack.backgroundProperty().set(buBack);         //adds transparent background
+        videoBack.setPadding(inset);
+
+        videoBack.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                System.out.println(videoView.getMediaPlayer().getCurrentTime());
+                if(!videoView.getMediaPlayer().getCurrentTime().lessThan(new Duration(5000.0))  ){
+                    videoView.getMediaPlayer().stop();
+                    videoView.getMediaPlayer().play();
+
+                }else{
+                    videoView.getMediaPlayer().dispose();
+                    if(i == 0){
+                        i = videoList.size();
+                    }else
+                        i--;
+                    videoView.setMediaPlayer(playahMakah(videoList.get(i %= videoList.size()),videoView));
+                    videoView.getMediaPlayer().play();
+
+                }
+
+                System.out.println("Audio Book back Pressed");
+            }
+        });
+
+        //Volume
+
+        Button videoMute = new Button("",musicMuteIcon);       //Creates button
+
+        videoMute.backgroundProperty().set(buBack);         //adds transparent background
+        videoMute.setPadding(inset);
+
+        videoMute.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+
+            public void handle(ActionEvent press) {
+                videoView.getMediaPlayer().setMute(!videoView.getMediaPlayer().isMute());
+                System.out.println("Audio Book Mute Pressed");
+                if(videoView.getMediaPlayer().isMute()){
+                    System.out.println(videoView.getMediaPlayer().isMute());
+                    musicMuteIcon.setImage(muteIcon);
+                }else{
+                    System.out.println("other");
+                    musicMuteIcon.setImage(highVolIcon);
+
+                }
+                musicMuteIcon.setImage(muteIcon);
+
+
+
+            }
+        });
+
+
+        videoControll.getChildren().addAll(videoBack,videoPlay,videoForward,videoMute);
+        //end video controll
 
 
         Label musicTester = new Label("");
@@ -1371,9 +1562,6 @@ public class PacApp extends Application {
             }
         });
 
-
-
-
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1411,6 +1599,7 @@ public class PacApp extends Application {
         File file = new File(objs.getLocation());
         URI uri = file.toURI();
         M[i] = new Media(uri.toString());
+        abookList.add(i,M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1418,7 +1607,21 @@ public class PacApp extends Application {
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                try{
+                    aBookView.getMediaPlayer().dispose();
+                }catch(Exception E){
+                    System.out.println(E);
+                }
+                System.out.println(i);
+                try{
+                    playahMakah(abookList.get(i) ,aBookView);}
+                catch(Exception T){
+
+                }
+                System.out.println(abookList.get(i).toString());
                 System.out.println(name + " Pressed");
+
+                aBookView.getMediaPlayer().play();
 
             }
         });
@@ -1447,6 +1650,7 @@ public class PacApp extends Application {
         File file = new File(objs.getLocation());
         URI uri = file.toURI();
         M[i] = new Media(uri.toString());
+        videoList.add(i,M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1454,7 +1658,23 @@ public class PacApp extends Application {
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                try{
+                    videoView.getMediaPlayer().dispose();
+                }catch(Exception E){
+                    System.out.println(E);
+                }
+                System.out.println(i);
+                try{
+                    playahMakah(videoList.get(i) ,videoView);}
+                catch(Exception T){
+
+                }
+                System.out.println(videoList.get(i).toString());
                 System.out.println(name + " Pressed");
+
+                videoView.getMediaPlayer().play();
+                cont.getChildren().clear();
+                cont.getChildren().add(videoView);
 
             }
         });
