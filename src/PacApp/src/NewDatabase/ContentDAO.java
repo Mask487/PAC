@@ -542,18 +542,40 @@ public class ContentDAO {
      * @param content
      * @return 
      */
-    public boolean setSyncStatus(Content content) {
-        return sql.setSyncStatus(content.getContentID());
-    }
+//    public boolean setSyncStatus(Content content) {
+//        return sql.setSyncStatus(content.getContentID());
+//    }
+//    
+//    
+//    /**
+//     * Set the sync status for a piece of content to false (i.e they don't want it to sync)
+//     * @param content
+//     * @return 
+//     */
+//    public boolean unsetSyncStatus(Content content) {
+//        return sql.unsetSyncStatus(content.getContentID());
+//    }
     
     
     /**
-     * Set the sync status for a piece of content to false (i.e they don't want it to sync)
+     * sets or unsets a sync status
      * @param content
      * @return 
      */
-    public boolean unsetSyncStatus(Content content) {
-        return sql.unsetSyncStatus(content.getContentID());
+    public boolean setSyncStatus(Content content) {
+        int val = sql.setSyncStatusTest(content.getContentID());
+        //Content is set to not sync
+        if(val == 1) {
+            content.setWantToSync(true);
+            return true;
+        }
+        
+        else {
+            content.setWantToSync(false);
+            return true;
+        }
+        
+        
     }
     
     

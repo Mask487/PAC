@@ -24,6 +24,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -105,6 +106,10 @@ public class PacApp extends Application {
         VBox searchResults = new VBox();
         ScrollPane searchPane = new ScrollPane(searchResults);
 
+        MediaView musicView = new MediaView();
+        MediaView podcastView = new MediaView();
+        MediaView aBookView = new MediaView();
+        MediaView videoView = new MediaView();
 
 
 
@@ -1176,7 +1181,18 @@ public class PacApp extends Application {
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                objs.setWantToSync(!objs.getWantToSync());
+                ContentDAO dao = new ContentDAO();
+                if(objs.getWantToSync()) {
+
+                    objs.setWantToSync(!objs.getWantToSync());
+                    dao.setSyncStatus(objs);
+                }
+                else {
+                    objs.setWantToSync(!objs.getWantToSync());
+                    dao.unsetSyncStatus(objs);
+                }
+
+
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
@@ -1403,4 +1419,11 @@ public class PacApp extends Application {
         doubleButt.getChildren().addAll(syncer,L[i]);
         cont.getChildren().add(doubleButt);
 
-}}
+}
+
+    public static void playahMaker(Media M,MediaView V){
+        MediaPlayer player = new MediaPlayer(M);
+        V.setMediaPlayer(player);
+    }
+}
+
