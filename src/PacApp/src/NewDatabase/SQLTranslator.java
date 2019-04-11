@@ -2319,10 +2319,10 @@ public class SQLTranslator {
      * @return 
      */
     private String getDBPath() {
-        File file = new File(System.getProperty("user.dir"));
+        /*File file = new File(System.getProperty("user.dir"));
         File file2 = new File(file.getParentFile().toString());
-        File file3 = new File(file2.getParentFile().toString());
-        String dbLocationPath = "jdbc:sqlite:".concat(file3.toString() + File.separator + "PACDB.db");
+        File file3 = new File(file2.getParentFile().toString());*/
+        String dbLocationPath = "jdbc:sqlite:./PACDB.db";
         return dbLocationPath;
     }
 
