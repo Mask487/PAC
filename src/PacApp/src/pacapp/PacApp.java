@@ -228,7 +228,7 @@ public class PacApp extends Application {
 
 
 
-    podcastCont.backgroundProperty().set(testBack);
+
 
         searchPane.backgroundProperty().set(buBack);
         searchResults.backgroundProperty().set(buBack);
@@ -267,12 +267,44 @@ public class PacApp extends Application {
 
 
 
+        TextField RSSLookup = new TextField("");
+        RSSLookup.setPromptText("Import RSS feed URL");
+        RSSLookup.backgroundProperty().set(buBack);
+
+
+
+        RSSLookup.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent Enter){
+                String newrl;
+                newrl = RSSLookup.getCharacters().toString();
+                System.out.println("URL added: " + newrl);
+                RSSLookup.setText("");
+                RSSReader rede = new RSSReader();
+                class csc490 implements Runnable{
+
+                    //rede.DownloadPodcast(newrl);
+                    csc490(String stringName){
+
+                    }
+                    public void run(){
+                        RSSReader rede = new RSSReader();
+                        rede.DownloadPodcast(newrl);
+                    }
+                }
+                Thread sheets = new Thread(new csc490(newrl));
+                sheets.start();
+
+
+            }
+        });
+
 
 
         music.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+                mainStack.getChildren().clear();
                 mainStack.getChildren().add(musicPane);
                 musicCont.getChildren().clear();
                 ContentDAO dao = new ContentDAO();
@@ -290,7 +322,8 @@ public class PacApp extends Application {
                     musButt(content, listings, i,musicCont,buBack,mediaSet);
                     i++;
                 }
-
+                bottomAnchorPane.getChildren().clear();
+                bottomAnchorPane.getChildren().addAll(musicControll,RSSLookup);
             }
 
 
@@ -410,7 +443,8 @@ public class PacApp extends Application {
                     podButt(content, listings, i,podcastCont,buBack,mediaSet);
                     i++;
                 }
-
+                bottomAnchorPane.getChildren().clear();
+                bottomAnchorPane.getChildren().addAll(podcastControll,RSSLookup);
             }
 
 
@@ -539,6 +573,7 @@ public class PacApp extends Application {
         videoPane.setFitToHeight(true);
         videoPane.setPannable(false);
 
+        // Create Search Pane
         searchResults.backgroundProperty().set(cenBack);
         searchPane.backgroundProperty().set(cenBack);
         searchPane.setFitToWidth(true);
@@ -658,43 +693,6 @@ public class PacApp extends Application {
 
         Insets sliderIn = new Insets(8.0,0.0,8.0,0.0);
 
-        Button rssImport = new Button("Import.");       //Creates button
-        rssImport.backgroundProperty().set(buBack);         //adds transparent background
-        rssImport.setTextFill(Paint.valueOf("BBBBBB"));
-        rssImport.setPadding(inset);
-
-
-        TextField RSSLookup = new TextField("");
-        RSSLookup.setPromptText("Import RSS feed URL");
-        RSSLookup.backgroundProperty().set(buBack);
-
-
-
-        RSSLookup.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent Enter){
-                String newrl;
-                newrl = RSSLookup.getCharacters().toString();
-                System.out.println("URL added: " + newrl);
-                RSSLookup.setText("");
-                RSSReader rede = new RSSReader();
-                class csc490 implements Runnable{
-
-                    //rede.DownloadPodcast(newrl);
-                    csc490(String stringName){
-
-                    }
-                    public void run(){
-                        RSSReader rede = new RSSReader();
-                        rede.DownloadPodcast(newrl);
-                    }
-                }
-                Thread sheets = new Thread(new csc490(newrl));
-                sheets.start();
-
-
-            }
-        });
 
 
 
@@ -818,28 +816,28 @@ public class PacApp extends Application {
         //Volume
         Image muteIcon = new Image("Mute.png");   //Load play  Icon for imageview
         ImageView musicMuteIcon = new ImageView();
-        musicMuteIcon.setImage(muteIcon);                  //adds icon to imageview
+                        //adds icon to imageview
         Button musicMute = new Button("",musicMuteIcon);       //Creates button
         Image  highVolIcon = new Image("HighVol.png");   //Load play  Icon for imageview
         ImageView musicHighIcon = new ImageView();
+        musicMuteIcon.setImage(highVolIcon);
 
-       /* if(musicVolumeSlider.getValue() <= 0.33 && musicVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
-        Image highVol = new Image("HighVol.png");   //Load play  Icon for imageview
-        ImageView highVolIcon = new ImageView();
-        if(musicVolumeSlider.getValue() >= 0.66){musicMuteIcon.setImage(highVol);     }             //adds icon to imageview
-        Image midVolIcon = new Image("MidVol.png");   //Load play  Icon for imageview
-        ImageView midVol = new ImageView();
-        if(musicVolumeSlider.getValue() <= 0.66 && musicVolumeSlider.getValue() >= 0.33){musicMuteIcon.setImage(midVolIcon);    }              //adds icon to imageview
-*/
         musicMute.backgroundProperty().set(buBack);         //adds transparent background
         musicMute.setPadding(inset);
 
         musicMute.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                musicView.getMediaPlayer().setMute(!musicView.getMediaPlayer().isMute());
                 System.out.println("Music Mute Pressed");
-                //musicVolumeSlider.setValue(0);
+                if(musicView.getMediaPlayer().isMute()){
+                    System.out.println(musicView.getMediaPlayer().isMute());
+                    musicMuteIcon.setImage(muteIcon);
+                }else{
+                    System.out.println("other");
+                    musicMuteIcon.setImage(highVolIcon);
+
+                }
                 musicMuteIcon.setImage(muteIcon);
 
 
@@ -853,18 +851,18 @@ public class PacApp extends Application {
 
         //Podcast Controll
 
-        //Podcast volume slider
-        Slider podcastVolumeSlider = new Slider();
-        podcastVolumeSlider.setMin(0);
-        podcastVolumeSlider.setMax(100);
-        podcastVolumeSlider.setValue(0);
-        podcastVolumeSlider.setPadding(sliderIn);
-        //podcast progress slider
-        Slider podcastProgressSlider = new Slider();
-        podcastProgressSlider.setMin(0);
-        podcastProgressSlider.setMax(100);
-        podcastProgressSlider.setValue(0);
-        podcastProgressSlider.setPadding(sliderIn);
+//        //Podcast volume slider
+//        Slider podcastVolumeSlider = new Slider();
+//        podcastVolumeSlider.setMin(0);
+//        podcastVolumeSlider.setMax(100);
+//        podcastVolumeSlider.setValue(0);
+//        podcastVolumeSlider.setPadding(sliderIn);
+//        //podcast progress slider
+//        Slider podcastProgressSlider = new Slider();
+//        podcastProgressSlider.setMin(0);
+//        podcastProgressSlider.setMax(100);
+//        podcastProgressSlider.setValue(0);
+//        podcastProgressSlider.setPadding(sliderIn);
         //Play
         Button podcastPlay = new Button("",musicPlayIcon);       //Creates button
 
@@ -875,9 +873,14 @@ public class PacApp extends Application {
             @Override
             public void handle(ActionEvent press) {
 
-                System.out.println("Podcast Play Pressed");
+                System.out.println("podcast Play Pressed");
+                podcastView.getMediaPlayer().play();
+                musicPlayIcon.setImage(PlayIcon);
+                if(podcastView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
+                    podcastView.getMediaPlayer().pause();
+                    musicPlayIcon.setImage(PauseIcon);
 
-            }
+            }}
         });
         // forward
         Button podcastForward = new Button("",forwardMusicIcon);       //Creates button
@@ -887,9 +890,12 @@ public class PacApp extends Application {
         podcastForward.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                podcastView.getMediaPlayer().dispose();
+                i++;
+                podcastView.getMediaPlayer().pause();
+                podcastView.setMediaPlayer(playahMakah(podcastList.get(i %= podcastList.size()),podcastView));
+                podcastView.getMediaPlayer().play();
                 System.out.println("Podcast Forward Pressed");
-
             }
         });
         //Backward
@@ -901,9 +907,23 @@ public class PacApp extends Application {
         podcastBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                System.out.println(podcastView.getMediaPlayer().getCurrentTime());
+                if(!podcastView.getMediaPlayer().getCurrentTime().lessThan(new Duration(5000.0))  ){
+                    podcastView.getMediaPlayer().stop();
+                    podcastView.getMediaPlayer().play();
 
-                System.out.println("podcst Back Pressed");
+                }else{
+                    podcastView.getMediaPlayer().dispose();
+                    if(i == 0){
+                        i = podcastList.size();
+                    }else
+                        i--;
+                    podcastView.setMediaPlayer(playahMakah(podcastList.get(i %= podcastList.size()),podcastView));
+                    podcastView.getMediaPlayer().play();
 
+                }
+
+                System.out.println("Podcast back Pressed");
             }
         });
 
@@ -919,18 +939,27 @@ public class PacApp extends Application {
 
         podcastMute.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent press) {
 
-                System.out.println("podcast Mute Pressed");
-               // musicVolumeSlider.setValue(0);
-                musicMuteIcon.setImage(muteIcon);
+                public void handle(ActionEvent press) {
+                    podcastView.getMediaPlayer().setMute(!podcastView.getMediaPlayer().isMute());
+                    System.out.println("Podcast Mute Pressed");
+                    if(podcastView.getMediaPlayer().isMute()){
+                        System.out.println(podcastView.getMediaPlayer().isMute());
+                        musicMuteIcon.setImage(muteIcon);
+                    }else{
+                        System.out.println("other");
+                        musicMuteIcon.setImage(highVolIcon);
+
+                    }
+                    musicMuteIcon.setImage(muteIcon);
+
 
 
             }
         });
 
 
-        podcastControll.getChildren().addAll(podcastBack,podcastPlay,podcastForward,podcastMute,podcastVolumeSlider);
+        podcastControll.getChildren().addAll(podcastBack,podcastPlay,podcastForward,podcastMute);
 //// end podcast controll
 
 
@@ -1294,6 +1323,7 @@ public class PacApp extends Application {
         File file = new File(objs.getLocation());
         URI uri = file.toURI();
         M[i] = new Media(uri.toString());
+        podcastList.add(i,M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1301,9 +1331,24 @@ public class PacApp extends Application {
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                System.out.println(name + " Pressed");
+                    try{
+                        podcastView.getMediaPlayer().dispose();
+                    }catch(Exception E){
+                        System.out.println(E);
+                    }
+                System.out.println(i);
+                    try{
+                    playahMakah(podcastList.get(i) ,podcastView);}
+                    catch(Exception T){
 
-            }
+                    }
+                    System.out.println(podcastList.get(i).toString());
+                    System.out.println(name + " Pressed");
+
+                podcastView.getMediaPlayer().play();
+
+
+                }
         });
         doubleButt.getChildren().addAll(syncer,L[i]);
         cont.getChildren().add(doubleButt);
