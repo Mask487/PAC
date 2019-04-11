@@ -111,12 +111,6 @@ public class PacApp extends Application {
         VBox searchResults = new VBox();
         ScrollPane searchPane = new ScrollPane(searchResults);
 
-
-
-
-
-
-
         //create background anchor
         AnchorPane.setRightAnchor(bp, 0.0);
         AnchorPane.setLeftAnchor(bp, 0.0);
@@ -305,10 +299,10 @@ public class PacApp extends Application {
         apps.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+                mainStack.getChildren().clear();
                 mainStack.getChildren().add(appPane);
                 appCont.getChildren().clear();
-                ContentDAO dao = new ContentDAO();
+               // ContentDAO dao = new ContentDAO();
                 Set appset = dao.getAllContentByType("App");
                 System.out.println("App Pressed");
                 Iterator appiter = appset.iterator();
@@ -545,6 +539,11 @@ public class PacApp extends Application {
         videoPane.setFitToHeight(true);
         videoPane.setPannable(false);
 
+        searchResults.backgroundProperty().set(cenBack);
+        searchPane.backgroundProperty().set(cenBack);
+        searchPane.setFitToWidth(true);
+        searchPane.setFitToHeight(true);
+        searchPane.setPannable(false);
 
         // create settings VBox
         Button lightMode = new Button("Change to light mode.");       //Creates button
@@ -580,8 +579,6 @@ public class PacApp extends Application {
         Label phoneName = new Label("" + t.getPhoneModel());
         phoneStack.getChildren().addAll(Android,phoneName,battery);}else
             phoneStack.getChildren().addAll(Android);
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-         //phoneStack.getChildren().addAll(Android,phoneName,battery);
 
         HBox phoneMidRow = new HBox();
         phoneMidRow.setPadding(new Insets(5, 5, 5, 5));
@@ -694,34 +691,37 @@ public class PacApp extends Application {
                 }
                 Thread sheets = new Thread(new csc490(newrl));
                 sheets.start();
-    /////////////////////////////////////Add rss import here
+
 
             }
         });
 
 
-     //   podcastPane1.backgroundProperty().setValue(buBack);
+
 
 
 
         //Music Controll
 
-        //music volume slider
-        Slider musicVolumeSlider = new Slider();
-        musicVolumeSlider.setMin(0);
-        musicVolumeSlider.setMax(100);
-        musicVolumeSlider.setValue(0);
-        musicVolumeSlider.setPadding(sliderIn);
-        //music progress slider
-        Slider musicProgressSlider = new Slider();
-        musicProgressSlider.setMin(0);
-        musicProgressSlider.setMax(100);
-        musicProgressSlider.setValue(0);
-        musicProgressSlider.setPadding(sliderIn);
+//        //music volume slider
+//        Slider musicVolumeSlider = new Slider();
+//        musicVolumeSlider.setMin(0);
+//        musicVolumeSlider.setMax(100);
+//        musicVolumeSlider.setValue(0);
+//        musicVolumeSlider.setPadding(sliderIn);
+//        //music progress slider
+//        Slider musicProgressSlider = new Slider();
+//        musicProgressSlider.setMin(0);
+//        musicProgressSlider.setMax(100);
+//        musicProgressSlider.setValue(0);
+//        musicProgressSlider.setPadding(sliderIn);
         //Play
         Image PlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
         ImageView musicPlayIcon = new ImageView();
-        musicPlayIcon.setImage(PlayIcon);                  //adds icon to imageview
+        musicPlayIcon.setImage(PlayIcon);
+        Image PauseIcon = new Image("pause.png");   //Load play  Icon for imageview
+        ImageView musicPauseIcon = new ImageView();
+        musicPauseIcon.setImage(PauseIcon);   //adds icon to imageview
         Button musicPlay = new Button("",musicPlayIcon);       //Creates button
 
         musicPlay.backgroundProperty().set(buBack);         //adds transparent background
@@ -733,11 +733,34 @@ public class PacApp extends Application {
 
                 System.out.println("Music Play Pressed");
                 musicView.getMediaPlayer().play();
+                musicPlayIcon.setImage(PlayIcon);
                 if(musicView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
                     musicView.getMediaPlayer().pause();
+                    musicPlayIcon.setImage(PauseIcon);
+
                 }
             }
         });
+//       Image PauseIcon = new Image("pause.png");   //Load play  Icon for imageview
+//       ImageView musicPauseIcon = new ImageView();
+//       musicPauseIcon.setImage(PauseIcon);                  //adds icon to imageview
+//        Button musicPause = new Button("",musicPauseIcon);       //Creates button
+//
+//        musicPause.backgroundProperty().set(buBack);         //adds transparent background
+//        musicPause.setPadding(inset);
+//
+//        musicPause.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent press) {
+//
+//                System.out.println("Music Play Pressed");
+//                musicView.getMediaPlayer().play();
+//                if(musicView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
+//                    musicView.getMediaPlayer().pause();
+//
+//                }
+//            }
+//        });
         // forward
         Image forwardIcon = new Image("ForwardButton.png");   //Load forward  Icon for imageview
         ImageView forwardMusicIcon = new ImageView();
@@ -771,24 +794,23 @@ public class PacApp extends Application {
         musicBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                //musicView.getMediaPlayer().dispose();
-                i++;
-                //musicView.getMediaPlayer().pause();
+
                 System.out.println(musicView.getMediaPlayer().getCurrentTime());
-                if(musicView.getMediaPlayer().getCurrentTime().greaterThan(new Duration(5000.0))  ){
+                if(!musicView.getMediaPlayer().getCurrentTime().lessThan(new Duration(5000.0))  ){
                     musicView.getMediaPlayer().stop();
                     musicView.getMediaPlayer().play();
 
                 }else{
                     musicView.getMediaPlayer().dispose();
+                    if(i == 0){
+                        i = musicList.size();
+                    }else
                     i--;
                     musicView.setMediaPlayer(playahMakah(musicList.get(i %= musicList.size()),musicView));
                     musicView.getMediaPlayer().play();
 
                 }
 
-                //musicView.setMediaPlayer(playahMakah(musicList.get(i %= musicList.size()),musicView));
-               // musicView.getMediaPlayer().play();
                 System.out.println("Music back Pressed");
             }
         });
@@ -798,16 +820,17 @@ public class PacApp extends Application {
         ImageView musicMuteIcon = new ImageView();
         musicMuteIcon.setImage(muteIcon);                  //adds icon to imageview
         Button musicMute = new Button("",musicMuteIcon);       //Creates button
-        Image lowVolIcon = new Image("LowVol.png");   //Load play  Icon for imageview
-        ImageView musicLowIcon = new ImageView();
-        if(musicVolumeSlider.getValue() <= 0.33 && musicVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
+        Image  highVolIcon = new Image("HighVol.png");   //Load play  Icon for imageview
+        ImageView musicHighIcon = new ImageView();
+
+       /* if(musicVolumeSlider.getValue() <= 0.33 && musicVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
         Image highVol = new Image("HighVol.png");   //Load play  Icon for imageview
         ImageView highVolIcon = new ImageView();
         if(musicVolumeSlider.getValue() >= 0.66){musicMuteIcon.setImage(highVol);     }             //adds icon to imageview
         Image midVolIcon = new Image("MidVol.png");   //Load play  Icon for imageview
         ImageView midVol = new ImageView();
         if(musicVolumeSlider.getValue() <= 0.66 && musicVolumeSlider.getValue() >= 0.33){musicMuteIcon.setImage(midVolIcon);    }              //adds icon to imageview
-
+*/
         musicMute.backgroundProperty().set(buBack);         //adds transparent background
         musicMute.setPadding(inset);
 
@@ -816,7 +839,7 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
 
                 System.out.println("Music Mute Pressed");
-                musicVolumeSlider.setValue(0);
+                //musicVolumeSlider.setValue(0);
                 musicMuteIcon.setImage(muteIcon);
 
 
@@ -824,7 +847,7 @@ public class PacApp extends Application {
         });
 
 
-        musicControll.getChildren().addAll(musicBack,musicPlay,musicForward,musicMute,musicVolumeSlider);
+        musicControll.getChildren().addAll(musicBack,musicPlay,musicForward,musicMute);
 //// end music controll
 
 
@@ -887,9 +910,9 @@ public class PacApp extends Application {
         //Volume
 
         Button podcastMute = new Button("",musicMuteIcon);       //Creates button
-        if(podcastVolumeSlider.getValue() <= 0.33 && podcastVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
-        if(podcastVolumeSlider.getValue() >= 0.66){musicMuteIcon.setImage(highVol);     }             //adds icon to imageview
-        if(podcastVolumeSlider.getValue() <= 0.66 && podcastVolumeSlider.getValue() >= 0.33){musicMuteIcon.setImage(midVolIcon);    }              //adds icon to imageview
+//        if(podcastVolumeSlider.getValue() <= 0.33 && podcastVolumeSlider.getValue() != 0.0){musicMuteIcon.setImage(lowVolIcon);  }                //adds icon to imageview
+//        if(podcastVolumeSlider.getValue() >= 0.66){musicMuteIcon.setImage(highVol);     }             //adds icon to imageview
+//        if(podcastVolumeSlider.getValue() <= 0.66 && podcastVolumeSlider.getValue() >= 0.33){musicMuteIcon.setImage(midVolIcon);    }              //adds icon to imageview
 
         podcastMute.backgroundProperty().set(buBack);         //adds transparent background
         podcastMute.setPadding(inset);
@@ -899,7 +922,7 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
 
                 System.out.println("podcast Mute Pressed");
-                musicVolumeSlider.setValue(0);
+               // musicVolumeSlider.setValue(0);
                 musicMuteIcon.setImage(muteIcon);
 
 
@@ -1240,6 +1263,7 @@ public class PacApp extends Application {
                 System.out.println(name + " Pressed");
 
                 musicView.getMediaPlayer().play();
+
 
             }
         });
