@@ -1689,7 +1689,7 @@ public class PacApp extends Application {
         ImageView appview = new ImageView();
         appview.setImage(appsIcon);
         L[i] = new Button(name,appview);
-        L[i].setTextFill(Paint.valueOf("505050"));
+        L[i].setTextFill(Paint.valueOf("707070"));
         L[i].setContentDisplay(ContentDisplay.TOP);
         L[i].backgroundProperty().set(b);
         L[i].setOnAction(new EventHandler<ActionEvent>() {
@@ -1702,7 +1702,7 @@ public class PacApp extends Application {
                 if(objs.getWantToSync()){
                     L[i].setTextFill(Paint.valueOf("BBBBBB"));
                 }else{
-                    L[i].setTextFill(Paint.valueOf("505050"));
+                    L[i].setTextFill(Paint.valueOf("707070"));
                 }
 
             }
