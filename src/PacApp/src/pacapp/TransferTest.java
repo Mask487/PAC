@@ -20,8 +20,8 @@ public class TransferTest
         //System.out.println("Phone Name: " + t.getPhoneName() + "\nPhone Model: " + t.getPhoneModel() + "\nBattery Level: " + t.getPhoneBattery());
         //t.addEbook(files);
         //t.getFolder("podcasts", file1);
-        //t.backup();
-        t.restore();
+        t.backup();
+        //t.restore();
         //t.setAdbPath("C:\\Users\\quinc\\AppData\\Local\\Android\\Sdk\\platform-tools");
         //t.getAdbPath();
         //t.setBackupPath("D:\\Desktop\\BACKUP");
@@ -30,5 +30,6 @@ public class TransferTest
         //t.getBackupPath();
         //t.syncQueuery();
         //t.setRoot("Phone");
+        ;
     }
 }

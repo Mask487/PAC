@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pacapp;
 
 import java.io.File;
-
 import NewDatabase.SQLTranslator;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,6 +18,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -34,10 +29,14 @@ import javafx.scene.image.ImageView;
 import NewDatabase.ContentDAO;
 import NewDatabase.Content;
 
+
+
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Set;
+import java.net.URI;
+import java.util.*;
+
 import javafx.scene.input.MouseButton;
+import javafx.util.Duration;
 
 import static javafx.scene.input.MouseButton.SECONDARY;
 
@@ -47,11 +46,24 @@ import static javafx.scene.input.MouseButton.SECONDARY;
  */
 public class PacApp extends Application {
 
+   static MediaView musicView = new MediaView();
+   static MediaView podcastView = new MediaView();
+   static MediaView aBookView = new MediaView();
+   static MediaView videoView = new MediaView();
+   static ContentDAO dao = new ContentDAO();
+   static List<Media> musicList = new ArrayList<>();
+    static List<Media> podcastList = new ArrayList<>();
+    static List<Media> videoList = new ArrayList<>();
+    static List<Media> abookList = new ArrayList<>();
+    static int i = 0;
+
     @Override
     public void start(Stage stage) throws Exception {
         SQLTranslator sql = new SQLTranslator();
         Transfer t = new Transfer();
         t.initializeDesk();
+
+           // t.initializePhone(0);
 
         AnchorPane root2 = new AnchorPane();
         Scene primary = new Scene(root2);
@@ -81,6 +93,7 @@ public class PacApp extends Application {
         VBox audioBookCont = new VBox();
         ScrollPane audioBookPane = new ScrollPane(audioBookCont);
         VBox podcastCont = new VBox();
+        VBox podcastPane1 = new VBox();
         ScrollPane podcastPane = new ScrollPane(podcastCont);
         VBox videoCont = new VBox();
         ScrollPane videoPane = new ScrollPane(videoCont);
@@ -97,6 +110,10 @@ public class PacApp extends Application {
         VBox phoneStack = new VBox();
         VBox searchResults = new VBox();
         ScrollPane searchPane = new ScrollPane(searchResults);
+
+
+
+
 
 
 
@@ -213,6 +230,14 @@ public class PacApp extends Application {
         search.setPromptText("Search");
         search.backgroundProperty().set(buBack);
         hSearch.getChildren().add(search);
+        hSearch.backgroundProperty().set(buBack);
+
+
+
+    podcastCont.backgroundProperty().set(testBack);
+
+        searchPane.backgroundProperty().set(buBack);
+        searchResults.backgroundProperty().set(buBack);
 
         search.setOnAction(new EventHandler<ActionEvent>(){
             @Override
@@ -220,22 +245,22 @@ public class PacApp extends Application {
                 String term = search.getCharacters().toString();
                 System.out.println("Search Term " + term);
                 search.setText("");
-                SQLTranslator searchSql = new SQLTranslator();
-//                ResultSet searchSet = searchSql.searchAllTablesByKeyTerm(term);
-//                mainStack.getChildren().clear();//(phoneMidRow, musicPane);
-//                mainStack.getChildren().add(searchPane);
-//               // ContentDAO dao = new ContentDAO();
-//               // Set searchSet = dao.getAllContentByType("Music");
-//                Iterator miter = searchSet.iterator();
-//                int setSize = searchSet.size();
-//                Button[] listings = new Button[setSize];
-//                int i = 0;
-//                while (miter.hasNext()) {
-//                    Content content = new Content();
-//                    content = (NewDatabase.Content) miter.next();
-//                    musButt(content, listings, i,musicCont,buBack);
-//                    i++;
-//                }
+                ContentDAO searchSql = new ContentDAO();
+                Set searchSet = searchSql.searchAllTablesBySearchTerm(term);
+                mainStack.getChildren().clear();
+                mainStack.getChildren().add(searchPane);
+                searchResults.getChildren().clear();
+                Iterator miter = searchSet.iterator();
+                int setSize = searchSet.size();
+                Button[] listings = new Button[setSize];
+                Media[] MediaArray = new Media[setSize];
+                int i = 0;
+                while (miter.hasNext()) {
+                    Content content = new Content();
+                    content = (NewDatabase.Content) miter.next();
+                    searchButt(content, listings, i,searchResults,buBack,MediaArray);
+                    i++;
+                }
 
 
 
@@ -261,12 +286,14 @@ public class PacApp extends Application {
                 System.out.println("Music Pressed");
                 Iterator miter = mset.iterator();
                 int setSize = mset.size();
+                Media[] mediaSet = new Media[setSize];
                 Button[] listings = new Button[setSize];
+                musicList.clear();
                 int i = 0;
                 while (miter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) miter.next();
-                    musButt(content, listings, i,musicCont,buBack);
+                    musButt(content, listings, i,musicCont,buBack,mediaSet);
                     i++;
                 }
 
@@ -346,6 +373,7 @@ public class PacApp extends Application {
                 System.out.println("Audio Book Pressed");
                 Iterator abiter = abset.iterator();
                 int setSize = abset.size();
+                Media[] mediaSet = new Media[setSize];
                 if(setSize == 0){
                     Label noABooks = new Label("You have no Audio Books.\n\nDrag and Drop Audio Books into this window to add to your collection.");
                     noABooks.setFont(new Font(20.0));
@@ -357,7 +385,7 @@ public class PacApp extends Application {
                 while (abiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) abiter.next();
-                    abkButt(content, listings, i,audioBookCont,buBack);
+                    abkButt(content, listings, i,audioBookCont,buBack,mediaSet);
                     i++;
                 }
 
@@ -377,18 +405,15 @@ public class PacApp extends Application {
                 System.out.println("podcast Pressed");
                 Iterator podcastiter = podcastset.iterator();
                 int setSize = podcastset.size();
+                Media[] mediaSet = new Media[setSize];
                 if(setSize == 0){
-                    Label nopodcasts = new Label("You have no Podcasts.\n\nDrag and Drop Podcasts into this window to add to your collection.");
-                    nopodcasts.setFont(new Font(20.0));
-                    nopodcasts.backgroundProperty().set(buBack);
-                    podcastCont.getChildren().addAll(nopodcasts);
                 }
                 Button[] listings = new Button[setSize];
                 int i = 0;
                 while (podcastiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) podcastiter.next();
-                    podButt(content, listings, i,podcastCont,buBack);
+                    podButt(content, listings, i,podcastCont,buBack,mediaSet);
                     i++;
                 }
 
@@ -408,6 +433,8 @@ public class PacApp extends Application {
                 System.out.println("video Pressed");
                 Iterator videoiter = videoset.iterator();
                 int setSize = videoset.size();
+                Media[] mediaSet = new Media[setSize];
+
                 if(setSize == 0){
                     Label noVideos = new Label("You have no videos.\n\nDrag and Drop videos into this window to add to your collection.");
                     noVideos.setFont(new Font(20.0));
@@ -419,7 +446,7 @@ public class PacApp extends Application {
                 while (videoiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) videoiter.next();
-                    vidButt(content, listings, i,videoCont,buBack);
+                    vidButt(content, listings, i,videoCont,buBack,mediaSet);
                     i++;
                 }
 
@@ -547,12 +574,14 @@ public class PacApp extends Application {
         Android.setPreserveRatio(true);
         Android.setSmooth(true);
         Android.setCache(true);
-//
-//        if(t.checkConnection()){
-//        Label battery = new Label("" + t.getPhoneBattery());
-//        Label phoneName = new Label("" + t.getPhoneModel());}
+
+        if(t.checkConnection()){
+        Label battery = new Label("" + t.getPhoneBattery());
+        Label phoneName = new Label("" + t.getPhoneModel());
+        phoneStack.getChildren().addAll(Android,phoneName,battery);}else
+            phoneStack.getChildren().addAll(Android);
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // phoneStack.getChildren().addAll(Android,phoneName,battery);
+         //phoneStack.getChildren().addAll(Android,phoneName,battery);
 
         HBox phoneMidRow = new HBox();
         phoneMidRow.setPadding(new Insets(5, 5, 5, 5));
@@ -592,32 +621,26 @@ public class PacApp extends Application {
             }
         });
 
-        Button copy = new Button("Duplicate Phone");       //Creates button
+        Button copy = new Button("Restore Phone");       //Creates button
         copy.setTextFill(Paint.valueOf("BBBBBB"));
         copy.backgroundProperty().set(buBack);         //adds transparent background
 
-//        copy.setOnMouseEntered(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void enter(MouseEvent enter) {
-//
-//                System.out.println("copy entered");
-//
-//            }
 //        });   2EB900 green color
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                t.initializePhone(0);
                 try {
-                    t.backup();
+                    t.restore();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println("copy Pressed");
+                System.out.println("Restore Pressed");
 
             }
         });
 
-        Button android = new Button("Duplicate Phone", Android);
+        Button android = new Button("", Android);
         copy.backgroundProperty().set(buBack);
 
 
@@ -637,6 +660,49 @@ public class PacApp extends Application {
         });
 
         Insets sliderIn = new Insets(8.0,0.0,8.0,0.0);
+
+        Button rssImport = new Button("Import.");       //Creates button
+        rssImport.backgroundProperty().set(buBack);         //adds transparent background
+        rssImport.setTextFill(Paint.valueOf("BBBBBB"));
+        rssImport.setPadding(inset);
+
+
+        TextField RSSLookup = new TextField("");
+        RSSLookup.setPromptText("Import RSS feed URL");
+        RSSLookup.backgroundProperty().set(buBack);
+
+
+
+        RSSLookup.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent Enter){
+                String newrl;
+                newrl = RSSLookup.getCharacters().toString();
+                System.out.println("URL added: " + newrl);
+                RSSLookup.setText("");
+                RSSReader rede = new RSSReader();
+                class csc490 implements Runnable{
+
+                    //rede.DownloadPodcast(newrl);
+                    csc490(String stringName){
+
+                    }
+                    public void run(){
+                        RSSReader rede = new RSSReader();
+                        rede.DownloadPodcast(newrl);
+                    }
+                }
+                Thread sheets = new Thread(new csc490(newrl));
+                sheets.start();
+    /////////////////////////////////////Add rss import here
+
+            }
+        });
+
+
+     //   podcastPane1.backgroundProperty().setValue(buBack);
+
+
 
         //Music Controll
 
@@ -666,8 +732,10 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
 
                 System.out.println("Music Play Pressed");
-                //musicPlayer.play();
-
+                musicView.getMediaPlayer().play();
+                if(musicView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
+                    musicView.getMediaPlayer().pause();
+                }
             }
         });
         // forward
@@ -682,7 +750,11 @@ public class PacApp extends Application {
         musicForward.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
+                musicView.getMediaPlayer().dispose();
+                i++;
+                musicView.getMediaPlayer().pause();
+                musicView.setMediaPlayer(playahMakah(musicList.get(i %= musicList.size()),musicView));
+                musicView.getMediaPlayer().play();
                 System.out.println("Music Forward Pressed");
 
             }
@@ -699,9 +771,25 @@ public class PacApp extends Application {
         musicBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                //musicView.getMediaPlayer().dispose();
+                i++;
+                //musicView.getMediaPlayer().pause();
+                System.out.println(musicView.getMediaPlayer().getCurrentTime());
+                if(musicView.getMediaPlayer().getCurrentTime().greaterThan(new Duration(5000.0))  ){
+                    musicView.getMediaPlayer().stop();
+                    musicView.getMediaPlayer().play();
 
-                System.out.println("Music Back Pressed");
+                }else{
+                    musicView.getMediaPlayer().dispose();
+                    i--;
+                    musicView.setMediaPlayer(playahMakah(musicList.get(i %= musicList.size()),musicView));
+                    musicView.getMediaPlayer().play();
 
+                }
+
+                //musicView.setMediaPlayer(playahMakah(musicList.get(i %= musicList.size()),musicView));
+               // musicView.getMediaPlayer().play();
+                System.out.println("Music back Pressed");
             }
         });
 
@@ -967,6 +1055,7 @@ public class PacApp extends Application {
                 event.consume();
             }
         });
+
         Label podcastTester = new Label("");
         podcastCont.getChildren().add(podcastTester);
         //drag and drop podcasts
@@ -1057,6 +1146,7 @@ public class PacApp extends Application {
         System.out.println("Music Showing");
         Iterator miter = mset.iterator();
         int setSize = mset.size();
+
         if(setSize == 0){
             Label noMusic = new Label("You have no music.\n\nDrag and Drop music into this window to add to your collection.");
             noMusic.setFont(new Font(25.0));
@@ -1064,24 +1154,26 @@ public class PacApp extends Application {
             musicCont.getChildren().addAll(noMusic);
         }
         Button[] listings = new Button[setSize];
+        Media[] mediaSet = new Media[setSize];
         int i = 0;
         while (miter.hasNext()) {
             Content content = new Content();
             content = (NewDatabase.Content) miter.next();
-            musButt(content, listings, i,musicCont,buBack);
+            musButt(content, listings, i,musicCont,buBack,mediaSet);
             i++;
         }
 
 
         phoneMidRow.getChildren().addAll(phoneStack, midButt);
-        centerAnchorPane.getChildren().addAll(tAnchor);
-        AnchorPane.setRightAnchor(tAnchor, 5.0);
-        AnchorPane.setLeftAnchor(tAnchor, 5.0);
-        AnchorPane.setTopAnchor(tAnchor, 5.0);
-        AnchorPane.setBottomAnchor(tAnchor, 5.0);
 
-        bottomAnchorPane.getChildren().addAll(musicControll);
-        bottomAnchorPane.setRightAnchor(musicControll, 10.0);
+        centerAnchorPane.getChildren().addAll(tAnchor);
+        centerAnchorPane.setRightAnchor(tAnchor, 0.0);
+        centerAnchorPane.setLeftAnchor(tAnchor, 5.0);
+        centerAnchorPane.setTopAnchor(tAnchor, 5.0);
+        centerAnchorPane.setBottomAnchor(tAnchor, 5.0);
+
+        bottomAnchorPane.getChildren().addAll(musicControll,RSSLookup);
+        bottomAnchorPane.setRightAnchor(RSSLookup, 10.0);
         bottomAnchorPane.setLeftAnchor(musicControll, 10.0);
         bottomAnchorPane.setTopAnchor(musicControll, 10.0);
         bottomAnchorPane.setBottomAnchor(musicControll, 10.0);
@@ -1106,104 +1198,199 @@ public class PacApp extends Application {
         launch(args);
     }
 
-    public static void musButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
+    public static void musButt(Content objs, Button[] L, int i, VBox cont, Background b,Media[] M) {
         String name = objs.getContentName();
-        L[i] = new Button(name);
-        L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
-
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                Media song = new Media("file://" + objs.getLocation());
-                MediaPlayer musicTester = new MediaPlayer(song);
-                musicTester.play();
-                System.out.println(name + " Pressed");
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
+
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
         });
-        cont.getChildren().add(L[i]);
+
+
+        String thefuquwant = objs.getLocation();
+        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        File file = new File(objs.getLocation());
+        URI uri = file.toURI();
+        M[i] = new Media(uri.toString());
+        musicList.add(i,M[i]);
+        L[i] = new Button(name);
+        L[i].setTextFill(Paint.valueOf("BBBBBB"));
+        L[i].backgroundProperty().set(b);
+
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                try{
+                    musicView.getMediaPlayer().dispose();
+                }catch(Exception E){
+                    System.out.println(E);
+                }
+
+                playahMakah(musicList.get(i) ,musicView);
+                System.out.println(musicList.get(i).toString());
+                System.out.println(name + " Pressed");
+
+                musicView.getMediaPlayer().play();
+
+            }
+        });
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
+
     }
 
-    public static void podButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
+    public static void podButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
         String name = objs.getContentName();
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+            }
+        });
+
+
+    String thefuquwant = objs.getLocation();
+        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        File file = new File(objs.getLocation());
+        URI uri = file.toURI();
+        M[i] = new Media(uri.toString());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
 
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
                 System.out.println(name + " Pressed");
 
             }
         });
-        cont.getChildren().add(L[i]);
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
     }
 
     public static void ebkButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
+        System.out.println(i);
         String name = objs.getContentName();
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+            }
+        });
+
+
+
+
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
 
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
                 System.out.println(name + " Pressed");
 
             }
         });
-        cont.getChildren().add(L[i]);
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
     }
 
-    public static void abkButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
+    public static void abkButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
         String name = objs.getContentName();
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+            }
+        });
+
+
+        String thefuquwant = objs.getLocation();
+        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        File file = new File(objs.getLocation());
+        URI uri = file.toURI();
+        M[i] = new Media(uri.toString());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
-        MouseEvent click;
-
-
-
-
-
 
         L[i].setOnAction(new EventHandler<ActionEvent>() {
-
-
             @Override
             public void handle(ActionEvent press) {
-
-
                 System.out.println(name + " Pressed");
 
             }
         });
-        cont.getChildren().add(L[i]);
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
     }
-    public static void vidButt(Content objs, Button[] L, int i, VBox cont, Background b) {
-
+    public static void vidButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
         String name = objs.getContentName();
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+            }
+        });
+
+
+        String thefuquwant = objs.getLocation();
+        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        File file = new File(objs.getLocation());
+        URI uri = file.toURI();
+        M[i] = new Media(uri.toString());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
 
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
                 System.out.println(name + " Pressed");
 
             }
         });
-        cont.getChildren().add(L[i]);
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
     }
 
     public static void appButt(Content objs, Button[] L, int i, TilePane cont, Background b) {
@@ -1228,22 +1415,49 @@ public class PacApp extends Application {
         cont.getChildren().add(L[i]);
     }
 
-    public static void searchButt(Content objs, Button[] L, int i, VBox cont, Background b) {
+    public static void searchButt(Content objs, Button[] L, int i, VBox cont, Background b,Media[] M) {
 
         String name = objs.getContentName();
+        HBox doubleButt = new HBox();
+        CheckBox syncer = new CheckBox();
+        syncer.backgroundProperty().set(b);
+        syncer.setSelected(objs.getWantToSync());
+        syncer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                ContentDAO dao = new ContentDAO();
+                dao.setSyncStatus(objs);
+                System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+            }
+        });
+
+
+
+        File file = new File(objs.getLocation());
+        URI uri = file.toURI();
+        M[i] = new Media(uri.toString());
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
-        L[i].setOnAction(new EventHandler<ActionEvent>() {
 
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
                 System.out.println(name + " Pressed");
 
             }
         });
-        cont.getChildren().add(L[i]);
-    }
+        doubleButt.backgroundProperty().set(b);
+        doubleButt.getChildren().addAll(syncer,L[i]);
+        cont.getChildren().add(doubleButt);
 
 }
+
+    public static MediaPlayer playahMakah(Media M,MediaView V){
+        MediaPlayer player = new MediaPlayer(M);
+        V.setMediaPlayer(player);
+        return player;
+    }
+}
+

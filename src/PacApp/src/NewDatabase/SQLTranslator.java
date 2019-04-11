@@ -41,8 +41,12 @@ public class SQLTranslator {
      * that File knows which OS it's on to determine what sort of
      * file separator to use (either / or \)
      */
-    private File file = new File("PACDB.db").getAbsoluteFile();
-    private final String dbLocationPath = "jdbc:sqlite:".concat(file.toString());
+//    File file = new File(System.getProperty("user.dir"));
+//    File file2 = new File(file.getAbsolutePath());
+//    File file3 = new File(file2.getAbsolutePath());
+//    private final String dbLocationPath = "jdbc:sqlite".concat(file3.toString() + "PACDB.db");
+    
+    //private final String dbLocationPath = "jdbc:sqlite:".concat(file.toString());
 
     /**
      * Adds a new piece of content to DB. Desperately needs to be refactored down.
@@ -769,6 +773,29 @@ public class SQLTranslator {
         //Default Value
         return false;
     }
+    
+    
+    /**
+     * Deletes all content of a given type
+     * @param contentType
+     * @return 
+     */
+    public boolean deleteContentByType(String contentType) {
+        String query = "DELETE FROM " + DBEnumeration.CONTENT
+                + " WHERE ContentTypeID = (SELECT ContentTypeID FROM "
+                + DBEnumeration.CONTENTTYPE + " WHERE ContentType = '" + contentType
+                + "')";
+        if(deleteFromDB(query)) {
+            System.out.println("All content of type: " + contentType
+            + " deleted");
+            return true;
+        }
+        
+        else {
+            System.out.println("Error with deleting content of type: " + contentType);
+            return false;
+        }
+    }
 
 
     /**
@@ -811,12 +838,8 @@ public class SQLTranslator {
             try {
                 Files.deleteIfExists(Paths.get(filePath));
             }
-
-            catch(NoSuchFileException e) {
-                System.out.println(e.getMessage());
-            }
-
-            catch(DirectoryNotEmptyException e) {
+            
+            catch(NoSuchFileException | DirectoryNotEmptyException e) {
                 System.out.println(e.getMessage());
             }
 
@@ -834,8 +857,14 @@ public class SQLTranslator {
             return false;
         }
     }
-
-
+    
+    
+    
+    /**
+     * Deletes content from the db given the object. Deletes file as well.
+     * @param content
+     * @return 
+     */
     public boolean deleteContent(Content content) {
         return deleteContent(content.getContentName(), content.getContentTypeName(), content.getCreatorName(), content.getLocation());
     }
@@ -2086,6 +2115,32 @@ public class SQLTranslator {
 
         return false;
     }
+    
+    
+    public int setSyncStatusTest(int contentID) {
+        try {
+            
+            String check = "SELECT WantToSync FROM " + DBEnumeration.CONTENT
+                    + " WHERE ContentID = " + contentID;
+            ResultSet res = getRecords(check);
+            int value = res.getInt("WantToSync");
+            
+            if(value == 0) {
+                setSyncStatus(contentID);
+                return 1;
+            }
+            else {
+                unsetSyncStatus(contentID);
+                return 0;
+            }
+        } 
+        
+        catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return 0;
+    }
 
 
     /**
@@ -2251,11 +2306,24 @@ public class SQLTranslator {
 
         try {
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection(dbLocationPath);
+            conn = DriverManager.getConnection(getDBPath());
         }
         catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    
+    /**
+     * used in get connection to find db path
+     * @return 
+     */
+    private String getDBPath() {
+        /*File file = new File(System.getProperty("user.dir"));
+        File file2 = new File(file.getParentFile().toString());
+        File file3 = new File(file2.getParentFile().toString());*/
+        String dbLocationPath = "jdbc:sqlite:./PACDB.db";
+        return dbLocationPath;
     }
 
 

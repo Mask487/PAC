@@ -91,6 +91,27 @@ public class PlaylistDAO {
     
     
     /**
+     * Deletes a specific piece of content from a given play list
+     * @param content
+     * @param playlist
+     * @return 
+     */
+    public boolean deleteFromPlaylist(Content content, Playlist playlist) {
+        return sql.deleteFromPlaylist(content.getContentID(), playlist.getPlaylistID());
+    }
+    
+    
+    /**
+     * Deletes an entire play list. Does not remove the content in that play list from the db though.
+     * @param playlist
+     * @return 
+     */
+    public boolean deletePlaylist(Playlist playlist) {
+        return sql.deletePlaylist(playlist.getPlaylistID());
+    }
+    
+    
+    /**
      * Gets all data from the result set and creates the new content object.
      * @param res
      * @return 

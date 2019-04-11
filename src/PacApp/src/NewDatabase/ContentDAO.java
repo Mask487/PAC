@@ -5,6 +5,7 @@
  */
 package NewDatabase;
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -66,7 +67,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content); 
+                if(content != null) {
+                    contents.add(content);
+                } 
             }
             
             return contents;
@@ -92,8 +95,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
-                
+                if(content != null) {
+                    contents.add(content);
+                }                
             }
             
             return contents;
@@ -119,7 +123,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -146,7 +152,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
                 
             }
             return contents;
@@ -172,7 +180,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
                 
             }
             return contents;
@@ -198,7 +208,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -225,7 +237,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -252,7 +266,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
                 
             }
             return contents;
@@ -277,7 +293,9 @@ public class ContentDAO {
         try{
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -298,7 +316,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -325,7 +345,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -352,7 +374,9 @@ public class ContentDAO {
         try {
             while(res.next()) {
                 Content content = extractDataFromResultSet(res);
-                contents.add(content);
+                if(content != null) {
+                    contents.add(content);
+                }
             }
             
             return contents;
@@ -454,6 +478,16 @@ public class ContentDAO {
     
     
     /**
+     * Deletes all content given a specific type
+     * @param contentType
+     * @return 
+     */
+    public boolean deleteContentByType(String contentType) {
+        return sql.deleteContentByType(contentType);
+    }
+    
+    
+    /**
      * Returns a creator's id from db given their name
      * @param creatorName
      * @return 
@@ -508,18 +542,40 @@ public class ContentDAO {
      * @param content
      * @return 
      */
-    public boolean setSyncStatus(Content content) {
-        return sql.setSyncStatus(content.getContentID());
-    }
+//    public boolean setSyncStatus(Content content) {
+//        return sql.setSyncStatus(content.getContentID());
+//    }
+//    
+//    
+//    /**
+//     * Set the sync status for a piece of content to false (i.e they don't want it to sync)
+//     * @param content
+//     * @return 
+//     */
+//    public boolean unsetSyncStatus(Content content) {
+//        return sql.unsetSyncStatus(content.getContentID());
+//    }
     
     
     /**
-     * Set the sync status for a piece of content to false (i.e they don't want it to sync)
+     * sets or unsets a sync status
      * @param content
      * @return 
      */
-    public boolean unsetSyncStatus(Content content) {
-        return sql.unsetSyncStatus(content.getContentID());
+    public boolean setSyncStatus(Content content) {
+        int val = sql.setSyncStatusTest(content.getContentID());
+        //Content is set to not sync
+        if(val == 1) {
+            content.setWantToSync(true);
+            return true;
+        }
+        
+        else {
+            content.setWantToSync(false);
+            return true;
+        }
+        
+        
     }
     
     
@@ -608,6 +664,13 @@ public class ContentDAO {
             content.setUploadDate(res.getString("Uploaddate"));
             content.setUrl(res.getString("DownloadURL"));
             content.setWantToSync(res.getBoolean("WantToSync"));
+            
+            //Check if file exists. If it doesn't, delete it from the database.
+            File temp = new File(content.getLocation());
+            if(!temp.exists()) {
+                deleteContent(content);
+                return null;
+            }
             
             return content; 
         }

@@ -1,5 +1,6 @@
 package pacapp;
 
+import NewDatabase.Content;
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
 
@@ -9,11 +10,11 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
+import java.util.*;
 import java.net.DatagramSocket;
 import java.sql.*;
+
+import NewDatabase.ContentDAO;
 
 class Transfer extends Thread implements pacapp.TransferObject {
     private PortableDevice pD = null;
@@ -412,14 +413,15 @@ class Transfer extends Thread implements pacapp.TransferObject {
         String location;
         String contentName;
         String type;
+        /*
         try {
-            Class.forName("org.sqlite.JDBC");
+            //Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:Database\\PACDB.db");
             c.setAutoCommit(false);
             System.out.println("Opened Database");
             stmt = c.createStatement();
             //SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID, and c.SyncStatusID = FALSE;
-            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID and c.WantToSync = TRUE;");
+            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID and c.WantToSync = 1;");
             while(rs.next()){
                 if(rs.getString("Location") == null){
                     System.out.println("location is null");
@@ -442,6 +444,17 @@ class Transfer extends Thread implements pacapp.TransferObject {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+        */
+        ContentDAO cd = new ContentDAO();
+        Set coll = cd.getAllContentBySyncStatus();
+        Iterator collection = coll.iterator();
+        while(collection.hasNext()){
+            Content con = (Content) collection.next();
+            String locationString = con.getLocation();
+            String nameString = con.getContentName();
+            String typeString = con.getContentTypeName();
+            locations.add(new FileA(locationString, nameString, typeString));
+        }
         return locations;
     }
 
@@ -454,6 +467,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
     public void addFiles(ArrayList<FileA> files){
         for (int i = 0; i < files.size(); i++) {
             File file = new File(files.get(i).getLocation());
+            System.out.println(files.get(i).getType());
             switch(files.get(i).getType().toUpperCase()){
                 case "PODCAST":
                     addPodcast(file);
@@ -723,7 +737,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
                 System.out.println("No BAckups Found!");
             }else{
                 Arrays.sort(phone);
-                File inPhone = new File(phone[0].getAbsolutePath() + "\\Phone");// "*\Backups\Phone"
+                File inPhone = new File(phone[0].getAbsolutePath());// "*\Backups\Phone"
                 for (PortableDeviceObject obj : pD.getRootObjects()){//  Device:\
                     if(obj instanceof PortableDeviceStorageObject && obj.getName().equalsIgnoreCase("phone")){
                         PortableDeviceStorageObject storage = (PortableDeviceStorageObject) obj;// Device:\Phone
@@ -747,9 +761,11 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
     }
 
+    /*
     public void wifiSetup() throws IOException {
         //not done
     }
+    */
 }
 
 class FileA{

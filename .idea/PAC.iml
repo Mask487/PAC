@@ -14,5 +14,6 @@
     <orderEntry type="library" name="sqlite-jdbc-3.23.1" level="project" />
     <orderEntry type="library" name="tika-app-1.20" level="project" />
     <orderEntry type="library" name="Libraries1" level="project" />
+    <orderEntry type="library" name="Libraries" level="project" />
   </component>
 </module>

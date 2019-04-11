@@ -41,6 +41,6 @@ public class Test{
                         0, Long.MAX_VALUE);*/
         
         
-        //RSSReader.DownloadPodcast("http://www.hellointernet.fm/podcast?format=rss");
+        //pacapp.RSSReader.DownloadPodcast("http://www.hellointernet.fm/podcast?format=rss");
     }
 }
