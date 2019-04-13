@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
     </list>
@@ -33,11 +34,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="1692" column="51" lean-forward="true" selection-start-line="1692" selection-start-column="51" selection-end-line="1692" selection-end-column="51" />
+            <state relative-caret-position="1309">
+              <caret line="1618" column="55" selection-start-line="1618" selection-start-column="55" selection-end-line="1618" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#56669#56670#0" expanded="true" />
+                <element signature="e#57797#57798#0" expanded="true" />
+                <element signature="e#57825#57826#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -138,9 +140,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>no mu</find>
-      <find>addCont</find>
-      <find>syn</find>
       <find>music</find>
       <find>searchS</find>
       <find>searchA</find>
@@ -168,6 +167,9 @@
       <find>podcast.</find>
       <find>playah</find>
       <find>font</find>
+      <find>stack</find>
+      <find>check</find>
+      <find>arrow</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -203,8 +205,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="100" />
-    <option name="y" value="38" />
+    <option name="x" value="64" />
+    <option name="y" value="37" />
     <option name="width" value="1500" />
     <option name="height" value="804" />
   </component>
@@ -214,7 +216,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -252,7 +254,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -381,10 +383,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="100" y="38" width="1500" height="804" extended-state="0" />
+    <frame x="64" y="37" width="1500" height="804" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14403293" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14609054" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -403,7 +405,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.31994644" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.31882024" />
       <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32936078" />
       <window_info anchor="bottom" id="DB Execution Console" order="14" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -788,11 +790,12 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/media/Media.java" />
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="1692" column="51" lean-forward="true" selection-start-line="1692" selection-start-column="51" selection-end-line="1692" selection-end-column="51" />
+        <state relative-caret-position="1309">
+          <caret line="1618" column="55" selection-start-line="1618" selection-start-column="55" selection-end-line="1618" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#56669#56670#0" expanded="true" />
+            <element signature="e#57797#57798#0" expanded="true" />
+            <element signature="e#57825#57826#0" expanded="true" />
           </folding>
         </state>
       </provider>

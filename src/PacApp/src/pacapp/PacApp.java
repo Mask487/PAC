@@ -110,6 +110,7 @@ public class PacApp extends Application {
         VBox phoneStack = new VBox();
         VBox searchResults = new VBox();
         ScrollPane searchPane = new ScrollPane(searchResults);
+        StackPane controllStack = new StackPane();
 
         //create background anchor
         AnchorPane.setRightAnchor(bp, 0.0);
@@ -221,13 +222,13 @@ public class PacApp extends Application {
         HBox hSearch = new HBox();
         hSearch.setPadding(new Insets(5, 5, 5, 5));
         TextField search = new TextField("");
-        search.setPromptText("Search");
+        search.setPromptText("Search\u25BC");
         search.backgroundProperty().set(buBack);
         hSearch.getChildren().add(search);
         hSearch.backgroundProperty().set(buBack);
 
 
-
+// Arrows checks ▼ ▲ ✓ ✗
 
 
         searchPane.backgroundProperty().set(buBack);
@@ -322,8 +323,8 @@ public class PacApp extends Application {
                     musButt(content, listings, i,musicCont,buBack,mediaSet);
                     i++;
                 }
-                bottomAnchorPane.getChildren().clear();
-                bottomAnchorPane.getChildren().addAll(musicControll,RSSLookup);
+                //controllStack.getChildren().clear();
+                controllStack.getChildren().addAll(musicControll);
             }
 
 
@@ -415,8 +416,8 @@ public class PacApp extends Application {
                     abkButt(content, listings, i,audioBookCont,buBack,mediaSet);
                     i++;
                 }
-                bottomAnchorPane.getChildren().clear();
-                bottomAnchorPane.getChildren().addAll(audioBookControll,RSSLookup);
+                controllStack.getChildren().clear();
+                controllStack.getChildren().addAll(audioBookControll);
             }
 
 
@@ -444,8 +445,8 @@ public class PacApp extends Application {
                     podButt(content, listings, i,podcastCont,buBack,mediaSet);
                     i++;
                 }
-                bottomAnchorPane.getChildren().clear();
-                bottomAnchorPane.getChildren().addAll(podcastControll,RSSLookup);
+               controllStack.getChildren().clear();
+                controllStack.getChildren().addAll(podcastControll);
             }
 
 
@@ -478,8 +479,8 @@ public class PacApp extends Application {
                     vidButt(content, listings, i,videoCont,buBack,mediaSet);
                     i++;
                 }
-                bottomAnchorPane.getChildren().clear();
-                bottomAnchorPane.getChildren().addAll(videoControll,RSSLookup);
+                controllStack.getChildren().clear();
+                controllStack.getChildren().addAll(videoControll);
             }
 
 
@@ -693,7 +694,7 @@ public class PacApp extends Application {
             }
         });
 
-        Insets sliderIn = new Insets(8.0,0.0,8.0,0.0);
+       // Insets sliderIn = new Insets(8.0,0.0,8.0,0.0);
 
 
 
@@ -840,7 +841,7 @@ public class PacApp extends Application {
                     musicMuteIcon.setImage(highVolIcon);
 
                 }
-                musicMuteIcon.setImage(muteIcon);
+
 
 
             }
@@ -870,6 +871,12 @@ public class PacApp extends Application {
 
         podcastPlay.backgroundProperty().set(buBack);         //adds transparent background
         podcastPlay.setPadding(inset);
+        Image PodPlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
+        ImageView podcastPlayIcon = new ImageView();
+        podcastPlayIcon.setImage(PlayIcon);
+        Image podPauseIcon = new Image("pause.png");   //Load play  Icon for imageview
+        ImageView podcastPauseIcon = new ImageView();
+        musicPauseIcon.setImage(PauseIcon);   //adds icon to imageview
 
         podcastPlay.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -877,10 +884,10 @@ public class PacApp extends Application {
 
                 System.out.println("podcast Play Pressed");
                 podcastView.getMediaPlayer().play();
-                musicPlayIcon.setImage(PlayIcon);
+                musicPlayIcon.setImage(PodPlayIcon);
                 if(podcastView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
                     podcastView.getMediaPlayer().pause();
-                    musicPlayIcon.setImage(PauseIcon);
+                    musicPlayIcon.setImage(podPauseIcon);
 
             }}
         });
@@ -950,7 +957,7 @@ public class PacApp extends Application {
                         musicMuteIcon.setImage(highVolIcon);
 
                     }
-                    musicMuteIcon.setImage(muteIcon);
+
 
 
 
@@ -967,16 +974,23 @@ public class PacApp extends Application {
         abookPlay.backgroundProperty().set(buBack);         //adds transparent background
         abookPlay.setPadding(inset);
 
+
+        Image abPlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
+        ImageView abookPlayIcon = new ImageView();
+        abookPlayIcon.setImage(PlayIcon);
+        Image abPauseIcon = new Image("pause.png");   //Load play  Icon for imageview
+        ImageView abookPauseIcon = new ImageView();
+        musicPauseIcon.setImage(PauseIcon);   //adds icon to imageview
         abookPlay.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
 
                 System.out.println("Abook Play Pressed");
                 aBookView.getMediaPlayer().play();
-                musicPlayIcon.setImage(PlayIcon);
+                musicPlayIcon.setImage(abPlayIcon);
                 if(aBookView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
                     aBookView.getMediaPlayer().pause();
-                    musicPlayIcon.setImage(PauseIcon);
+                    musicPlayIcon.setImage(abPauseIcon);
 
                 }}
         });
@@ -1046,7 +1060,7 @@ public class PacApp extends Application {
                     musicMuteIcon.setImage(highVolIcon);
 
                 }
-                musicMuteIcon.setImage(muteIcon);
+
 
 
 
@@ -1063,16 +1077,22 @@ public class PacApp extends Application {
         videoPlay.backgroundProperty().set(buBack);         //adds transparent background
         videoPlay.setPadding(inset);
 
+        Image viPlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
+        ImageView videoPlayIcon = new ImageView();
+        videoPlayIcon.setImage(PlayIcon);
+        Image viPauseIcon = new Image("pause.png");   //Load play  Icon for imageview
+        ImageView videoPauseIcon = new ImageView();
+        musicPauseIcon.setImage(PauseIcon);   //adds icon to imageview
         videoPlay.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
 
                 System.out.println("Video Play Pressed");
                 videoView.getMediaPlayer().play();
-                musicPlayIcon.setImage(PlayIcon);
+                musicPlayIcon.setImage(viPlayIcon);
                 if(videoView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
                     videoView.getMediaPlayer().pause();
-                    musicPlayIcon.setImage(PauseIcon);
+                    musicPlayIcon.setImage(viPauseIcon);
 
                 }}
         });
@@ -1142,7 +1162,7 @@ public class PacApp extends Application {
                     musicMuteIcon.setImage(highVolIcon);
 
                 }
-                musicMuteIcon.setImage(muteIcon);
+
 
 
 
@@ -1380,8 +1400,10 @@ public class PacApp extends Application {
         AnchorPane.setBottomAnchor(mainStack, 25.0);// area around
         AnchorPane.setTopAnchor(mainStack, 25.0);// area around
 
+        bottomAnchorPane.getChildren().add(controllStack);
+
         //MusicPane
-        mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+        mainStack.getChildren().clear();
         mainStack.getChildren().add(musicPane);
         musicCont.getChildren().clear();
         ContentDAO dao = new ContentDAO();
@@ -1415,11 +1437,13 @@ public class PacApp extends Application {
         centerAnchorPane.setTopAnchor(tAnchor, 5.0);
         centerAnchorPane.setBottomAnchor(tAnchor, 5.0);
 
-        bottomAnchorPane.getChildren().addAll(musicControll,RSSLookup);
+
+        controllStack.getChildren().addAll(musicControll);
+        bottomAnchorPane.getChildren().addAll(RSSLookup);
         bottomAnchorPane.setRightAnchor(RSSLookup, 10.0);
-        bottomAnchorPane.setLeftAnchor(musicControll, 10.0);
-        bottomAnchorPane.setTopAnchor(musicControll, 10.0);
-        bottomAnchorPane.setBottomAnchor(musicControll, 10.0);
+        bottomAnchorPane.setLeftAnchor(controllStack, 10.0);
+        bottomAnchorPane.setTopAnchor(controllStack, 10.0);
+        bottomAnchorPane.setBottomAnchor(controllStack, 10.0);
         leftButtonPane.getChildren().addAll(vbutt, bvbutt);
         topAnchorPane.getChildren().addAll(hSearch);
         AnchorPane.setTopAnchor(vbutt, 0.0);
@@ -1444,19 +1468,44 @@ public class PacApp extends Application {
     public static void musButt(Content objs, Button[] L, int i, VBox cont, Background b,Media[] M) {
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
-        CheckBox syncer = new CheckBox();
+        StackPane syncStatus = new StackPane();
+        Button syncer = new Button("✔");
+        Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(b);
-        syncer.setSelected(objs.getWantToSync());
+        unsyncer.backgroundProperty().set(b);
+        if(objs.getWantToSync()){
+
+        syncStatus.getChildren().add(syncer);}
+        else{
+            syncStatus.getChildren().add(unsyncer);
+        }
+      //  syncer.setSelected(objs.getWantToSync());
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                ContentDAO dao = new ContentDAO();
+                //ContentDAO dao = new ContentDAO();
                 dao.setSyncStatus(objs);
+                syncStatus.getChildren().clear();
+                syncStatus.getChildren().add(unsyncer);
 
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
         });
+                unsyncer.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent press) {
+                        //ContentDAO dao = new ContentDAO();
+                        dao.setSyncStatus(objs);
+                        syncStatus.getChildren().clear();
+                        syncStatus.getChildren().add(syncer);
+
+                        System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+                    }
+                }
+
+        );
 
 
         String thefuquwant = objs.getLocation();
@@ -1487,27 +1536,53 @@ public class PacApp extends Application {
 
             }
         });
-        doubleButt.getChildren().addAll(syncer,L[i]);
+        doubleButt.getChildren().addAll(L[i],syncStatus);
         cont.getChildren().add(doubleButt);
+
 
     }
 
     public static void podButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
-        CheckBox syncer = new CheckBox();
+        StackPane syncStatus = new StackPane();
+        Button syncer = new Button("✔");
+        Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(b);
-        syncer.setSelected(objs.getWantToSync());
+        unsyncer.backgroundProperty().set(b);
+        if(objs.getWantToSync()){
+
+            syncStatus.getChildren().add(syncer);}
+        else{
+            syncStatus.getChildren().add(unsyncer);
+        }
+        //  syncer.setSelected(objs.getWantToSync());
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                ContentDAO dao = new ContentDAO();
+                //ContentDAO dao = new ContentDAO();
                 dao.setSyncStatus(objs);
+                syncStatus.getChildren().clear();
+                syncStatus.getChildren().add(unsyncer);
+
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
         });
+        unsyncer.setOnAction(new EventHandler<ActionEvent>() {
+                                 @Override
+                                 public void handle(ActionEvent press) {
+                                     //ContentDAO dao = new ContentDAO();
+                                     dao.setSyncStatus(objs);
+                                     syncStatus.getChildren().clear();
+                                     syncStatus.getChildren().add(syncer);
 
+                                     System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+                                 }
+                             }
+
+        );
 
     String thefuquwant = objs.getLocation();
         thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
@@ -1541,7 +1616,7 @@ public class PacApp extends Application {
 
                 }
         });
-        doubleButt.getChildren().addAll(syncer,L[i]);
+        doubleButt.getChildren().addAll(L[i],syncStatus);
         cont.getChildren().add(doubleButt);
     }
 
@@ -1549,18 +1624,44 @@ public class PacApp extends Application {
         System.out.println(i);
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
-        CheckBox syncer = new CheckBox();
+        StackPane syncStatus = new StackPane();
+        Button syncer = new Button("✔");
+        Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(b);
-        syncer.setSelected(objs.getWantToSync());
+        unsyncer.backgroundProperty().set(b);
+        if(objs.getWantToSync()){
+
+            syncStatus.getChildren().add(syncer);}
+        else{
+            syncStatus.getChildren().add(unsyncer);
+        }
+        //  syncer.setSelected(objs.getWantToSync());
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                ContentDAO dao = new ContentDAO();
+                //ContentDAO dao = new ContentDAO();
                 dao.setSyncStatus(objs);
+                syncStatus.getChildren().clear();
+                syncStatus.getChildren().add(unsyncer);
+
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
         });
+        unsyncer.setOnAction(new EventHandler<ActionEvent>() {
+                                 @Override
+                                 public void handle(ActionEvent press) {
+                                     //ContentDAO dao = new ContentDAO();
+                                     dao.setSyncStatus(objs);
+                                     syncStatus.getChildren().clear();
+                                     syncStatus.getChildren().add(syncer);
+
+                                     System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+                                 }
+                             }
+
+        );
 
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
@@ -1573,25 +1674,51 @@ public class PacApp extends Application {
 
             }
         });
-        doubleButt.getChildren().addAll(syncer,L[i]);
+        doubleButt.getChildren().addAll(L[i],syncStatus);
         cont.getChildren().add(doubleButt);
     }
 
     public static void abkButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
-        CheckBox syncer = new CheckBox();
+        StackPane syncStatus = new StackPane();
+        Button syncer = new Button("✔");
+        Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(b);
-        syncer.setSelected(objs.getWantToSync());
+        unsyncer.backgroundProperty().set(b);
+        if(objs.getWantToSync()){
+
+            syncStatus.getChildren().add(syncer);}
+        else{
+            syncStatus.getChildren().add(unsyncer);
+        }
+        //  syncer.setSelected(objs.getWantToSync());
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                ContentDAO dao = new ContentDAO();
+                //ContentDAO dao = new ContentDAO();
                 dao.setSyncStatus(objs);
+                syncStatus.getChildren().clear();
+                syncStatus.getChildren().add(unsyncer);
+
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
         });
+        unsyncer.setOnAction(new EventHandler<ActionEvent>() {
+                                 @Override
+                                 public void handle(ActionEvent press) {
+                                     //ContentDAO dao = new ContentDAO();
+                                     dao.setSyncStatus(objs);
+                                     syncStatus.getChildren().clear();
+                                     syncStatus.getChildren().add(syncer);
+
+                                     System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+                                 }
+                             }
+
+        );
 
 
         String thefuquwant = objs.getLocation();
@@ -1625,25 +1752,50 @@ public class PacApp extends Application {
 
             }
         });
-        doubleButt.getChildren().addAll(syncer,L[i]);
+        doubleButt.getChildren().addAll(L[i],syncStatus);
         cont.getChildren().add(doubleButt);
     }
     public static void vidButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
-        CheckBox syncer = new CheckBox();
+        StackPane syncStatus = new StackPane();
+        Button syncer = new Button("✔");
+        Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(b);
-        syncer.setSelected(objs.getWantToSync());
+        unsyncer.backgroundProperty().set(b);
+        if(objs.getWantToSync()){
+
+            syncStatus.getChildren().add(syncer);}
+        else{
+            syncStatus.getChildren().add(unsyncer);
+        }
+        //  syncer.setSelected(objs.getWantToSync());
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                ContentDAO dao = new ContentDAO();
+                //ContentDAO dao = new ContentDAO();
                 dao.setSyncStatus(objs);
+                syncStatus.getChildren().clear();
+                syncStatus.getChildren().add(unsyncer);
+
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
         });
+        unsyncer.setOnAction(new EventHandler<ActionEvent>() {
+                                 @Override
+                                 public void handle(ActionEvent press) {
+                                     //ContentDAO dao = new ContentDAO();
+                                     dao.setSyncStatus(objs);
+                                     syncStatus.getChildren().clear();
+                                     syncStatus.getChildren().add(syncer);
 
+                                     System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+                                 }
+                             }
+
+        );
 
         String thefuquwant = objs.getLocation();
         thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
@@ -1678,7 +1830,7 @@ public class PacApp extends Application {
 
             }
         });
-        doubleButt.getChildren().addAll(syncer,L[i]);
+        doubleButt.getChildren().addAll(L[i],syncStatus);
         cont.getChildren().add(doubleButt);
     }
 
