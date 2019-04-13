@@ -1705,9 +1705,10 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 try{
                 String book = new Scanner(new File(objs.getLocation())).useDelimiter("\\Z").next();
-                System.out.println(book);
                 cont.getChildren().clear();
-                cont.getChildren().add(new Text(book));
+                Text bookT = new Text(book);
+                bookT.setFill(Paint.valueOf("BBBBBB"));//.setTextFill(Paint.valueOf("BBBBBB"));
+                cont.getChildren().add(bookT);
 
                 }
                 catch(IOException E){
