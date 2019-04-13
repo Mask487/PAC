@@ -59,6 +59,17 @@ public class PacApp extends Application {
     static List<Media> abookList = new ArrayList<>();
     static int i = 0;
 
+    static Insets bFillIn = new Insets(0);
+    static CornerRadii bFillCR = new CornerRadii(0);
+
+    //Button panel Color
+   static BackgroundFill buFill = new BackgroundFill(Paint.valueOf("TRANSPARENT"), bFillCR, bFillIn);
+   static Background buBack = new Background(buFill);
+
+    //highlight background
+   static BackgroundFill hiFill = new BackgroundFill(Paint.valueOf("515151"), bFillCR, bFillIn);
+   static Background hiBack = new Background(hiFill);
+
     @Override
     public void start(Stage stage) throws Exception {
         SQLTranslator sql = new SQLTranslator();
@@ -75,8 +86,7 @@ public class PacApp extends Application {
         root2.setPrefSize(750, 510);
         //root2.setMaxSize(1600,900);
 
-        Insets bFillIn = new Insets(0);
-        CornerRadii bFillCR = new CornerRadii(0);
+
 
         BorderPane bp = new BorderPane();
         root2.getChildren().add(bp);
@@ -129,9 +139,7 @@ public class PacApp extends Application {
         Insets inset = new Insets(-1.0);
         leftButtonPane.backgroundProperty().set(lPaneColor);
 
-        //Button panel Color
-        BackgroundFill buFill = new BackgroundFill(Paint.valueOf("TRANSPARENT"), bFillCR, bFillIn);
-        Background buBack = new Background(buFill);
+
 
         //CenterPane preferences
         BackgroundFill cenFill = new BackgroundFill(Paint.valueOf("414141"), bFillCR, bFillIn);
@@ -329,7 +337,11 @@ public class PacApp extends Application {
                     i++;
                 }
                 //controllStack.getChildren().clear();
-                controllStack.getChildren().addAll(musicControll);
+                try {
+                    controllStack.getChildren().addAll(musicControll);
+                }catch(IllegalArgumentException Error){
+                    System.out.println("Tried to add controlls again");
+                }
             }
 
 
@@ -595,6 +607,20 @@ public class PacApp extends Application {
         lightMode.setTextFill(Paint.valueOf("BBBBBB"));
         lightMode.setPadding(inset);
 
+        lightMode.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                lightMode.backgroundProperty().set(hiBack);
+            }
+        });
+
+        lightMode.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                lightMode.backgroundProperty().set(buBack);
+            }
+        });
+
         lightMode.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -631,6 +657,20 @@ public class PacApp extends Application {
         Button sync = new Button("Sync Phone");       //Creates button
         sync.setTextFill(Paint.valueOf("BBBBBB"));
         sync.backgroundProperty().set(buBack);         //adds transparent background
+
+        sync.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                sync.backgroundProperty().set(hiBack);
+            }
+        });
+
+        sync.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+               sync.backgroundProperty().set(buBack);
+            }
+        });
         sync.setPadding(inset);
 
         sync.setOnAction(new EventHandler<ActionEvent>() {
@@ -647,6 +687,20 @@ public class PacApp extends Application {
         backup.setTextFill(Paint.valueOf("BBBBBB"));
         backup.backgroundProperty().set(buBack);         //adds transparent background
         backup.setPadding(inset);
+
+        backup.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                backup.backgroundProperty().set(hiBack);
+            }
+        });
+
+        backup.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                backup.backgroundProperty().set(buBack);
+            }
+        });
 
         backup.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -667,6 +721,20 @@ public class PacApp extends Application {
         copy.backgroundProperty().set(buBack);         //adds transparent background
 
 //        });   2EB900 green color
+       copy.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                copy.backgroundProperty().set(hiBack);
+            }
+        });
+
+        copy.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                copy.backgroundProperty().set(buBack);
+            }
+        });
+
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -1548,6 +1616,20 @@ public class PacApp extends Application {
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
 
+        L[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(hiBack);
+            }
+        });
+
+        L[i].setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(buBack);
+            }
+        });
+
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -1624,6 +1706,19 @@ public class PacApp extends Application {
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
 
+        L[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+                    public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(hiBack);
+            }
+        });
+
+        L[i].setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(buBack);
+            }
+        });
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -1700,6 +1795,20 @@ public class PacApp extends Application {
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
 
+        L[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(hiBack);
+            }
+        });
+
+        L[i].setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(buBack);
+            }
+        });
+
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -1774,6 +1883,20 @@ public class PacApp extends Application {
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
+
+        L[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(hiBack);
+            }
+        });
+
+        L[i].setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(buBack);
+            }
+        });
 
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -1851,6 +1974,20 @@ public class PacApp extends Application {
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
 
+        L[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(hiBack);
+            }
+        });
+
+        L[i].setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(buBack);
+            }
+        });
+
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -1911,18 +2048,45 @@ public class PacApp extends Application {
 
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
-        CheckBox syncer = new CheckBox();
+        StackPane syncStatus = new StackPane();
+        Button syncer = new Button("✔");
+        Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(b);
-        syncer.setSelected(objs.getWantToSync());
+        unsyncer.backgroundProperty().set(b);
+
+        if(objs.getWantToSync()){
+
+            syncStatus.getChildren().add(syncer);}
+        else{
+            syncStatus.getChildren().add(unsyncer);
+        }
+        //  syncer.setSelected(objs.getWantToSync());
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                ContentDAO dao = new ContentDAO();
+                //ContentDAO dao = new ContentDAO();
                 dao.setSyncStatus(objs);
+                syncStatus.getChildren().clear();
+                syncStatus.getChildren().add(unsyncer);
+
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
         });
+        unsyncer.setOnAction(new EventHandler<ActionEvent>() {
+                                 @Override
+                                 public void handle(ActionEvent press) {
+                                     //ContentDAO dao = new ContentDAO();
+                                     dao.setSyncStatus(objs);
+                                     syncStatus.getChildren().clear();
+                                     syncStatus.getChildren().add(syncer);
+
+                                     System.out.println(name + " switched to sync = " + objs.getWantToSync());
+
+                                 }
+                             }
+
+        );
 
 
 
@@ -1933,6 +2097,20 @@ public class PacApp extends Application {
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
 
+        L[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(hiBack);
+            }
+        });
+
+        L[i].setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent entered){
+                L[i].backgroundProperty().set(buBack);
+            }
+        });
+
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -1941,7 +2119,7 @@ public class PacApp extends Application {
             }
         });
         doubleButt.backgroundProperty().set(b);
-        doubleButt.getChildren().addAll(syncer,L[i]);
+        doubleButt.getChildren().addAll(L[i],syncStatus);
         cont.getChildren().add(doubleButt);
 
 }
