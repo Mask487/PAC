@@ -733,7 +733,12 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
 
                 System.out.println("Music Play Pressed");
-                musicView.getMediaPlayer().play();
+               try{
+                musicView.getMediaPlayer().play();}
+               catch(NullPointerException E){
+                    playahMakah(musicList.get(0),musicView);
+                   musicView.getMediaPlayer().play();
+                }
                 musicPlayIcon.setImage(PlayIcon);
                 if(musicView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
                     musicView.getMediaPlayer().pause();
@@ -883,7 +888,12 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
 
                 System.out.println("podcast Play Pressed");
-                podcastView.getMediaPlayer().play();
+                try{
+                    podcastView.getMediaPlayer().play();}
+                catch(NullPointerException E){
+                    playahMakah(podcastList.get(0),podcastView);
+                    podcastView.getMediaPlayer().play();
+                }
                 musicPlayIcon.setImage(PodPlayIcon);
                 if(podcastView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
                     podcastView.getMediaPlayer().pause();
@@ -986,7 +996,12 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
 
                 System.out.println("Abook Play Pressed");
-                aBookView.getMediaPlayer().play();
+                try{
+                    aBookView.getMediaPlayer().play();}
+                catch(NullPointerException E){
+                    playahMakah(abookList.get(0),aBookView);
+                    aBookView.getMediaPlayer().play();
+                }
                 musicPlayIcon.setImage(abPlayIcon);
                 if(aBookView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
                     aBookView.getMediaPlayer().pause();
@@ -1088,7 +1103,16 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
 
                 System.out.println("Video Play Pressed");
-                videoView.getMediaPlayer().play();
+                try{
+                    videoView.getMediaPlayer().play();
+                    videoCont.getChildren().clear();
+                    videoCont.getChildren().add(videoView);}
+                catch(NullPointerException E){
+                    playahMakah(videoList.get(0),videoView);
+                    videoView.getMediaPlayer().play();
+                    videoCont.getChildren().clear();
+                    videoCont.getChildren().add(videoView);;
+                }
                 musicPlayIcon.setImage(viPlayIcon);
                 if(videoView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
                     videoView.getMediaPlayer().pause();
