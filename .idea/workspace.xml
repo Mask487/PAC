@@ -32,18 +32,18 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="660" column="22" selection-start-line="660" selection-start-column="22" selection-end-line="660" selection-end-column="22" />
+            <state relative-caret-position="158">
+              <caret line="2003" column="32" selection-start-line="2003" selection-start-column="32" selection-end-line="2003" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#24843#24844#0" expanded="true" />
                 <element signature="e#24917#24918#0" expanded="true" />
                 <element signature="e#25072#25073#0" expanded="true" />
                 <element signature="e#25146#25147#0" expanded="true" />
-                <element signature="e#82080#82081#0" expanded="true" />
-                <element signature="e#82149#82150#0" expanded="true" />
-                <element signature="e#82299#82300#0" expanded="true" />
-                <element signature="e#82368#82369#0" expanded="true" />
+                <element signature="e#78352#78353#0" expanded="true" />
+                <element signature="e#78421#78422#0" expanded="true" />
+                <element signature="e#78571#78572#0" expanded="true" />
+                <element signature="e#78640#78641#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -144,8 +144,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cleanOriginalFile</find>
-      <find>del</find>
       <find>gree</find>
       <find>inset</find>
       <find>center</find>
@@ -172,8 +170,10 @@
       <find>search</find>
       <find>BBB</find>
       <find>APPP</find>
-      <find>phone</find>
       <find>settings</find>
+      <find>phone</find>
+      <find>Android</find>
+      <find>dao</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -623,18 +623,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="660" column="22" selection-start-line="660" selection-start-column="22" selection-end-line="660" selection-end-column="22" />
+        <state relative-caret-position="158">
+          <caret line="2003" column="32" selection-start-line="2003" selection-start-column="32" selection-end-line="2003" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#24843#24844#0" expanded="true" />
             <element signature="e#24917#24918#0" expanded="true" />
             <element signature="e#25072#25073#0" expanded="true" />
             <element signature="e#25146#25147#0" expanded="true" />
-            <element signature="e#82080#82081#0" expanded="true" />
-            <element signature="e#82149#82150#0" expanded="true" />
-            <element signature="e#82299#82300#0" expanded="true" />
-            <element signature="e#82368#82369#0" expanded="true" />
+            <element signature="e#78352#78353#0" expanded="true" />
+            <element signature="e#78421#78422#0" expanded="true" />
+            <element signature="e#78571#78572#0" expanded="true" />
+            <element signature="e#78640#78641#0" expanded="true" />
           </folding>
         </state>
       </provider>

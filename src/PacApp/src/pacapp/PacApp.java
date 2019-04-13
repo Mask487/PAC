@@ -17,6 +17,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
@@ -265,7 +266,7 @@ public class PacApp extends Application {
                 while (miter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) miter.next();
-                    searchButt(content, listings, i,searchResults,buBack,MediaArray);
+                    searchButt(content, listings, i,searchResults,MediaArray);
                     i++;
                 }
 
@@ -321,7 +322,7 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(musicPane);
                 musicCont.getChildren().clear();
-                ContentDAO dao = new ContentDAO();
+
                 Set mset = dao.getAllContentByType("Music");
                 System.out.println("Music Pressed");
                 Iterator miter = mset.iterator();
@@ -333,7 +334,7 @@ public class PacApp extends Application {
                 while (miter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) miter.next();
-                    musButt(content, listings, i,musicCont,buBack,mediaSet);
+                    musButt(content, listings, i,musicCont,mediaSet);
                     i++;
                 }
                 //controllStack.getChildren().clear();
@@ -353,7 +354,7 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(appPane);
                 appCont.getChildren().clear();
-               // ContentDAO dao = new ContentDAO();
+
                 Set appset = dao.getAllContentByType("App");
                 System.out.println("App Pressed");
                 Iterator appiter = appset.iterator();
@@ -369,7 +370,7 @@ public class PacApp extends Application {
                     while (appiter.hasNext()) {
                         Content content = new Content();
                         content = (NewDatabase.Content) appiter.next();
-                        appButt(content, listings, i, appCont, buBack);
+                        appButt(content, listings, i, appCont);
                         i++;
                     }
                 }
@@ -385,7 +386,7 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(bookPane);
                 bookCont.getChildren().clear();
-                ContentDAO dao = new ContentDAO();
+
                 Set set = dao.getAllContentByType("EBook");
                 System.out.println("Book Pressed");
                 Iterator iter = set.iterator();
@@ -401,7 +402,7 @@ public class PacApp extends Application {
                 while (iter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) iter.next();
-                    ebkButt(content, listings, i,bookCont,buBack);
+                    ebkButt(content, listings, i,bookCont);
                     i++;
                 }
 
@@ -414,7 +415,7 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(audioBookPane);
                 audioBookCont.getChildren().clear();
-                ContentDAO dao = new ContentDAO();
+
                 Set abset = dao.getAllContentByType("audioBook");
                 System.out.println("Audio Book Pressed");
                 Iterator abiter = abset.iterator();
@@ -431,7 +432,7 @@ public class PacApp extends Application {
                 while (abiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) abiter.next();
-                    abkButt(content, listings, i,audioBookCont,buBack,mediaSet);
+                    abkButt(content, listings, i,audioBookCont,mediaSet);
                     i++;
                 }
                 controllStack.getChildren().clear();
@@ -447,7 +448,7 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(podcastPane);
                 podcastCont.getChildren().clear();
-                ContentDAO dao = new ContentDAO();
+
                 Set podcastset = dao.getAllContentByType("Podcast");
                 System.out.println("podcast Pressed");
                 Iterator podcastiter = podcastset.iterator();
@@ -460,7 +461,7 @@ public class PacApp extends Application {
                 while (podcastiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) podcastiter.next();
-                    podButt(content, listings, i,podcastCont,buBack,mediaSet);
+                    podButt(content, listings, i,podcastCont,mediaSet);
                     i++;
                 }
                controllStack.getChildren().clear();
@@ -476,7 +477,7 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(videoPane);
                 videoCont.getChildren().clear();
-                ContentDAO dao = new ContentDAO();
+
                 Set videoset = dao.getAllContentByType("Video");
                 System.out.println("video Pressed");
                 Iterator videoiter = videoset.iterator();
@@ -494,7 +495,7 @@ public class PacApp extends Application {
                 while (videoiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) videoiter.next();
-                    vidButt(content, listings, i,videoCont,buBack,mediaSet);
+                    vidButt(content, listings, i,videoCont,mediaSet);
                     i++;
                 }
                 controllStack.getChildren().clear();
@@ -509,7 +510,7 @@ public class PacApp extends Application {
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(appPane);
-                ContentDAO dao = new ContentDAO();
+
                 Set appset = dao.getAllContentByType("App");
                 System.out.println("Apps Pressed");
                 Iterator appiter = appset.iterator();
@@ -527,7 +528,7 @@ public class PacApp extends Application {
                 while (appiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) appiter.next();
-                    appButt(content, listings, i,appCont,buBack);
+                    appButt(content, listings, i,appCont);
                     i++;
                 }
 
@@ -644,11 +645,6 @@ public class PacApp extends Application {
         Android.setSmooth(true);
         Android.setCache(true);
 
-        if(t.checkConnection()){
-        Label battery = new Label("" + t.getPhoneBattery());
-        Label phoneName = new Label("" + t.getPhoneModel());
-        phoneStack.getChildren().addAll(Android,phoneName,battery);}else
-            phoneStack.getChildren().addAll(Android);
 
         HBox phoneMidRow = new HBox();
         phoneMidRow.setPadding(new Insets(5, 5, 5, 5));
@@ -725,8 +721,19 @@ public class PacApp extends Application {
             @Override
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();//(phoneMidRow, musicPane);
+                if(t.checkConnection()){
+                    Label battery = new Label("" + t.getPhoneBattery());
+                    Label phoneName = new Label("" + t.getPhoneModel());
+                    phoneStack.getChildren().addAll(Android,phoneName,battery);}else
+                        try {
+                            phoneStack.getChildren().addAll(Android);
+                        }catch(IllegalArgumentException E){
+                            System.out.println(E);
+                        }
+
+
                 mainStack.getChildren().add(phoneMidRow);
-                System.out.println("Phone Pressed");
+
 
             }
         });
@@ -1467,7 +1474,7 @@ public class PacApp extends Application {
         mainStack.getChildren().clear();
         mainStack.getChildren().add(musicPane);
         musicCont.getChildren().clear();
-        ContentDAO dao = new ContentDAO();
+
         Set mset = dao.getAllContentByType("Music");
         System.out.println("Music Showing");
         Iterator miter = mset.iterator();
@@ -1485,7 +1492,7 @@ public class PacApp extends Application {
         while (miter.hasNext()) {
             Content content = new Content();
             content = (NewDatabase.Content) miter.next();
-            musButt(content, listings, i,musicCont,buBack,mediaSet);
+            musButt(content, listings, i,musicCont,mediaSet);
             i++;
         }
 
@@ -1526,14 +1533,14 @@ public class PacApp extends Application {
         launch(args);
     }
 
-    public static void musButt(Content objs, Button[] L, int i, VBox cont, Background b,Media[] M) {
+    public static void musButt(Content objs, Button[] L, int i, VBox cont, Media[] M) {
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
         Button unsyncer = new Button("✘");
-        syncer.backgroundProperty().set(b);
-        unsyncer.backgroundProperty().set(b);
+        syncer.backgroundProperty().set(buBack);
+        unsyncer.backgroundProperty().set(buBack);
         if(objs.getWantToSync()){
 
         syncStatus.getChildren().add(syncer);}
@@ -1544,7 +1551,7 @@ public class PacApp extends Application {
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                //ContentDAO dao = new ContentDAO();
+
                 dao.setSyncStatus(objs);
                 syncStatus.getChildren().clear();
                 syncStatus.getChildren().add(unsyncer);
@@ -1556,7 +1563,7 @@ public class PacApp extends Application {
                 unsyncer.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent press) {
-                        //ContentDAO dao = new ContentDAO();
+
                         dao.setSyncStatus(objs);
                         syncStatus.getChildren().clear();
                         syncStatus.getChildren().add(syncer);
@@ -1577,7 +1584,7 @@ public class PacApp extends Application {
         musicList.add(i,M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
+        L[i].backgroundProperty().set(buBack);
 
         highLight(L[i]);
 
@@ -1605,14 +1612,14 @@ public class PacApp extends Application {
 
     }
 
-    public static void podButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
+    public static void podButt(Content objs, Button[] L, int i, VBox cont, Media[] M) {
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
         Button unsyncer = new Button("✘");
-        syncer.backgroundProperty().set(b);
-        unsyncer.backgroundProperty().set(b);
+        syncer.backgroundProperty().set(buBack);
+        unsyncer.backgroundProperty().set(buBack);
         if(objs.getWantToSync()){
 
             syncStatus.getChildren().add(syncer);}
@@ -1623,7 +1630,7 @@ public class PacApp extends Application {
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                //ContentDAO dao = new ContentDAO();
+
                 dao.setSyncStatus(objs);
                 syncStatus.getChildren().clear();
                 syncStatus.getChildren().add(unsyncer);
@@ -1635,7 +1642,7 @@ public class PacApp extends Application {
         unsyncer.setOnAction(new EventHandler<ActionEvent>() {
                                  @Override
                                  public void handle(ActionEvent press) {
-                                     //ContentDAO dao = new ContentDAO();
+
                                      dao.setSyncStatus(objs);
                                      syncStatus.getChildren().clear();
                                      syncStatus.getChildren().add(syncer);
@@ -1655,7 +1662,7 @@ public class PacApp extends Application {
         podcastList.add(i,M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
+        L[i].backgroundProperty().set(buBack);
 
         highLight(L[i]);
         L[i].setOnAction(new EventHandler<ActionEvent>() {
@@ -1684,15 +1691,15 @@ public class PacApp extends Application {
         cont.getChildren().add(doubleButt);
     }
 
-    public static void ebkButt(Content objs, Button[] L, int i, VBox cont, Background b) {
+    public static void ebkButt(Content objs, Button[] L, int i, VBox cont) {
         System.out.println(i);
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
         Button unsyncer = new Button("✘");
-        syncer.backgroundProperty().set(b);
-        unsyncer.backgroundProperty().set(b);
+        syncer.backgroundProperty().set(buBack);
+        unsyncer.backgroundProperty().set(buBack);
         if(objs.getWantToSync()){
 
             syncStatus.getChildren().add(syncer);}
@@ -1703,7 +1710,7 @@ public class PacApp extends Application {
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                //ContentDAO dao = new ContentDAO();
+
                 dao.setSyncStatus(objs);
                 syncStatus.getChildren().clear();
                 syncStatus.getChildren().add(unsyncer);
@@ -1715,7 +1722,7 @@ public class PacApp extends Application {
         unsyncer.setOnAction(new EventHandler<ActionEvent>() {
                                  @Override
                                  public void handle(ActionEvent press) {
-                                     //ContentDAO dao = new ContentDAO();
+
                                      dao.setSyncStatus(objs);
                                      syncStatus.getChildren().clear();
                                      syncStatus.getChildren().add(syncer);
@@ -1732,7 +1739,7 @@ public class PacApp extends Application {
         URI uri = file.toURI();
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
+        L[i].backgroundProperty().set(buBack);
 
         highLight(L[i]);
 
@@ -1758,25 +1765,24 @@ public class PacApp extends Application {
         cont.getChildren().add(doubleButt);
     }
 
-    public static void abkButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
+    public static void abkButt(Content objs, Button[] L, int i, VBox cont, Media[] M) {
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
         Button unsyncer = new Button("✘");
-        syncer.backgroundProperty().set(b);
-        unsyncer.backgroundProperty().set(b);
+        syncer.backgroundProperty().set(buBack);
+        unsyncer.backgroundProperty().set(buBack);
         if(objs.getWantToSync()){
 
             syncStatus.getChildren().add(syncer);}
         else{
             syncStatus.getChildren().add(unsyncer);
         }
-        //  syncer.setSelected(objs.getWantToSync());
+
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                //ContentDAO dao = new ContentDAO();
                 dao.setSyncStatus(objs);
                 syncStatus.getChildren().clear();
                 syncStatus.getChildren().add(unsyncer);
@@ -1788,7 +1794,7 @@ public class PacApp extends Application {
         unsyncer.setOnAction(new EventHandler<ActionEvent>() {
                                  @Override
                                  public void handle(ActionEvent press) {
-                                     //ContentDAO dao = new ContentDAO();
+
                                      dao.setSyncStatus(objs);
                                      syncStatus.getChildren().clear();
                                      syncStatus.getChildren().add(syncer);
@@ -1809,7 +1815,7 @@ public class PacApp extends Application {
         abookList.add(i,M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
+        L[i].backgroundProperty().set(buBack);
 
         highLight(L[i]);
 
@@ -1837,25 +1843,24 @@ public class PacApp extends Application {
         doubleButt.getChildren().addAll(L[i],syncStatus);
         cont.getChildren().add(doubleButt);
     }
-    public static void vidButt(Content objs, Button[] L, int i, VBox cont, Background b, Media[] M) {
+    public static void vidButt(Content objs, Button[] L, int i, VBox cont, Media[] M) {
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
         Button unsyncer = new Button("✘");
-        syncer.backgroundProperty().set(b);
-        unsyncer.backgroundProperty().set(b);
+        syncer.backgroundProperty().set(buBack);
+        unsyncer.backgroundProperty().set(buBack);
         if(objs.getWantToSync()){
 
             syncStatus.getChildren().add(syncer);}
         else{
             syncStatus.getChildren().add(unsyncer);
         }
-        //  syncer.setSelected(objs.getWantToSync());
+
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                //ContentDAO dao = new ContentDAO();
                 dao.setSyncStatus(objs);
                 syncStatus.getChildren().clear();
                 syncStatus.getChildren().add(unsyncer);
@@ -1867,7 +1872,6 @@ public class PacApp extends Application {
         unsyncer.setOnAction(new EventHandler<ActionEvent>() {
                                  @Override
                                  public void handle(ActionEvent press) {
-                                     //ContentDAO dao = new ContentDAO();
                                      dao.setSyncStatus(objs);
                                      syncStatus.getChildren().clear();
                                      syncStatus.getChildren().add(syncer);
@@ -1887,7 +1891,7 @@ public class PacApp extends Application {
         videoList.add(i,M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
+        L[i].backgroundProperty().set(buBack);
 
         highLight(L[i]);
 
@@ -1918,7 +1922,7 @@ public class PacApp extends Application {
         cont.getChildren().add(doubleButt);
     }
 
-    public static void appButt(Content objs, Button[] L, int i, TilePane cont, Background b) {
+    public static void appButt(Content objs, Button[] L, int i, TilePane cont) {
 
         String name = objs.getContentName();
 
@@ -1928,7 +1932,7 @@ public class PacApp extends Application {
         L[i] = new Button(name,appview);
         L[i].setTextFill(Paint.valueOf("707070"));
         L[i].setContentDisplay(ContentDisplay.TOP);
-        L[i].backgroundProperty().set(b);
+        L[i].backgroundProperty().set(buBack);
         L[i].setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -1947,15 +1951,15 @@ public class PacApp extends Application {
         cont.getChildren().add(L[i]);
     }
 
-    public static void searchButt(Content objs, Button[] L, int i, VBox cont, Background b,Media[] M) {
+    public static void searchButt(Content objs, Button[] L, int i, VBox cont, Media[] M) {
 
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
         Button unsyncer = new Button("✘");
-        syncer.backgroundProperty().set(b);
-        unsyncer.backgroundProperty().set(b);
+        syncer.backgroundProperty().set(buBack);
+        unsyncer.backgroundProperty().set(buBack);
 
         if(objs.getWantToSync()){
 
@@ -1967,7 +1971,7 @@ public class PacApp extends Application {
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                //ContentDAO dao = new ContentDAO();
+
                 dao.setSyncStatus(objs);
                 syncStatus.getChildren().clear();
                 syncStatus.getChildren().add(unsyncer);
@@ -1979,7 +1983,6 @@ public class PacApp extends Application {
         unsyncer.setOnAction(new EventHandler<ActionEvent>() {
                                  @Override
                                  public void handle(ActionEvent press) {
-                                     //ContentDAO dao = new ContentDAO();
                                      dao.setSyncStatus(objs);
                                      syncStatus.getChildren().clear();
                                      syncStatus.getChildren().add(syncer);
@@ -1995,10 +1998,14 @@ public class PacApp extends Application {
 
         File file = new File(objs.getLocation());
         URI uri = file.toURI();
-        M[i] = new Media(uri.toString());
+        try {
+            M[i] = new Media(uri.toString());
+        }catch(MediaException E){
+            System.out.println(E);
+        }
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
-        L[i].backgroundProperty().set(b);
+        L[i].backgroundProperty().set(buBack);
 
 
         highLight(L[i]);
@@ -2010,7 +2017,7 @@ public class PacApp extends Application {
 
             }
         });
-        doubleButt.backgroundProperty().set(b);
+        doubleButt.backgroundProperty().set(buBack);
         doubleButt.getChildren().addAll(L[i],syncStatus);
         cont.getChildren().add(doubleButt);
 
