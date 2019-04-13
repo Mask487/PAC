@@ -222,7 +222,9 @@ public class PacApp extends Application {
         HBox hSearch = new HBox();
         hSearch.setPadding(new Insets(5, 5, 5, 5));
         TextField search = new TextField("");
-        search.setPromptText("Search\u25BC");
+        search.setPromptText("Search");
+        search.setStyle("-fx-text-inner-color: BBBBBB;");
+       // search.
         search.backgroundProperty().set(buBack);
         hSearch.getChildren().add(search);
         hSearch.backgroundProperty().set(buBack);
@@ -270,6 +272,7 @@ public class PacApp extends Application {
 
         TextField RSSLookup = new TextField("");
         RSSLookup.setPromptText("Import RSS feed URL");
+        RSSLookup.setStyle("-fx-text-inner-color: BBBBBB;");
         RSSLookup.backgroundProperty().set(buBack);
 
 
@@ -346,14 +349,15 @@ public class PacApp extends Application {
                     noapps.setFont(new Font(20.0));
                     noapps.backgroundProperty().set(buBack);
                     appCont.getChildren().addAll(noapps);
-                }
-                Button[] listings = new Button[setSize];
-                int i = 0;
-                while (appiter.hasNext()) {
-                    Content content = new Content();
-                    content = (NewDatabase.Content) appiter.next();
-                    appButt(content, listings, i,appCont,buBack);
-                    i++;
+                }else {
+                    Button[] listings = new Button[setSize];
+                    int i = 0;
+                    while (appiter.hasNext()) {
+                        Content content = new Content();
+                        content = (NewDatabase.Content) appiter.next();
+                        appButt(content, listings, i, appCont, buBack);
+                        i++;
+                    }
                 }
 
             }
@@ -1861,6 +1865,7 @@ public class PacApp extends Application {
     public static void appButt(Content objs, Button[] L, int i, TilePane cont, Background b) {
 
         String name = objs.getContentName();
+
         Image appsIcon = new Image("AppDefault.png");   //Load Phone Icon for imageview
         ImageView appview = new ImageView();
         appview.setImage(appsIcon);

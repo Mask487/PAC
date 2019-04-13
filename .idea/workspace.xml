@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
     </list>
@@ -33,12 +34,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="1111" column="54" selection-start-line="1111" selection-start-column="54" selection-end-line="1111" selection-end-column="54" />
+            <state relative-caret-position="484">
+              <caret line="354" column="47" lean-forward="true" selection-start-line="354" selection-start-column="47" selection-end-line="354" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#57886#57887#0" expanded="true" />
-                <element signature="e#57914#57915#0" expanded="true" />
+                <element signature="e#59010#59011#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -139,8 +139,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>searchS</find>
-      <find>searchA</find>
       <find>searchAll</find>
       <find>allc</find>
       <find>cleanOriginalFile</find>
@@ -152,7 +150,6 @@
       <find>sea</find>
       <find>midbutt</find>
       <find>phonestack</find>
-      <find>search</find>
       <find>rss</find>
       <find>musicContro</find>
       <find>RSS</find>
@@ -169,6 +166,9 @@
       <find>check</find>
       <find>arrow</find>
       <find>play</find>
+      <find>search</find>
+      <find>BBB</find>
+      <find>APPP</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -396,7 +396,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32868525" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23174158" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.23174158" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43222892" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -639,12 +639,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="1111" column="54" selection-start-line="1111" selection-start-column="54" selection-end-line="1111" selection-end-column="54" />
+        <state relative-caret-position="484">
+          <caret line="354" column="47" lean-forward="true" selection-start-line="354" selection-start-column="47" selection-end-line="354" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#57886#57887#0" expanded="true" />
-            <element signature="e#57914#57915#0" expanded="true" />
+            <element signature="e#59010#59011#0" expanded="true" />
           </folding>
         </state>
       </provider>
