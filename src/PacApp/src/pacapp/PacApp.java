@@ -22,12 +22,14 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import NewDatabase.ContentDAO;
 import NewDatabase.Content;
+import java.util.Scanner;
 
 
 
@@ -1690,7 +1692,10 @@ public class PacApp extends Application {
                              }
 
         );
-
+        String thefuquwant = objs.getLocation();
+        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        File file = new File(objs.getLocation());
+        URI uri = file.toURI();
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(b);
@@ -1698,6 +1703,16 @@ public class PacApp extends Application {
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                try{
+                String book = new Scanner(new File(objs.getLocation())).useDelimiter("\\Z").next();
+                System.out.println(book);
+                cont.getChildren().clear();
+                cont.getChildren().add(new Text(book));
+
+                }
+                catch(IOException E){
+                    System.out.println(E);
+                }
                 System.out.println(name + " Pressed");
 
             }
