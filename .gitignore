@@ -5,3 +5,4 @@ Backups
 *.xml
 /src/transfere/
 /ContentFiles/
+PAC_Config.cfg
