@@ -636,6 +636,23 @@ public class ContentDAO {
     
     
     /**
+     * Updates a content's name.
+     * @param content
+     * @param newName
+     * @return 
+     */
+    public boolean updateContentName(Content content, String newName) {
+        
+        if(sql.updateContentName(content.getContentID(), newName)) {
+            content.setContentName(newName);
+            return true;
+        }
+        
+        return false;   
+    }
+    
+    
+    /**
      * Gets all data from the result set and creates the new content object.
      * @param res
      * @return 
