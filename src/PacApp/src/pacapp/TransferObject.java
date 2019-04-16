@@ -44,6 +44,8 @@ public interface TransferObject
     void ptoPC(PortableDeviceObject pDO, String file);
     void pctoP(PortableDeviceFolderObject targetFolder, File file);
     boolean checkConnection();
+    void setRunningB();
+    void setRunningR();
     void backup() throws IOException;
     void restore() throws IOException;
 
