@@ -672,6 +672,9 @@ public class SQLTranslator {
         //Default Value
         return false;
     }
+    
+    
+    
 
 
     public boolean addToPlaylist(Content content, Playlist playlist) {

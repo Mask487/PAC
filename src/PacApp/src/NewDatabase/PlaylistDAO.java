@@ -36,6 +36,7 @@ public class PlaylistDAO {
         try {
             while(res.next()) {
                 Playlist playlist = extractDataFromPlaylistResultSet(res);
+                getContentFromPlaylist(playlist);
                 playlists.add(playlist);
             }
             
@@ -47,6 +48,16 @@ public class PlaylistDAO {
         }
         
         return null;
+    }
+    
+    
+    /**
+     * Adds a new playlist to the database.
+     * @param playlistName
+     * @return 
+     */
+    public boolean addPlaylist(String playlistName) {
+        return sql.addPlaylist(playlistName);
     }
     
     
