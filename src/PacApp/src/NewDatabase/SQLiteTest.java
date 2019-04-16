@@ -42,17 +42,20 @@ public class SQLiteTest {
         String filePath = "";
         
         ContentDAO dao = new ContentDAO();
+        PlaylistDAO pdao = new PlaylistDAO();
+        pdao.addPlaylist("test");
         Set set = dao.getAllContent();
         Iterator iter = set.iterator();
+        Content content = (Content) iter.next();
         
-//        while(iter.hasNext()) {
-//            System.out.println(iter.next().toString());    
-//        }
-
+        Set playlists = pdao.getAllPlaylists();
+        Iterator piter = playlists.iterator();
         
+        Playlist playlist = (Playlist) piter.next();
         
-        dao.updateContentName((Content) iter.next(), "ConteTest");
+        pdao.insertContentIntoPlaylist(content, playlist);
         
+        Set playlists2 = pdao.getAllPlaylists();
         Set set2 = dao.getAllContent();
         Iterator iter2 = set2.iterator();
         while(iter2.hasNext()) {
