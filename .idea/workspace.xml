@@ -33,7 +33,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24191">
+            <state relative-caret-position="29206">
               <caret line="1758" selection-start-line="1758" selection-end-line="1758" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -45,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-632">
-              <caret line="689" column="103" lean-forward="true" selection-start-line="689" selection-start-column="103" selection-end-line="689" selection-end-column="103" />
+            <state relative-caret-position="629">
+              <caret line="698" column="18" selection-start-line="698" selection-start-column="18" selection-end-line="698" selection-end-column="18" />
               <folding>
                 <element signature="class#FileA#0" />
                 <element signature="method#FileA#0;class#FileA#0" />
@@ -171,7 +171,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -184,16 +183,11 @@
               <item name="PAC" type="462c0819:PsiDirectoryNode" />
               <item name="Backups" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="Backups" type="462c0819:PsiDirectoryNode" />
-              <item name="2019-04-11_1430" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -201,7 +195,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555007480368" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555016951830" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Libraries" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -307,12 +301,13 @@
       <workItem from="1554829184447" duration="4039000" />
       <workItem from="1554931745084" duration="2538000" />
       <workItem from="1554956962871" duration="777000" />
-      <workItem from="1555000725211" duration="3296000" />
+      <workItem from="1555000725211" duration="4773000" />
+      <workItem from="1555010795128" duration="2688000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119605000" />
+    <option name="totallyTimeSpent" value="123770000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -325,9 +320,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1119403" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1130064" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -577,9 +571,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24191">
+        <state relative-caret-position="29206">
           <caret line="1758" selection-start-line="1758" selection-end-line="1758" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -607,13 +608,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/BookLookupTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -623,8 +617,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-632">
-          <caret line="689" column="103" lean-forward="true" selection-start-line="689" selection-start-column="103" selection-end-line="689" selection-end-column="103" />
+        <state relative-caret-position="629">
+          <caret line="698" column="18" selection-start-line="698" selection-start-column="18" selection-end-line="698" selection-end-column="18" />
           <folding>
             <element signature="class#FileA#0" />
             <element signature="method#FileA#0;class#FileA#0" />

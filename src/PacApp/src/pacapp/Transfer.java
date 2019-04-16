@@ -23,6 +23,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
     private String adbPath = null;
     private String mainPath = System.getProperty("user.dir");
     private String backupPath = null;
+    private volatile boolean running = false;
 
 
     //creates folder on the root of the device
@@ -732,9 +733,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
                 }
             }
         }
-        Thread t = new Thread(new BackupThread(path));
-        t.start();
-
+        Thread b = new Thread(new BackupThread(path));
+        b.start();
     }
 
     //restores backup to phone
@@ -781,8 +781,9 @@ class Transfer extends Thread implements pacapp.TransferObject {
                 }
             }
         }
-        Thread t = new Thread(new RestoreThread(bfolder));
-        t.start();
+        Thread r = new Thread(new RestoreThread(bfolder));
+        r.start();
+
     }
 
     /*
