@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,10 +34,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1036">
-              <caret line="2048" selection-start-line="2048" selection-end-line="2048" />
+            <state relative-caret-position="-852">
+              <caret line="1457" column="45" selection-start-line="1457" selection-start-column="45" selection-end-line="1457" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#26011#26012#0" expanded="true" />
+                <element signature="e#26085#26086#0" expanded="true" />
+                <element signature="e#26241#26242#0" expanded="true" />
+                <element signature="e#26315#26316#0" expanded="true" />
+                <element signature="e#31444#31445#0" expanded="true" />
+                <element signature="e#31491#31492#0" expanded="true" />
+                <element signature="e#32127#32128#0" expanded="true" />
+                <element signature="e#32164#32165#0" expanded="true" />
+                <element signature="e#32545#32546#0" expanded="true" />
+                <element signature="e#32583#32584#0" expanded="true" />
+                <element signature="e#43546#43547#0" expanded="true" />
+                <element signature="e#43574#43575#0" expanded="true" />
+                <element signature="e#61293#61294#0" expanded="true" />
+                <element signature="e#61362#61363#0" expanded="true" />
+                <element signature="e#61513#61514#0" expanded="true" />
+                <element signature="e#61582#61583#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -114,11 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>gree</find>
-      <find>inset</find>
-      <find>center</find>
-      <find>podcast</find>
-      <find>sea</find>
       <find>midbutt</find>
       <find>phonestack</find>
       <find>rss</find>
@@ -128,7 +141,6 @@
       <find>temp</find>
       <find>\</find>
       <find>getDB</find>
-      <find>musicControll</find>
       <find>podcastCont</find>
       <find>podcast.</find>
       <find>playah</find>
@@ -144,6 +156,12 @@
       <find>phone</find>
       <find>Android</find>
       <find>dao</find>
+      <find>video.</find>
+      <find>videoControll</find>
+      <find>audioBookControl</find>
+      <find>musicControll</find>
+      <find>podcastControll</find>
+      <find>green</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -178,9 +196,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="100" />
-    <option name="y" value="38" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="92" />
+    <option name="y" value="41" />
     <option name="width" value="1500" />
     <option name="height" value="804" />
   </component>
@@ -190,7 +208,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -233,6 +250,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -366,10 +384,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="92" y="41" width="1500" height="804" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.114072494" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15843621" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -377,8 +395,8 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32868525" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.23076923" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23174158" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43222892" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -388,7 +406,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.31892696" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.31882024" />
       <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32936078" />
       <window_info anchor="bottom" id="DB Execution Console" order="14" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -590,10 +608,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
+        <state relative-caret-position="-852">
+          <caret line="1457" column="45" selection-start-line="1457" selection-start-column="45" selection-end-line="1457" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#26011#26012#0" expanded="true" />
+            <element signature="e#26085#26086#0" expanded="true" />
+            <element signature="e#26241#26242#0" expanded="true" />
+            <element signature="e#26315#26316#0" expanded="true" />
+            <element signature="e#31444#31445#0" expanded="true" />
+            <element signature="e#31491#31492#0" expanded="true" />
+            <element signature="e#32127#32128#0" expanded="true" />
+            <element signature="e#32164#32165#0" expanded="true" />
+            <element signature="e#32545#32546#0" expanded="true" />
+            <element signature="e#32583#32584#0" expanded="true" />
+            <element signature="e#43546#43547#0" expanded="true" />
+            <element signature="e#43574#43575#0" expanded="true" />
+            <element signature="e#61293#61294#0" expanded="true" />
+            <element signature="e#61362#61363#0" expanded="true" />
+            <element signature="e#61513#61514#0" expanded="true" />
+            <element signature="e#61582#61583#0" expanded="true" />
           </folding>
         </state>
       </provider>

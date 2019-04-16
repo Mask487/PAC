@@ -1,6 +1,7 @@
 package pacapp;
 
 import java.io.File;
+
 import NewDatabase.SQLTranslator;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -30,8 +31,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import NewDatabase.ContentDAO;
 import NewDatabase.Content;
-import java.util.Scanner;
 
+import java.util.Scanner;
 
 
 import java.io.IOException;
@@ -44,32 +45,48 @@ import javafx.util.Duration;
 import static javafx.scene.input.MouseButton.SECONDARY;
 
 /**
- *
  * @author andrewmenezes
  */
 public class PacApp extends Application {
 
-   static MediaView musicView = new MediaView();
-   static MediaView podcastView = new MediaView();
-   static MediaView aBookView = new MediaView();
-   static MediaView videoView = new MediaView();
-   static ContentDAO dao = new ContentDAO();
-   static List<Media> musicList = new ArrayList<>();
+    static MediaView musicView = new MediaView();
+    static MediaView podcastView = new MediaView();
+    static MediaView aBookView = new MediaView();
+    static MediaView videoView = new MediaView();
+    static ContentDAO dao = new ContentDAO();
+    static List<Media> musicList = new ArrayList<>();
     static List<Media> podcastList = new ArrayList<>();
     static List<Media> videoList = new ArrayList<>();
     static List<Media> abookList = new ArrayList<>();
     static int i = 0;
-
     static Insets bFillIn = new Insets(0);
     static CornerRadii bFillCR = new CornerRadii(0);
-
     //Button panel Color
-   static BackgroundFill buFill = new BackgroundFill(Paint.valueOf("TRANSPARENT"), bFillCR, bFillIn);
-   static Background buBack = new Background(buFill);
-
+    static BackgroundFill buFill = new BackgroundFill(Paint.valueOf("TRANSPARENT"), bFillCR, bFillIn);
+    static Background buBack = new Background(buFill);
     //highlight background
-   static BackgroundFill hiFill = new BackgroundFill(Paint.valueOf("515151"), bFillCR, bFillIn);
-   static Background hiBack = new Background(hiFill);
+    static BackgroundFill hiFill = new BackgroundFill(Paint.valueOf("515151"), bFillCR, bFillIn);
+    static Background hiBack = new Background(hiFill);
+    //controll icons
+    static Image PlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
+    static ImageView musicPlayIcon = new ImageView();
+    static Image PauseIcon = new Image("pause.png");   //Load play  Icon for imageview
+    static ImageView musicPauseIcon = new ImageView();
+    static Image BackIcon = new Image("backwardButton.png");   //Load Back  Icon for imageview
+    static ImageView musicBackIcon = new ImageView();    //adds icon to imageview
+    static Image muteIcon = new Image("Mute.png");   //Load play  Icon for imageview
+    static ImageView musicMuteIcon = new ImageView();
+    static Image highVolIcon = new Image("HighVol.png");   //Load play  Icon for imageview
+    static ImageView musicHighIcon = new ImageView();
+    static Image lowVolIcon = new Image("LowVol.png");   //Load play  Icon for imageview
+    static ImageView musiclowIcon = new ImageView();
+    static Image medVolIcon = new Image("MidVol.png");   //Load play  Icon for imageview
+    static ImageView musicMedIcon = new ImageView();
+    static Slider musicVolumeSlider = new Slider(0.0, 1.0, 1.0);
+    static Slider podcastVolumeSlider = new Slider(0.0, 1.0, 1.0);
+    static Slider videoVolumeSlider = new Slider(0.0, 1.0, 1.0);
+    static Slider abookVolumeSlider = new Slider(0.0, 1.0, 1.0);
+    static int type = 0;//music - 0,abook - 1, podcast - 2,video - 3
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -77,7 +94,7 @@ public class PacApp extends Application {
         Transfer t = new Transfer();
         t.initializeDesk();
 
-           // t.initializePhone(0);
+        // t.initializePhone(0);
 
         AnchorPane root2 = new AnchorPane();
         Scene primary = new Scene(root2);
@@ -86,7 +103,6 @@ public class PacApp extends Application {
         stage.setScene(primary);
         root2.setPrefSize(750, 510);
         //root2.setMaxSize(1600,900);
-
 
 
         BorderPane bp = new BorderPane();
@@ -139,7 +155,6 @@ public class PacApp extends Application {
         Background lPaneColor = new Background(lBgFill);
         Insets inset = new Insets(-1.0);
         leftButtonPane.backgroundProperty().set(lPaneColor);
-
 
 
         //CenterPane preferences
@@ -235,7 +250,7 @@ public class PacApp extends Application {
         TextField search = new TextField("");
         search.setPromptText("Search");
         search.setStyle("-fx-text-inner-color: BBBBBB;");
-       // search.
+        // search.
         search.backgroundProperty().set(buBack);
         hSearch.getChildren().add(search);
         hSearch.backgroundProperty().set(buBack);
@@ -247,9 +262,9 @@ public class PacApp extends Application {
         searchPane.backgroundProperty().set(buBack);
         searchResults.backgroundProperty().set(buBack);
 
-        search.setOnAction(new EventHandler<ActionEvent>(){
+        search.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent Enter){
+            public void handle(ActionEvent Enter) {
                 String term = search.getCharacters().toString();
                 System.out.println("Search Term " + term);
                 search.setText("");
@@ -266,10 +281,9 @@ public class PacApp extends Application {
                 while (miter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) miter.next();
-                    searchButt(content, listings, i,searchResults,MediaArray);
+                    searchButt(content, listings, i, searchResults, MediaArray);
                     i++;
                 }
-
 
 
             }
@@ -280,29 +294,28 @@ public class PacApp extends Application {
         bottomButt.setPadding(new Insets(5));
 
 
-
         TextField RSSLookup = new TextField("");
         RSSLookup.setPromptText("Import RSS feed URL");
         RSSLookup.setStyle("-fx-text-inner-color: BBBBBB;");
         RSSLookup.backgroundProperty().set(buBack);
 
 
-
-        RSSLookup.setOnAction(new EventHandler<ActionEvent>(){
+        RSSLookup.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent Enter){
+            public void handle(ActionEvent Enter) {
                 String newrl;
                 newrl = RSSLookup.getCharacters().toString();
                 System.out.println("URL added: " + newrl);
                 RSSLookup.setText("");
                 RSSReader rede = new RSSReader();
-                class csc490 implements Runnable{
+                class csc490 implements Runnable {
 
                     //rede.DownloadPodcast(newrl);
-                    csc490(String stringName){
+                    csc490(String stringName) {
 
                     }
-                    public void run(){
+
+                    public void run() {
                         RSSReader rede = new RSSReader();
                         rede.DownloadPodcast(newrl);
                     }
@@ -315,10 +328,10 @@ public class PacApp extends Application {
         });
 
 
-
         music.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                type = 0;
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(musicPane);
                 musicCont.getChildren().clear();
@@ -334,13 +347,13 @@ public class PacApp extends Application {
                 while (miter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) miter.next();
-                    musButt(content, listings, i,musicCont,mediaSet);
+                    musButt(content, listings, i, musicCont, mediaSet);
                     i++;
                 }
-                //controllStack.getChildren().clear();
-                try {
+
+               try {
                     controllStack.getChildren().addAll(musicControll);
-                }catch(IllegalArgumentException Error){
+               } catch (IllegalArgumentException Error) {
                     System.out.println("Tried to add controlls again");
                 }
             }
@@ -351,6 +364,7 @@ public class PacApp extends Application {
         apps.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(appPane);
                 appCont.getChildren().clear();
@@ -359,12 +373,13 @@ public class PacApp extends Application {
                 System.out.println("App Pressed");
                 Iterator appiter = appset.iterator();
                 int setSize = appset.size();
-                if(setSize == 0){
+                if (setSize == 0) {
                     Label noapps = new Label("You have no Apps.\n\nDrag and Drop apps into this window to add to your collection.");
                     noapps.setFont(new Font(20.0));
                     noapps.backgroundProperty().set(buBack);
                     appCont.getChildren().addAll(noapps);
-                }else {
+                } else {
+                    appCont.getChildren().clear();
                     Button[] listings = new Button[setSize];
                     int i = 0;
                     while (appiter.hasNext()) {
@@ -391,7 +406,7 @@ public class PacApp extends Application {
                 System.out.println("Book Pressed");
                 Iterator iter = set.iterator();
                 int setSize = set.size();
-                if(setSize == 0){
+                if (setSize == 0) {
                     Label noEBooks = new Label("You have no eBooks.\n\nDrag and Drop eBooks into this window to add to your collection.");
                     noEBooks.setFont(new Font(20.0));
                     noEBooks.backgroundProperty().set(buBack);
@@ -402,7 +417,7 @@ public class PacApp extends Application {
                 while (iter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) iter.next();
-                    ebkButt(content, listings, i,bookCont);
+                    ebkButt(content, listings, i, bookCont);
                     i++;
                 }
 
@@ -412,6 +427,7 @@ public class PacApp extends Application {
         aBook.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                type = 1;
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(audioBookPane);
                 audioBookCont.getChildren().clear();
@@ -421,7 +437,7 @@ public class PacApp extends Application {
                 Iterator abiter = abset.iterator();
                 int setSize = abset.size();
                 Media[] mediaSet = new Media[setSize];
-                if(setSize == 0){
+                if (setSize == 0) {
                     Label noABooks = new Label("You have no Audio Books.\n\nDrag and Drop Audio Books into this window to add to your collection.");
                     noABooks.setFont(new Font(20.0));
                     noABooks.backgroundProperty().set(buBack);
@@ -432,11 +448,11 @@ public class PacApp extends Application {
                 while (abiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) abiter.next();
-                    abkButt(content, listings, i,audioBookCont,mediaSet);
+                    abkButt(content, listings, i, audioBookCont, mediaSet);
                     i++;
                 }
-                controllStack.getChildren().clear();
-                controllStack.getChildren().addAll(audioBookControll);
+               // controllStack.getChildren().clear();
+               // controllStack.getChildren().addAll(audioBookControll);
             }
 
 
@@ -445,6 +461,7 @@ public class PacApp extends Application {
         podcast.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                type = 2;
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(podcastPane);
                 podcastCont.getChildren().clear();
@@ -454,18 +471,19 @@ public class PacApp extends Application {
                 Iterator podcastiter = podcastset.iterator();
                 int setSize = podcastset.size();
                 Media[] mediaSet = new Media[setSize];
-                if(setSize == 0){
+                if (setSize == 0) {
                 }
                 Button[] listings = new Button[setSize];
                 int i = 0;
                 while (podcastiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) podcastiter.next();
-                    podButt(content, listings, i,podcastCont,mediaSet);
+                    podButt(content, listings, i, podcastCont, mediaSet);
                     i++;
                 }
-               controllStack.getChildren().clear();
-                controllStack.getChildren().addAll(podcastControll);
+               // controllStack.getChildren().clear();
+
+               // controllStack.getChildren().addAll(podcastControll);
             }
 
 
@@ -474,6 +492,7 @@ public class PacApp extends Application {
         video.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
+                type = 3;
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(videoPane);
                 videoCont.getChildren().clear();
@@ -484,7 +503,7 @@ public class PacApp extends Application {
                 int setSize = videoset.size();
                 Media[] mediaSet = new Media[setSize];
 
-                if(setSize == 0){
+                if (setSize == 0) {
                     Label noVideos = new Label("You have no videos.\n\nDrag and Drop videos into this window to add to your collection.");
                     noVideos.setFont(new Font(20.0));
                     noVideos.backgroundProperty().set(buBack);
@@ -495,11 +514,11 @@ public class PacApp extends Application {
                 while (videoiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) videoiter.next();
-                    vidButt(content, listings, i,videoCont,mediaSet);
+                    vidButt(content, listings, i, videoCont, mediaSet);
                     i++;
                 }
-                controllStack.getChildren().clear();
-                controllStack.getChildren().addAll(videoControll);
+                //controllStack.getChildren().clear();
+                //controllStack.getChildren().addAll(videoControll);
             }
 
 
@@ -515,12 +534,12 @@ public class PacApp extends Application {
                 System.out.println("Apps Pressed");
                 Iterator appiter = appset.iterator();
                 int setSize = appset.size();
-                if(setSize == 0){
+                if (setSize == 0) {
                     Label noApps = new Label("You have no Apps.\n\nDrag and Drop Apps into this window to add to your collection.");
                     noApps.setFont(new Font(20.0));
                     noApps.backgroundProperty().set(buBack);
                     appCont.getChildren().addAll(noApps);
-                }else{
+                } else {
                     appCont.getChildren().remove(0);
                 }
                 Button[] listings = new Button[setSize];
@@ -528,7 +547,7 @@ public class PacApp extends Application {
                 while (appiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) appiter.next();
-                    appButt(content, listings, i,appCont);
+                    appButt(content, listings, i, appCont);
                     i++;
                 }
 
@@ -546,7 +565,7 @@ public class PacApp extends Application {
             }
         });
 
-        vbutt.getChildren().addAll(music, book, aBook, podcast, video, apps, phoneB,throwaway);
+        vbutt.getChildren().addAll(music, book, aBook, podcast, video, apps, phoneB, throwaway);
         bvbutt.getChildren().addAll(settingsB);
 
         // Create music pane
@@ -610,14 +629,14 @@ public class PacApp extends Application {
 
         lightMode.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent entered){
+            public void handle(MouseEvent entered) {
                 lightMode.backgroundProperty().set(hiBack);
             }
         });
 
         lightMode.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent entered){
+            public void handle(MouseEvent entered) {
                 lightMode.backgroundProperty().set(buBack);
             }
         });
@@ -692,7 +711,7 @@ public class PacApp extends Application {
         copy.backgroundProperty().set(buBack);         //adds transparent background
 
 //        });   2EB900 green color
-       highLight(copy);
+        highLight(copy);
 
         copy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -715,21 +734,22 @@ public class PacApp extends Application {
         VBox midButt = new VBox();
         midButt.setPadding(new Insets(5, 5, 5, 5));
         midButt.setSpacing(50);
-        midButt.getChildren().addAll(sync, backup, copy,throwaway);
+        midButt.getChildren().addAll(sync, backup, copy, throwaway);
 
         phoneB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
                 mainStack.getChildren().clear();//(phoneMidRow, musicPane);
-                if(t.checkConnection()){
+                if (t.checkConnection()) {
                     Label battery = new Label("" + t.getPhoneBattery());
                     Label phoneName = new Label("" + t.getPhoneModel());
-                    phoneStack.getChildren().addAll(Android,phoneName,battery);}else
-                        try {
-                            phoneStack.getChildren().addAll(Android);
-                        }catch(IllegalArgumentException E){
-                            System.out.println(E);
-                        }
+                    phoneStack.getChildren().addAll(Android, phoneName, battery);
+                } else
+                    try {
+                        phoneStack.getChildren().addAll(Android);
+                    } catch (IllegalArgumentException E) {
+                        System.out.println(E);
+                    }
 
 
                 mainStack.getChildren().add(phoneMidRow);
@@ -738,22 +758,16 @@ public class PacApp extends Application {
             }
         });
 
-       // Insets sliderIn = new Insets(8.0,0.0,8.0,0.0);
-
-
-
-
-
-
+        Insets sliderIn = new Insets(8.0, 0.0, 8.0, 0.0);
 
         //Music Controll
 
-//        //music volume slider
-//        Slider musicVolumeSlider = new Slider();
-//        musicVolumeSlider.setMin(0);
-//        musicVolumeSlider.setMax(100);
-//        musicVolumeSlider.setValue(0);
-//        musicVolumeSlider.setPadding(sliderIn);
+//music volume slider
+
+        musicPlayIcon.setImage(PlayIcon);
+        musicPauseIcon.setImage(PauseIcon);   //adds icon to imageview
+        musicBackIcon.setImage(BackIcon);
+        musicVolumeSlider.setPadding(sliderIn);
 //        //music progress slider
 //        Slider musicProgressSlider = new Slider();
 //        musicProgressSlider.setMin(0);
@@ -761,61 +775,27 @@ public class PacApp extends Application {
 //        musicProgressSlider.setValue(0);
 //        musicProgressSlider.setPadding(sliderIn);
         //Play
-        Image PlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
-        ImageView musicPlayIcon = new ImageView();
-        musicPlayIcon.setImage(PlayIcon);
-        Image PauseIcon = new Image("pause.png");   //Load play  Icon for imageview
-        ImageView musicPauseIcon = new ImageView();
-        musicPauseIcon.setImage(PauseIcon);   //adds icon to imageview
-        Button musicPlay = new Button("",musicPlayIcon);       //Creates button
 
+
+        Button musicPlay = new Button("", musicPlayIcon);       //Creates button
+        Button musicMute = new Button("", musicMuteIcon);       //Creates button
+
+        musicMuteIcon.setImage(highVolIcon);
         musicPlay.backgroundProperty().set(buBack);         //adds transparent background
         musicPlay.setPadding(inset);
 
         musicPlay.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
-                System.out.println("Music Play Pressed");
-               try{
-                musicView.getMediaPlayer().play();}
-               catch(NullPointerException E){
-                    playahMakah(musicList.get(0),musicView);
-                   musicView.getMediaPlayer().play();
-                }
-                musicPlayIcon.setImage(PlayIcon);
-                if(musicView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
-                    musicView.getMediaPlayer().pause();
-                    musicPlayIcon.setImage(PauseIcon);
-
-                }
+                play(videoCont);
             }
         });
-//       Image PauseIcon = new Image("pause.png");   //Load play  Icon for imageview
-//       ImageView musicPauseIcon = new ImageView();
-//       musicPauseIcon.setImage(PauseIcon);                  //adds icon to imageview
-//        Button musicPause = new Button("",musicPauseIcon);       //Creates button
-//
-//        musicPause.backgroundProperty().set(buBack);         //adds transparent background
-//        musicPause.setPadding(inset);
-//
-//        musicPause.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent press) {
-//
-//                System.out.println("Music Play Pressed");
-//                musicView.getMediaPlayer().play();
-//                if(musicView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
-//                    musicView.getMediaPlayer().pause();
-//
-//                }
-//            }
-//        });
+
         // forward
         Image forwardIcon = new Image("ForwardButton.png");   //Load forward  Icon for imageview
         ImageView forwardMusicIcon = new ImageView();
         forwardMusicIcon.setImage(forwardIcon);                  //adds icon to imageview
-        Button musicForward = new Button("",forwardMusicIcon);       //Creates button
+        Button musicForward = new Button("", forwardMusicIcon);       //Creates button
 
         musicForward.backgroundProperty().set(buBack);         //adds transparent background
         musicForward.setPadding(inset);
@@ -823,20 +803,13 @@ public class PacApp extends Application {
         musicForward.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                musicView.getMediaPlayer().dispose();
-                i++;
-                musicView.getMediaPlayer().pause();
-                musicView.setMediaPlayer(playahMakah(musicList.get(i %= musicList.size()),musicView));
-                musicView.getMediaPlayer().play();
-                System.out.println("Music Forward Pressed");
-
+            forward();
             }
         });
         //Backward
-        Image BackIcon = new Image("backwardButton.png");   //Load Back  Icon for imageview
-        ImageView musicBackIcon = new ImageView();
-        musicBackIcon.setImage(BackIcon);                  //adds icon to imageview
-        Button musicBack = new Button("",musicBackIcon);       //Creates button
+
+
+        Button musicBack = new Button("", musicBackIcon);       //Creates button
 
         musicBack.backgroundProperty().set(buBack);         //adds transparent background
         musicBack.setPadding(inset);
@@ -844,35 +817,12 @@ public class PacApp extends Application {
         musicBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
-                System.out.println(musicView.getMediaPlayer().getCurrentTime());
-                if(!musicView.getMediaPlayer().getCurrentTime().lessThan(new Duration(5000.0))  ){
-                    musicView.getMediaPlayer().stop();
-                    musicView.getMediaPlayer().play();
-
-                }else{
-                    musicView.getMediaPlayer().dispose();
-                    if(i == 0){
-                        i = musicList.size();
-                    }else
-                    i--;
-                    musicView.setMediaPlayer(playahMakah(musicList.get(i %= musicList.size()),musicView));
-                    musicView.getMediaPlayer().play();
-
-                }
-
-                System.out.println("Music back Pressed");
+            backward();
             }
         });
 
         //Volume
-        Image muteIcon = new Image("Mute.png");   //Load play  Icon for imageview
-        ImageView musicMuteIcon = new ImageView();
-                        //adds icon to imageview
-        Button musicMute = new Button("",musicMuteIcon);       //Creates button
-        Image  highVolIcon = new Image("HighVol.png");   //Load play  Icon for imageview
-        ImageView musicHighIcon = new ImageView();
-        musicMuteIcon.setImage(highVolIcon);
+
 
         musicMute.backgroundProperty().set(buBack);         //adds transparent background
         musicMute.setPadding(inset);
@@ -880,368 +830,13 @@ public class PacApp extends Application {
         musicMute.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                musicView.getMediaPlayer().setMute(!musicView.getMediaPlayer().isMute());
-                System.out.println("Music Mute Pressed");
-                if(musicView.getMediaPlayer().isMute()){
-                    System.out.println(musicView.getMediaPlayer().isMute());
-                    musicMuteIcon.setImage(muteIcon);
-                }else{
-                    System.out.println("other");
-                    musicMuteIcon.setImage(highVolIcon);
-
-                }
-
-
+            mute();
 
             }
         });
 
 
-        musicControll.getChildren().addAll(musicBack,musicPlay,musicForward,musicMute);
-//// end music controll
-
-
-        //Podcast Controll
-
-//        //Podcast volume slider
-//        Slider podcastVolumeSlider = new Slider();
-//        podcastVolumeSlider.setMin(0);
-//        podcastVolumeSlider.setMax(100);
-//        podcastVolumeSlider.setValue(0);
-//        podcastVolumeSlider.setPadding(sliderIn);
-//        //podcast progress slider
-//        Slider podcastProgressSlider = new Slider();
-//        podcastProgressSlider.setMin(0);
-//        podcastProgressSlider.setMax(100);
-//        podcastProgressSlider.setValue(0);
-//        podcastProgressSlider.setPadding(sliderIn);
-        //Play
-        Button podcastPlay = new Button("",musicPlayIcon);       //Creates button
-
-        podcastPlay.backgroundProperty().set(buBack);         //adds transparent background
-        podcastPlay.setPadding(inset);
-        Image PodPlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
-        ImageView podcastPlayIcon = new ImageView();
-        podcastPlayIcon.setImage(PlayIcon);
-        Image podPauseIcon = new Image("pause.png");   //Load play  Icon for imageview
-        ImageView podcastPauseIcon = new ImageView();
-        musicPauseIcon.setImage(PauseIcon);   //adds icon to imageview
-
-        podcastPlay.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println("podcast Play Pressed");
-                try{
-                    podcastView.getMediaPlayer().play();}
-                catch(NullPointerException E){
-                    playahMakah(podcastList.get(0),podcastView);
-                    podcastView.getMediaPlayer().play();
-                }
-                musicPlayIcon.setImage(PodPlayIcon);
-                if(podcastView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
-                    podcastView.getMediaPlayer().pause();
-                    musicPlayIcon.setImage(podPauseIcon);
-
-            }}
-        });
-        // forward
-        Button podcastForward = new Button("",forwardMusicIcon);       //Creates button
-        podcastForward.backgroundProperty().set(buBack);         //adds transparent background
-        podcastForward.setPadding(inset);
-
-        podcastForward.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-                podcastView.getMediaPlayer().dispose();
-                i++;
-                podcastView.getMediaPlayer().pause();
-                podcastView.setMediaPlayer(playahMakah(podcastList.get(i %= podcastList.size()),podcastView));
-                podcastView.getMediaPlayer().play();
-                System.out.println("Podcast Forward Pressed");
-            }
-        });
-        //Backward
-        Button podcastBack = new Button("",musicBackIcon);       //Creates button
-
-        podcastBack.backgroundProperty().set(buBack);         //adds transparent background
-        podcastBack.setPadding(inset);
-
-        podcastBack.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-                System.out.println(podcastView.getMediaPlayer().getCurrentTime());
-                if(!podcastView.getMediaPlayer().getCurrentTime().lessThan(new Duration(5000.0))  ){
-                    podcastView.getMediaPlayer().stop();
-                    podcastView.getMediaPlayer().play();
-
-                }else{
-                    podcastView.getMediaPlayer().dispose();
-                    if(i == 0){
-                        i = podcastList.size();
-                    }else
-                        i--;
-                    podcastView.setMediaPlayer(playahMakah(podcastList.get(i %= podcastList.size()),podcastView));
-                    podcastView.getMediaPlayer().play();
-
-                }
-
-                System.out.println("Podcast back Pressed");
-            }
-        });
-
-        //Volume
-
-        Button podcastMute = new Button("",musicMuteIcon);       //Creates button
-
-        podcastMute.backgroundProperty().set(buBack);         //adds transparent background
-        podcastMute.setPadding(inset);
-
-        podcastMute.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-
-                public void handle(ActionEvent press) {
-                    podcastView.getMediaPlayer().setMute(!podcastView.getMediaPlayer().isMute());
-                    System.out.println("Podcast Mute Pressed");
-                    if(podcastView.getMediaPlayer().isMute()){
-                        System.out.println(podcastView.getMediaPlayer().isMute());
-                        musicMuteIcon.setImage(muteIcon);
-                    }else{
-                        System.out.println("other");
-                        musicMuteIcon.setImage(highVolIcon);
-
-                    }
-
-
-
-
-            }
-        });
-
-
-        podcastControll.getChildren().addAll(podcastBack,podcastPlay,podcastForward,podcastMute);
-//// end podcast controll
-        // start abook controll
-        //Play
-        Button abookPlay = new Button("",musicPlayIcon);       //Creates button
-
-        abookPlay.backgroundProperty().set(buBack);         //adds transparent background
-        abookPlay.setPadding(inset);
-
-
-        Image abPlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
-        ImageView abookPlayIcon = new ImageView();
-        abookPlayIcon.setImage(PlayIcon);
-        Image abPauseIcon = new Image("pause.png");   //Load play  Icon for imageview
-        ImageView abookPauseIcon = new ImageView();
-        musicPauseIcon.setImage(PauseIcon);   //adds icon to imageview
-        abookPlay.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println("Abook Play Pressed");
-                try{
-                    aBookView.getMediaPlayer().play();}
-                catch(NullPointerException E){
-                    playahMakah(abookList.get(0),aBookView);
-                    aBookView.getMediaPlayer().play();
-                }
-                musicPlayIcon.setImage(abPlayIcon);
-                if(aBookView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
-                    aBookView.getMediaPlayer().pause();
-                    musicPlayIcon.setImage(abPauseIcon);
-
-                }}
-        });
-        // forward
-        Button abookForward = new Button("",forwardMusicIcon);       //Creates button
-        abookForward.backgroundProperty().set(buBack);         //adds transparent background
-        abookForward.setPadding(inset);
-
-        abookForward.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-                aBookView.getMediaPlayer().dispose();
-                i++;
-                aBookView.getMediaPlayer().pause();
-                aBookView.setMediaPlayer(playahMakah(abookList.get(i %= abookList.size()),aBookView));
-                aBookView.getMediaPlayer().play();
-                System.out.println("audio Book Forward Pressed");
-            }
-        });
-        //Backward
-        Button abookBack = new Button("",musicBackIcon);       //Creates button
-
-        abookBack.backgroundProperty().set(buBack);         //adds transparent background
-        abookBack.setPadding(inset);
-
-        abookBack.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-                System.out.println(aBookView.getMediaPlayer().getCurrentTime());
-                if(!aBookView.getMediaPlayer().getCurrentTime().lessThan(new Duration(5000.0))  ){
-                    aBookView.getMediaPlayer().stop();
-                    aBookView.getMediaPlayer().play();
-
-                }else{
-                    aBookView.getMediaPlayer().dispose();
-                    if(i == 0){
-                        i = abookList.size();
-                    }else
-                        i--;
-                    aBookView.setMediaPlayer(playahMakah(abookList.get(i %= abookList.size()),aBookView));
-                    aBookView.getMediaPlayer().play();
-
-                }
-
-                System.out.println("Audio Book back Pressed");
-            }
-        });
-
-        //Volume
-
-        Button abookMute = new Button("",musicMuteIcon);       //Creates button
-
-        abookMute.backgroundProperty().set(buBack);         //adds transparent background
-        abookMute.setPadding(inset);
-
-        abookMute.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-
-            public void handle(ActionEvent press) {
-                aBookView.getMediaPlayer().setMute(!aBookView.getMediaPlayer().isMute());
-                System.out.println("Audio Book Mute Pressed");
-                if(aBookView.getMediaPlayer().isMute()){
-                    System.out.println(aBookView.getMediaPlayer().isMute());
-                    musicMuteIcon.setImage(muteIcon);
-                }else{
-                    System.out.println("other");
-                    musicMuteIcon.setImage(highVolIcon);
-
-                }
-
-
-
-
-            }
-        });
-
-
-        audioBookControll.getChildren().addAll(abookBack,abookPlay,abookForward,abookMute);
-        //end abook controll
-        // start video controll
-        //Play
-        Button videoPlay = new Button("",musicPlayIcon);       //Creates button
-
-        videoPlay.backgroundProperty().set(buBack);         //adds transparent background
-        videoPlay.setPadding(inset);
-
-        Image viPlayIcon = new Image("PlayButton.png");   //Load play  Icon for imageview
-        ImageView videoPlayIcon = new ImageView();
-        videoPlayIcon.setImage(PlayIcon);
-        Image viPauseIcon = new Image("pause.png");   //Load play  Icon for imageview
-        ImageView videoPauseIcon = new ImageView();
-        musicPauseIcon.setImage(PauseIcon);   //adds icon to imageview
-        videoPlay.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-
-                System.out.println("Video Play Pressed");
-                try{
-                    videoView.getMediaPlayer().play();
-                    videoCont.getChildren().clear();
-                    videoCont.getChildren().add(videoView);}
-                catch(NullPointerException E){
-                    playahMakah(videoList.get(0),videoView);
-                    videoView.getMediaPlayer().play();
-                    videoCont.getChildren().clear();
-                    videoCont.getChildren().add(videoView);;
-                }
-                musicPlayIcon.setImage(viPlayIcon);
-                if(videoView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING){
-                    videoView.getMediaPlayer().pause();
-                    musicPlayIcon.setImage(viPauseIcon);
-
-                }}
-        });
-        // forward
-        Button videoForward = new Button("",forwardMusicIcon);       //Creates button
-        videoForward.backgroundProperty().set(buBack);         //adds transparent background
-        videoForward.setPadding(inset);
-
-        videoForward.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-                videoView.getMediaPlayer().dispose();
-                i++;
-                videoView.getMediaPlayer().pause();
-                videoView.setMediaPlayer(playahMakah(videoList.get(i %= videoList.size()),videoView));
-                videoView.getMediaPlayer().play();
-                System.out.println("video Book Forward Pressed");
-            }
-        });
-        //Backward
-        Button videoBack = new Button("",musicBackIcon);       //Creates button
-
-        videoBack.backgroundProperty().set(buBack);         //adds transparent background
-        videoBack.setPadding(inset);
-
-        videoBack.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent press) {
-                System.out.println(videoView.getMediaPlayer().getCurrentTime());
-                if(!videoView.getMediaPlayer().getCurrentTime().lessThan(new Duration(5000.0))  ){
-                    videoView.getMediaPlayer().stop();
-                    videoView.getMediaPlayer().play();
-
-                }else{
-                    videoView.getMediaPlayer().dispose();
-                    if(i == 0){
-                        i = videoList.size();
-                    }else
-                        i--;
-                    videoView.setMediaPlayer(playahMakah(videoList.get(i %= videoList.size()),videoView));
-                    videoView.getMediaPlayer().play();
-
-                }
-
-                System.out.println("Audio Book back Pressed");
-            }
-        });
-
-        //Volume
-
-        Button videoMute = new Button("",musicMuteIcon);       //Creates button
-
-        videoMute.backgroundProperty().set(buBack);         //adds transparent background
-        videoMute.setPadding(inset);
-
-        videoMute.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-
-            public void handle(ActionEvent press) {
-                videoView.getMediaPlayer().setMute(!videoView.getMediaPlayer().isMute());
-                System.out.println("Audio Book Mute Pressed");
-                if(videoView.getMediaPlayer().isMute()){
-                    System.out.println(videoView.getMediaPlayer().isMute());
-                    musicMuteIcon.setImage(muteIcon);
-                }else{
-                    System.out.println("other");
-                    musicMuteIcon.setImage(highVolIcon);
-
-                }
-
-
-
-
-            }
-        });
-
-
-        videoControll.getChildren().addAll(videoBack,videoPlay,videoForward,videoMute);
-        //end video controll
-
-
+        musicControll.getChildren().addAll(musicBack, musicPlay, musicForward, musicMute, musicVolumeSlider);
         Label musicTester = new Label("");
         musicCont.getChildren().add(musicTester);
         //drag and drop music
@@ -1265,7 +860,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    sql.addContent("" + db.getFiles().toString(),"Music");
+                    sql.addContent("" + db.getFiles().toString(), "Music");
                     System.out.println("music added");
                     musicTester.setText(db.getFiles().toString());
                     success = true;
@@ -1302,7 +897,7 @@ public class PacApp extends Application {
                 boolean success = false;
                 if (db.hasFiles()) {
                     // addContent("EBook,);
-                    sql.addContent("" + db.getFiles().toString(),"EBook");
+                    sql.addContent("" + db.getFiles().toString(), "EBook");
                     System.out.println("eBook added");
                     ebookTester.setText(db.getFiles().toString());
                     success = true;
@@ -1338,7 +933,7 @@ public class PacApp extends Application {
                 boolean success = false;
                 if (db.hasFiles()) {
 
-                    sql.addContent("" + db.getFiles().toString(),"audioBook");
+                    sql.addContent("" + db.getFiles().toString(), "audioBook");
                     System.out.println("audio book added");
                     audioBookTester.setText(db.getFiles().toString());
                     success = true;
@@ -1374,7 +969,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    sql.addContent("" + db.getFiles().toString(),"Video");
+                    sql.addContent("" + db.getFiles().toString(), "Video");
                     System.out.println("video added");
                     videoTester.setText(db.getFiles().toString());
                     success = true;
@@ -1410,7 +1005,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    sql.addContent("" + db.getFiles().toString(),"Podcast");
+                    sql.addContent("" + db.getFiles().toString(), "Podcast");
                     System.out.println("podcast added");
                     podcastTester.setText(db.getFiles().toString());
                     success = true;
@@ -1445,7 +1040,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    sql.addContent("" + db.getFiles().toString(),"App");
+                    sql.addContent("" + db.getFiles().toString(), "App");
                     System.out.println("app added");
                     appTester.setText(db.getFiles().toString());
                     success = true;
@@ -1480,7 +1075,7 @@ public class PacApp extends Application {
         Iterator miter = mset.iterator();
         int setSize = mset.size();
 
-        if(setSize == 0){
+        if (setSize == 0) {
             Label noMusic = new Label("You have no music.\n\nDrag and Drop music into this window to add to your collection.");
             noMusic.setFont(new Font(25.0));
             noMusic.backgroundProperty().set(buBack);
@@ -1492,7 +1087,7 @@ public class PacApp extends Application {
         while (miter.hasNext()) {
             Content content = new Content();
             content = (NewDatabase.Content) miter.next();
-            musButt(content, listings, i,musicCont,mediaSet);
+            musButt(content, listings, i, musicCont, mediaSet);
             i++;
         }
 
@@ -1538,20 +1133,22 @@ public class PacApp extends Application {
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
+        syncer.setTextFill(Paint.valueOf("Green"));
         Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
-        if(objs.getWantToSync()){
+        Button men = new Button("▼");
+        men.backgroundProperty().set(buBack);
+        if (objs.getWantToSync()) {
 
-        syncStatus.getChildren().add(syncer);}
-        else{
+            syncStatus.getChildren().add(syncer);
+        } else {
             syncStatus.getChildren().add(unsyncer);
         }
 
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-
                 dao.setSyncStatus(objs);
                 syncStatus.getChildren().clear();
                 syncStatus.getChildren().add(unsyncer);
@@ -1560,28 +1157,28 @@ public class PacApp extends Application {
 
             }
         });
-                unsyncer.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent press) {
+        unsyncer.setOnAction(new EventHandler<ActionEvent>() {
+                                 @Override
+                                 public void handle(ActionEvent press) {
 
-                        dao.setSyncStatus(objs);
-                        syncStatus.getChildren().clear();
-                        syncStatus.getChildren().add(syncer);
+                                     dao.setSyncStatus(objs);
+                                     syncStatus.getChildren().clear();
+                                     syncStatus.getChildren().add(syncer);
 
-                        System.out.println(name + " switched to sync = " + objs.getWantToSync());
+                                     System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
-                    }
-                }
+                                 }
+                             }
 
         );
 
 
         String thefuquwant = objs.getLocation();
-        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        thefuquwant = "file:" + thefuquwant.replace("\\", "/");
         File file = new File(objs.getLocation());
         URI uri = file.toURI();
         M[i] = new Media(uri.toString());
-        musicList.add(i,M[i]);
+        musicList.add(i, M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(buBack);
@@ -1591,13 +1188,13 @@ public class PacApp extends Application {
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                try{
+                try {
                     musicView.getMediaPlayer().dispose();
-                }catch(Exception E){
+                } catch (Exception E) {
                     System.out.println(E);
                 }
 
-                playahMakah(musicList.get(i) ,musicView);
+                playahMakah(musicList.get(i), musicView, musicVolumeSlider);
                 System.out.println(musicList.get(i).toString());
                 System.out.println(name + " Pressed");
 
@@ -1606,7 +1203,7 @@ public class PacApp extends Application {
 
             }
         });
-        doubleButt.getChildren().addAll(L[i],syncStatus);
+        doubleButt.getChildren().addAll(men,L[i], syncStatus);
         cont.getChildren().add(doubleButt);
 
 
@@ -1617,16 +1214,19 @@ public class PacApp extends Application {
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
+        syncer.setTextFill(Paint.valueOf("Green"));
         Button unsyncer = new Button("✘");
+        Button men = new Button("▼");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
-        if(objs.getWantToSync()){
+        men.backgroundProperty().set(buBack);
 
-            syncStatus.getChildren().add(syncer);}
-        else{
+        if (objs.getWantToSync()) {
+
+            syncStatus.getChildren().add(syncer);
+        } else {
             syncStatus.getChildren().add(unsyncer);
         }
-        //  syncer.setSelected(objs.getWantToSync());
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -1654,12 +1254,12 @@ public class PacApp extends Application {
 
         );
 
-    String thefuquwant = objs.getLocation();
-        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        String thefuquwant = objs.getLocation();
+        thefuquwant = "file:" + thefuquwant.replace("\\", "/");
         File file = new File(objs.getLocation());
         URI uri = file.toURI();
         M[i] = new Media(uri.toString());
-        podcastList.add(i,M[i]);
+        podcastList.add(i, M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(buBack);
@@ -1668,26 +1268,26 @@ public class PacApp extends Application {
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                    try{
-                        podcastView.getMediaPlayer().dispose();
-                    }catch(Exception E){
-                        System.out.println(E);
-                    }
+                try {
+                    podcastView.getMediaPlayer().dispose();
+                } catch (Exception E) {
+                    System.out.println(E);
+                }
                 System.out.println(i);
-                    try{
-                    playahMakah(podcastList.get(i) ,podcastView);}
-                    catch(Exception T){
+                try {
+                    playahMakah(podcastList.get(i), podcastView, podcastVolumeSlider);
+                } catch (Exception T) {
 
-                    }
-                    System.out.println(podcastList.get(i).toString());
-                    System.out.println(name + " Pressed");
+                }
+                System.out.println(podcastList.get(i).toString());
+                System.out.println(name + " Pressed");
 
                 podcastView.getMediaPlayer().play();
 
 
-                }
+            }
         });
-        doubleButt.getChildren().addAll(L[i],syncStatus);
+        doubleButt.getChildren().addAll(men,L[i], syncStatus);
         cont.getChildren().add(doubleButt);
     }
 
@@ -1697,16 +1297,18 @@ public class PacApp extends Application {
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
+        syncer.setTextFill(Paint.valueOf("Green"));
         Button unsyncer = new Button("✘");
+        Button men = new Button("▼");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
-        if(objs.getWantToSync()){
+        men.backgroundProperty().set(buBack);
+        if (objs.getWantToSync()) {
 
-            syncStatus.getChildren().add(syncer);}
-        else{
+            syncStatus.getChildren().add(syncer);
+        } else {
             syncStatus.getChildren().add(unsyncer);
         }
-        //  syncer.setSelected(objs.getWantToSync());
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -1714,7 +1316,6 @@ public class PacApp extends Application {
                 dao.setSyncStatus(objs);
                 syncStatus.getChildren().clear();
                 syncStatus.getChildren().add(unsyncer);
-
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
             }
@@ -1722,11 +1323,9 @@ public class PacApp extends Application {
         unsyncer.setOnAction(new EventHandler<ActionEvent>() {
                                  @Override
                                  public void handle(ActionEvent press) {
-
                                      dao.setSyncStatus(objs);
                                      syncStatus.getChildren().clear();
                                      syncStatus.getChildren().add(syncer);
-
                                      System.out.println(name + " switched to sync = " + objs.getWantToSync());
 
                                  }
@@ -1734,7 +1333,7 @@ public class PacApp extends Application {
 
         );
         String thefuquwant = objs.getLocation();
-        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        thefuquwant = "file:" + thefuquwant.replace("\\", "/");
         File file = new File(objs.getLocation());
         URI uri = file.toURI();
         L[i] = new Button(name);
@@ -1746,22 +1345,21 @@ public class PacApp extends Application {
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                try{
-                String book = new Scanner(new File(objs.getLocation())).useDelimiter("\\Z").next();
-                cont.getChildren().clear();
-                Text bookT = new Text(book);
-                bookT.setFill(Paint.valueOf("BBBBBB"));//.setTextFill(Paint.valueOf("BBBBBB"));
-                cont.getChildren().add(bookT);
+                try {
+                    String book = new Scanner(new File(objs.getLocation())).useDelimiter("\\Z").next();
+                    cont.getChildren().clear();
+                    Text bookT = new Text(book);
+                    bookT.setFill(Paint.valueOf("BBBBBB"));//.setTextFill(Paint.valueOf("BBBBBB"));
+                    cont.getChildren().add(bookT);
 
-                }
-                catch(IOException E){
+                } catch (IOException E) {
                     System.out.println(E);
                 }
                 System.out.println(name + " Pressed");
 
             }
         });
-        doubleButt.getChildren().addAll(L[i],syncStatus);
+        doubleButt.getChildren().addAll(men,L[i], syncStatus);
         cont.getChildren().add(doubleButt);
     }
 
@@ -1770,13 +1368,16 @@ public class PacApp extends Application {
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
+        syncer.setTextFill(Paint.valueOf("Green"));
         Button unsyncer = new Button("✘");
+        Button men = new Button("▼");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
-        if(objs.getWantToSync()){
+        men.backgroundProperty().set(buBack);
+        if (objs.getWantToSync()) {
 
-            syncStatus.getChildren().add(syncer);}
-        else{
+            syncStatus.getChildren().add(syncer);
+        } else {
             syncStatus.getChildren().add(unsyncer);
         }
 
@@ -1808,11 +1409,11 @@ public class PacApp extends Application {
 
 
         String thefuquwant = objs.getLocation();
-        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        thefuquwant = "file:" + thefuquwant.replace("\\", "/");
         File file = new File(objs.getLocation());
         URI uri = file.toURI();
         M[i] = new Media(uri.toString());
-        abookList.add(i,M[i]);
+        abookList.add(i, M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(buBack);
@@ -1822,15 +1423,15 @@ public class PacApp extends Application {
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                try{
+                try {
                     aBookView.getMediaPlayer().dispose();
-                }catch(Exception E){
+                } catch (Exception E) {
                     System.out.println(E);
                 }
                 System.out.println(i);
-                try{
-                    playahMakah(abookList.get(i) ,aBookView);}
-                catch(Exception T){
+                try {
+                    playahMakah(abookList.get(i), aBookView, abookVolumeSlider);
+                } catch (Exception T) {
 
                 }
                 System.out.println(abookList.get(i).toString());
@@ -1840,21 +1441,25 @@ public class PacApp extends Application {
 
             }
         });
-        doubleButt.getChildren().addAll(L[i],syncStatus);
+        doubleButt.getChildren().addAll(men,L[i], syncStatus);
         cont.getChildren().add(doubleButt);
     }
+
     public static void vidButt(Content objs, Button[] L, int i, VBox cont, Media[] M) {
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
+        syncer.setTextFill(Paint.valueOf("Green"));
         Button unsyncer = new Button("✘");
+        Button men = new Button("▼");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
-        if(objs.getWantToSync()){
+        men.backgroundProperty().set(buBack);
+        if (objs.getWantToSync()) {
 
-            syncStatus.getChildren().add(syncer);}
-        else{
+            syncStatus.getChildren().add(syncer);
+        } else {
             syncStatus.getChildren().add(unsyncer);
         }
 
@@ -1884,11 +1489,11 @@ public class PacApp extends Application {
         );
 
         String thefuquwant = objs.getLocation();
-        thefuquwant = "file:" + thefuquwant.replace("\\" , "/");
+        thefuquwant = "file:" + thefuquwant.replace("\\", "/");
         File file = new File(objs.getLocation());
         URI uri = file.toURI();
         M[i] = new Media(uri.toString());
-        videoList.add(i,M[i]);
+        videoList.add(i, M[i]);
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(buBack);
@@ -1898,15 +1503,15 @@ public class PacApp extends Application {
         L[i].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
-                try{
+                try {
                     videoView.getMediaPlayer().dispose();
-                }catch(Exception E){
+                } catch (Exception E) {
                     System.out.println(E);
                 }
                 System.out.println(i);
-                try{
-                    playahMakah(videoList.get(i) ,videoView);}
-                catch(Exception T){
+                try {
+                    playahMakah(videoList.get(i), videoView, videoVolumeSlider);
+                } catch (Exception T) {
 
                 }
                 System.out.println(videoList.get(i).toString());
@@ -1918,7 +1523,7 @@ public class PacApp extends Application {
 
             }
         });
-        doubleButt.getChildren().addAll(L[i],syncStatus);
+        doubleButt.getChildren().addAll(men,L[i], syncStatus);
         cont.getChildren().add(doubleButt);
     }
 
@@ -1929,7 +1534,7 @@ public class PacApp extends Application {
         Image appsIcon = new Image("AppDefault.png");   //Load Phone Icon for imageview
         ImageView appview = new ImageView();
         appview.setImage(appsIcon);
-        L[i] = new Button(name,appview);
+        L[i] = new Button(name, appview);
         L[i].setTextFill(Paint.valueOf("707070"));
         L[i].setContentDisplay(ContentDisplay.TOP);
         L[i].backgroundProperty().set(buBack);
@@ -1940,9 +1545,9 @@ public class PacApp extends Application {
 
                 dao.setSyncStatus(objs);
                 System.out.println(name + " switched to sync = " + objs.getWantToSync());
-                if(objs.getWantToSync()){
+                if (objs.getWantToSync()) {
                     L[i].setTextFill(Paint.valueOf("BBBBBB"));
-                }else{
+                } else {
                     L[i].setTextFill(Paint.valueOf("707070"));
                 }
 
@@ -1957,17 +1562,17 @@ public class PacApp extends Application {
         HBox doubleButt = new HBox();
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
+        syncer.setTextFill(Paint.valueOf("Green"));
         Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
 
-        if(objs.getWantToSync()){
+        if (objs.getWantToSync()) {
 
-            syncStatus.getChildren().add(syncer);}
-        else{
+            syncStatus.getChildren().add(syncer);
+        } else {
             syncStatus.getChildren().add(unsyncer);
         }
-        //  syncer.setSelected(objs.getWantToSync());
         syncer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent press) {
@@ -1994,13 +1599,11 @@ public class PacApp extends Application {
 
         );
 
-
-
         File file = new File(objs.getLocation());
         URI uri = file.toURI();
         try {
             M[i] = new Media(uri.toString());
-        }catch(MediaException E){
+        } catch (MediaException E) {
             System.out.println(E);
         }
         L[i] = new Button(name);
@@ -2018,31 +1621,230 @@ public class PacApp extends Application {
             }
         });
         doubleButt.backgroundProperty().set(buBack);
-        doubleButt.getChildren().addAll(L[i],syncStatus);
+        doubleButt.getChildren().addAll(L[i], syncStatus);
         cont.getChildren().add(doubleButt);
 
-}
+    }
 
-    public static MediaPlayer playahMakah(Media M,MediaView V){
+    public static MediaPlayer playahMakah(Media M, MediaView V, Slider S) {
         MediaPlayer player = new MediaPlayer(M);
         V.setMediaPlayer(player);
+        player.volumeProperty().bindBidirectional(S.valueProperty());
         return player;
     }
 
-    public static void highLight(Button butt){
+    public static void highLight(Button butt) {
         butt.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent entered){
+            public void handle(MouseEvent entered) {
                 butt.backgroundProperty().set(hiBack);
             }
         });
 
         butt.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent entered){
+            public void handle(MouseEvent entered) {
                 butt.backgroundProperty().set(buBack);
             }
         });
     }
-}
+
+    public static void play(VBox box){
+        //music - 0,abook - 1, podcast - 2,video - 3
+        MediaView view = new MediaView();
+        List<Media> List = new ArrayList<>();
+        Slider slider = new Slider();
+        switch (type) {
+            case 0:
+                view = musicView;
+                List = musicList;
+                slider = musicVolumeSlider;
+                break;
+            case 1:
+                view = aBookView;
+                List = abookList;
+                slider = abookVolumeSlider;
+                break;
+            case 2:
+                view = podcastView;
+                List = podcastList;
+                slider = podcastVolumeSlider;
+                break;
+            case 3:
+                view = videoView;
+                List = videoList;
+                slider = videoVolumeSlider;
+
+                break;
+            default:
+            System.out.println("error");
+            break;
+        }
+
+        System.out.println("Play Pressed");
+        try {
+            if(type == 3){
+                box.getChildren().clear();
+                box.getChildren().add(videoView);
+            }
+            view.getMediaPlayer().play();
+
+        } catch (NullPointerException E) {
+            playahMakah(List.get(0), view, slider);
+            if(type == 3){
+                box.getChildren().clear();
+                box.getChildren().add(videoView);
+            }
+            view.getMediaPlayer().play();
+        }
+
+        musicPlayIcon.setImage(PlayIcon);
+        if (view.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING) {
+            view.getMediaPlayer().pause();
+            musicPlayIcon.setImage(PauseIcon);
+
+        }
+    }
+    public static void forward(){
+        //music - 0,abook - 1, podcast - 2,video - 3
+        MediaView view = new MediaView();
+        List<Media> List = new ArrayList<>();
+        Slider slider = new Slider();
+        switch (type) {
+            case 0:
+                view = musicView;
+                List = musicList;
+                slider = musicVolumeSlider;
+                break;
+            case 1:
+                view = aBookView;
+                List = abookList;
+                slider = abookVolumeSlider;
+                break;
+            case 2:
+                view = podcastView;
+                List = podcastList;
+                slider = podcastVolumeSlider;
+                break;
+            case 3:
+                view = videoView;
+                List = videoList;
+                slider = videoVolumeSlider;
+                break;
+            default:
+                System.out.println("error");
+                break;
+        }
+        view.getMediaPlayer().dispose();
+        i++;
+        view.getMediaPlayer().pause();
+        view.setMediaPlayer(playahMakah(List.get(i %= List.size()), view, slider));
+        view.getMediaPlayer().play();
+        System.out.println("Forward Pressed");
+    }
+
+    public static void backward(){
+
+        //music - 0,abook - 1, podcast - 2,video - 3
+        MediaView view = new MediaView();
+        List<Media> List = new ArrayList<>();
+        Slider slider = new Slider();
+        switch (type) {
+            case 0:
+                view = musicView;
+                List = musicList;
+                slider = musicVolumeSlider;
+                break;
+            case 1:
+                view = aBookView;
+                List = abookList;
+                slider = abookVolumeSlider;
+                break;
+            case 2:
+                view = podcastView;
+                List = podcastList;
+                slider = podcastVolumeSlider;
+                break;
+            case 3:
+                view = videoView;
+                List = videoList;
+                slider = videoVolumeSlider;
+                break;
+            default:
+                System.out.println("error");
+                break;
+        }
+
+        System.out.println(view.getMediaPlayer().getCurrentTime());
+        if (!view.getMediaPlayer().getCurrentTime().lessThan(new Duration(5000.0))) {
+            view.getMediaPlayer().stop();
+            view.getMediaPlayer().play();
+
+        } else {
+            view.getMediaPlayer().dispose();
+            if (i == 0) {
+                i = List.size();
+            } else
+                i--;
+            view.setMediaPlayer(playahMakah(List.get(i %= List.size()), view, slider));
+            view.getMediaPlayer().play();
+        }
+        System.out.println("Back Pressed");
+    }
+
+    public static void mute(){
+        //music - 0,abook - 1, podcast - 2,video - 3
+        MediaView view = new MediaView();
+        List<Media> List = new ArrayList<>();
+        Slider slider = new Slider();
+        switch (type) {
+            case 0:
+                view = musicView;
+                List = musicList;
+                slider = musicVolumeSlider;
+                break;
+            case 1:
+                view = aBookView;
+                List = abookList;
+                slider = abookVolumeSlider;
+                break;
+            case 2:
+                view = podcastView;
+                List = podcastList;
+                slider = podcastVolumeSlider;
+                break;
+            case 3:
+                view = videoView;
+                List = videoList;
+                slider = videoVolumeSlider;
+                break;
+            default:
+                System.out.println("error");
+                break;
+        }
+        view.getMediaPlayer().setMute(!view.getMediaPlayer().isMute());
+        System.out.println("Music Mute Pressed");
+        if (view.getMediaPlayer().isMute()) {
+            System.out.println(view.getMediaPlayer().isMute());
+            slider.setValue(0);
+            musicMuteIcon.setImage(muteIcon);
+        } else {
+            System.out.println("other");
+            if (slider.getValue() <= 0.33) {
+                musicMuteIcon.setImage(lowVolIcon);
+            } else if (slider.getValue() <= 0.66) {
+                musicMuteIcon.setImage(medVolIcon);
+            } else {
+                musicMuteIcon.setImage(highVolIcon);
+            }
+            view.getMediaPlayer().setVolume(slider.getValue() / 100.0);
+            slider.setValue(view.getMediaPlayer().getVolume() * 100);
+
+        }
+
+    }
+
+    }
+
+
 
