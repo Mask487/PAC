@@ -2235,6 +2235,26 @@ public class SQLTranslator {
     public boolean updateContent() {
         return false;
     }
+    
+    
+    public boolean updateContentName(int contentID, String newName) {
+        String query = "UPDATE " + DBEnumeration.CONTENT 
+                + " SET ContentName = ? WHERE ContentID = ?";
+        
+        try {
+            PreparedStatement prep = conn.prepareStatement(query);
+            prep.setString(1, newName);
+            prep.setInt(2, contentID);
+            return SQLExecute(prep);
+        }
+        
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        //If fail.
+        return false;   
+    }
 
 
     /**
