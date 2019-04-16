@@ -87,6 +87,7 @@ public class PacApp extends Application {
     static Slider videoVolumeSlider = new Slider(0.0, 1.0, 1.0);
     static Slider abookVolumeSlider = new Slider(0.0, 1.0, 1.0);
     static int type = 0;//music - 0,abook - 1, podcast - 2,video - 3
+    static VBox midButt = new VBox();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -140,6 +141,7 @@ public class PacApp extends Application {
         VBox searchResults = new VBox();
         ScrollPane searchPane = new ScrollPane(searchResults);
         StackPane controllStack = new StackPane();
+
 
         //create background anchor
         AnchorPane.setRightAnchor(bp, 0.0);
@@ -451,8 +453,6 @@ public class PacApp extends Application {
                     abkButt(content, listings, i, audioBookCont, mediaSet);
                     i++;
                 }
-               // controllStack.getChildren().clear();
-               // controllStack.getChildren().addAll(audioBookControll);
             }
 
 
@@ -673,6 +673,14 @@ public class PacApp extends Application {
         sync.setTextFill(Paint.valueOf("BBBBBB"));
         sync.backgroundProperty().set(buBack);         //adds transparent background
 
+        Button stopSync = new Button("Cancel Sync");       //Creates button
+        sync.setTextFill(Paint.valueOf("BBBBBB"));
+        sync.backgroundProperty().set(buBack);         //adds transparent background
+
+        Button stopBackup = new Button("Cancel Sync");       //Creates button
+        sync.setTextFill(Paint.valueOf("BBBBBB"));
+        sync.backgroundProperty().set(buBack);         //adds transparent background
+
         highLight(sync);
         sync.setPadding(inset);
 
@@ -682,9 +690,24 @@ public class PacApp extends Application {
                 t.initializePhone(0);
                 t.sync();
                 System.out.println("Sync Pressed");
+                midButt.getChildren().add(stopSync);
 
             }
         });
+
+        stopSync.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                t.initializePhone(0);
+
+                System.out.println("stopo Sync Pressed");
+                t.setRunningR();
+                midButt.getChildren().remove(stopSync);
+
+            }
+        });
+
+
 
         Button backup = new Button("Backup Phone");       //Creates button
         backup.setTextFill(Paint.valueOf("BBBBBB"));
@@ -702,6 +725,18 @@ public class PacApp extends Application {
                     e.printStackTrace();
                 }
                 System.out.println("backup Pressed");
+                midButt.getChildren().add(stopBackup);
+
+            }
+        });
+        stopBackup.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                t.initializePhone(0);
+
+                System.out.println("stopo backup Pressed");
+                t.setRunningB();
+                midButt.getChildren().remove(stopBackup);
 
             }
         });
@@ -731,7 +766,7 @@ public class PacApp extends Application {
         copy.backgroundProperty().set(buBack);
 
 
-        VBox midButt = new VBox();
+
         midButt.setPadding(new Insets(5, 5, 5, 5));
         midButt.setSpacing(50);
         midButt.getChildren().addAll(sync, backup, copy, throwaway);
