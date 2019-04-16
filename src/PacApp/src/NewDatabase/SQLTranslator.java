@@ -2228,15 +2228,35 @@ public class SQLTranslator {
 
 
     /**
-     * Updates a specific piece of content. Could be used when something might
-     * become a favorite. Still need to work on that functionality.
+     * Updates a specific piece of content's download url for its image.
+     * @param contentID
+     * @param downloadURL
      * @return
      */
-    public boolean updateContent() {
+    public boolean updateContentImage(int contentID, String downloadURL) {
+        String query = "UPDATE " + DBEnumeration.CONTENT
+                + " SET DownloadURL = ? WHERE ContentID = ?";
+        try {
+            PreparedStatement prep = conn.prepareStatement(query);
+            prep.setString(1, downloadURL);
+            prep.setInt(2, contentID);
+            
+            return SQLExecute(prep);
+        }
+        
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return false;
     }
     
     
+    /**
+     * Updates a piece of content's name
+     * @param contentID
+     * @param newName
+     * @return 
+     */
     public boolean updateContentName(int contentID, String newName) {
         String query = "UPDATE " + DBEnumeration.CONTENT 
                 + " SET ContentName = ? WHERE ContentID = ?";
