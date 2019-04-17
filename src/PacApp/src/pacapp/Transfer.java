@@ -417,7 +417,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         4 -
         5 -
         6 -
-        7 - Podcast
+        7 - pacapp.Podcast
         */
 
         System.out.println();
@@ -507,7 +507,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     }
 
-    //add single Podcast
+    //add single pacapp.Podcast
     public void addPodcast(File file) {
         if (doesFolderExist("podcasts", pD))
         {

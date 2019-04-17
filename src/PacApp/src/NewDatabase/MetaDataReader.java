@@ -41,7 +41,7 @@ Here's what the DB NEEDS for any file
  */
 public class MetaDataReader {
     
-    private static String location = "C:/Test/FreePodcast.mp3";
+    private static String location = "C:/pacapp.Test/FreePodcast.mp3";
     
     /**
      * You have to tell this methods if the mp3 file you're passing
@@ -204,7 +204,7 @@ public class MetaDataReader {
     }
     
 //    public static void main(String[] args) {
-//        //mp3Reader("Podcast");
+//        //mp3Reader("pacapp.Podcast");
 //        ePubReader();
 //    }
 }

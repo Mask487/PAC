@@ -1,4 +1,4 @@
-//standard java imports included with netbeans
+package pacapp;//standard java imports included with netbeans
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +12,7 @@ import java.util.List;
 //json library specific imports
 import org.json.JSONException;
 import org.json.JSONObject;
+import pacapp.Book;
 
 public class BookSearch{
     

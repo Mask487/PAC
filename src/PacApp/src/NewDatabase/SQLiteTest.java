@@ -22,12 +22,12 @@ public class SQLiteTest {
         SQLTranslator test = new SQLTranslator();
         ResultSet res;
         String foo = "ThisIsTest";
-        String contentType = "Podcast";
+        String contentType = "pacapp.Podcast";
         String creatorName = "Jacob";
-        String genreName = "Test";
-        String publisherName = "Test";
+        String genreName = "pacapp.Test";
+        String publisherName = "pacapp.Test";
         String seriesName = "test";
-        String contentName = "Test on new file system";
+        String contentName = "pacapp.Test on new file system";
         String contentDescription = foo;
         //yyyy-mm-dd
         String uploadDate = "2019-04-07";
@@ -36,7 +36,7 @@ public class SQLiteTest {
         String duration = "01:33:12";
         String isbn = null;
         boolean explicit = false;
-        String location = "C:/Test/ultimatetest.mp3";
+        String location = "C:/pacapp.Test/ultimatetest.mp3";
         String url = null;
         boolean wantToSync = false;
         String filePath = "";

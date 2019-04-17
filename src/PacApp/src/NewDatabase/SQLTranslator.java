@@ -11,9 +11,9 @@ import java.util.logging.Logger;
 import org.apache.commons.io.FilenameUtils;
 import java.io.IOException;
 import java.nio.file.*;
-//import Default.Book;
-//import Default.Podcast;
-//import Default.Song;
+//import Default.pacapp.Book;
+//import Default.pacapp.Podcast;
+//import Default.pacapp.Song;
 /**
  * @author Jacob Oleson
  *
@@ -87,7 +87,7 @@ public class SQLTranslator {
             }
 //            String fileName;
 //
-//            if("Podcast".equals(contentType) | "AudioBook".equals(contentType) | "Music".equals(contentType)) {
+//            if("pacapp.Podcast".equals(contentType) | "AudioBook".equals(contentType) | "Music".equals(contentType)) {
 //                fileName = contentName + ".mp3";
 //            }
 //
@@ -335,17 +335,17 @@ public class SQLTranslator {
 
 
 //    /**
-//     * Test with the objects Cody has done to add them into the database.
+//     * pacapp.Test with the objects Cody has done to add them into the database.
 //     * Still need to extract more information from these objects
 //     * and make sure that the packaging of them is good with Cody and Andrew
 //     * @param book
 //     * @param contentType since there are multiple book objects
 //     *      its important to pass this one's type
-//     *      (i.e AudioBook, EBook, or Book).
+//     *      (i.e AudioBook, EBook, or pacapp.Book).
 //     * @param originalFilePath
 //     * @return
 //     */
-//    public boolean addBook(Book book, String contentType, String originalFilePath) {
+//    public boolean addBook(pacapp.Book book, String contentType, String originalFilePath) {
 //        return addContent(contentType, book.getAuthors(), null,
 //                null, null, book.getTitle(), null, book.getPublishYear(),  Integer.parseInt(book.getPageCount()),
 //                null, book.getISBN(), false, null, null, false, originalFilePath);
@@ -358,7 +358,7 @@ public class SQLTranslator {
 //     * @param originalFilePath
 //     * @return
 //     */
-//    public boolean addMusic(Song song, String originalFilePath) {
+//    public boolean addMusic(pacapp.Song song, String originalFilePath) {
 //        String contentType = "Music";
 //        return addContent(contentType, song.getArtist(), song.getGenre(), null,
 //                song.getAlbum(), song.getTitle(), null, null, 0, song.getDuration(),
@@ -372,8 +372,8 @@ public class SQLTranslator {
 //     * @param originalFilePath
 //     * @return
 //     */
-//    public boolean addPodcast(Podcast podcast, String originalFilePath) {
-//        String contentType = "Podcast";
+//    public boolean addPodcast(pacapp.Podcast podcast, String originalFilePath) {
+//        String contentType = "pacapp.Podcast";
 //        return addContent(contentType, podcast.getAuthor(), null,
 //                null, null, podcast.getTitle(), podcast.getDescription(), null,
 //                0, podcast.getDuration(), null, false, null, podcast.getUrl(),
