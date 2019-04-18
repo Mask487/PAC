@@ -350,12 +350,12 @@ public class PacApp extends Application {
                 mainStack.getChildren().add(overallPBooks);
                 pBooksTall.getChildren().clear();
                 try {
-                  List<Book> authors = R.RecommendBook("author");
+                    List<Book> authors = R.RecommendBook("author");
                     List<Book> genres = R.RecommendBook("genre");
                     List<Book> serieses = R.RecommendBook("series");
                     List<Book> publishers = R.RecommendBook("publisher");
-
                 }catch(IOException |SQLException |ClassNotFoundException | JSONException c){
+                    c.printStackTrace();
                     System.out.println(c);
                     System.out.println("this is the error...shame shame");
                 }
@@ -442,7 +442,7 @@ public class PacApp extends Application {
                         System.out.println(b.getAuthors());
                         System.out.println();
 
-                        //dao.
+                        dao.insertBook(b);
                     }
                 }catch(IOException | JSONException E){
                     System.out.println(E);

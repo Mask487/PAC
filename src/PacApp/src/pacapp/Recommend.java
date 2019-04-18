@@ -50,23 +50,60 @@ public class Recommend {
             if(t.contains(" ")){
                 t = t.replace(" ", "+");
             }
-            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=subject:" + t);
+            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=inauthor:" + t);
             JSONArray jArray = json.getJSONArray("items");
 
             for (int i = 0; i < jArray.length(); i++) {
-                String title = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
+                String title;
                 String subTitle;
+                String authors;
+                String publisher;
+                String publishYear;
+                String pageCount;
+                String isbn;
+
+                try {
+                    title = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
+                }catch(Exception e){
+                    title = "";
+                }
+
                 try{
                     subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
                 }catch(Exception e){
                     subTitle = "";
                 }
-                String authors = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
-                String publisher = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
-                String publishYear = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
-                String pageCount = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("pageCount").toString();
-                String isbn = jArray.getJSONObject(i).getJSONObject("volumeInfo")
-                        .getJSONArray("industryIdentifiers").getJSONObject(1).get("identifier").toString();
+
+                try {
+                    authors = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
+                }catch(Exception e){
+                    authors = "";
+                }
+
+                try {
+                    publisher = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
+                }catch(Exception e){
+                    publisher = "";
+                }
+
+                try {
+                    publishYear = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
+                }catch(Exception e){
+                    publishYear = "";
+                }
+
+                try {
+                    pageCount = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("pageCount").toString();
+                }catch(Exception e){
+                    pageCount = "";
+                }
+
+                try {
+                    isbn = jArray.getJSONObject(i).getJSONObject("volumeInfo")
+                            .getJSONArray("industryIdentifiers").getJSONObject(1).get("identifier").toString();
+                }catch(Exception e){
+                    isbn = "";
+                }
 
                 Book book = new Book(title, subTitle, authors, publisher, publishYear, pageCount, isbn);
 
@@ -141,7 +178,7 @@ public class Recommend {
             if(t.contains(" ")){
                 t = t.replace(" ", "+");
             }
-            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=inauthor:" + t);
+            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=intitle:" + t);
             JSONArray jArray = json.getJSONArray("items");
 
             for (int i = 0; i < jArray.length(); i++) {
@@ -205,7 +242,7 @@ public class Recommend {
             if(t.contains(" ")){
                 t = t.replace(" ", "+");
             }
-            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=inauthor:" + t);
+            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=inpublisher:" + t);
             JSONArray jArray = json.getJSONArray("items");
 
             for (int i = 0; i < jArray.length(); i++) {
