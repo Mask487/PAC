@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import org.apache.commons.io.FilenameUtils;
 import java.io.IOException;
 import java.nio.file.*;
+import pacapp.Book;
 //import Default.pacapp.Book;
 //import Default.pacapp.Podcast;
 //import Default.pacapp.Song;
@@ -331,6 +332,15 @@ public class SQLTranslator {
                 content.getContentDescription(), content.getUploadDate(), content.getPageCount(),
                 content.getDuration(), content.getIsbn(), content.isExplicit(), null,
                 content.getUrl(), content.getWantToSync(), originalFilePath);
+    }
+    
+    
+    public boolean addBook(Book book) {
+        if(conn == null) {
+            getConnection();
+        }
+        
+        return false;
     }
 
 
