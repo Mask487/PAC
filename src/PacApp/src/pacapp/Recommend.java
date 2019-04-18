@@ -1,3 +1,4 @@
+package pacapp;
 
 import NewDatabase.SQLTranslator;
 import NewDatabase.ContentDAO;
@@ -17,7 +18,7 @@ import org.json.JSONObject;
 
 public class Recommend {
 
-    //Recommend based on user statistics
+    //pacapp.Recommend based on user statistics
     List<Book> RecommendBook(String searchType) throws IOException, SQLException, ClassNotFoundException {
 
         List<String[]> searchTerms = new ArrayList<>();

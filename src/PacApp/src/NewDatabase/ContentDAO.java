@@ -454,7 +454,7 @@ public class ContentDAO {
     
     /**
      * Inserts a piece of content given the current filepath to that content, 
-     * and a description of its type (Podcast, AudioBook, Etc.)
+     * and a description of its type (pacapp.Podcast, AudioBook, Etc.)
      * @param filePath
      * @param contentType
      * @return 
