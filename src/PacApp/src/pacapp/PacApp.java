@@ -357,6 +357,7 @@ public class PacApp extends Application {
 
                 }catch(IOException |SQLException |ClassNotFoundException | JSONException c){
                     System.out.println(c);
+                    System.out.println("this is the error...shame shame");
                 }
                 ListIterator<Book> iter = new ListIterator<Book>() {
                     @Override
@@ -431,9 +432,18 @@ public class PacApp extends Application {
             public void handle(ActionEvent Enter) {
 
                 List<String> ISBN = new ArrayList<>();
+                List<Book> books = new ArrayList<>();
                 ISBN.add(ISBNAdd.getCharacters().toString());
                 try {
-                    S.BookLookUp(ISBN);
+                    books = S.BookLookUp(ISBN);
+                    for(Book b : books){
+                        System.out.println(b.getTitle());
+                        System.out.println(b.getSubtitle());
+                        System.out.println(b.getAuthors());
+                        System.out.println();
+
+                        //dao.
+                    }
                 }catch(IOException | JSONException E){
                     System.out.println(E);
                 }
