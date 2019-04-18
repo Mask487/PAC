@@ -28,7 +28,7 @@ public class Recommend {
         //String st = searchTerms.toLowerCase();
         String st = searchType;
 
-        if (st.equals("genre")) {
+        /*if (st.equals("genre")) {
             ContentDAO dao = new NewDatabase.ContentDAO();
             searchTerms = dao.getAllGenres();
         } else if (st.equals("author")) {
@@ -43,7 +43,7 @@ public class Recommend {
         } else {
             //should eventually return a message popup containing the string
             System.out.println("Please enter valid searchType: Genre, Author/Creator, or Series");
-        }
+        }*/
 
         if (st.equals("genre")) {
             String t = stats.BookStats("genre");
@@ -81,19 +81,56 @@ public class Recommend {
             JSONArray jArray = json.getJSONArray("items");
 
             for (int i = 0; i < jArray.length(); i++) {
-                String title = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
+                String title;
                 String subTitle;
+                String authors;
+                String publisher;
+                String publishYear;
+                String pageCount;
+                String isbn;
+
+                try {
+                    title = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
+                }catch(Exception e){
+                    title = "";
+                }
+
                 try{
                     subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
                 }catch(Exception e){
                     subTitle = "";
                 }
-                String authors = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
-                String publisher = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
-                String publishYear = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
-                String pageCount = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("pageCount").toString();
-                String isbn = jArray.getJSONObject(i).getJSONObject("volumeInfo")
-                        .getJSONArray("industryIdentifiers").getJSONObject(1).get("identifier").toString();
+
+                try {
+                    authors = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
+                }catch(Exception e){
+                    authors = "";
+                }
+
+                try {
+                    publisher = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
+                }catch(Exception e){
+                    publisher = "";
+                }
+
+                try {
+                    publishYear = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
+                }catch(Exception e){
+                    publishYear = "";
+                }
+
+                try {
+                    pageCount = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("pageCount").toString();
+                }catch(Exception e){
+                    pageCount = "";
+                }
+
+                try {
+                    isbn = jArray.getJSONObject(i).getJSONObject("volumeInfo")
+                            .getJSONArray("industryIdentifiers").getJSONObject(1).get("identifier").toString();
+                }catch(Exception e){
+                    isbn = "";
+                }
 
                 Book book = new Book(title, subTitle, authors, publisher, publishYear, pageCount, isbn);
 
@@ -104,24 +141,60 @@ public class Recommend {
             if(t.contains(" ")){
                 t = t.replace(" ", "+");
             }
-            System.out.println(t);
-            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=intitle:" + t);
+            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=inauthor:" + t);
             JSONArray jArray = json.getJSONArray("items");
 
-            for (int i = 0; i < json.getJSONArray("items").length(); i++) {
-                String title = json.getJSONArray("items").getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
+            for (int i = 0; i < jArray.length(); i++) {
+                String title;
                 String subTitle;
+                String authors;
+                String publisher;
+                String publishYear;
+                String pageCount;
+                String isbn;
+
+                try {
+                    title = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
+                }catch(Exception e){
+                    title = "";
+                }
+
                 try{
                     subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
                 }catch(Exception e){
                     subTitle = "";
                 }
-                String authors = json.getJSONArray("items").getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
-                String publisher = json.getJSONArray("items").getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
-                String publishYear = json.getJSONArray("items").getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
-                String pageCount = json.getJSONArray("items").getJSONObject(i).getJSONObject("volumeInfo").get("pageCount").toString();
-                String isbn = json.getJSONArray("items").getJSONObject(i).getJSONObject("volumeInfo")
-                        .getJSONArray("industryIdentifiers").getJSONObject(1).get("identifier").toString();
+
+                try {
+                    authors = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
+                }catch(Exception e){
+                    authors = "";
+                }
+
+                try {
+                    publisher = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
+                }catch(Exception e){
+                    publisher = "";
+                }
+
+                try {
+                    publishYear = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
+                }catch(Exception e){
+                    publishYear = "";
+                }
+
+                try {
+                    pageCount = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("pageCount").toString();
+                }catch(Exception e){
+                    pageCount = "";
+                }
+
+                try {
+                    isbn = jArray.getJSONObject(i).getJSONObject("volumeInfo")
+                            .getJSONArray("industryIdentifiers").getJSONObject(1).get("identifier").toString();
+                }catch(Exception e){
+                    isbn = "";
+                }
 
                 Book book = new Book(title, subTitle, authors, publisher, publishYear, pageCount, isbn);
 
@@ -132,23 +205,60 @@ public class Recommend {
             if(t.contains(" ")){
                 t = t.replace(" ", "+");
             }
-            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=inpublisher:" + t);
+            JSONObject json = readJSONFromUrl("https://www.googleapis.com/books/v1/" + "volumes?q=inauthor:" + t);
             JSONArray jArray = json.getJSONArray("items");
 
             for (int i = 0; i < jArray.length(); i++) {
-                String title = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
+                String title;
                 String subTitle;
+                String authors;
+                String publisher;
+                String publishYear;
+                String pageCount;
+                String isbn;
+
+                try {
+                    title = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("title").toString();
+                }catch(Exception e){
+                    title = "";
+                }
+
                 try{
                     subTitle = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("subtitle").toString();
                 }catch(Exception e){
                     subTitle = "";
                 }
-                String authors = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
-                String publisher = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
-                String publishYear = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
-                String pageCount = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("pageCount").toString();
-                String isbn = jArray.getJSONObject(i).getJSONObject("volumeInfo")
-                        .getJSONArray("industryIdentifiers").getJSONObject(1).get("identifier").toString();
+
+                try {
+                    authors = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("authors").toString();
+                }catch(Exception e){
+                    authors = "";
+                }
+
+                try {
+                    publisher = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publisher").toString();
+                }catch(Exception e){
+                    publisher = "";
+                }
+
+                try {
+                    publishYear = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("publishedDate").toString();
+                }catch(Exception e){
+                    publishYear = "";
+                }
+
+                try {
+                    pageCount = jArray.getJSONObject(i).getJSONObject("volumeInfo").get("pageCount").toString();
+                }catch(Exception e){
+                    pageCount = "";
+                }
+
+                try {
+                    isbn = jArray.getJSONObject(i).getJSONObject("volumeInfo")
+                            .getJSONArray("industryIdentifiers").getJSONObject(1).get("identifier").toString();
+                }catch(Exception e){
+                    isbn = "";
+                }
 
                 Book book = new Book(title, subTitle, authors, publisher, publishYear, pageCount, isbn);
 
