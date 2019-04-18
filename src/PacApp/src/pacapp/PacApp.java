@@ -1,8 +1,11 @@
 package pacapp;
 
+import java.awt.*;
 import java.io.File;
 
 import NewDatabase.SQLTranslator;
+import com.sun.deploy.uitoolkit.impl.fx.HostServicesFactory;
+import com.sun.javafx.application.HostServicesDelegate;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,6 +14,10 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
@@ -32,6 +39,9 @@ import javafx.scene.image.ImageView;
 import NewDatabase.ContentDAO;
 import NewDatabase.Content;
 
+import java.net.URISyntaxException;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -41,6 +51,7 @@ import java.util.*;
 
 import javafx.scene.input.MouseButton;
 import javafx.util.Duration;
+import org.json.JSONException;
 
 import static javafx.scene.input.MouseButton.SECONDARY;
 
@@ -88,13 +99,17 @@ public class PacApp extends Application {
     static Slider abookVolumeSlider = new Slider(0.0, 1.0, 1.0);
     static int type = 0;//music - 0,abook - 1, podcast - 2,video - 3
     static VBox midButt = new VBox();
+    static Transfer t = new Transfer();
+    static Recommend R = new Recommend();
+    static BookSearch S = new BookSearch();
+
+
 
     @Override
     public void start(Stage stage) throws Exception {
         SQLTranslator sql = new SQLTranslator();
-        Transfer t = new Transfer();
-        t.initializeDesk();
 
+         t.initializeDesk();
         // t.initializePhone(0);
 
         AnchorPane root2 = new AnchorPane();
@@ -104,7 +119,6 @@ public class PacApp extends Application {
         stage.setScene(primary);
         root2.setPrefSize(750, 510);
         //root2.setMaxSize(1600,900);
-
 
         BorderPane bp = new BorderPane();
         root2.getChildren().add(bp);
@@ -131,17 +145,21 @@ public class PacApp extends Application {
         ScrollPane appPane = new ScrollPane(appCont);
         VBox settingsList = new VBox();
         HBox musicControll = new HBox(10);
-        HBox videoControll = new HBox(10);
-        HBox podcastControll = new HBox(10);
-        HBox ebookControll = new HBox(10);
-        HBox audioBookControll = new HBox(10);
-        HBox phoneProgress = new HBox(10);
         Button throwaway = new Button("");
         VBox phoneStack = new VBox();
         VBox searchResults = new VBox();
         ScrollPane searchPane = new ScrollPane(searchResults);
         StackPane controllStack = new StackPane();
-
+        VBox pBooksTall = new VBox();
+        ScrollPane overallPBooks = new ScrollPane(pBooksTall);
+        HBox reccomendAuthor = new HBox();//genre author series publisher
+        ScrollPane authorReccomend = new ScrollPane(reccomendAuthor);
+        HBox reccomendgenre = new HBox();//genre author series publisher
+        ScrollPane genreReccomend = new ScrollPane(reccomendgenre);
+        HBox reccomendSeries = new HBox();//genre author series publisher
+        ScrollPane seriesReccomend = new ScrollPane(reccomendSeries);
+        HBox reccomendpublisher = new HBox();//genre author series publisher
+        ScrollPane publisherReccomend = new ScrollPane(reccomendpublisher);
 
         //create background anchor
         AnchorPane.setRightAnchor(bp, 0.0);
@@ -257,6 +275,19 @@ public class PacApp extends Application {
         hSearch.getChildren().add(search);
         hSearch.backgroundProperty().set(buBack);
 
+        //reccomendations
+        pBooksTall.backgroundProperty().set(buBack);
+        reccomendAuthor.backgroundProperty().set(buBack);
+        reccomendgenre.backgroundProperty().set(buBack);
+        reccomendpublisher.backgroundProperty().set(buBack);
+        reccomendSeries.backgroundProperty().set(buBack);
+        overallPBooks.backgroundProperty().set(buBack);
+        seriesReccomend.backgroundProperty().set(buBack);
+        authorReccomend.backgroundProperty().set(buBack);
+        genreReccomend.backgroundProperty().set(buBack);
+        publisherReccomend.backgroundProperty().set(buBack);
+
+
 
 // Arrows checks ▼ ▲ ✓ ✗
 
@@ -301,6 +332,115 @@ public class PacApp extends Application {
         RSSLookup.setStyle("-fx-text-inner-color: BBBBBB;");
         RSSLookup.backgroundProperty().set(buBack);
 
+        TextField ISBNAdd = new TextField("");
+        ISBNAdd.setPromptText("Add ISBN");
+        ISBNAdd.setStyle("-fx-text-inner-color: BBBBBB;");
+        ISBNAdd.backgroundProperty().set(buBack);
+
+        Image libimage = new Image("lib.png");
+        ImageView library = new ImageView(libimage);
+        Button lib = new Button("",library);
+        lib.backgroundProperty().set(buBack);
+        lib.setPadding(inset);
+        lib.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent Enter) {
+                System.out.println("lib pressed");
+                mainStack.getChildren().clear();
+                mainStack.getChildren().add(overallPBooks);
+                pBooksTall.getChildren().clear();
+                try {
+                  List<Book> authors = R.RecommendBook("author");
+                    List<Book> genres = R.RecommendBook("genre");
+                    List<Book> serieses = R.RecommendBook("series");
+                    List<Book> publishers = R.RecommendBook("publisher");
+
+                }catch(IOException |SQLException |ClassNotFoundException | JSONException c){
+                    System.out.println(c);
+                }
+                ListIterator<Book> iter = new ListIterator<Book>() {
+                    @Override
+                    public boolean hasNext() {
+                        return false;
+                    }
+
+                    @Override
+                    public Book next() {
+                        return null;
+                    }
+
+                    @Override
+                    public boolean hasPrevious() {
+                        return false;
+                    }
+
+                    @Override
+                    public Book previous() {
+                        return null;
+                    }
+
+                    @Override
+                    public int nextIndex() {
+                        return 0;
+                    }
+
+                    @Override
+                    public int previousIndex() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void remove() {
+
+                    }
+
+                    @Override
+                    public void set(Book book) {
+
+                    }
+
+                    @Override
+                    public void add(Book book) {
+
+                    }
+                };
+                reccomendAuthor.getChildren().clear();
+                while(iter.hasNext()){
+                    addBook(iter.next(),reccomendAuthor);
+                }
+                reccomendgenre.getChildren().clear();
+                while(iter.hasNext()){
+                    addBook(iter.next(),reccomendgenre);
+                }
+                reccomendpublisher.getChildren().clear();
+                while(iter.hasNext()){
+                    addBook(iter.next(),reccomendpublisher);
+                }
+                reccomendSeries.getChildren().clear();
+                while(iter.hasNext()){
+                    addBook(iter.next(),reccomendSeries);
+                }
+                pBooksTall.getChildren().addAll(ISBNAdd,reccomendAuthor,reccomendgenre,reccomendpublisher,reccomendSeries);
+
+            }
+        });
+
+
+        ISBNAdd.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent Enter) {
+
+                List<String> ISBN = new ArrayList<>();
+                ISBN.add(ISBNAdd.getCharacters().toString());
+                try {
+                    S.BookLookUp(ISBN);
+                }catch(IOException | JSONException E){
+                    System.out.println(E);
+                }
+                ISBNAdd.setText("");
+
+            }
+        });
 
         RSSLookup.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -312,7 +452,6 @@ public class PacApp extends Application {
                 RSSReader rede = new RSSReader();
                 class csc490 implements Runnable {
 
-                    //rede.DownloadPodcast(newrl);
                     csc490(String stringName) {
 
                     }
@@ -371,8 +510,8 @@ public class PacApp extends Application {
                 mainStack.getChildren().add(appPane);
                 appCont.getChildren().clear();
 
-                Set appset = dao.getAllContentByType("App");
-                System.out.println("App Pressed");
+                Set appset = dao.getAllContentByType("pacapp.App");
+                System.out.println("pacapp.App Pressed");
                 Iterator appiter = appset.iterator();
                 int setSize = appset.size();
                 if (setSize == 0) {
@@ -403,9 +542,12 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(bookPane);
                 bookCont.getChildren().clear();
+                bottomAnchorPane.getChildren().clear();
+                bottomAnchorPane.getChildren().addAll(controllStack,lib);
+                bottomAnchorPane.setRightAnchor(lib, 10.0);
 
                 Set set = dao.getAllContentByType("EBook");
-                System.out.println("Book Pressed");
+                System.out.println("pacapp.Book Pressed");
                 Iterator iter = set.iterator();
                 int setSize = set.size();
                 if (setSize == 0) {
@@ -422,6 +564,7 @@ public class PacApp extends Application {
                     ebkButt(content, listings, i, bookCont);
                     i++;
                 }
+                //bottomAnchorPane.getChildren().add();
 
             }
         });
@@ -435,7 +578,7 @@ public class PacApp extends Application {
                 audioBookCont.getChildren().clear();
 
                 Set abset = dao.getAllContentByType("audioBook");
-                System.out.println("Audio Book Pressed");
+                System.out.println("Audio pacapp.Book Pressed");
                 Iterator abiter = abset.iterator();
                 int setSize = abset.size();
                 Media[] mediaSet = new Media[setSize];
@@ -465,8 +608,11 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(podcastPane);
                 podcastCont.getChildren().clear();
+                bottomAnchorPane.getChildren().clear();
+                bottomAnchorPane.getChildren().addAll(controllStack,RSSLookup);
+                bottomAnchorPane.setRightAnchor(RSSLookup, 10.0);
 
-                Set podcastset = dao.getAllContentByType("Podcast");
+                Set podcastset = dao.getAllContentByType("pacapp.Podcast");
                 System.out.println("podcast Pressed");
                 Iterator podcastiter = podcastset.iterator();
                 int setSize = podcastset.size();
@@ -497,7 +643,7 @@ public class PacApp extends Application {
                 mainStack.getChildren().add(videoPane);
                 videoCont.getChildren().clear();
 
-                Set videoset = dao.getAllContentByType("Video");
+                Set videoset = dao.getAllContentByType("pacapp.Video");
                 System.out.println("video Pressed");
                 Iterator videoiter = videoset.iterator();
                 int setSize = videoset.size();
@@ -530,7 +676,7 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(appPane);
 
-                Set appset = dao.getAllContentByType("App");
+                Set appset = dao.getAllContentByType("pacapp.App");
                 System.out.println("Apps Pressed");
                 Iterator appiter = appset.iterator();
                 int setSize = appset.size();
@@ -582,14 +728,12 @@ public class PacApp extends Application {
         bookPane.setFitToHeight(true);
         bookPane.setPannable(false);
 
-
         // Create audio book pane
         audioBookCont.backgroundProperty().set(cenBack);
         audioBookPane.backgroundProperty().set(cenBack);
         audioBookPane.setFitToWidth(true);
         audioBookPane.setFitToHeight(true);
         audioBookPane.setPannable(false);
-
 
         // Create app pane
         appCont.backgroundProperty().set(cenBack);
@@ -598,14 +742,12 @@ public class PacApp extends Application {
         appPane.setFitToHeight(true);
         appPane.setPannable(false);
 
-
         // Create podcast pane
         podcastCont.backgroundProperty().set(cenBack);
         podcastPane.backgroundProperty().set(cenBack);
         podcastPane.setFitToWidth(true);
         podcastPane.setFitToHeight(true);
         podcastPane.setPannable(false);
-
 
         // Create video pane
         videoCont.backgroundProperty().set(cenBack);
@@ -620,6 +762,12 @@ public class PacApp extends Application {
         searchPane.setFitToWidth(true);
         searchPane.setFitToHeight(true);
         searchPane.setPannable(false);
+
+        pBooksTall.backgroundProperty().set(cenBack);
+        overallPBooks.backgroundProperty().set(cenBack);
+        overallPBooks.setFitToWidth(true);
+        overallPBooks.setFitToHeight(true);
+        overallPBooks.setPannable(false);
 
         // create settings VBox
         Button lightMode = new Button("Change to light mode.");       //Creates button
@@ -764,6 +912,7 @@ public class PacApp extends Application {
 
         Button android = new Button("", Android);
         copy.backgroundProperty().set(buBack);
+        copy.setPadding(inset);
 
 
 
@@ -937,8 +1086,6 @@ public class PacApp extends Application {
                     ebookTester.setText(db.getFiles().toString());
                     success = true;
                 }
-                /* let the source know whether the string was successfully
-                 * transferred and used */
                 event.setDropCompleted(success);
 
                 event.consume();
@@ -1004,7 +1151,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    sql.addContent("" + db.getFiles().toString(), "Video");
+                    sql.addContent("" + db.getFiles().toString(), "pacapp.Video");
                     System.out.println("video added");
                     videoTester.setText(db.getFiles().toString());
                     success = true;
@@ -1040,7 +1187,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    sql.addContent("" + db.getFiles().toString(), "Podcast");
+                    sql.addContent("" + db.getFiles().toString(), "pacapp.Podcast");
                     System.out.println("podcast added");
                     podcastTester.setText(db.getFiles().toString());
                     success = true;
@@ -1075,7 +1222,7 @@ public class PacApp extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
-                    sql.addContent("" + db.getFiles().toString(), "App");
+                    sql.addContent("" + db.getFiles().toString(), "pacapp.App");
                     System.out.println("app added");
                     appTester.setText(db.getFiles().toString());
                     success = true;
@@ -1721,6 +1868,8 @@ public class PacApp extends Application {
             if(type == 3){
                 box.getChildren().clear();
                 box.getChildren().add(videoView);
+                videoView.setFitWidth(videoView.getFitWidth());
+                videoView.setFitHeight(videoView.getFitHeight());
             }
             view.getMediaPlayer().play();
 
@@ -1879,7 +2028,31 @@ public class PacApp extends Application {
 
     }
 
+    public static void addBook(Book B,HBox h){
+    Button link = new Button();
+    link.backgroundProperty().set(buBack);
+    link.setTextFill(Paint.valueOf("BBBBBB"));
+    link.setText(B.title + "\n" + B.subTitle + "\n" + B.authors);
+
+
+        link.setOnAction(new EventHandler<ActionEvent>() {
+                               @Override public void handle(ActionEvent e) {
+                                   try {
+                                       Desktop.getDesktop().browse(new URI("https://www.amazon.com/s?k=" + B.isbn + "&ref=nb_sb_noss" ));
+                                   } catch (IOException e1) {
+                                       e1.printStackTrace();
+                                   } catch (URISyntaxException e1) {
+                                       e1.printStackTrace();
+                                   }
+                               }
+                           }
+
+        );
+    h.getChildren().add(link);
     }
+}
+
+
 
 
 

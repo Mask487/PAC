@@ -92,7 +92,7 @@ public class RSSReader {
             
             //will be changed in the future to permanent location
             //uses above formatted title to create file path
-            File file = new File("./ContentFiles/Podcast/Podcast/UNKNOWN/" + name + ".mp3");
+            File file = new File("./ContentFiles/pacapp.Podcast/pacapp.Podcast/UNKNOWN/" + name + ".mp3");
 
             
             //checks if file already exists
@@ -108,7 +108,7 @@ public class RSSReader {
                 fileOutputStream.getChannel().transferFrom(readableByteChannel, 
                         0, Long.MAX_VALUE);
                 ContentDAO cdao = new ContentDAO();
-                cdao.insertContent(file.getAbsolutePath(), "Podcast");
+                cdao.insertContent(file.getAbsolutePath(), "pacapp.Podcast");
             } 
             else {
                 System.out.println("FILE ALREADY EXISTS. "

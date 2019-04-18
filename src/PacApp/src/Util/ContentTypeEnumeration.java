@@ -10,9 +10,9 @@ package Util;
  */
 public class ContentTypeEnumeration {
     
-    public static final String PODCAST = "Podcast";
+    public static final String PODCAST = "pacapp.Podcast";
     public static final String AUDIOBOOK = "AudioBook";
     public static final String MUSIC = "Music";
     public static final String EBOOK = "EBook";
-    public static final String BOOK = "Book";
+    public static final String BOOK = "pacapp.Book";
 }

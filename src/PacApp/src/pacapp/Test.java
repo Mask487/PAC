@@ -1,10 +1,6 @@
-import NewDatabase.SQLTranslator;
-import java.io.File;
-import java.io.FileOutputStream;
+package pacapp;
+
 import java.io.IOException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
