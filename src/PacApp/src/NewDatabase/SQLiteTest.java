@@ -7,7 +7,9 @@ import java.nio.file.Paths;
 import java.sql.*;
 import java.util.Iterator;
 import java.util.Set;
+import pacapp.Book;
 /**
+ * 
  *
  * @author Jacob Oleson
  *
@@ -40,28 +42,12 @@ public class SQLiteTest {
         String url = null;
         boolean wantToSync = false;
         String filePath = "";
-        
         ContentDAO dao = new ContentDAO();
-        PlaylistDAO pdao = new PlaylistDAO();
-        pdao.addPlaylist("test");
-        Set set = dao.getAllContent();
-        Iterator iter = set.iterator();
-        Content content = (Content) iter.next();
         
-        Set playlists = pdao.getAllPlaylists();
-        Iterator piter = playlists.iterator();
-        
-        Playlist playlist = (Playlist) piter.next();
-        
-        pdao.insertContentIntoPlaylist(content, playlist);
-        
-        Set playlists2 = pdao.getAllPlaylists();
-        Set set2 = dao.getAllContent();
-        Iterator iter2 = set2.iterator();
-        while(iter2.hasNext()) {
-            System.out.println(iter2.next().toString());
-        }
-        
+        Book book = new Book("Test", "Test", "Test", "Test", "04-18-2019", "0", "TestISBN");
+        dao.insertBook(book);
+        Set set4 = dao.getAllContentByType("Book");
+        Set set3 = dao.getAllContent();
 
     }
 }    

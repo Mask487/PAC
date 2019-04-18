@@ -305,7 +305,7 @@ public class SQLTranslator {
 
     /**
      * Adds content based off a filepath to the downloaded file and a type.
-     * @param filePath
+     * @param originalFilePath
      * @param contentType
      * @return
      */
@@ -335,11 +335,141 @@ public class SQLTranslator {
     }
     
     
+    /**
+     * This method adds a new book object to the database.
+     * Since this does not have a file path is is used by the user to archive what
+     * books they own and could be used for recommendations.
+     * @param book
+     * @return 
+     */
     public boolean addBook(Book book) {
+        
+        //Check connection
         if(conn == null) {
             getConnection();
         }
         
+        if(book.getTitle() == null) {
+            book.setTitle(DBEnumeration.UNKNOWN);
+        }
+        
+        if(book.getAuthors() == null) {
+            book.setAuthors(DBEnumeration.UNKNOWN);
+        }
+        
+        if(book.getPublisher() == null) {
+            book.setPublisher(DBEnumeration.UNKNOWN);
+        }
+        
+        if(book.getSubtitle() == null) {
+            book.setSubTitle(DBEnumeration.UNKNOWN);
+        }
+        
+        String genreName = DBEnumeration.UNKNOWN;
+        String seriesName = DBEnumeration.UNKNOWN;
+        
+        try{
+
+            //Check if attributes of content exist by querying relevant tables
+            String queryContentType = "SELECT ContentTypeID FROM " + DBEnumeration.CONTENTTYPE
+                    + " WHERE ContentType = 'Book'";
+            String queryCreator = "SELECT CreatorID FROM " + DBEnumeration.CREATOR
+                    + " WHERE CreatorName = '" + book.getAuthors() + "'";
+            String queryGenre = "SELECT GenreID FROM " + DBEnumeration.GENRE
+                    + " WHERE GenreName = '" + genreName + "'";
+            String queryPublisher = "SELECT PublisherID FROM " + DBEnumeration.PUBLISHER
+                    + " WHERE PublisherName = '" + book.getPublisher() + "'";
+            String querySeries = "SELECT SeriesID FROM " + DBEnumeration.SERIES
+                    + " WHERE SeriesName = '" + seriesName + "'";
+
+
+            //Retrieve id of foreign keys. If they don't exist in DB, insert them as new records.
+            // -1 is the sentinel value to denote that something does not exist within the DB.
+            int contentTypeID = SQLCheckForeignKeyRecord(queryContentType, DBEnumeration.CONTENTTYPE);
+            if(contentTypeID == DBEnumeration.SENTINEL) {
+                addContentType("Book");
+                contentTypeID = SQLCheckForeignKeyRecord(queryContentType, DBEnumeration.CONTENTTYPE);
+            }
+
+            int creatorID = SQLCheckForeignKeyRecord(queryCreator, DBEnumeration.CREATOR);
+            if(creatorID == DBEnumeration.SENTINEL) {
+                addCreator(book.getAuthors());
+                creatorID = SQLCheckForeignKeyRecord(queryCreator, DBEnumeration.CREATOR);
+            }
+            
+            
+
+            int genreID = SQLCheckForeignKeyRecord(queryGenre, DBEnumeration.GENRE);
+            if(genreID == DBEnumeration.SENTINEL) {
+                addGenre(genreName);
+                genreID = SQLCheckForeignKeyRecord(queryGenre, DBEnumeration.GENRE);
+            }
+
+            int publisherID = SQLCheckForeignKeyRecord(queryPublisher, DBEnumeration.PUBLISHER);
+            if(publisherID == DBEnumeration.SENTINEL) {
+                addPublisher(book.getPublisher());
+                publisherID = SQLCheckForeignKeyRecord(queryPublisher, DBEnumeration.PUBLISHER);
+            }
+
+            int seriesID = SQLCheckForeignKeyRecord(querySeries, DBEnumeration.SERIES);
+            if(seriesID == DBEnumeration.SENTINEL) {
+                addSeries(seriesName);
+                seriesID = SQLCheckForeignKeyRecord(querySeries, DBEnumeration.SERIES);
+            }
+
+            //Check if this book already exists by this author with this publisher
+
+            String queryCount = "SELECT COUNT(*) AS total FROM " + DBEnumeration.CONTENT
+                        + " WHERE ContentName = '" + book.getTitle() + "' AND ContentTypeID = "
+                        + "(SELECT ContentTypeID FROM " + DBEnumeration.CONTENTTYPE
+                        + " WHERE ContentType = 'Book') AND CreatorID = "
+                        + "(SELECT CreatorID FROM " + DBEnumeration.CREATOR
+                        + " WHERE CreatorName = '" + book.getAuthors() + "')"
+                        + " AND PublisherID = (SELECT PublisherID FROM " + DBEnumeration.PUBLISHER
+                        + " WHERE PublisherName = '" + book.getPublisher() + "')";
+
+                //Checks contents existence, if it exists, don't add
+                if(!checkExistence(queryCount)) {
+                    System.out.println("Cannot add duplicate content");
+                    return false;
+                }
+
+                //Content does not exist, continue with adding
+                String query = "INSERT INTO " + DBEnumeration.CONTENT
+                        + "(ContentTypeID, CreatorID, GenreID, PublisherID"
+                        + ", SeriesID, ContentName, ContentDescription, UploadDate, "
+                        + "PageCount, Duration, ISBN, Explicit, Location, DownloadURL, WantToSync)"
+                        + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                PreparedStatement prep = conn.prepareStatement(query);
+                prep.setInt(1, contentTypeID);
+                prep.setInt(2, creatorID);
+                prep.setInt(3, genreID);
+                prep.setInt(4, publisherID);
+                prep.setInt(5, seriesID);
+                prep.setString(6, book.getTitle());
+                prep.setString(7, book.getSubtitle());
+                prep.setString(8, book.getPublishYear());
+                prep.setInt(9, Integer.parseInt(book.getPageCount()));
+                prep.setString(10, "00:00:00");
+                prep.setString(11, book.getISBN());
+                prep.setBoolean(12, false);
+                prep.setString(13, DBEnumeration.UNKNOWN);
+                prep.setString(14, DBEnumeration.UNKNOWN);
+                prep.setBoolean(15, false);
+                
+                if(SQLExecute(prep)) {
+                    System.out.println("Book added successfully");
+                    return true;
+                }
+                
+                else{
+                    return false;
+                }      
+        }
+        
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
         return false;
     }
 
