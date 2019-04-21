@@ -24,6 +24,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
     private String backupPath = null;
     private volatile boolean runningB = true;
     private volatile boolean runningR = true;
+    Thread b = null;
 
     //creates folder on the root of the device
     private void createFolder(String folderName, PortableDevice pD) {
@@ -637,20 +638,37 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return false;
     }
 
+    public boolean getRunningR(){
+        return this.runningR;
+    }
+
+    public boolean getRunningB(){
+        return this.runningB;
+    }
+
     public void setRunningB(){
+        /*
         if(runningB == false){
             this.runningB = true;
         }else{
             this.runningB = false;
         }
+        */
+        if(b != null){
+            b.stop();
+        }
     }
 
     public void setRunningR(){
+        /*
         if(runningR == true){
             this.runningR = true;
         }else{
             this.runningR = false;
         }
+        */
+
+
     }
 
     //makes a copy of the phones storage and puts it in backup folder on pc
@@ -667,8 +685,11 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
                 //path = string;
             }
+
+            private volatile boolean exit = false;
+
             public void run() {
-                while (runningB == true){
+                while (!exit){
                     System.out.println("Thread starting");
                     PortableDeviceFolderObject target = null;
                     File file = new File(path + "\\" + time);
@@ -694,8 +715,10 @@ class Transfer extends Thread implements pacapp.TransferObject {
                                         if (!tempFile2.isDirectory()) {
                                             tempFile2.mkdir();
                                         }
+                                        getRunningB();
                                         recurBackup((PortableDeviceFolderObject) obj2, "    ", tempFile2);
                                     }
+                                    getRunningB();
                                     ptoPC(obj2, tempFile.getPath());
                                 }
                             }
@@ -705,9 +728,14 @@ class Transfer extends Thread implements pacapp.TransferObject {
                         System.out.println("No Phone Connected");
                     }
                 }
+                System.out.println("BACKUP COMPLETE!");
+            }
+
+            public void stop(){
+                exit = true;
             }
         }
-        Thread b = new Thread(new BackupThread(path));
+        b = new Thread(new BackupThread(path));
         b.start();
     }
 
