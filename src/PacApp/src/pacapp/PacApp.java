@@ -43,6 +43,9 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 
 
 import java.io.IOException;
@@ -160,6 +163,8 @@ public class PacApp extends Application {
         ScrollPane seriesReccomend = new ScrollPane(reccomendSeries);
         HBox reccomendpublisher = new HBox();//genre author series publisher
         ScrollPane publisherReccomend = new ScrollPane(reccomendpublisher);
+        HBox insertedBooks = new HBox();//genre author series publisher
+        ScrollPane sInsertedBooks = new ScrollPane(insertedBooks);
 
         //create background anchor
         AnchorPane.setRightAnchor(bp, 0.0);
@@ -286,6 +291,8 @@ public class PacApp extends Application {
         authorReccomend.backgroundProperty().set(buBack);
         genreReccomend.backgroundProperty().set(buBack);
         publisherReccomend.backgroundProperty().set(buBack);
+        insertedBooks.backgroundProperty().set(buBack);
+        sInsertedBooks.backgroundProperty().set(buBack);
 
 
 
@@ -1329,8 +1336,12 @@ public class PacApp extends Application {
         Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
-        Button men = new Button("▼");
+        MenuBar men = new MenuBar();
+        men.setStyle("-fx-selection-bar: #515151;");
+
         men.backgroundProperty().set(buBack);
+        addMenu(men,objs);
+
         if (objs.getWantToSync()) {
 
             syncStatus.getChildren().add(syncer);
@@ -1408,10 +1419,13 @@ public class PacApp extends Application {
         Button syncer = new Button("✔");
         syncer.setTextFill(Paint.valueOf("Green"));
         Button unsyncer = new Button("✘");
-        Button men = new Button("▼");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
+        MenuBar men = new MenuBar();
+        men.setStyle("-fx-selection-bar: #515151;");
         men.backgroundProperty().set(buBack);
+        addMenu(men,objs);
+
 
         if (objs.getWantToSync()) {
 
@@ -1491,10 +1505,13 @@ public class PacApp extends Application {
         Button syncer = new Button("✔");
         syncer.setTextFill(Paint.valueOf("Green"));
         Button unsyncer = new Button("✘");
-        Button men = new Button("▼");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
+        MenuBar men = new MenuBar();
+        men.setStyle("-fx-selection-bar: #515151;");
         men.backgroundProperty().set(buBack);
+        addMenu(men,objs);
+
         if (objs.getWantToSync()) {
 
             syncStatus.getChildren().add(syncer);
@@ -1562,10 +1579,13 @@ public class PacApp extends Application {
         Button syncer = new Button("✔");
         syncer.setTextFill(Paint.valueOf("Green"));
         Button unsyncer = new Button("✘");
-        Button men = new Button("▼");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
+        MenuBar men = new MenuBar();
+        men.setStyle("-fx-selection-bar: #515151;");
         men.backgroundProperty().set(buBack);
+        addMenu(men,objs);
+
         if (objs.getWantToSync()) {
 
             syncStatus.getChildren().add(syncer);
@@ -1644,10 +1664,12 @@ public class PacApp extends Application {
         Button syncer = new Button("✔");
         syncer.setTextFill(Paint.valueOf("Green"));
         Button unsyncer = new Button("✘");
-        Button men = new Button("▼");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
+        MenuBar men = new MenuBar();
+        men.setStyle("-fx-selection-bar: #515151;");
         men.backgroundProperty().set(buBack);
+        addMenu(men,objs);
         if (objs.getWantToSync()) {
 
             syncStatus.getChildren().add(syncer);
@@ -1758,7 +1780,10 @@ public class PacApp extends Application {
         Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
-
+        MenuBar men = new MenuBar();
+        men.setStyle("-fx-selection-bar: #515151;");
+        men.backgroundProperty().set(buBack);
+        addMenu(men,objs);
         if (objs.getWantToSync()) {
 
             syncStatus.getChildren().add(syncer);
@@ -1813,7 +1838,7 @@ public class PacApp extends Application {
             }
         });
         doubleButt.backgroundProperty().set(buBack);
-        doubleButt.getChildren().addAll(L[i], syncStatus);
+        doubleButt.getChildren().addAll(men,L[i], syncStatus);
         cont.getChildren().add(doubleButt);
 
     }
@@ -2060,6 +2085,46 @@ public class PacApp extends Application {
         );
     h.getChildren().add(link);
     }
+    public static void addMenu(MenuBar M,Content objs){
+
+        Menu menu = new Menu("▼");
+        menu.setStyle("-fx-menu-fill: #454545;");
+        M.getMenus().add(menu);
+
+
+        MenuItem rename = new MenuItem("Rename");
+
+        rename.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                TextInputDialog newNameD = new TextInputDialog("");
+                newNameD.setTitle("Rename");
+                newNameD.setContentText("Please enter the new Content name: ");
+                newNameD.setHeaderText(null);
+                Optional<String> newName = newNameD.showAndWait();
+                if (newName.isPresent()) {
+                    dao.updateContentName(objs,newName.get());
+                }
+                System.out.println("rename");
+
+            }
+        });
+        MenuItem delete = new MenuItem("Delete");
+        //delete.setStyle("-fx-menu-item: #454545;");
+        delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                System.out.println("delete");
+                dao.deleteContent(objs);
+            }
+        });
+
+
+
+        menu.getItems().addAll(rename,delete);
+
+
+    }
+
+
 }
 
 
