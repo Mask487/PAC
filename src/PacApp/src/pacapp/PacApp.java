@@ -38,6 +38,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import NewDatabase.ContentDAO;
 import NewDatabase.Content;
+import NewDatabase.PlaylistDAO;
+import NewDatabase.Playlist;
 
 import java.net.URISyntaxException;
 import java.sql.SQLException;
@@ -105,6 +107,7 @@ public class PacApp extends Application {
     static Transfer t = new Transfer();
     static Recommend R = new Recommend();
     static BookSearch S = new BookSearch();
+    static PlaylistDAO pdao = new PlaylistDAO();
 
 
 
@@ -1340,7 +1343,7 @@ public class PacApp extends Application {
         men.setStyle("-fx-selection-bar: #515151;");
 
         men.backgroundProperty().set(buBack);
-        addMenu(men,objs);
+        addMusicMenu(men,objs);
 
         if (objs.getWantToSync()) {
 
@@ -2088,11 +2091,10 @@ public class PacApp extends Application {
     public static void addMenu(MenuBar M,Content objs){
 
         Menu menu = new Menu("▼");
-        menu.setStyle("-fx-menu-fill: #454545;");
         M.getMenus().add(menu);
-
-
         MenuItem rename = new MenuItem("Rename");
+        //rename.setStyle("-fx-background-color: #454545;");
+
 
         rename.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
@@ -2100,6 +2102,7 @@ public class PacApp extends Application {
                 newNameD.setTitle("Rename");
                 newNameD.setContentText("Please enter the new Content name: ");
                 newNameD.setHeaderText(null);
+                newNameD.getModality().equals(false);
                 Optional<String> newName = newNameD.showAndWait();
                 if (newName.isPresent()) {
                     dao.updateContentName(objs,newName.get());
@@ -2119,11 +2122,75 @@ public class PacApp extends Application {
 
 
 
-        menu.getItems().addAll(rename,delete);
+        menu.getItems().addAll(rename);
+        menu.getItems().add(delete);
 
 
     }
+    public static void addMusicMenu(MenuBar M,Content objs){
 
+        Menu menu = new Menu("▼");
+        M.getMenus().add(menu);
+        MenuItem rename = new MenuItem("Rename");
+        //rename.setStyle("-fx-background-color: #454545;");
+
+
+        rename.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                TextInputDialog newNameD = new TextInputDialog("");
+                newNameD.setTitle("Rename");
+                newNameD.setContentText("Please enter the new Content name: ");
+                newNameD.setHeaderText(null);
+                newNameD.getModality().equals(false);
+                Optional<String> newName = newNameD.showAndWait();
+                if (newName.isPresent()) {
+                    dao.updateContentName(objs,newName.get());
+                }
+                System.out.println("rename");
+
+            }
+        });
+        menu.getItems().addAll(rename);
+
+        Set pset = pdao.getAllPlaylists();
+        Iterator piter = pset.iterator();
+        int setSize = pset.size();
+        int i = 0;
+
+        while (piter.hasNext()) {
+
+            final Playlist playlist = (NewDatabase.Playlist) piter.next();
+            //content =
+            MenuItem addPl = new MenuItem("Add to " + playlist.getPlaylistName());
+            addPl.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    pdao.insertContentIntoPlaylist(objs,playlist);
+                    System.out.println(objs.getContentName() + " added to " + playlist.getPlaylistName());
+
+                }
+            });
+            menu.getItems().add(addPl);
+            i++;
+        }
+
+
+
+        MenuItem delete = new MenuItem("Delete");
+        //delete.setStyle("-fx-menu-item: #454545;");
+        delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                System.out.println("delete");
+                dao.deleteContent(objs);
+            }
+        });
+
+
+
+
+        menu.getItems().add(delete);
+
+
+    }
 
 }
 

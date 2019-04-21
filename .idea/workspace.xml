@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/nbproject/UPDATED.TXT" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/nbproject/UPDATED.TXT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/nbproject/jfx-impl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/nbproject/jfx-impl.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/nbproject/private/private.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,25 +33,43 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="1840" column="44" selection-start-line="1840" selection-start-column="44" selection-end-line="1840" selection-end-column="44" />
+            <state relative-caret-position="344">
+              <caret line="2163" column="54" selection-start-line="2163" selection-start-column="54" selection-end-line="2163" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#32793#32794#0" expanded="true" />
-                <element signature="e#32867#32868#0" expanded="true" />
-                <element signature="e#33023#33024#0" expanded="true" />
-                <element signature="e#33097#33098#0" expanded="true" />
-                <element signature="e#39469#39470#0" expanded="true" />
-                <element signature="e#39516#39517#0" expanded="true" />
-                <element signature="e#40152#40153#0" expanded="true" />
-                <element signature="e#40189#40190#0" expanded="true" />
-                <element signature="e#40570#40571#0" expanded="true" />
-                <element signature="e#40608#40609#0" expanded="true" />
-                <element signature="e#70804#70805#0" expanded="true" />
-                <element signature="e#70873#70874#0" expanded="true" />
-                <element signature="e#71024#71025#0" expanded="true" />
-                <element signature="e#71093#71094#0" expanded="true" />
+                <element signature="e#32903#32904#0" expanded="true" />
+                <element signature="e#32977#32978#0" expanded="true" />
+                <element signature="e#33133#33134#0" expanded="true" />
+                <element signature="e#33207#33208#0" expanded="true" />
+                <element signature="e#39579#39580#0" expanded="true" />
+                <element signature="e#39626#39627#0" expanded="true" />
+                <element signature="e#40262#40263#0" expanded="true" />
+                <element signature="e#40299#40300#0" expanded="true" />
+                <element signature="e#40680#40681#0" expanded="true" />
+                <element signature="e#40718#40719#0" expanded="true" />
+                <element signature="e#70655#70656#0" expanded="true" />
+                <element signature="e#70724#70725#0" expanded="true" />
+                <element signature="e#70875#70876#0" expanded="true" />
+                <element signature="e#70944#70945#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Playlist.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/PlaylistDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -135,7 +149,6 @@
       <find>APPP</find>
       <find>phone</find>
       <find>Android</find>
-      <find>dao</find>
       <find>video.</find>
       <find>videoControll</find>
       <find>audioBookControl</find>
@@ -146,7 +159,6 @@
       <find>RSS</find>
       <find>settings</find>
       <find>rest</find>
-      <find>iter</find>
       <find>set</find>
       <find>RSSLoo</find>
       <find>BookLook</find>
@@ -157,6 +169,8 @@
       <find>hiFill</find>
       <find>name</find>
       <find>change</find>
+      <find>dao</find>
+      <find>iter</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -192,7 +206,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="24" />
     <option name="width" value="1600" />
     <option name="height" value="839" />
@@ -380,7 +394,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1600" height="839" extended-state="0" />
+    <frame x="0" y="23" width="1600" height="839" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19127086" />
@@ -535,7 +549,6 @@
     </SUITE>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/src/transfere/jmtp.jar!/be/derycke/pieter/com/COM.class" />
     <entry file="jar://$PROJECT_DIR$/src/transfere/jmtp.jar!/be/derycke/pieter/com/Guid.class" />
     <entry file="jar://$PROJECT_DIR$/src/transfere/jmtp.jar!/jmtp/PortableDeviceToHostImpl32.class" />
     <entry file="jar://$PROJECT_DIR$/src/transfere/jmtp.jar!/jmtp/PortableDeviceObjectImplWin32.class" />
@@ -736,26 +749,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Playlist.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/PlaylistDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="1840" column="44" selection-start-line="1840" selection-start-column="44" selection-end-line="1840" selection-end-column="44" />
+        <state relative-caret-position="344">
+          <caret line="2163" column="54" selection-start-line="2163" selection-start-column="54" selection-end-line="2163" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#32793#32794#0" expanded="true" />
-            <element signature="e#32867#32868#0" expanded="true" />
-            <element signature="e#33023#33024#0" expanded="true" />
-            <element signature="e#33097#33098#0" expanded="true" />
-            <element signature="e#39469#39470#0" expanded="true" />
-            <element signature="e#39516#39517#0" expanded="true" />
-            <element signature="e#40152#40153#0" expanded="true" />
-            <element signature="e#40189#40190#0" expanded="true" />
-            <element signature="e#40570#40571#0" expanded="true" />
-            <element signature="e#40608#40609#0" expanded="true" />
-            <element signature="e#70804#70805#0" expanded="true" />
-            <element signature="e#70873#70874#0" expanded="true" />
-            <element signature="e#71024#71025#0" expanded="true" />
-            <element signature="e#71093#71094#0" expanded="true" />
+            <element signature="e#32903#32904#0" expanded="true" />
+            <element signature="e#32977#32978#0" expanded="true" />
+            <element signature="e#33133#33134#0" expanded="true" />
+            <element signature="e#33207#33208#0" expanded="true" />
+            <element signature="e#39579#39580#0" expanded="true" />
+            <element signature="e#39626#39627#0" expanded="true" />
+            <element signature="e#40262#40263#0" expanded="true" />
+            <element signature="e#40299#40300#0" expanded="true" />
+            <element signature="e#40680#40681#0" expanded="true" />
+            <element signature="e#40718#40719#0" expanded="true" />
+            <element signature="e#70655#70656#0" expanded="true" />
+            <element signature="e#70724#70725#0" expanded="true" />
+            <element signature="e#70875#70876#0" expanded="true" />
+            <element signature="e#70944#70945#0" expanded="true" />
           </folding>
         </state>
       </provider>
