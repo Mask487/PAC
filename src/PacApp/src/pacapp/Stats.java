@@ -1,3 +1,5 @@
+package pacapp;
+
 import NewDatabase.ContentDAO;
 import NewDatabase.SQLTranslator;
 import java.util.ArrayList;

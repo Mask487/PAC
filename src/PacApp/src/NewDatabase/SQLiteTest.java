@@ -7,7 +7,9 @@ import java.nio.file.Paths;
 import java.sql.*;
 import java.util.Iterator;
 import java.util.Set;
+import pacapp.Book;
 /**
+ * 
  *
  * @author Jacob Oleson
  *
@@ -22,12 +24,12 @@ public class SQLiteTest {
         SQLTranslator test = new SQLTranslator();
         ResultSet res;
         String foo = "ThisIsTest";
-        String contentType = "Podcast";
+        String contentType = "pacapp.Podcast";
         String creatorName = "Jacob";
-        String genreName = "Test";
-        String publisherName = "Test";
+        String genreName = "pacapp.Test";
+        String publisherName = "pacapp.Test";
         String seriesName = "test";
-        String contentName = "Test on new file system";
+        String contentName = "pacapp.Test on new file system";
         String contentDescription = foo;
         //yyyy-mm-dd
         String uploadDate = "2019-04-07";
@@ -36,81 +38,16 @@ public class SQLiteTest {
         String duration = "01:33:12";
         String isbn = null;
         boolean explicit = false;
-        String location = "C:/Test/ultimatetest.mp3";
+        String location = "C:/pacapp.Test/ultimatetest.mp3";
         String url = null;
         boolean wantToSync = false;
         String filePath = "";
-        //test.addContent(contentType, creatorName, genreName, publisherName, seriesName, contentName, contentDescription, uploadDate, pageCount, duration, isbn, explicit, location, url, wantToSync, filePath);
-        //test.addContent("C:/Test/test4.epub", contentType);
+        ContentDAO dao = new ContentDAO();
+        
+        Book book = new Book("Test", "Test", "Test", "Test", "04-18-2019", "0", "TestISBN");
+        dao.insertBook(book);
+        Set set4 = dao.getAllContentByType("Book");
+        Set set3 = dao.getAllContent();
 
-//        File file1 = new File("ContentFiles").getAbsoluteFile();
-//        System.out.println(file1.toString());
-//        ContentDAO cdao = new ContentDAO();
-//        PlaylistDAO pdao = new PlaylistDAO();
-//        //cdao.insertContent("C:/Test/FreePodcast.mp3", "Podcast");
-//        Set contents0 = cdao.getAllContent();
-//        Set playlists = pdao.getAllPlaylists();
-//        Iterator pDAOIterator = playlists.iterator();
-//        Content contentTest = cdao.getContent(3);
-//
-//        Playlist playlist1 =  (Playlist) pDAOIterator.next();
-//        pdao.insertContentIntoPlaylist(contentTest, playlist1);
-//        pdao.getContentFromPlaylist(playlist1);
-//        System.out.println(playlist1.toString());
-//
-//        Set contents = cdao.getAllContent();
-//        Iterator iterTest = contents.iterator();
-//        Content contentTest2 = cdao.getContent(2);
-//        Set contents2 = cdao.searchAllTablesBySearchTermAndType("ant", "EBook");
-//        Iterator iter2 = contents2.iterator();
-//
-//        //System.out.println(iter2.next().toString());
-//        Content test3 = (Content) iter2.next();
-//        System.out.println(test3.getContentName());
-//
-//        Set content5 = cdao.getAllContent();
-//        Iterator iter5 = content5.iterator();
-//        while(iter5.hasNext()) {
-//            System.out.println(iter5.next().toString());
-//        }
-//
-//        Set contentsResult = cdao.searchAllTablesBySearchTerm("t");
-//        Iterator iterResult = contentsResult.iterator();
-//
-//        System.out.println("The results are: ");
-//        while(iterResult.hasNext()) {
-//            System.out.println(iterResult.next().toString());
-//        }
-//
-//        test.addContent("C:/Test/Test.epub", contentType);
-//        ContentDAO cdao = new ContentDAO();
-//        Set contents = cdao.getAllContentByType("Podcast");
-//        Iterator iter = contents.iterator();
-//        while(iter.hasNext()) {
-//            System.out.println(iter.next().toString());
-//        }
-//
-//        Set contentsResult = cdao.searchAllTablesBySearchTerm("t");
-//        Iterator iterResult = contentsResult.iterator();
-//
-//        System.out.println("The results are: ");
-//        while(iterResult.hasNext()) {
-//            System.out.println(iterResult.next().toString());
-//        }
-//
-//        test.addContent("C:/Test/Test.epub", contentType);
-        ContentDAO cdao = new ContentDAO(); 
-        Set contents = cdao.getAllContent();
-        
-        Iterator iter = contents.iterator();
-        
-        Content content = (Content) iter.next();
-        
-        cdao.setSyncStatus(content);
-//        while(iter.hasNext()) {
-//            System.out.println(iter.next().toString());
-//        }
-        
-        
     }
-}
+}    

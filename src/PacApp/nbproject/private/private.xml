@@ -2,6 +2,33 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/PAC/src/PacApp/src/NewDatabase/SQLTranslator.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/Util/ContentTypeEnumeration.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/MediaTest.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/NewDatabase/PlaylistDAO.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/Util/DBPrint.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/pacapp.Stats.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/BookIcon.png</file>
+            <file>file:/C:/PAC/src/PacApp/src/NewDatabase/SQLiteTest.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/pacapp.Test.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/NewDatabase/Content.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/NewDatabase/Playlist.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/pacapp.BookSearch.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/pacapp.Book.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/pacapp.Recommend.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/Expand.png</file>
+            <file>file:/C:/PAC/src/PacApp/src/NewDatabase/MetaDataEnum.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/Util/DBDirectories.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/Interfaces/DBInterface.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/AudioBook.png</file>
+            <file>file:/C:/PAC/src/PacApp/src/pacapp/PacApp.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/NewDatabase/MetaDataReader.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/pacapp.App.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/NewDatabase/ContentDAO.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/pacapp.Song.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/Util/DBEnumeration.java</file>
+            <file>file:/C:/PAC/src/PacApp/src/pacapp.BookLookupTest.java</file>
+        </group>
     </open-files>
 </project-private>

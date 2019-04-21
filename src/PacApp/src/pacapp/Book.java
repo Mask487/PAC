@@ -1,14 +1,16 @@
+package pacapp;
+
 public class Book{
     
-    String title;
-    String subTitle;
-    String authors;
-    String publisher;
-    String publishYear;
-    String pageCount;
-    String isbn;
+     String title;
+     String subTitle;
+     String authors;
+     String publisher;
+     String publishYear;
+     String pageCount;
+     String isbn;
     
-    Book(String title, String subTitle, String authors, String publisher, 
+    public Book(String title, String subTitle, String authors, String publisher, 
             String publishYear, String pageCount, String isbn){
         this.title = title;
         this.subTitle = subTitle;
@@ -19,52 +21,52 @@ public class Book{
         this.isbn = isbn;
     }
     
-    String getTitle(){
+    public String getTitle(){
         return title;
     }
-    void setTitle(String title){
+    public void setTitle(String title){
         this.title = title;
     }
     
-    String getSubtitle(){
+    public String getSubtitle(){
         return subTitle;
     }
-    void setSubTitle(String subTitle){
+    public void setSubTitle(String subTitle){
         this.subTitle = subTitle;
     }
     
-    String getAuthors(){
+    public String getAuthors(){
         return authors;
     }
-    void setAuthors(String authors){
+    public void setAuthors(String authors){
         this.authors = authors;
     }
     
-    String getPublisher(){
+    public String getPublisher(){
         return publisher;
     }
-    void setPublisher(String publisher){
+    public void setPublisher(String publisher){
         this.publisher = publisher;
     }
     
-    String getPublishYear(){
+    public String getPublishYear(){
         return publishYear;
     }
-    void setPublishYear(String publishYear){
+    public void setPublishYear(String publishYear){
         this.publishYear = publishYear;
     }
     
-    String getPageCount(){
+    public String getPageCount(){
         return pageCount;
     }
-    void setPageCount(String pageCount){
+    public void setPageCount(String pageCount){
         this.pageCount = pageCount;
     }
     
-    String getISBN(){
+    public String getISBN(){
         return isbn;
     }
-    void setISBN(String isbn){
+    public void setISBN(String isbn){
         this.isbn = isbn;
     }
 }

@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pacapp.Book;
 
 /**
  *
@@ -373,10 +374,14 @@ public class ContentDAO {
         
         try {
             while(res.next()) {
-                Content content = extractDataFromResultSet(res);
+                Content content;
+                
+                content = extractDataFromResultSet(res);
+
                 if(content != null) {
                     contents.add(content);
                 }
+                
             }
             
             return contents;
@@ -454,7 +459,7 @@ public class ContentDAO {
     
     /**
      * Inserts a piece of content given the current filepath to that content, 
-     * and a description of its type (Podcast, AudioBook, Etc.)
+     * and a description of its type (pacapp.Podcast, AudioBook, Etc.)
      * @param filePath
      * @param contentType
      * @return 
@@ -462,6 +467,18 @@ public class ContentDAO {
     public boolean insertContent(String filePath, String contentType) {
         boolean success = sql.addContent(filePath, contentType);
         return success;
+    }
+    
+    
+    /**
+     * Inserts a book object into db.
+     * This is a special case since these are purely used for archival purposes 
+     * by the user and do not have a file path.
+     * @param book
+     * @return 
+     */
+    public boolean insertBook(Book book) {
+        return sql.addBook(book);
     }
     
     
@@ -636,6 +653,23 @@ public class ContentDAO {
     
     
     /**
+     * Updates a content's name.
+     * @param content
+     * @param newName
+     * @return 
+     */
+    public boolean updateContentName(Content content, String newName) {
+        
+        if(sql.updateContentName(content.getContentID(), newName)) {
+            content.setContentName(newName);
+            return true;
+        }
+        
+        return false;   
+    }
+    
+    
+    /**
      * Gets all data from the result set and creates the new content object.
      * @param res
      * @return 
@@ -643,7 +677,6 @@ public class ContentDAO {
     private Content extractDataFromResultSet(ResultSet res) {
         Content content = new Content();
         try {
-            ResultSet res2;
             content.setContentID(res.getInt("ContentID"));
             content.setContentName(res.getString("ContentName"));
             /**Since result set returns the foreign key ids
@@ -665,11 +698,14 @@ public class ContentDAO {
             content.setUrl(res.getString("DownloadURL"));
             content.setWantToSync(res.getBoolean("WantToSync"));
             
-            //Check if file exists. If it doesn't, delete it from the database.
-            File temp = new File(content.getLocation());
-            if(!temp.exists()) {
-                deleteContent(content);
-                return null;
+            //Check if the content is not just an ordinary book.
+            if(!content.getContentTypeName().equals("Book")) {
+                //Check if file exists. If it doesn't, delete it from the database.
+                File temp = new File(content.getLocation());
+                if(!temp.exists()) {
+                    deleteContent(content);
+                    return null;
+                }
             }
             
             return content; 

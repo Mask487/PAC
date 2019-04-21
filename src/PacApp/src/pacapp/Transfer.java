@@ -23,11 +23,12 @@ class Transfer extends Thread implements pacapp.TransferObject {
     private String adbPath = null;
     private String mainPath = System.getProperty("user.dir");
     private String backupPath = null;
+    private volatile boolean runningB = true;
+    private volatile boolean runningR = true;
 
 
     //creates folder on the root of the device
     private void createFolder(String folderName, PortableDevice pD) {
-        //PortableDeviceFolderObject target = ;
         for (PortableDeviceObject obj1 : pD.getRootObjects())
         {
             if (obj1 instanceof PortableDeviceStorageObject)
@@ -72,7 +73,6 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     //checks if folder exists on device
     private boolean doesFolderExist(String folderName, PortableDevice pD) {
-        //boolean condition = false;
         for (PortableDeviceObject obj1 : pD.getRootObjects())
         {
             if (obj1 instanceof PortableDeviceStorageObject)
@@ -171,7 +171,6 @@ class Transfer extends Thread implements pacapp.TransferObject {
             w.close();
             file = new File("PAC_Config.cfg");
         }
-        //System.out.println(file.getAbsolutePath());
     }
 
     //checks phone if folders exist on the phone
@@ -379,19 +378,34 @@ class Transfer extends Thread implements pacapp.TransferObject {
     //returns phone model
     public String getPhoneModel() {
         String out = "";
-        return out = pD.getModel();
+        try {
+            out = pD.getModel();
+        }catch(NullPointerException e){
+            System.out.println("Cannot get phone model: No Phone Connected");
+        }
+        return out;
     }
 
     //returns battery percentage
     public int getPhoneBattery() {
-        int out;
-        return out = pD.getPowerLevel();
+        int out = -1;
+        try {
+            out = pD.getPowerLevel();
+        }catch(NullPointerException e){
+            System.out.println("Cannot get battery percentage: No Phone Connected!");
+        }
+        return out;
     }
 
     //return name of phone
     public String getPhoneName() {
-        String out;
-        return out = pD.getFriendlyName();
+        String out = "";
+        try {
+            out = pD.getFriendlyName();
+        }catch(NullPointerException e){
+            System.out.println("Cannot get phone name: No Phone Connected!");
+        }
+        return out;
     }
 
     public ArrayList<FileA> syncQueuery(){
@@ -403,7 +417,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
         4 -
         5 -
         6 -
-        7 - Podcast
+        7 - pacapp.Podcast
         */
 
         System.out.println();
@@ -460,8 +474,12 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     public void sync(){
         //calls syncQueuery method to make a list of items that need to be synced to the phone
-        ArrayList<FileA> queue = syncQueuery();
-        addFiles(queue);
+        try {
+            ArrayList<FileA> queue = syncQueuery();
+            addFiles(queue);
+        }catch(NullPointerException e){
+            System.out.println("Cannot Sync");
+        }
     }
 
     public void addFiles(ArrayList<FileA> files){
@@ -489,7 +507,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
     }
 
-    //add single Podcast
+    //add single pacapp.Podcast
     public void addPodcast(File file) {
         if (doesFolderExist("podcasts", pD))
         {
@@ -664,6 +682,22 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return false;
     }
 
+    public void setRunningB(){
+        if(runningB == false){
+            this.runningB = true;
+        }else{
+            this.runningB = false;
+        }
+    }
+
+    public void setRunningR(){
+        if(runningR == true){
+            this.runningR = true;
+        }else{
+            this.runningR = false;
+        }
+    }
+
     //makes a copy of the phones storage and puts it in backup folder on pc
     public void backup() throws IOException {
         //add backup folder check here
@@ -679,78 +713,87 @@ class Transfer extends Thread implements pacapp.TransferObject {
                 //path = string;
             }
             public void run() {
-                System.out.println("Thread starting");
-                PortableDeviceFolderObject target = null;
-                File file = new File(path + "\\" + time);
-                //File file = new File(path + "\\" + pModel + "\\" + time);
-                //String test = file.toString();
-                if(!file.isDirectory()){
-                    file.mkdirs();
-                    System.out.println(file.toString());
-                }
-                for (PortableDeviceObject obj1 : pD.getRootObjects())
-                {
-                    System.out.println(obj1.getName() + "\n--------------------");
-                    if (obj1 instanceof PortableDeviceStorageObject)
-                    {
-                        File tempFile = new File(file.getPath() + "\\" + obj1.getName());
-                        if (!tempFile.isDirectory()){
-                            tempFile.mkdir();
-                        }
-                        PortableDeviceStorageObject storage = (PortableDeviceStorageObject) obj1;
-                        for (PortableDeviceObject obj2 : storage.getChildObjects())
-                        {
-                            System.out.println("    " + obj2.getName());
-                            if (obj2 instanceof PortableDeviceFolderObject)
-                            {
-                                File tempFile2 = new File(tempFile.getPath() + "\\" + obj2.getName());
-                                if(!tempFile2.isDirectory()){
-                                    tempFile2.mkdir();
-                                }
-                                recurBackup((PortableDeviceFolderObject) obj2, "    ", tempFile2);
-                            }
-                            ptoPC(obj2, tempFile.getPath());
-                        }
+                while (runningB == true){
+                    System.out.println("Thread starting");
+                    PortableDeviceFolderObject target = null;
+                    File file = new File(path + "\\" + time);
+                    //File file = new File(path + "\\" + pModel + "\\" + time);
+                    //String test = file.toString();
+                    if(!file.isDirectory()){
+                        file.mkdirs();
+                        System.out.println(file.toString());
                     }
-                    System.out.println("");
+                    try {
+                        for (PortableDeviceObject obj1 : pD.getRootObjects()) {
+                            System.out.println(obj1.getName() + "\n--------------------");
+                            if (obj1 instanceof PortableDeviceStorageObject) {
+                                File tempFile = new File(file.getPath() + "\\" + obj1.getName());
+                                if (!tempFile.isDirectory()) {
+                                    tempFile.mkdir();
+                                }
+                                PortableDeviceStorageObject storage = (PortableDeviceStorageObject) obj1;
+                                for (PortableDeviceObject obj2 : storage.getChildObjects()) {
+                                    System.out.println("    " + obj2.getName());
+                                    if (obj2 instanceof PortableDeviceFolderObject) {
+                                        File tempFile2 = new File(tempFile.getPath() + "\\" + obj2.getName());
+                                        if (!tempFile2.isDirectory()) {
+                                            tempFile2.mkdir();
+                                        }
+                                        recurBackup((PortableDeviceFolderObject) obj2, "    ", tempFile2);
+                                    }
+                                    ptoPC(obj2, tempFile.getPath());
+                                }
+                            }
+                            System.out.println("");
+                        }
+                    }catch(NullPointerException e){
+                        System.out.println("No Phone Connected");
+                    }
                 }
             }
         }
-
-        Thread t = new Thread(new BackupThread(path));
-        t.start();
-
+        Thread b = new Thread(new BackupThread(path));
+        b.start();
     }
 
     //restores backup to phone
     public void restore()throws IOException{
-        PortableDeviceFolderObject target = null;
         File bfolder = new File(this.getBackupPath());// "*\Backups"
-        File[] backups = bfolder.listFiles();//list files and folders in "*\Backups"
-        File[] phone = null;
-        if(backups == null){
-            System.out.println("No Backups Found!");
-        }else{
-            Arrays.sort(backups);
-            phone = backups[0].listFiles();
-            if(phone == null){
-                System.out.println("No BAckups Found!");
-            }else{
-                Arrays.sort(phone);
-                File inPhone = new File(phone[0].getAbsolutePath());// "*\Backups\Phone"
-                for (PortableDeviceObject obj : pD.getRootObjects()){//  Device:\
-                    if(obj instanceof PortableDeviceStorageObject && obj.getName().equalsIgnoreCase("phone")){
-                        PortableDeviceStorageObject storage = (PortableDeviceStorageObject) obj;// Device:\Phone
-                        for(PortableDeviceObject obj2 : storage.getChildObjects()){
-                            if(obj2 instanceof PortableDeviceFolderObject){
-                                File[] a = inPhone.listFiles();//lists files and folders in "*\Backups\Phone"
-                                Arrays.sort(a);
-                                target = (PortableDeviceFolderObject) obj2;
-                                System.out.println("==================== COMPARE WITH " + obj2.getName());
-                                for (int i = 0; i < a.length; i++) {
-                                    System.out.println(a[i].getPath());
-                                    if(obj2.getName().equalsIgnoreCase(a[i].getName()) && a[i].isDirectory()){
-                                        recurRestore(target, a[i]);
+        class RestoreThread implements Runnable{
+            RestoreThread(File file){
+
+            }
+            public void run(){
+                while (runningR = true){
+                    PortableDeviceFolderObject target = null;
+                    File[] backups = bfolder.listFiles();//list files and folders in "*\Backups"
+                    File[] phone = null;
+                    if(backups == null){
+                        System.out.println("No Backups Found!");
+                    }else{
+                        Arrays.sort(backups);
+                        phone = backups[0].listFiles();
+                        if(phone == null){
+                            System.out.println("No BAckups Found!");
+                        }else{
+                            Arrays.sort(phone);
+                            File inPhone = new File(phone[0].getAbsolutePath());// "*\Backups\Phone"
+                            for (PortableDeviceObject obj : pD.getRootObjects()){//  Device:\
+                                if(obj instanceof PortableDeviceStorageObject && obj.getName().equalsIgnoreCase("phone")){
+                                    PortableDeviceStorageObject storage = (PortableDeviceStorageObject) obj;// Device:\Phone
+                                    for(PortableDeviceObject obj2 : storage.getChildObjects()){
+                                        if(obj2 instanceof PortableDeviceFolderObject){
+                                            File[] a = inPhone.listFiles();//lists files and folders in "*\Backups\Phone"
+                                            Arrays.sort(a);
+                                            target = (PortableDeviceFolderObject) obj2;
+                                            System.out.println("==================== COMPARE WITH " + obj2.getName());
+                                            for (int i = 0; i < a.length; i++) {
+                                                System.out.println(a[i].getPath());
+                                                if(obj2.getName().equalsIgnoreCase(a[i].getName()) && a[i].isDirectory()){
+                                                    recurRestore(target, a[i]);
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -759,6 +802,9 @@ class Transfer extends Thread implements pacapp.TransferObject {
                 }
             }
         }
+        Thread r = new Thread(new RestoreThread(bfolder));
+        r.start();
+
     }
 
     /*
