@@ -25,6 +25,7 @@ class Transfer extends Thread implements pacapp.TransferObject {
     private volatile boolean runningB = true;
     private volatile boolean runningR = true;
     Thread b = null;
+    Thread r = null;
 
     //creates folder on the root of the device
     private void createFolder(String folderName, PortableDevice pD) {
@@ -647,28 +648,15 @@ class Transfer extends Thread implements pacapp.TransferObject {
     }
 
     public void setRunningB(){
-        /*
-        if(runningB == false){
-            this.runningB = true;
-        }else{
-            this.runningB = false;
-        }
-        */
         if(b != null){
             b.stop();
         }
     }
 
     public void setRunningR(){
-        /*
-        if(runningR == true){
-            this.runningR = true;
-        }else{
-            this.runningR = false;
+        if(b!= null){
+            b.stop();
         }
-        */
-
-
     }
 
     //makes a copy of the phones storage and puts it in backup folder on pc
@@ -743,11 +731,14 @@ class Transfer extends Thread implements pacapp.TransferObject {
     public void restore()throws IOException{
         File bfolder = new File(this.getBackupPath());// "*\Backups"
         class RestoreThread implements Runnable{
+
+            private volatile boolean exit = false;
+
             RestoreThread(File file){
 
             }
             public void run(){
-                while (runningR = true){
+                while (!exit){
                     PortableDeviceFolderObject target = null;
                     File[] backups = bfolder.listFiles();//list files and folders in "*\Backups"
                     File[] phone = null;
@@ -787,7 +778,6 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
         Thread r = new Thread(new RestoreThread(bfolder));
         r.start();
-
     }
 
     /*
