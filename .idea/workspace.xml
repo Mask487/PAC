@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" afterDir="false" />
-    </list>
+    <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,17 +30,38 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="480" selection-start-line="480" selection-end-line="480" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PAC_Config.cfg">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+            <state relative-caret-position="44">
+              <caret line="438" column="33" selection-start-line="438" selection-start-column="33" selection-end-line="438" selection-end-column="33" />
+              <folding>
+                <element signature="e#16692#16693#0" expanded="true" />
+                <element signature="e#16752#16753#0" expanded="true" />
+                <element signature="e#16824#16825#0" expanded="true" />
+                <element signature="e#16883#16884#0" expanded="true" />
+                <element signature="e#16965#16966#0" expanded="true" />
+                <element signature="e#17025#17026#0" expanded="true" />
+                <element signature="e#17101#17102#0" expanded="true" />
+                <element signature="e#17160#17161#0" expanded="true" />
+                <element signature="e#17236#17237#0" expanded="true" />
+                <element signature="e#17292#17293#0" expanded="true" />
+                <element signature="e#17372#17373#0" expanded="true" />
+                <element signature="e#17428#17429#0" expanded="true" />
+                <element signature="e#32903#32904#0" expanded="true" />
+                <element signature="e#32977#32978#0" expanded="true" />
+                <element signature="e#33133#33134#0" expanded="true" />
+                <element signature="e#33207#33208#0" expanded="true" />
+                <element signature="e#39579#39580#0" expanded="true" />
+                <element signature="e#39626#39627#0" expanded="true" />
+                <element signature="e#40262#40263#0" expanded="true" />
+                <element signature="e#40299#40300#0" expanded="true" />
+                <element signature="e#40680#40681#0" expanded="true" />
+                <element signature="e#40718#40719#0" expanded="true" />
+                <element signature="e#51584#51585#0" expanded="true" />
+                <element signature="e#51612#51613#0" expanded="true" />
+                <element signature="e#70655#70656#0" expanded="true" />
+                <element signature="e#70724#70725#0" expanded="true" />
+                <element signature="e#70875#70876#0" expanded="true" />
+                <element signature="e#70944#70945#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -52,8 +69,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1191">
-              <caret line="779" column="18" selection-start-line="779" selection-start-column="18" selection-end-line="779" selection-end-column="18" />
+            <state relative-caret-position="2822">
+              <caret line="180" selection-start-line="180" selection-end-line="180" />
               <folding>
                 <element signature="e#12220#12221#0" expanded="true" />
                 <element signature="e#12256#12257#0" expanded="true" />
@@ -76,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/TransferObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+            <state relative-caret-position="1139">
+              <caret line="94" column="73" selection-start-line="94" selection-start-column="73" selection-end-line="94" selection-end-column="73" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,10 +103,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/BookSearch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1411">
+              <caret line="96" column="23" selection-start-line="96" selection-start-column="15" selection-end-line="96" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Recommend.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="401">
+              <caret line="110" column="13" selection-start-line="110" selection-start-column="13" selection-end-line="110" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/RSSReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1785">
-              <caret line="105" selection-start-line="105" selection-end-line="105" />
+            <state relative-caret-position="697">
+              <caret line="48" selection-start-line="48" selection-end-line="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -101,7 +136,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>check</find>
       <find>arrow</find>
       <find>play</find>
       <find>search</find>
@@ -123,7 +157,6 @@
       <find>RSSLoo</find>
       <find>BookLook</find>
       <find>app</find>
-      <find>recommend</find>
       <find>del</find>
       <find>hiBack</find>
       <find>hiFill</find>
@@ -131,6 +164,8 @@
       <find>change</find>
       <find>dao</find>
       <find>iter</find>
+      <find>recommend</find>
+      <find>addBook</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -158,10 +193,10 @@
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/Recommend.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/TransferTest.java" />
-        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" />
-        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" />
         <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" />
+        <option value="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" />
       </list>
     </option>
   </component>
@@ -176,7 +211,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -187,12 +221,34 @@
             <path>
               <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
               <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="Backups" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pacapp" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -325,9 +381,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19349681" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1852349" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -336,8 +393,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22860238" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4312026" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22804533" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43201134" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289256" />
@@ -346,7 +403,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.31852654" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.31728044" />
       <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32936078" />
       <window_info anchor="bottom" id="DB Execution Console" order="14" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -473,6 +530,36 @@
           <line>689</line>
           <properties />
           <option name="timeStamp" value="117" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java</url>
+          <line>775</line>
+          <properties />
+          <option name="timeStamp" value="119" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java</url>
+          <line>936</line>
+          <properties />
+          <option name="timeStamp" value="120" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java</url>
+          <line>937</line>
+          <properties />
+          <option name="timeStamp" value="121" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java</url>
+          <line>938</line>
+          <properties />
+          <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java</url>
+          <line>939</line>
+          <properties />
+          <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/media/Media.java</url>
@@ -631,43 +718,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Playlist.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="2822">
+          <caret line="180" selection-start-line="180" selection-end-line="180" />
+          <folding>
+            <element signature="class#FileA#0" />
+            <element signature="method#FileA#0;class#FileA#0" />
+            <element signature="method#FileA#1;class#FileA#0" />
+            <element signature="method#setLocation#0;class#FileA#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/PlaylistDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="375" selection-start-line="375" selection-end-line="375" />
+        <state relative-caret-position="1139">
+          <caret line="94" column="73" selection-start-line="94" selection-start-column="73" selection-end-line="94" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/BookSearch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
+        <state relative-caret-position="1411">
           <caret line="96" column="23" selection-start-line="96" selection-start-column="15" selection-end-line="96" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Recommend.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="348" selection-start-line="348" selection-end-line="348" />
+        <state relative-caret-position="401">
+          <caret line="110" column="13" selection-start-line="110" selection-start-column="13" selection-end-line="110" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/SQLiteTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        <state relative-caret-position="697">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -712,10 +804,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/RSSReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
+        <state relative-caret-position="44">
+          <caret line="438" column="33" selection-start-line="438" selection-start-column="33" selection-end-line="438" selection-end-column="33" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#16692#16693#0" expanded="true" />
+            <element signature="e#16752#16753#0" expanded="true" />
+            <element signature="e#16824#16825#0" expanded="true" />
+            <element signature="e#16883#16884#0" expanded="true" />
+            <element signature="e#16965#16966#0" expanded="true" />
+            <element signature="e#17025#17026#0" expanded="true" />
+            <element signature="e#17101#17102#0" expanded="true" />
+            <element signature="e#17160#17161#0" expanded="true" />
+            <element signature="e#17236#17237#0" expanded="true" />
+            <element signature="e#17292#17293#0" expanded="true" />
+            <element signature="e#17372#17373#0" expanded="true" />
+            <element signature="e#17428#17429#0" expanded="true" />
+            <element signature="e#32903#32904#0" expanded="true" />
+            <element signature="e#32977#32978#0" expanded="true" />
+            <element signature="e#33133#33134#0" expanded="true" />
+            <element signature="e#33207#33208#0" expanded="true" />
+            <element signature="e#39579#39580#0" expanded="true" />
+            <element signature="e#39626#39627#0" expanded="true" />
+            <element signature="e#40262#40263#0" expanded="true" />
+            <element signature="e#40299#40300#0" expanded="true" />
+            <element signature="e#40680#40681#0" expanded="true" />
+            <element signature="e#40718#40719#0" expanded="true" />
+            <element signature="e#51584#51585#0" expanded="true" />
+            <element signature="e#51612#51613#0" expanded="true" />
+            <element signature="e#70655#70656#0" expanded="true" />
+            <element signature="e#70724#70725#0" expanded="true" />
+            <element signature="e#70875#70876#0" expanded="true" />
+            <element signature="e#70944#70945#0" expanded="true" />
           </folding>
         </state>
       </provider>
