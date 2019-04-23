@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PacApp/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/nbproject/private/private.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,8 +34,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="2163" column="54" selection-start-line="2163" selection-start-column="54" selection-end-line="2163" selection-end-column="54" />
+            <state relative-caret-position="112">
+              <caret line="2072" column="80" lean-forward="true" selection-start-line="2072" selection-start-column="80" selection-end-line="2072" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#32903#32904#0" expanded="true" />
@@ -77,7 +78,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3693">
+            <state relative-caret-position="5385">
               <caret line="374" selection-start-line="374" selection-end-line="374" />
             </state>
           </provider>
@@ -206,10 +207,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="24" />
-    <option name="width" value="1600" />
-    <option name="height" value="839" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="23" />
+    <option name="y" value="65" />
+    <option name="width" value="1207" />
+    <option name="height" value="616" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -217,8 +219,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -264,6 +264,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -394,10 +396,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1600" height="839" extended-state="6" />
+    <frame x="23" y="65" width="1207" height="616" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19127086" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26266095" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -406,7 +408,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22891566" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.22891566" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43201134" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -698,6 +700,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="2072" column="80" lean-forward="true" selection-start-line="2072" selection-start-column="80" selection-end-line="2072" selection-end-column="80" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#32903#32904#0" expanded="true" />
+            <element signature="e#32977#32978#0" expanded="true" />
+            <element signature="e#33133#33134#0" expanded="true" />
+            <element signature="e#33207#33208#0" expanded="true" />
+            <element signature="e#39579#39580#0" expanded="true" />
+            <element signature="e#39626#39627#0" expanded="true" />
+            <element signature="e#40262#40263#0" expanded="true" />
+            <element signature="e#40299#40300#0" expanded="true" />
+            <element signature="e#40680#40681#0" expanded="true" />
+            <element signature="e#40718#40719#0" expanded="true" />
+            <element signature="e#70655#70656#0" expanded="true" />
+            <element signature="e#70724#70725#0" expanded="true" />
+            <element signature="e#70875#70876#0" expanded="true" />
+            <element signature="e#70944#70945#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Playlist.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/PlaylistDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5385">
+          <caret line="374" selection-start-line="374" selection-end-line="374" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/Transfer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2475">
@@ -738,51 +785,6 @@
           <caret line="45" selection-start-line="45" selection-end-line="45" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/ContentDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3693">
-          <caret line="374" selection-start-line="374" selection-end-line="374" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/Playlist.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/NewDatabase/PlaylistDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="2163" column="54" selection-start-line="2163" selection-start-column="54" selection-end-line="2163" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#32903#32904#0" expanded="true" />
-            <element signature="e#32977#32978#0" expanded="true" />
-            <element signature="e#33133#33134#0" expanded="true" />
-            <element signature="e#33207#33208#0" expanded="true" />
-            <element signature="e#39579#39580#0" expanded="true" />
-            <element signature="e#39626#39627#0" expanded="true" />
-            <element signature="e#40262#40263#0" expanded="true" />
-            <element signature="e#40299#40300#0" expanded="true" />
-            <element signature="e#40680#40681#0" expanded="true" />
-            <element signature="e#40718#40719#0" expanded="true" />
-            <element signature="e#70655#70656#0" expanded="true" />
-            <element signature="e#70724#70725#0" expanded="true" />
-            <element signature="e#70875#70876#0" expanded="true" />
-            <element signature="e#70944#70945#0" expanded="true" />
           </folding>
         </state>
       </provider>
