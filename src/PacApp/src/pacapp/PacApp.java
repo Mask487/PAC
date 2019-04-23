@@ -158,16 +158,18 @@ public class PacApp extends Application {
         StackPane controllStack = new StackPane();
         VBox pBooksTall = new VBox();
         ScrollPane overallPBooks = new ScrollPane(pBooksTall);
-        HBox reccomendAuthor = new HBox();//genre author series publisher
+        VBox reccomendAuthor = new VBox();//genre author series publisher
         ScrollPane authorReccomend = new ScrollPane(reccomendAuthor);
-        HBox reccomendgenre = new HBox();//genre author series publisher
+        VBox reccomendgenre = new VBox();//genre author series publisher
         ScrollPane genreReccomend = new ScrollPane(reccomendgenre);
-        HBox reccomendSeries = new HBox();//genre author series publisher
+        VBox reccomendSeries = new VBox();//genre author series publisher
         ScrollPane seriesReccomend = new ScrollPane(reccomendSeries);
-        HBox reccomendpublisher = new HBox();//genre author series publisher
+        VBox reccomendpublisher = new VBox();//genre author series publisher
         ScrollPane publisherReccomend = new ScrollPane(reccomendpublisher);
-        HBox insertedBooks = new HBox();//genre author series publisher
+        VBox insertedBooks = new VBox();//genre author series publisher
         ScrollPane sInsertedBooks = new ScrollPane(insertedBooks);
+        TilePane playlists = new TilePane();
+        ScrollPane playScroll = new ScrollPane(playlists);
 
         //create background anchor
         AnchorPane.setRightAnchor(bp, 0.0);
@@ -347,6 +349,45 @@ public class PacApp extends Application {
         ISBNAdd.setStyle("-fx-text-inner-color: BBBBBB;");
         ISBNAdd.backgroundProperty().set(buBack);
 
+        Image playlistImage = new Image("Playlists.png");
+        ImageView playlistpic = new ImageView(playlistImage);
+        Button plL = new Button("",playlistpic);
+        plL.backgroundProperty().set(buBack);
+        plL.setPadding(inset);
+        plL.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent Enter) {
+                System.out.println("playists pressed");
+                type = 0;
+                mainStack.getChildren().clear();
+                mainStack.getChildren().add(playlists);
+                playlists.getChildren().clear();
+                bottomAnchorPane.getChildren().clear();
+                bottomAnchorPane.getChildren().addAll(controllStack,plL);
+                bottomAnchorPane.setRightAnchor(plL, 10.0);
+
+                Set mset = pdao.getAllPlaylists();
+                System.out.println("Playlists Pressed");
+                Iterator miter = mset.iterator();
+                int setSize = mset.size();
+                Button[] playlistings = new Button[setSize];
+                int i = 0;
+                while (miter.hasNext()) {
+                    Playlist content = new Playlist();
+                    content = (NewDatabase.Playlist) miter.next();
+                    plButt(content, playlistings, i, playlists);
+                    i++;
+                }
+
+                try {
+                    controllStack.getChildren().addAll(musicControll);
+                } catch (IllegalArgumentException Error) {
+                    System.out.println("Tried to add controlls again");
+                }
+
+            }
+        });
+
         Image libimage = new Image("lib.png");
         ImageView library = new ImageView(libimage);
         Button lib = new Button("",library);
@@ -368,7 +409,7 @@ public class PacApp extends Application {
                     genres = R.RecommendBook("genre");
                     serieses = R.RecommendBook("series");
                     publishers = R.RecommendBook("publisher");
-                }catch(IOException |SQLException |ClassNotFoundException | JSONException c){
+                }catch(IOException |SQLException |ClassNotFoundException | JSONException | NullPointerException c){
                     c.printStackTrace();
                     System.out.println(c);
                     System.out.println("this is the error...shame shame");
@@ -505,6 +546,9 @@ public class PacApp extends Application {
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(musicPane);
                 musicCont.getChildren().clear();
+                bottomAnchorPane.getChildren().clear();
+                bottomAnchorPane.getChildren().addAll(controllStack,plL);
+                bottomAnchorPane.setRightAnchor(plL, 10.0);
 
                 Set mset = dao.getAllContentByType("Music");
                 System.out.println("Music Pressed");
@@ -854,6 +898,10 @@ public class PacApp extends Application {
         sync.setTextFill(Paint.valueOf("BBBBBB"));
         sync.backgroundProperty().set(buBack);         //adds transparent background
 
+        Button stopRestore = new Button("Cancel Restore");       //Creates button
+        sync.setTextFill(Paint.valueOf("BBBBBB"));
+        sync.backgroundProperty().set(buBack);         //adds transparent background
+
         Button stopBackup = new Button("Cancel Sync");       //Creates button
         sync.setTextFill(Paint.valueOf("BBBBBB"));
         sync.backgroundProperty().set(buBack);         //adds transparent background
@@ -935,6 +983,20 @@ public class PacApp extends Application {
                     e.printStackTrace();
                 }
                 System.out.println("Restore Pressed");
+
+            }
+        });
+        stopRestore.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent press) {
+                t.initializePhone(0);
+                try {
+                    t.backup();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("stop restore Pressed");
+                midButt.getChildren().add(stopRestore);
 
             }
         });
@@ -2075,11 +2137,11 @@ public class PacApp extends Application {
 
     }
 
-    public static void addBook(Book B,HBox h){
+    public static void addBook(Book B,VBox h){
     Button link = new Button();
     link.backgroundProperty().set(buBack);
     link.setTextFill(Paint.valueOf("BBBBBB"));
-    link.setText(B.getTitle() +  B.getSubtitle() +  B.getAuthors());
+    link.setText(B.getTitle() +":   " +  B.getSubtitle() +" By: " +   B.getAuthors());
     link.wrapTextProperty().setValue(false);
 
 
@@ -2202,5 +2264,26 @@ public class PacApp extends Application {
 
 
     }
+    public static void plButt(Playlist objs, Button[] L, int i, TilePane cont) {
 
+        String name = objs.getPlaylistName();
+
+        Image appsIcon = new Image("AlbumDefault.png");   //Load Phone Icon for imageview
+        ImageView appview = new ImageView();
+        appview.setImage(appsIcon);
+        L[i] = new Button(name, appview);
+        L[i].setTextFill(Paint.valueOf("707070"));
+        L[i].setContentDisplay(ContentDisplay.TOP);
+        L[i].backgroundProperty().set(buBack);
+        L[i].setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent press) {
+
+
+
+            }
+        });
+        cont.getChildren().add(L[i]);
+    }
 }
