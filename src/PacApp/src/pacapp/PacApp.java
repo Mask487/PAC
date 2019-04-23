@@ -2079,7 +2079,9 @@ public class PacApp extends Application {
     Button link = new Button();
     link.backgroundProperty().set(buBack);
     link.setTextFill(Paint.valueOf("BBBBBB"));
-    link.setText(B.getTitle() + "\n" + B.getSubtitle() + "\n" + B.getAuthors());
+    link.setText(B.getTitle() +  B.getSubtitle() +  B.getAuthors());
+    link.wrapTextProperty().setValue(false);
+
 
 
         link.setOnAction(new EventHandler<ActionEvent>() {
