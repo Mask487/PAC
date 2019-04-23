@@ -3,7 +3,6 @@ package pacapp;
 import NewDatabase.Content;
 import be.derycke.pieter.com.COMException;
 import jmtp.*;
-
 import java.io.*;
 import java.math.BigInteger;
 import java.net.InetAddress;
@@ -25,7 +24,8 @@ class Transfer extends Thread implements pacapp.TransferObject {
     private String backupPath = null;
     private volatile boolean runningB = true;
     private volatile boolean runningR = true;
-
+    Thread b = null;
+    Thread r = null;
 
     //creates folder on the root of the device
     private void createFolder(String folderName, PortableDevice pD) {
@@ -409,17 +409,6 @@ class Transfer extends Thread implements pacapp.TransferObject {
     }
 
     public ArrayList<FileA> syncQueuery(){
-        /*
-        Content Type
-        1 - Audiobook
-        2 - EBook
-        3 -
-        4 -
-        5 -
-        6 -
-        7 - pacapp.Podcast
-        */
-
         System.out.println();
         Connection c = null;
         Statement stmt = null;
@@ -427,38 +416,6 @@ class Transfer extends Thread implements pacapp.TransferObject {
         String location;
         String contentName;
         String type;
-        /*
-        try {
-            //Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:Database\\PACDB.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened Database");
-            stmt = c.createStatement();
-            //SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID, and c.SyncStatusID = FALSE;
-            ResultSet rs = stmt.executeQuery("SELECT c.location, c.ContentName, ct.ContentType FROM Content as c, ContentType as ct WHERE c.ContentTypeID = ct.ContentTypeID and c.WantToSync = 1;");
-            while(rs.next()){
-                if(rs.getString("Location") == null){
-                    System.out.println("location is null");
-                }else if(rs.getString("Location") != null){
-                    System.out.println(rs.getString("Location"));
-                    System.out.println(rs.getString("ContentName"));
-                    System.out.println(rs.getString("ContentType"));
-                    String locationString = rs.getString("Location");
-                    String nameString = rs.getString("ContentName");
-                    String id = rs.getString("ContentType");
-                    FileA fileaccess = new FileA(locationString, nameString, id);
-                    locations.add(fileaccess);
-                }
-            }
-            rs.close();
-            stmt.close();
-            c.close();
-        }catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        */
         ContentDAO cd = new ContentDAO();
         Set coll = cd.getAllContentBySyncStatus();
         Iterator collection = coll.iterator();
@@ -682,19 +639,23 @@ class Transfer extends Thread implements pacapp.TransferObject {
         return false;
     }
 
+    public boolean getRunningR(){
+        return this.runningR;
+    }
+
+    public boolean getRunningB(){
+        return this.runningB;
+    }
+
     public void setRunningB(){
-        if(runningB == false){
-            this.runningB = true;
-        }else{
-            this.runningB = false;
+        if(b != null){
+            b.stop();
         }
     }
 
     public void setRunningR(){
-        if(runningR == true){
-            this.runningR = true;
-        }else{
-            this.runningR = false;
+        if(b!= null){
+            b.stop();
         }
     }
 
@@ -712,8 +673,11 @@ class Transfer extends Thread implements pacapp.TransferObject {
 
                 //path = string;
             }
+
+            private volatile boolean exit = false;
+
             public void run() {
-                while (runningB == true){
+                while (!exit){
                     System.out.println("Thread starting");
                     PortableDeviceFolderObject target = null;
                     File file = new File(path + "\\" + time);
@@ -739,8 +703,10 @@ class Transfer extends Thread implements pacapp.TransferObject {
                                         if (!tempFile2.isDirectory()) {
                                             tempFile2.mkdir();
                                         }
+                                        getRunningB();
                                         recurBackup((PortableDeviceFolderObject) obj2, "    ", tempFile2);
                                     }
+                                    getRunningB();
                                     ptoPC(obj2, tempFile.getPath());
                                 }
                             }
@@ -750,9 +716,14 @@ class Transfer extends Thread implements pacapp.TransferObject {
                         System.out.println("No Phone Connected");
                     }
                 }
+                System.out.println("BACKUP COMPLETE!");
+            }
+
+            public void stop(){
+                exit = true;
             }
         }
-        Thread b = new Thread(new BackupThread(path));
+        b = new Thread(new BackupThread(path));
         b.start();
     }
 
@@ -760,11 +731,14 @@ class Transfer extends Thread implements pacapp.TransferObject {
     public void restore()throws IOException{
         File bfolder = new File(this.getBackupPath());// "*\Backups"
         class RestoreThread implements Runnable{
+
+            private volatile boolean exit = false;
+
             RestoreThread(File file){
 
             }
             public void run(){
-                while (runningR = true){
+                while (!exit){
                     PortableDeviceFolderObject target = null;
                     File[] backups = bfolder.listFiles();//list files and folders in "*\Backups"
                     File[] phone = null;
@@ -804,7 +778,6 @@ class Transfer extends Thread implements pacapp.TransferObject {
         }
         Thread r = new Thread(new RestoreThread(bfolder));
         r.start();
-
     }
 
     /*

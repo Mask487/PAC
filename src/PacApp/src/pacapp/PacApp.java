@@ -355,15 +355,19 @@ public class PacApp extends Application {
         lib.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent Enter) {
+                List<Book> authors = new ArrayList<>();
+                List<Book> genres = new ArrayList<>();
+                List<Book> serieses = new ArrayList<>();
+                List<Book> publishers = new ArrayList<>();
                 System.out.println("lib pressed");
                 mainStack.getChildren().clear();
                 mainStack.getChildren().add(overallPBooks);
                 pBooksTall.getChildren().clear();
                 try {
-                    List<Book> authors = R.RecommendBook("author");
-                    List<Book> genres = R.RecommendBook("genre");
-                    List<Book> serieses = R.RecommendBook("series");
-                    List<Book> publishers = R.RecommendBook("publisher");
+                    authors = R.RecommendBook("author");
+                    genres = R.RecommendBook("genre");
+                    serieses = R.RecommendBook("series");
+                    publishers = R.RecommendBook("publisher");
                 }catch(IOException |SQLException |ClassNotFoundException | JSONException c){
                     c.printStackTrace();
                     System.out.println(c);
@@ -416,18 +420,23 @@ public class PacApp extends Application {
                     }
                 };
                 reccomendAuthor.getChildren().clear();
+                iter = authors.listIterator();
                 while(iter.hasNext()){
                     addBook(iter.next(),reccomendAuthor);
+
                 }
                 reccomendgenre.getChildren().clear();
+                iter = genres.listIterator();
                 while(iter.hasNext()){
                     addBook(iter.next(),reccomendgenre);
                 }
                 reccomendpublisher.getChildren().clear();
+                iter = serieses.listIterator();
                 while(iter.hasNext()){
                     addBook(iter.next(),reccomendpublisher);
                 }
                 reccomendSeries.getChildren().clear();
+                iter = publishers.listIterator();
                 while(iter.hasNext()){
                     addBook(iter.next(),reccomendSeries);
                 }
@@ -2193,8 +2202,3 @@ public class PacApp extends Application {
     }
 
 }
-
-
-
-
-
