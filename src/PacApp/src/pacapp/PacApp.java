@@ -956,7 +956,7 @@ public class PacApp extends Application {
                 if (t.checkConnection()) {
                     Label battery = new Label("" + t.getPhoneBattery());
                     Label phoneName = new Label("" + t.getPhoneModel());
-                    phoneStack.getChildren().addAll(Android, phoneName, battery);
+                    //phoneStack.getChildren().addAll(Android, phoneName, battery);
                 } else
                     try {
                         phoneStack.getChildren().addAll(Android);
