@@ -1383,8 +1383,8 @@ public class PacApp extends Application {
 
 
         controllStack.getChildren().addAll(musicControll);
-        bottomAnchorPane.getChildren().addAll(RSSLookup);
-        bottomAnchorPane.setRightAnchor(RSSLookup, 10.0);
+        bottomAnchorPane.getChildren().addAll(plL);////////////////////////////
+        bottomAnchorPane.setRightAnchor(plL, 10.0);
         bottomAnchorPane.setLeftAnchor(controllStack, 10.0);
         bottomAnchorPane.setTopAnchor(controllStack, 10.0);
         bottomAnchorPane.setBottomAnchor(controllStack, 10.0);

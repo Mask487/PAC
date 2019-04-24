@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="383" column="37" selection-start-line="383" selection-start-column="37" selection-end-line="383" selection-end-column="37" />
+            <state relative-caret-position="141">
+              <caret line="1388" column="59" lean-forward="true" selection-start-line="1388" selection-start-column="59" selection-end-line="1388" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#35357#35358#0" expanded="true" />
@@ -155,14 +154,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>video.</find>
-      <find>videoControll</find>
       <find>audioBookControl</find>
       <find>musicControll</find>
       <find>podcastControll</find>
       <find>green</find>
       <find>backup</find>
-      <find>RSS</find>
       <find>settings</find>
       <find>rest</find>
       <find>set</find>
@@ -185,6 +181,9 @@
       <find>android</find>
       <find>musButt</find>
       <find>Stack</find>
+      <find>RSS</find>
+      <find>music.</find>
+      <find>///</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -559,12 +558,6 @@
           <properties />
           <option name="timeStamp" value="119" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java</url>
-          <line>411</line>
-          <properties />
-          <option name="timeStamp" value="124" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/media/Media.java</url>
           <line>376</line>
@@ -722,8 +715,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="383" column="37" selection-start-line="383" selection-start-column="37" selection-end-line="383" selection-end-column="37" />
+        <state relative-caret-position="141">
+          <caret line="1388" column="59" lean-forward="true" selection-start-line="1388" selection-start-column="59" selection-end-line="1388" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#35357#35358#0" expanded="true" />
