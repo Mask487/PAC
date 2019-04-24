@@ -108,6 +108,7 @@ public class PacApp extends Application {
     static Recommend R = new Recommend();
     static BookSearch S = new BookSearch();
     static PlaylistDAO pdao = new PlaylistDAO();
+    static Insets inset = new Insets(-1.0);
 
 
 
@@ -170,6 +171,7 @@ public class PacApp extends Application {
         ScrollPane sInsertedBooks = new ScrollPane(insertedBooks);
         TilePane playlists = new TilePane();
         ScrollPane playScroll = new ScrollPane(playlists);
+        VBox playlistMusic = new VBox();
 
         //create background anchor
         AnchorPane.setRightAnchor(bp, 0.0);
@@ -183,7 +185,7 @@ public class PacApp extends Application {
         //Left panel Color
         BackgroundFill lBgFill = new BackgroundFill(Paint.valueOf("454545"), bFillCR, bFillIn);
         Background lPaneColor = new Background(lBgFill);
-        Insets inset = new Insets(-1.0);
+
         leftButtonPane.backgroundProperty().set(lPaneColor);
 
 
@@ -298,6 +300,7 @@ public class PacApp extends Application {
         publisherReccomend.backgroundProperty().set(buBack);
         insertedBooks.backgroundProperty().set(buBack);
         sInsertedBooks.backgroundProperty().set(buBack);
+        playlistMusic.backgroundProperty().set(buBack);
 
 
 
@@ -375,7 +378,7 @@ public class PacApp extends Application {
                 while (miter.hasNext()) {
                     Playlist content = new Playlist();
                     content = (NewDatabase.Playlist) miter.next();
-                    plButt(content, playlistings, i, playlists);
+                    plButt(content, playlistings, i, playlists,playlistMusic,mainStack);
                     i++;
                 }
 
@@ -877,7 +880,7 @@ public class PacApp extends Application {
         settingsList.getChildren().add(lightMode);
 
         // Create Phone Transfer Section
-        Image androidImage = new Image("Android.png");   //Load video Icon for imageview
+        Image androidImage = new Image("Phone.png");   //Load video Icon for imageview
         ImageView Android = new ImageView();
         Android.setImage(androidImage);
         Android.setFitWidth(200);
@@ -895,16 +898,21 @@ public class PacApp extends Application {
         sync.backgroundProperty().set(buBack);         //adds transparent background
 
         Button stopSync = new Button("Cancel Sync");       //Creates button
-        sync.setTextFill(Paint.valueOf("BBBBBB"));
-        sync.backgroundProperty().set(buBack);         //adds transparent background
+        stopSync.setTextFill(Paint.valueOf("BBBBBB"));
+        stopSync.backgroundProperty().set(buBack);         //adds transparent background
+        stopSync.setPadding(inset);
 
         Button stopRestore = new Button("Cancel Restore");       //Creates button
-        sync.setTextFill(Paint.valueOf("BBBBBB"));
-        sync.backgroundProperty().set(buBack);         //adds transparent background
+        stopRestore.setTextFill(Paint.valueOf("BBBBBB"));
+        stopRestore.backgroundProperty().set(buBack);         //adds transparent background
+        stopRestore.setPadding(inset);
+
 
         Button stopBackup = new Button("Cancel Sync");       //Creates button
-        sync.setTextFill(Paint.valueOf("BBBBBB"));
-        sync.backgroundProperty().set(buBack);         //adds transparent background
+        stopBackup.setTextFill(Paint.valueOf("BBBBBB"));
+        stopBackup.backgroundProperty().set(buBack);         //adds transparent background
+        stopBackup.setPadding(inset);
+
 
         highLight(sync);
         sync.setPadding(inset);
@@ -1404,6 +1412,7 @@ public class PacApp extends Application {
     public static void musButt(Content objs, Button[] L, int i, VBox cont, Media[] M) {
         String name = objs.getContentName();
         HBox doubleButt = new HBox();
+        doubleButt.setPadding(inset);
         StackPane syncStatus = new StackPane();
         Button syncer = new Button("✔");
         syncer.setTextFill(Paint.valueOf("Green"));
@@ -1411,6 +1420,8 @@ public class PacApp extends Application {
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
         MenuBar men = new MenuBar();
+        syncer.setPadding(inset);
+
         men.setStyle("-fx-selection-bar: #515151;");
 
         men.backgroundProperty().set(buBack);
@@ -1459,7 +1470,6 @@ public class PacApp extends Application {
         L[i] = new Button(name);
         L[i].setTextFill(Paint.valueOf("BBBBBB"));
         L[i].backgroundProperty().set(buBack);
-
         highLight(L[i]);
 
         L[i].setOnAction(new EventHandler<ActionEvent>() {
@@ -2264,26 +2274,42 @@ public class PacApp extends Application {
 
 
     }
-    public static void plButt(Playlist objs, Button[] L, int i, TilePane cont) {
+    public static void plButt(Playlist objs, Button[] L, int i, TilePane cont,VBox pane,StackPane anch) {
 
         String name = objs.getPlaylistName();
-
         Image appsIcon = new Image("AlbumDefault.png");   //Load Phone Icon for imageview
         ImageView appview = new ImageView();
         appview.setImage(appsIcon);
+        appview.setFitWidth(200);
+        appview.setPreserveRatio(true);
+        appview.setSmooth(true);
+        appview.setCache(true);
         L[i] = new Button(name, appview);
         L[i].setTextFill(Paint.valueOf("707070"));
         L[i].setContentDisplay(ContentDisplay.TOP);
+        L[i].setPadding(inset);
         L[i].backgroundProperty().set(buBack);
+        System.out.println("sout;asdhgo");
         L[i].setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent press) {
+                System.out.println("in playlist individual button");
+                anch.getChildren().clear();
+                anch.getChildren().add(pane);
+                Set pset = objs.geContents();
+                Iterator piter = pset.iterator();
+                int setSize = pset.size();
+                Button[] L = new Button[setSize];
+                Media[] mediaSet = new Media[setSize];
+                int i = 0;
+                while (piter.hasNext()) {
+                    Content content = (Content)piter.next();
 
-
-
+                    musButt(content,L,i,pane,mediaSet);
+                }
             }
         });
-        cont.getChildren().add(L[i]);
+            cont.getChildren().add(L[i]);
     }
 }
