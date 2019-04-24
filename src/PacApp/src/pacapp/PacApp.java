@@ -124,7 +124,7 @@ public class PacApp extends Application {
 
         primary.fillProperty().set(Paint.valueOf("505050"));
         stage.setScene(primary);
-        root2.setPrefSize(750, 510);
+        root2.setPrefSize(900, 750);
         //root2.setMaxSize(1600,900);
 
         BorderPane bp = new BorderPane();
@@ -2297,6 +2297,17 @@ public class PacApp extends Application {
                 System.out.println("in playlist individual button");
                 anch.getChildren().clear();
                 anch.getChildren().add(pane);
+                Button deleteP = new Button("Delete This Playlist");
+                pane.getChildren().clear();
+                pane.getChildren().addAll(deleteP);
+                deleteP.setTextFill(Paint.valueOf("BBBBBB"));
+                deleteP.backgroundProperty().set(buBack);
+                deleteP.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent press) {
+                        pdao.deletePlaylist(objs);
+                    }
+                });
                 Set pset = objs.geContents();
                 Iterator piter = pset.iterator();
                 int setSize = pset.size();
