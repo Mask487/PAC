@@ -381,6 +381,7 @@ public class PacApp extends Application {
                     plButt(content, playlistings, i, playlists,playlistMusic,mainStack);
                     i++;
                 }
+                addPlaylist(playlists);
 
                 try {
                     controllStack.getChildren().addAll(musicControll);
@@ -912,7 +913,6 @@ public class PacApp extends Application {
         stopBackup.setTextFill(Paint.valueOf("BBBBBB"));
         stopBackup.backgroundProperty().set(buBack);         //adds transparent background
         stopBackup.setPadding(inset);
-
 
         highLight(sync);
         sync.setPadding(inset);
@@ -2305,11 +2305,60 @@ public class PacApp extends Application {
                 int i = 0;
                 while (piter.hasNext()) {
                     Content content = (Content)piter.next();
-
                     musButt(content,L,i,pane,mediaSet);
                 }
             }
         });
-            cont.getChildren().add(L[i]);
+        Image addPlIcon = new Image("addPlaylist.png");   //Load Phone Icon for imageview
+        ImageView addPl = new ImageView(addPlIcon);
+        Button playAdd = new Button("Add Playlist", addPl);
+        playAdd.setTextFill(Paint.valueOf("707070"));
+        playAdd.setContentDisplay(ContentDisplay.TOP);
+        playAdd.setPadding(inset);
+        playAdd.backgroundProperty().set(buBack);
+        System.out.println("Add playlist");
+        playAdd.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                TextInputDialog newNameD = new TextInputDialog("");
+                newNameD.setTitle("New Playlist");
+                newNameD.setContentText("Please enter the new playlist name: ");
+                newNameD.setHeaderText(null);
+                newNameD.getModality().equals(false);
+                Optional<String> newName = newNameD.showAndWait();
+                if (newName.isPresent()) {
+                    pdao.addPlaylist(newName.get());
+                }
+                System.out.println("Added " + newName.get());
+
+            }
+        });
+            cont.getChildren().addAll(L[i]);
+    }
+    static void addPlaylist(TilePane cont) {
+        Image addPlIcon = new Image("addPlaylist.png");   //Load Phone Icon for imageview
+        ImageView addPl = new ImageView(addPlIcon);
+        Button playAdd = new Button("Add Playlist", addPl);
+        playAdd.setTextFill(Paint.valueOf("707070"));
+        playAdd.setContentDisplay(ContentDisplay.TOP);
+        playAdd.setPadding(inset);
+        playAdd.backgroundProperty().set(buBack);
+        System.out.println("Add playlist");
+        playAdd.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                TextInputDialog newNameD = new TextInputDialog("");
+                newNameD.setTitle("New Playlist");
+                newNameD.setContentText("Please enter the new playlist name: ");
+                newNameD.setHeaderText(null);
+                newNameD.getModality().equals(false);
+                Optional<String> newName = newNameD.showAndWait();
+                if (newName.isPresent()) {
+                    pdao.addPlaylist(newName.get());
+                }
+                System.out.println("Added " + newName.get());
+
+            }
+        });
+        cont.getChildren().add(playAdd);
     }
 }
