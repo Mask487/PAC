@@ -194,7 +194,6 @@ public class PacApp extends Application {
         Background cenBack = new Background(cenFill);
         centerAnchorPane.setBackground(cenBack);
 
-
         throwaway.backgroundProperty().set(buBack);
 
         // Sidebar Button for the Music Section
@@ -756,6 +755,7 @@ public class PacApp extends Application {
                 Set appset = dao.getAllContentByType("pacapp.App");
                 System.out.println("Apps Pressed");
                 Iterator appiter = appset.iterator();
+
                 int setSize = appset.size();
                 if (setSize == 0) {
                     Label noApps = new Label("You have no Apps.\n\nDrag and Drop Apps into this window to add to your collection.");
@@ -767,6 +767,7 @@ public class PacApp extends Application {
                 }
                 Button[] listings = new Button[setSize];
                 int i = 0;
+                appCont.getChildren().clear();
                 while (appiter.hasNext()) {
                     Content content = new Content();
                     content = (NewDatabase.Content) appiter.next();
@@ -881,10 +882,10 @@ public class PacApp extends Application {
         settingsList.getChildren().add(lightMode);
 
         // Create Phone Transfer Section
-        Image androidImage = new Image("Phone.png");   //Load video Icon for imageview
+        Image androidImage = new Image("phone2.png");   //Load video Icon for imageview
         ImageView Android = new ImageView();
         Android.setImage(androidImage);
-        Android.setFitWidth(200);
+       Android.setFitWidth(200);
         Android.setPreserveRatio(true);
         Android.setSmooth(true);
         Android.setCache(true);
@@ -1421,6 +1422,7 @@ public class PacApp extends Application {
         unsyncer.backgroundProperty().set(buBack);
         MenuBar men = new MenuBar();
         syncer.setPadding(inset);
+        unsyncer.setPadding(inset);
 
         men.setStyle("-fx-selection-bar: #515151;");
 
@@ -1505,6 +1507,8 @@ public class PacApp extends Application {
         Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
+        syncer.setPadding(inset);
+        unsyncer.setPadding(inset);
         MenuBar men = new MenuBar();
         men.setStyle("-fx-selection-bar: #515151;");
         men.backgroundProperty().set(buBack);
@@ -1591,6 +1595,8 @@ public class PacApp extends Application {
         Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
+        syncer.setPadding(inset);
+        unsyncer.setPadding(inset);
         MenuBar men = new MenuBar();
         men.setStyle("-fx-selection-bar: #515151;");
         men.backgroundProperty().set(buBack);
@@ -1665,6 +1671,8 @@ public class PacApp extends Application {
         Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
+        syncer.setPadding(inset);
+        unsyncer.setPadding(inset);
         MenuBar men = new MenuBar();
         men.setStyle("-fx-selection-bar: #515151;");
         men.backgroundProperty().set(buBack);
@@ -1750,6 +1758,8 @@ public class PacApp extends Application {
         Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
+        syncer.setPadding(inset);
+        unsyncer.setPadding(inset);
         MenuBar men = new MenuBar();
         men.setStyle("-fx-selection-bar: #515151;");
         men.backgroundProperty().set(buBack);
@@ -1864,6 +1874,8 @@ public class PacApp extends Application {
         Button unsyncer = new Button("✘");
         syncer.backgroundProperty().set(buBack);
         unsyncer.backgroundProperty().set(buBack);
+        syncer.setPadding(inset);
+        unsyncer.setPadding(inset);
         MenuBar men = new MenuBar();
         men.setStyle("-fx-selection-bar: #515151;");
         men.backgroundProperty().set(buBack);
@@ -2277,6 +2289,7 @@ public class PacApp extends Application {
     public static void plButt(Playlist objs, Button[] L, int i, TilePane cont,VBox pane,StackPane anch) {
 
         String name = objs.getPlaylistName();
+        cont.setPadding(new Insets(5.0));
         Image appsIcon = new Image("AlbumDefault.png");   //Load Phone Icon for imageview
         ImageView appview = new ImageView();
         appview.setImage(appsIcon);
@@ -2298,6 +2311,7 @@ public class PacApp extends Application {
                 anch.getChildren().clear();
                 anch.getChildren().add(pane);
                 Button deleteP = new Button("Delete This Playlist");
+                deleteP.setPadding(inset);
                 pane.getChildren().clear();
                 pane.getChildren().addAll(deleteP);
                 deleteP.setTextFill(Paint.valueOf("BBBBBB"));

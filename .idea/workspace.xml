@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13f84237-fb46-4147-97db-66daf8f116d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PACDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/PACDB.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java" afterDir="false" />
     </list>
@@ -33,8 +34,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="2301" column="20" selection-start-line="2301" selection-start-column="20" selection-end-line="2301" selection-end-column="20" />
+            <state relative-caret-position="76">
+              <caret line="1404" lean-forward="true" selection-start-line="1404" selection-end-line="1404" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#35397#35398#0" expanded="true" />
@@ -47,14 +48,10 @@
                 <element signature="e#43636#43637#0" expanded="true" />
                 <element signature="e#44017#44018#0" expanded="true" />
                 <element signature="e#44055#44056#0" expanded="true" />
-                <element signature="e#54610#54611#0" expanded="true" />
-                <element signature="e#54638#54639#0" expanded="true" />
                 <element signature="e#74080#74081#0" expanded="true" />
                 <element signature="e#74149#74150#0" expanded="true" />
                 <element signature="e#74300#74301#0" expanded="true" />
                 <element signature="e#74369#74370#0" expanded="true" />
-                <element signature="e#86504#86505#0" expanded="true" />
-                <element signature="e#86555#86556#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -157,8 +154,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>audioBookControl</find>
-      <find>musicControll</find>
       <find>podcastControll</find>
       <find>green</find>
       <find>backup</find>
@@ -167,7 +162,6 @@
       <find>set</find>
       <find>RSSLoo</find>
       <find>BookLook</find>
-      <find>app</find>
       <find>del</find>
       <find>hiBack</find>
       <find>hiFill</find>
@@ -187,6 +181,9 @@
       <find>RSS</find>
       <find>music.</find>
       <find>///</find>
+      <find>phone</find>
+      <find>app</find>
+      <find>appButt</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -222,7 +219,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="x" value="134" />
+    <option name="y" value="30" />
     <option name="width" value="1207" />
     <option name="height" value="616" />
   </component>
@@ -258,14 +256,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="PacApp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PAC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PAC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="PacApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pacapp" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -405,10 +395,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1207" height="616" extended-state="0" />
+    <frame x="134" y="30" width="1207" height="616" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19055794" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19399142" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -718,8 +708,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PacApp/src/pacapp/PacApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="2301" column="20" selection-start-line="2301" selection-start-column="20" selection-end-line="2301" selection-end-column="20" />
+        <state relative-caret-position="76">
+          <caret line="1404" lean-forward="true" selection-start-line="1404" selection-end-line="1404" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#35397#35398#0" expanded="true" />
@@ -732,14 +722,10 @@
             <element signature="e#43636#43637#0" expanded="true" />
             <element signature="e#44017#44018#0" expanded="true" />
             <element signature="e#44055#44056#0" expanded="true" />
-            <element signature="e#54610#54611#0" expanded="true" />
-            <element signature="e#54638#54639#0" expanded="true" />
             <element signature="e#74080#74081#0" expanded="true" />
             <element signature="e#74149#74150#0" expanded="true" />
             <element signature="e#74300#74301#0" expanded="true" />
             <element signature="e#74369#74370#0" expanded="true" />
-            <element signature="e#86504#86505#0" expanded="true" />
-            <element signature="e#86555#86556#0" expanded="true" />
           </folding>
         </state>
       </provider>
