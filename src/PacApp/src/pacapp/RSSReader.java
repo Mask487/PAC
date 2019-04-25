@@ -92,7 +92,7 @@ public class RSSReader {
             
             //will be changed in the future to permanent location
             //uses above formatted title to create file path
-            File file = new File("./ContentFiles/pacapp.Podcast/pacapp.Podcast/UNKNOWN/" + name + ".mp3");
+            File file = new File("./ContentFiles/pacappPodcast/Podcast/UNKNOWN/" + name + ".mp3");
 
             
             //checks if file already exists
