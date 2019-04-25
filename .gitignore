@@ -7,3 +7,4 @@ Backups
 /ContentFiles/
 PAC_Config.cfg
 .idea/workspace.xml
+*.log
